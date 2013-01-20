@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="custom_rules">
+	<property name="deploy.dir" value="deploy" />
+	<property name="build.name" value="classes.jar" />
+	<property name="deployable.name" value="AmoebaEngine.jar" />
+
+	<target name="-post-build">	
+		<copy file="${out.dir}/${build.name}" todir="${deploy.dir}" />
+		<move file="${deploy.dir}/${build.name}" tofile="${deploy.dir}/${deployable.name}" />
+	</target>
+
+	<target name="-pre-clean">
+		<delete file="${deploy.dir}/${deployable.name}" quiet="true" />
+	</target>
+</project>
