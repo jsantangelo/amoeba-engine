@@ -17,7 +17,7 @@ After you have cloned the repository to your local system, you will need to tail
 See [this page](http://developer.android.com/tools/projects/projects-cmdline.html) for more details. This process generates local machine specific configuration such that you can build Amoeba
 Engine.
 
-Now that the build system is tailor to your machine, you can compile AmoebaEngine. To do so, run:
+Now that the build system is tailored to your machine, you can compile AmoebaEngine. To do so, run:
 
 	ant debug
 
@@ -25,7 +25,7 @@ Alternatively, for a release configuration, run:
 
 	ant release
 
-The resultant .jar file, to be referenced from your project, is located in the `deploy` directory.
+The resultant `.jar` file, to be referenced from your project, is located in the `deploy` directory.
 
 To clean out any files generated as part of the build process, simply run:
 
