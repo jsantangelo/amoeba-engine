@@ -62,3 +62,10 @@ Issue Creation
 --------------
 
 If a developr finds a bug, an issue should be created. If the bug already relates to an issue being worked in the current sprint, a comment should be made in the issue thread instead. All new issues, if not planned for the current sprint, should be added to the BackLog milestone.
+
+All issues must be labeled accordingly, and each requires two tags: one tag to indicate type of code change, and another to indicate prioritization via MoSCoW.
+
+The valid type tags are: enhancement, research, bug, invalid.
+The priorization tags are: must have, should have, could have, won't have.
+
+During the development process, bugs and must haves should be prioritized for completion.
