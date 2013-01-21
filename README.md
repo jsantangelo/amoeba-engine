@@ -1,7 +1,12 @@
 amoeba-engine
 =============
 
-Game engine for the Android platform.
+Amoeba Engine is a game engine for the Android platform, designed to be lightweight and modular. As a distibutable jar, Amoeba Engine should be easy to pick up and use.
+
+How To Use
+----------
+
+Amoeba Engine is distributed as a jar, and can therefore be included/referenced by your project as a library. The overall design of Amoeba Engine, including the interfaces that can be implemented with your own custom implementation, and other documentation necessary to build your game around Amoeba Engine can be found in doc/design.md.
 
 How To Compile From Source
 --------------------------
