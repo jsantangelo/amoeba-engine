@@ -1,0 +1,3 @@
+# Ignore all files in the res directory except for this file.
+*
+!.gitignore
