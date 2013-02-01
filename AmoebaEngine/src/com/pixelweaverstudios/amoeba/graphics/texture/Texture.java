@@ -1,74 +1,77 @@
 package com.pixelweaverstudios.amoeba.graphics.texture;
 
-public class Texture
+import android.opengl.GLES20;
+
+public class Texture implements ITexture
 {
-	private Integer handle, drawableId;
-	private float width, height;
+	private int handle, drawableId;
+	private int width, height;
 
-	public Texture() 
+	public Texture()
 	{
-	    handle = null;
-		drawableId = null;
-		
-		setWidth(1.0f);
-		setHeight(1.0f);
-	}
-	
-	public Texture(Integer drawable)
-	{		
-	    handle = null;
-		drawableId = drawable;
-	}
-	
-	public Texture(Integer drawable, Integer tex)
-	{		
-	    handle = tex;
-		drawableId = drawable;
-	}
-	
-	public void setTexture(Integer texID)
-	{
-	    handle = texID;
+	    handle = -1;
+		drawableId = -1;
+
+		setWidth(0);
+		setHeight(0);
 	}
 
-	public void setDrawable(Integer drawable)
+	public Texture(int drawable)
 	{
+	    handle = -1;
 		drawableId = drawable;
 	}
 
-	public void setWidth(float w)
+	public boolean load()
 	{
-		if(w > 0.0f)
-			width = w;
-		else
-			width = 1.0f;
+
 	}
 
-	public void setHeight(float h)
+	public boolean unload()
 	{
-		if(h > 0.0f)
-			height = h;
-		else
-			height = 1.0f;
+
 	}
 
-	public Integer getHandle()
+	public boolean isLoaded()
 	{
-		return handle;
+		return GLES20.glIsTexture(handle);
 	}
 
-	public Integer getDrawableID()
-	{
-		return drawableId;
-	}
-
-	public float getWidth()
+	public int getWidth()
 	{
 		return width;
 	}
 
-	public float getHeight()
+	public int getHeight()
 	{
 		return height;
+	}
+
+	public int getHandle()
+	{
+		return handle;
+	}
+
+	public int getDrawable()
+	{
+		return drawableId;
+	}
+
+	private void setWidth(int w)
+	{
+		width = 0;
+		if(w >= 0)
+		{
+			width = w;
+		}
+	}
+
+	private void setHeight(int h)
+	{
+		height = 0;
+		if(h >= 0)
+		{
+			height = h;
+		}
 	}
 }

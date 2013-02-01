@@ -7,22 +7,22 @@ package com.pixelweaverstudios.amoeba.graphics.texture;
 public interface ITexture
 {
     /**
-     * Load the texture to hardware.
+     * Load the texture into opengl.
      * @return Whether the operation was successful.
      */
     public boolean load();
 
     /**
-     * Unload the texture from hardware.
+     * Unload the texture from opengl.
      * @return Whether the operation was successful.
      */
     public boolean unload();
 
     /**
-     * @return Whether the texture is loaded into hardware.
+     * @return Whether the texture is loaded in opengl.
      */
     public boolean isLoaded();
-    
+
     /**
      * @return The width of the texture.
      */
@@ -32,12 +32,12 @@ public interface ITexture
      * @return The height of the texture.
      */
     public int getHeight();
-    
+
     /**
-     * @return The handle that represents the texture on the hardware.
+     * @return The handle that represents the texture in opengl.
      */
     public int getHandle();
-    
+
     /**
      * @return The drawable id number that was used to generate the texture.
      */
