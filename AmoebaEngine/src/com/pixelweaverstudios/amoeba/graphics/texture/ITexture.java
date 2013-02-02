@@ -7,19 +7,19 @@ package com.pixelweaverstudios.amoeba.graphics.texture;
 public interface ITexture
 {
     /**
-     * Load the texture into opengl.
+     * Load the texture.
      * @return Whether the operation was successful.
      */
     public boolean load();
 
     /**
-     * Unload the texture from opengl.
+     * Unload the texture.
      * @return Whether the operation was successful.
      */
     public boolean unload();
 
     /**
-     * @return Whether the texture is loaded in opengl.
+     * @return Whether the texture is loaded.
      */
     public boolean isLoaded();
 
@@ -34,7 +34,7 @@ public interface ITexture
     public int getHeight();
 
     /**
-     * @return The handle that represents the texture in opengl.
+     * @return The handle that represents the texture.
      */
     public int getHandle();
 
