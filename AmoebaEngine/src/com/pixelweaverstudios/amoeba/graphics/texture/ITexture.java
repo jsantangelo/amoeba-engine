@@ -2,26 +2,29 @@ package com.pixelweaverstudios.amoeba.graphics.texture;
 
 /**
  * @author Mike Testen
- *
+ * 
  */
 public interface ITexture
 {
     /**
-     * Load the texture.
-     * @return Whether the operation was successful.
+     * @param width
      */
-    public boolean load();
+    public void setWidth(int width);
 
     /**
-     * Unload the texture.
-     * @return Whether the operation was successful.
+     * @param height
      */
-    public boolean unload();
+    public void setHeight(int height);
 
     /**
-     * @return Whether the texture is loaded.
+     * @param handle
      */
-    public boolean isLoaded();
+    public void setHandle(int handle);
+
+    /**
+     * @param drawable
+     */
+    public void setDrawable(int drawable);
 
     /**
      * @return The width of the texture.
