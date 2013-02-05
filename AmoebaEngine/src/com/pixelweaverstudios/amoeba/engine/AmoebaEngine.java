@@ -10,21 +10,30 @@ import com.pixelweaverstudios.amoeba.engine.IAmoebaEngine;
  */
 public class AmoebaEngine implements IAmoebaEngine
 {
-	private GLSurfaceView glSurfaceView;
+	private IAmoebaEngineView glSurfaceView;
+	//private IScreenManager screenManager;
+	//private IGameLoop gameLoop;
 
-	/**
-	 * Adds a Screen to the ScreenManager.
-	 */
-	public void addScreen()
+	public AmoebaEngine(Context context)
 	{
+		glSurfaceView = new AmoebaEngineView(context, this);
+	}
 
+	public void enableGesture()
+	{
+		//glSurfaceView.enableGesture(type);
+	}
+
+	public void disableGesture()
+	{
+		//glSurfaceView.disableGesture(type);
 	}
 
 	/**
 	 * Returns the ContentView of the Engine.
 	 * @return the content view
 	 */
-	public GLSurfaceView getContentView()
+	public IAmoebaEngineView getContentView()
 	{
 		return glSurfaceView;
 	}

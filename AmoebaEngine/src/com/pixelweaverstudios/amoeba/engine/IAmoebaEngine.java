@@ -5,14 +5,18 @@ import android.opengl.GLSurfaceView;
 /**
  * An interface defining the publicly accessible methods of the AmoebaEngine.
  */
-public interface IAmoebaEngine
+public interface IAmoebaEngine implements IGestureConfigurator
 {
-	/**
-	 * Adds a Screen to the ScreenManager of the Engine.
-	 * @see Screen
-	 * @see ScreenManager
-	 */
-	public void addScreen();
+	//Commented out below are likely services that the engine will expose to the game
+	//activity.
+	//public void addScreen();
+	//public void setGameLoopType(SOME_ENUM);
+	
+
+
+	//Services for GestureDetection
+	// public void enableGesture(GestureType type);
+	// public void disableGesture(GestureType type);
 
 	/**
 	 * Returns the ContentView instance of the Engine.
