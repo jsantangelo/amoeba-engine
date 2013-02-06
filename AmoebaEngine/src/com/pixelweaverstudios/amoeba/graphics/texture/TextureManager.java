@@ -35,6 +35,14 @@ public class TextureManager
 	
 	/**
 	 * @param resource
+	 */
+	public void remove(int resource)
+	{
+		textures.remove(resource);
+	}
+	
+	/**
+	 * @param resource
 	 * @return
 	 */
 	public ITexture loadTexture(int resource) 
