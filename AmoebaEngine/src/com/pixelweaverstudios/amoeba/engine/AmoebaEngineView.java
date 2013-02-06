@@ -20,6 +20,15 @@ public class AmoebaEngineView extends GLSurfaceView
 		setRenderMode(GLSurfaceView.RENDERMODE_WHEN_DIRTY);
 
 		setFocusable(true);
+
+		gestureListener = new GestureListener(context, engine);
+	}
+
+	//Methods from GLSurfaceView
+	@Override
+	public boolean onTouchEvent(MotionEvent event)
+	{
+		gestureListener.onTouchEvent(event);
 	}
 
 	//Methods from GLSurfaceView (who implements SurfaceHolder.Callback)
