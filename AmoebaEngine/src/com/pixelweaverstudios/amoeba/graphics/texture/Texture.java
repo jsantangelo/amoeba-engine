@@ -54,7 +54,7 @@ public class Texture implements ITexture
 	 */
 	public boolean isLoaded()
 	{
-		TextureUtilities.isTextureLoaded(getHandle());
+		return TextureUtilities.isTextureLoaded(getHandle());
 	}
 
 	/* (non-Javadoc)
@@ -100,7 +100,7 @@ public class Texture implements ITexture
 	/* (non-Javadoc)
 	 * @see com.pixelweaverstudios.amoeba.graphics.texture.ITexture#getWidth()
 	 */
-	public final int getWidth()
+	public int getWidth()
 	{
 		return width;
 	}
@@ -108,7 +108,7 @@ public class Texture implements ITexture
 	/* (non-Javadoc)
 	 * @see com.pixelweaverstudios.amoeba.graphics.texture.ITexture#getHeight()
 	 */
-	public final int getHeight()
+	public int getHeight()
 	{
 		return height;
 	}
@@ -116,7 +116,7 @@ public class Texture implements ITexture
 	/* (non-Javadoc)
 	 * @see com.pixelweaverstudios.amoeba.graphics.texture.ITexture#getHandle()
 	 */
-	public final int getHandle()
+	public int getHandle()
 	{
 		return handle;
 	}
@@ -124,7 +124,7 @@ public class Texture implements ITexture
 	/* (non-Javadoc)
 	 * @see com.pixelweaverstudios.amoeba.graphics.texture.ITexture#getDrawable()
 	 */
-	public final int getDrawable()
+	public int getDrawable()
 	{
 		return drawableId;
 	}

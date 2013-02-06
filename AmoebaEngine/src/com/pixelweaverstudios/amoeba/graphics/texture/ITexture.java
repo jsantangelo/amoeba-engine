@@ -44,20 +44,20 @@ public interface ITexture
 	/**
 	 * @return The width of the texture.
 	 */
-	public final int getWidth();
+	public int getWidth();
 
 	/**
 	 * @return The height of the texture.
 	 */
-	public final int getHeight();
+	public int getHeight();
 
 	/**
 	 * @return The handle that represents the texture.
 	 */
-	public final int getHandle();
+	public int getHandle();
 
 	/**
 	 * @return The drawable id number that was used to generate the texture.
 	 */
-	public final int getDrawable();
+	public int getDrawable();
 }

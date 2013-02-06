@@ -1,5 +1,7 @@
 package com.pixelweaverstudios.amoeba.graphics.utilities;
 
+import com.pixelweaverstudios.amoeba.graphics.texture.ITexture;
+
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -37,15 +39,15 @@ public class TextureUtilities
 		return temp[0];
 	}
 
-	public static void loadTextureFromResource(Context context, Texture texture)
+	public static void loadTextureFromResource(Context context, ITexture texture)
 	{
-		int handle = texture.getHandle();
-		if(handle == -1)
+		int textureHandle = texture.getHandle();
+		if(textureHandle == -1)
 		{
-			handle = generateTextureHandle();
+		    textureHandle = generateTextureHandle();
 		}
 
-		if(handle != -1)
+		if(textureHandle != -1)
 		{
 			BitmapFactory.Options opts = new BitmapFactory.Options();
 			opts.inScaled = false;
@@ -64,7 +66,7 @@ public class TextureUtilities
 
 			texture.setWidth(bmp.getWidth());
 			texture.setHeight(bmp.getHeight());
-			texture.setHandle(handle);
+			texture.setHandle(textureHandle);
 
 			bmp.recycle();
 		}

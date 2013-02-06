@@ -44,15 +44,8 @@ public class TextureManager
 	 */
 	public ITexture loadTexture(int resource) 
     {
-		ITexture texture = textures.get(resource);
-        
-        if(texture == null)
-        {
-            if((texture = TextureFactory.createTexture(context, resource)) != null)
-            {
-                textures.put(resource, texture);
-            }
-        }
+		ITexture texture = getTexture(resource);
+        texture.load();
         
         return texture;
     }
@@ -66,24 +59,6 @@ public class TextureManager
 		{
 		    loadTexture(textures.keyAt(index));
 		}
-	}
-
-	/**
-	 * @param resource
-	 * @return
-	 */
-	public ITexture getTexture(int resource)
-	{				
-		return textures.get(resource);
-	}
-	
-	/**
-	 * @param resource
-	 * @return
-	 */
-	public Integer getTextureID(int resource)
-	{				
-		return textures.get(resource).getHandle();
 	}
 	
     /**
@@ -117,4 +92,22 @@ public class TextureManager
 	{
 		
 	}
+	
+	/**
+     * @param resource
+     * @return
+     */
+    public ITexture getTexture(int resource)
+    {               
+        return textures.get(resource);
+    }
+    
+    /**
+     * @param resource
+     * @return
+     */
+    public Integer getTextureID(int resource)
+    {               
+        return textures.get(resource).getHandle();
+    }
 }
