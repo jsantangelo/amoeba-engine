@@ -44,7 +44,7 @@ public abstract class GameActivity extends Activity
 	{
 		if (engine == null)
 		{
-			engine = new AmoebaEngine();
+			engine = new AmoebaEngine(this);
 		}
 		return engine;
 	}

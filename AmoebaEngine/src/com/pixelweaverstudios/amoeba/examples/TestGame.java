@@ -24,7 +24,10 @@ public class TestGame extends GameActivity
 		IAmoebaEngine myEngine = getEngine();
 		//Screen mainMenu = createMainMenuScreen();
 		//myEngine.addScreen(mainMenu);
+		//myEngine.setGameLoop(somegameloop);
+		//myEngine.completeInitialization();
 
+		//Engine initialization should be done before we call the next line
 		super.onCreate(savedInstanceState);
 	}
 }
