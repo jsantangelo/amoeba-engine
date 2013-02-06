@@ -1,5 +1,7 @@
 package com.pixelweaverstudios.amoeba.graphics.texture;
 
+import com.pixelweaverstudios.amoeba.graphics.utilities.TextureUtilities;
+
 /**
  * @author Mike Testen
  *
@@ -10,15 +12,14 @@ public class Texture implements ITexture
 	private int width, height;
 
 	/**
-	 * 
+	 *
 	 */
 	public Texture()
 	{
-	    handle = -1;
+		handle = -1;
 		drawableId = -1;
-
-		setWidth(0);
-		setHeight(0);
+		width = 0;
+		height = 0;
 	}
 
 	/**
@@ -26,54 +27,80 @@ public class Texture implements ITexture
 	 */
 	public Texture(int drawable)
 	{
-	    handle = -1;
+		handle = -1;
 		drawableId = drawable;
+		width = 0;
+		height = 0;
 	}
 
 	/* (non-Javadoc)
 	 * @see com.pixelweaverstudios.amoeba.graphics.texture.ITexture#setWidth(int)
 	 */
-	public void setWidth(int width)
-    {
-        this.width = 0;
-        if(width >= 0)
-        {
-            this.width = width;
-        }
-    }
+	public void load()
+	{
+		//TextureUtilities.loadTextureFromResource(context, getDrawable());
+	}
 
-    /* (non-Javadoc)
-     * @see com.pixelweaverstudios.amoeba.graphics.texture.ITexture#setHeight(int)
-     */
-    public void setHeight(int height)
-    {
-        this.height = 0;
-        if(height >= 0)
-        {
-            this.height = height;
-        }
-    }
-    
-    /* (non-Javadoc)
-     * @see com.pixelweaverstudios.amoeba.graphics.texture.ITexture#setHandle(int)
-     */
-    public void setHandle(int handle)
-    {
-        this.handle = handle;
-    }
-    
-    /* (non-Javadoc)
-     * @see com.pixelweaverstudios.amoeba.graphics.texture.ITexture#setDrawable(int)
-     */
-    public void setDrawable(int drawable)
-    {
-        this.drawableId = drawable;
-    }
-	
+	/* (non-Javadoc)
+	 * @see com.pixelweaverstudios.amoeba.graphics.texture.ITexture#setWidth(int)
+	 */
+	public void unload()
+	{
+
+	}
+
+	/* (non-Javadoc)
+	 * @see com.pixelweaverstudios.amoeba.graphics.texture.ITexture#setWidth(int)
+	 */
+	public boolean isLoaded()
+	{
+		TextureUtilities.isTextureLoaded(getHandle());
+	}
+
+	/* (non-Javadoc)
+	 * @see com.pixelweaverstudios.amoeba.graphics.texture.ITexture#setWidth(int)
+	 */
+	public void setWidth(final int width)
+	{
+		this.width = 0;
+		if(width >= 0)
+		{
+			this.width = width;
+		}
+	}
+
+	/* (non-Javadoc)
+	 * @see com.pixelweaverstudios.amoeba.graphics.texture.ITexture#setHeight(int)
+	 */
+	public void setHeight(final int height)
+	{
+		this.height = 0;
+		if(height >= 0)
+		{
+			this.height = height;
+		}
+	}
+
+	/* (non-Javadoc)
+	 * @see com.pixelweaverstudios.amoeba.graphics.texture.ITexture#setHandle(int)
+	 */
+	public void setHandle(final int handle)
+	{
+		this.handle = handle;
+	}
+
+	/* (non-Javadoc)
+	 * @see com.pixelweaverstudios.amoeba.graphics.texture.ITexture#setDrawable(int)
+	 */
+	public void setDrawable(final int drawable)
+	{
+		this.drawableId = drawable;
+	}
+
 	/* (non-Javadoc)
 	 * @see com.pixelweaverstudios.amoeba.graphics.texture.ITexture#getWidth()
 	 */
-	public int getWidth()
+	public final int getWidth()
 	{
 		return width;
 	}
@@ -81,7 +108,7 @@ public class Texture implements ITexture
 	/* (non-Javadoc)
 	 * @see com.pixelweaverstudios.amoeba.graphics.texture.ITexture#getHeight()
 	 */
-	public int getHeight()
+	public final int getHeight()
 	{
 		return height;
 	}
@@ -89,7 +116,7 @@ public class Texture implements ITexture
 	/* (non-Javadoc)
 	 * @see com.pixelweaverstudios.amoeba.graphics.texture.ITexture#getHandle()
 	 */
-	public int getHandle()
+	public final int getHandle()
 	{
 		return handle;
 	}
@@ -97,7 +124,7 @@ public class Texture implements ITexture
 	/* (non-Javadoc)
 	 * @see com.pixelweaverstudios.amoeba.graphics.texture.ITexture#getDrawable()
 	 */
-	public int getDrawable()
+	public final int getDrawable()
 	{
 		return drawableId;
 	}
