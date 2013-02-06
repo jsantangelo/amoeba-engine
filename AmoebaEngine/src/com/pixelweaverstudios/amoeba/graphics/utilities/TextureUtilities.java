@@ -1,5 +1,9 @@
 package com.pixelweaverstudios.amoeba.graphics.utilities;
 
+import java.nio.ByteBuffer;
+import java.nio.ByteOrder;
+import java.nio.IntBuffer;
+
 import com.pixelweaverstudios.amoeba.graphics.texture.ITexture;
 
 import android.content.Context;
@@ -10,7 +14,7 @@ import android.opengl.GLUtils;
 
 /**
  * @author Mike Testen
- *
+ * 
  */
 public class TextureUtilities
 {
@@ -31,7 +35,7 @@ public class TextureUtilities
 		int[] temp = new int[1];
 
 		GLES20.glGenTextures(1, temp, 0);
-		if(temp[0] == 0)
+		if (temp[0] == 0)
 		{
 			throw new RuntimeException("Unable to generate a new texture id.");
 		}
@@ -39,15 +43,19 @@ public class TextureUtilities
 		return temp[0];
 	}
 
+	/**
+	 * @param context
+	 * @param texture
+	 */
 	public static void loadTextureFromResource(Context context, ITexture texture)
 	{
 		int textureHandle = texture.getHandle();
-		if(textureHandle == -1)
+		if (textureHandle == -1)
 		{
-		    textureHandle = generateTextureHandle();
+			textureHandle = generateTextureHandle();
 		}
 
-		if(textureHandle != -1)
+		if (textureHandle != -1)
 		{
 			BitmapFactory.Options opts = new BitmapFactory.Options();
 			opts.inScaled = false;
@@ -69,6 +77,28 @@ public class TextureUtilities
 			texture.setHandle(textureHandle);
 
 			bmp.recycle();
+		}
+	}
+	
+	/**
+	 * @param texture
+	 */
+	public static void unloadTexture(ITexture texture)
+	{
+		int textureHandle = texture.getHandle();
+		if(textureHandle != -1)
+		{
+			IntBuffer texBuffer;
+	    	int tempID[] = new int[1]; 
+			tempID[0] = textureHandle;
+	    	
+			ByteBuffer bb = ByteBuffer.allocateDirect(4);
+			bb.order(ByteOrder.nativeOrder());
+			texBuffer = bb.asIntBuffer();
+			texBuffer.put(tempID);
+			texBuffer.position(0);
+	    	
+			GLES20.glDeleteTextures(1, texBuffer);
 		}
 	}
 }

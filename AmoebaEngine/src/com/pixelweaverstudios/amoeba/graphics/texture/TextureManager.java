@@ -1,11 +1,6 @@
 package com.pixelweaverstudios.amoeba.graphics.texture;
 
-import java.nio.ByteBuffer;
-import java.nio.ByteOrder;
-import java.nio.IntBuffer;
-
 import android.content.Context;
-import android.opengl.GLES20;
 import android.util.SparseArray;
 
 /**
@@ -32,7 +27,7 @@ public class TextureManager
 	 */
 	public void add(ITexture texture)
 	{
-		if(texture.getDrawable() != -1)
+		if(texture != null && texture.getDrawable() != -1)
 		{
 		    textures.put(texture.getDrawable(), texture);
 		}
@@ -45,7 +40,7 @@ public class TextureManager
 	public ITexture loadTexture(int resource) 
     {
 		ITexture texture = getTexture(resource);
-        texture.load();
+        texture.load(context);
         
         return texture;
     }
@@ -57,32 +52,19 @@ public class TextureManager
 	{
 		for(int index = 0; index < textures.size(); index++)
 		{
-		    loadTexture(textures.keyAt(index));
+		    textures.valueAt(index).load(context);
 		}
 	}
 	
     /**
      * @param resource
      */
-    public void unloadTexture(int resource)
+    public ITexture unloadTexture(int resource)
     {
-    	Integer id = getTextureID(resource);
-		if(id != null)
-		{
-			IntBuffer texBuffer;
-	    	int tempID[] = new int[1]; 
-	    	tempID[0] = id.intValue();
-	    	
-			ByteBuffer bb = ByteBuffer.allocateDirect(4);
-			bb.order(ByteOrder.nativeOrder());
-			texBuffer = bb.asIntBuffer();
-			texBuffer.put(tempID);
-			texBuffer.position(0);
-	    	
-			GLES20.glDeleteTextures(1, texBuffer);
-    		
-			textures.remove(resource);
-		}
+    	ITexture texture = getTexture(resource);
+        texture.unload();
+        
+        return texture;
     }
     
 	/**
@@ -90,7 +72,10 @@ public class TextureManager
 	 */
 	public void unloadAllTextures()
 	{
-		
+		for(int index = 0; index < textures.size(); index++)
+		{
+			textures.valueAt(index).unload();
+		}
 	}
 	
 	/**

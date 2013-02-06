@@ -1,5 +1,7 @@
 package com.pixelweaverstudios.amoeba.graphics.texture;
 
+import android.content.Context;
+
 import com.pixelweaverstudios.amoeba.graphics.utilities.TextureUtilities;
 
 /**
@@ -36,9 +38,9 @@ public class Texture implements ITexture
 	/* (non-Javadoc)
 	 * @see com.pixelweaverstudios.amoeba.graphics.texture.ITexture#setWidth(int)
 	 */
-	public void load()
+	public void load(Context context)
 	{
-		//TextureUtilities.loadTextureFromResource(context, getDrawable());
+		TextureUtilities.loadTextureFromResource(context, this);
 	}
 
 	/* (non-Javadoc)
@@ -46,7 +48,7 @@ public class Texture implements ITexture
 	 */
 	public void unload()
 	{
-
+		TextureUtilities.unloadTexture(this);
 	}
 
 	/* (non-Javadoc)

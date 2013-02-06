@@ -1,15 +1,17 @@
 package com.pixelweaverstudios.amoeba.graphics.texture;
 
+import android.content.Context;
+
 /**
  * @author Mike Testen
- *
+ * 
  */
 public interface ITexture
 {
 	/**
-	 *
+	 * @param context
 	 */
-	public void load();
+	public void load(Context context);
 
 	/**
 	 *
