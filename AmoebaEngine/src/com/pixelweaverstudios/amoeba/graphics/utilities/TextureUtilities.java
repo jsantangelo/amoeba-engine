@@ -79,25 +79,25 @@ public class TextureUtilities
 			bmp.recycle();
 		}
 	}
-	
+
 	/**
 	 * @param texture
 	 */
 	public static void unloadTexture(ITexture texture)
 	{
 		int textureHandle = texture.getHandle();
-		if(textureHandle != -1)
+		if (textureHandle != -1)
 		{
 			IntBuffer texBuffer;
-	    	int tempID[] = new int[1]; 
+			int tempID[] = new int[1];
 			tempID[0] = textureHandle;
-	    	
+
 			ByteBuffer bb = ByteBuffer.allocateDirect(4);
 			bb.order(ByteOrder.nativeOrder());
 			texBuffer = bb.asIntBuffer();
 			texBuffer.put(tempID);
 			texBuffer.position(0);
-	    	
+
 			GLES20.glDeleteTextures(1, texBuffer);
 		}
 	}
