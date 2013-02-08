@@ -39,7 +39,7 @@ public class AmoebaEngineView extends GLSurfaceView
 		setRenderMode(GLSurfaceView.RENDERMODE_WHEN_DIRTY);
 	}
 
-	//Methods from GLSurfaceView
+	//Methods from GLSurfaceView/SurfaceView/View
 	@Override
 	public boolean onTouchEvent(MotionEvent event)
 	{

@@ -23,6 +23,9 @@ public class GestureListener implements OnGestureListener, OnScaleGestureListene
 		scaleGestureDetector.onTouchEvent(event);
 	}
 
+	//TODO - these methods will callback the engine with information, and allow the
+	//engine to determine what to do with the touch events
+
 	//methods implementing OnGestureListener
 	public boolean onDown(MotionEvent event)
 	{
@@ -67,6 +70,6 @@ public class GestureListener implements OnGestureListener, OnScaleGestureListene
 
 	public void onScaleEnd(ScaleGestureDetector detector)
 	{
-		
+
 	}
 }
