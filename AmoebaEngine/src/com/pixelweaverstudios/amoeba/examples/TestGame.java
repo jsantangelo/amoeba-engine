@@ -27,7 +27,9 @@ public class TestGame extends GameActivity
 		//myEngine.setGameLoop(somegameloop);
 		//myEngine.completeInitialization();
 
+
 		//Engine initialization should be done before we call the next line
+		myEngine.start();
 		super.onCreate(savedInstanceState);
 	}
 }

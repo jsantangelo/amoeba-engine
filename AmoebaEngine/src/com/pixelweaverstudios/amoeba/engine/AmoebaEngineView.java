@@ -1,9 +1,9 @@
 package com.pixelweaverstudios.amoeba.engine;
 
 public class AmoebaEngineView extends GLSurfaceView
-	implements IAmoebaEngineView//, SurfaceHolder.Callback
+	implements IAmoebaEngineView
 {
-	private GLRenderer glRenderer;
+	private IAmoebaEngineRenderer renderer;
 	private GestureListener gestureListener;
 
 	IAmoebaEngine engine;
@@ -11,17 +11,32 @@ public class AmoebaEngineView extends GLSurfaceView
 	public AmoebaEngineView(Context context, IAmoebaEngine engine)
 	{
 		super(context);
-
 		this.engine = engine;
 
-		getHolder().addCallback(this);
-		glRenderer = new GLRenderer(this);
-		setRenderer(glRenderer);
-		setRenderMode(GLSurfaceView.RENDERMODE_WHEN_DIRTY);
-
+		//TODO: Investigate if the following commented out line is necessary.
+		//I have a suspicion that it isn't, because we already get onTouchEvent via
+		//GLSurfaceView.
+		//getHolder().addCallback(this);
+		
 		setFocusable(true);
+		initializeGestureListener();
+	}
 
+	private void initializeGestureListener()
+	{
 		gestureListener = new GestureListener(context, engine);
+	}
+
+	public void start()
+	{
+		initializeRenderer();
+	}
+
+	private void initializeRenderer()
+	{
+		//renderer = new GLES20Renderer(engine); - TODO (Mike)
+		setRenderer(renderer);
+		setRenderMode(GLSurfaceView.RENDERMODE_WHEN_DIRTY);
 	}
 
 	//Methods from GLSurfaceView
@@ -31,33 +46,14 @@ public class AmoebaEngineView extends GLSurfaceView
 		gestureListener.onTouchEvent(event);
 	}
 
-	//Methods from GLSurfaceView (who implements SurfaceHolder.Callback)
-	@Override
-	public boolean surfaceChanged(SurfaceHolder holder, int format, int width, int height)
-	{
-		super.surfaceChanged(holder, format, width, height);
-	}
+	// public void enableGesture(int motionEventType)
+	// {
 
-	@Override
-	public boolean surfaceCreated(SurfaceHolder holder)
-	{
-		super.surfaceCreated(holder);
-	}
+	// }
 
-	@Override
-	public boolean surfaceDestroyed(SurfaceHolder holder)
-	{
-		super.surfaceDestroyed(holder);
-	}
+	// public void disableGesture(int motionEventType)
+	// {
 
-	public void enableGesture(int motionEventType)
-	{
-
-	}
-
-	public void disableGesture(int motionEventType)
-	{
-
-	}
+	// }
 
 }

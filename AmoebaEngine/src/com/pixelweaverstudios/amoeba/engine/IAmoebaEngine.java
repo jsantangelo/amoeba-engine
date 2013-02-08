@@ -12,11 +12,11 @@ public interface IAmoebaEngine implements IGestureConfigurator
 	//public void addScreen();
 	//public void setGameLoopType(SOME_ENUM);
 	
-
-
 	//Services for GestureDetection
 	// public void enableGesture(GestureType type);
 	// public void disableGesture(GestureType type);
+
+	public void start();
 
 	/**
 	 * Returns the ContentView instance of the Engine.

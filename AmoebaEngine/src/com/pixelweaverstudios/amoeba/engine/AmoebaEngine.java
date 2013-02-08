@@ -10,24 +10,29 @@ import com.pixelweaverstudios.amoeba.engine.IAmoebaEngine;
  */
 public class AmoebaEngine implements IAmoebaEngine
 {
-	private IAmoebaEngineView glSurfaceView;
+	private IAmoebaEngineView view;
 	//private IScreenManager screenManager;
 	//private IGameLoop gameLoop;
 
 	public AmoebaEngine(Context context)
 	{
-		glSurfaceView = new AmoebaEngineView(context, this);
+		view = new AmoebaEngineView(context, this);
 	}
 
-	public void enableGesture()
+	public void start()
 	{
-		//glSurfaceView.enableGesture(type);
+		glSurfaceView.start();
 	}
 
-	public void disableGesture()
-	{
-		//glSurfaceView.disableGesture(type);
-	}
+	// public void enableGesture()
+	// {
+	// 	glSurfaceView.enableGesture(type);
+	// }
+
+	// public void disableGesture()
+	// {
+	// 	glSurfaceView.disableGesture(type);
+	// }
 
 	/**
 	 * Returns the ContentView of the Engine.
@@ -35,6 +40,6 @@ public class AmoebaEngine implements IAmoebaEngine
 	 */
 	public IAmoebaEngineView getContentView()
 	{
-		return glSurfaceView;
+		return view;
 	}
 }
