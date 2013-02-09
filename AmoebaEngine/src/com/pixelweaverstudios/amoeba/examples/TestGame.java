@@ -29,7 +29,6 @@ public class TestGame extends GameActivity
 
 
 		//Engine initialization should be done before we call the next line
-		myEngine.start();
-		super.onCreate(savedInstanceState);
+		start();
 	}
 }

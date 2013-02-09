@@ -27,13 +27,25 @@ public abstract class GameActivity extends Activity
 	public void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
+	}
+
+	public void start()
+	{
+		engine.start();
+		setWindowFeatures();
+		setContentView();
+	}
+
+	public void setWindowFeatures()
+	{
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
 			WindowManager.LayoutParams.FLAG_FULLSCREEN);
-		if (engine != null)
-		{
-			setContentView(engine.getContentView());
-		}
+	}
+
+	public void setContentView()
+	{
+		setContentView(getEngine().getContentView());
 	}
 
 	/**
