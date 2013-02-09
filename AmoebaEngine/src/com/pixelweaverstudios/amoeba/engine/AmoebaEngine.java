@@ -11,17 +11,26 @@ import com.pixelweaverstudios.amoeba.engine.IAmoebaEngine;
 public class AmoebaEngine implements IAmoebaEngine
 {
 	private IAmoebaEngineView view;
+	private AmoebaEngineFactory factory;
 	//private IScreenManager screenManager;
 	//private IGameLoop gameLoop;
 
 	public AmoebaEngine(Context context)
 	{
-		view = new AmoebaEngineView(context, this);
+
+		factory = new AmoebaEngineFactory(context, this);
+
+		factory.createDefaultComponents();
+
+		//Line below should be in factory
+		//view = new AmoebaEngineView(context, this);
 	}
 
 	public void start()
 	{
-		glSurfaceView.start();
+		//Below is questionable. Needs more thought.
+		//glSurfaceView.start();
+		factory.getView().start();
 	}
 
 	// public void enableGesture()
