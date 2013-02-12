@@ -21,6 +21,7 @@ public class TestGame extends GameActivity
 	@Override
 	public void onCreate(Bundle savedInstanceState)
 	{
+		super.onCreate(savedInstanceState);
 		IAmoebaEngine myEngine = getEngine();
 		//Screen mainMenu = createMainMenuScreen();
 		//myEngine.addScreen(mainMenu);

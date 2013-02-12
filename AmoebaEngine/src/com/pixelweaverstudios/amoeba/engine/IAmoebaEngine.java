@@ -1,11 +1,13 @@
 package com.pixelweaverstudios.amoeba.engine;
 
-import android.opengl.GLSurfaceView;
+//import android.opengl.GLSurfaceView;
+
+import com.pixelweaverstudios.amoeba.engine.view.IAmoebaEngineView;
 
 /**
  * An interface defining the publicly accessible methods of the AmoebaEngine.
  */
-public interface IAmoebaEngine implements IGestureConfigurator
+public interface IAmoebaEngine //implements IGestureConfigurator
 {
 	//Commented out below are likely services that the engine will expose to the game
 	//activity.
@@ -22,5 +24,5 @@ public interface IAmoebaEngine implements IGestureConfigurator
 	 * Returns the ContentView instance of the Engine.
 	 * @return the content view
 	 */
-	public GLSurfaceView getContentView();
+	public IAmoebaEngineView getContentView();
 }
