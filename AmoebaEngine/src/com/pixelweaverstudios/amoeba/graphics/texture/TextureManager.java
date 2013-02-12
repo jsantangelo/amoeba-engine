@@ -1,6 +1,5 @@
 package com.pixelweaverstudios.amoeba.graphics.texture;
 
-import android.content.Context;
 import android.util.SparseArray;
 
 /**
@@ -9,16 +8,13 @@ import android.util.SparseArray;
  */
 public class TextureManager
 {
-	private Context context;
-
 	private SparseArray<ITexture> textures;
 
 	/**
 	 * @param context
 	 */
-	public TextureManager(Context context)
+	public TextureManager()
 	{
-		this.context = context;
 		this.textures = new SparseArray<ITexture>();
 	}
 
@@ -48,7 +44,7 @@ public class TextureManager
 	public ITexture loadTexture(int resource)
 	{
 		ITexture texture = getTexture(resource);
-		texture.load(context);
+		texture.load();
 
 		return texture;
 	}
@@ -60,7 +56,7 @@ public class TextureManager
 	{
 		for (int index = 0; index < textures.size(); index++)
 		{
-			textures.valueAt(index).load(context);
+			textures.valueAt(index).load();
 		}
 	}
 

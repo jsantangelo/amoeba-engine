@@ -1,7 +1,6 @@
 package com.pixelweaverstudios.amoeba.engine.view;
 
 import android.opengl.GLSurfaceView;
-import android.content.Context;
 import android.view.MotionEvent;
 
 import com.pixelweaverstudios.amoeba.engine.renderer.IAmoebaEngineRenderer;

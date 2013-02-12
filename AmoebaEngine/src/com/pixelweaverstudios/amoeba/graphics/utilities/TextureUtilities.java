@@ -4,9 +4,9 @@ import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.nio.IntBuffer;
 
+import com.pixelweaverstudios.amoeba.engine.AmoebaEngine;
 import com.pixelweaverstudios.amoeba.graphics.texture.ITexture;
 
-import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.opengl.GLES20;
@@ -47,7 +47,7 @@ public class TextureUtilities
 	 * @param context
 	 * @param texture
 	 */
-	public static void loadTextureFromResource(Context context, ITexture texture)
+	public static void loadTextureFromResource(ITexture texture)
 	{
 		int textureHandle = texture.getHandle();
 		if (textureHandle == -1)
@@ -60,7 +60,7 @@ public class TextureUtilities
 			BitmapFactory.Options opts = new BitmapFactory.Options();
 			opts.inScaled = false;
 
-			Bitmap bmp = BitmapFactory.decodeResource(context.getResources(), texture.getDrawable(), opts);
+			Bitmap bmp = BitmapFactory.decodeResource(AmoebaEngine.getContext().getResources(), texture.getDrawable(), opts);
 
 			GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, textureHandle);
 

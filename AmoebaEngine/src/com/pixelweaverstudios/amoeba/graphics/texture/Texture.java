@@ -1,7 +1,5 @@
 package com.pixelweaverstudios.amoeba.graphics.texture;
 
-import android.content.Context;
-
 import com.pixelweaverstudios.amoeba.graphics.utilities.TextureUtilities;
 
 /**
@@ -40,9 +38,9 @@ public class Texture implements ITexture
 	 * 
 	 * @see com.pixelweaverstudios.amoeba.graphics.texture.ITexture#setWidth(int)
 	 */
-	public void load(Context context)
+	public void load()
 	{
-		TextureUtilities.loadTextureFromResource(context, this);
+		TextureUtilities.loadTextureFromResource(this);
 	}
 
 	/*

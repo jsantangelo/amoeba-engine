@@ -1,6 +1,5 @@
 package com.pixelweaverstudios.amoeba.engine.input;
 
-import android.content.Context;
 import android.view.GestureDetector;
 import android.view.ScaleGestureDetector;
 import android.view.MotionEvent;
