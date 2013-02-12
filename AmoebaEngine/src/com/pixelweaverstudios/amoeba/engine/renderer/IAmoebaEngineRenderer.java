@@ -1,6 +1,13 @@
-package com.pixelweaverstudios.amoeba.engine;
+package com.pixelweaverstudios.amoeba.engine.renderer;
 
-public interface IAmoebaEngineRenderer implements GLSurfaceView.Renderer
+import android.opengl.GLSurfaceView;
+import javax.microedition.khronos.opengles.GL10;
+//import android.opengl.EGLConfig;
+import javax.microedition.khronos.egl.EGLConfig;
+
+import com.pixelweaverstudios.amoeba.engine.IAmoebaEngine;
+
+public interface IAmoebaEngineRenderer extends GLSurfaceView.Renderer
 {
 	public void attachEngine(IAmoebaEngine engine);
 	public void onDrawFrame(GL10 unused);
