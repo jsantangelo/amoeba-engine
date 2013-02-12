@@ -1,8 +1,9 @@
 package com.pixelweaverstudios.amoeba.engine;
 
-import android.opengl.GLSurfaceView;
+import android.content.Context;
+//import android.opengl.GLSurfaceView;
 
-import com.pixelweaverstudios.amoeba.engine.IAmoebaEngine;
+import com.pixelweaverstudios.amoeba.engine.view.IAmoebaEngineView;
 
 /**
  * The main class in which the AmoebaEngine is encapsulated. Provides access to
@@ -11,26 +12,35 @@ import com.pixelweaverstudios.amoeba.engine.IAmoebaEngine;
 public class AmoebaEngine implements IAmoebaEngine
 {
 	private IAmoebaEngineView view;
-	private AmoebaEngineFactory factory;
+	//private AmoebaEngineFactory factory;
+	private EngineServices services;
 	//private IScreenManager screenManager;
 	//private IGameLoop gameLoop;
+	private static Context context;
 
 	public AmoebaEngine(Context context)
 	{
 
-		factory = new AmoebaEngineFactory(context, this);
+		//factory = new AmoebaEngineFactory(context, this);
+		services = new EngineServices();
+		AmoebaEngine.context = context;
 
-		factory.createDefaultComponents();
+		//factory.createDefaultComponents();
 
 		//Line below should be in factory
 		//view = new AmoebaEngineView(context, this);
+	}
+
+	public static Context getContext()
+	{
+		return context;
 	}
 
 	public void start()
 	{
 		//Below is questionable. Needs more thought.
 		//glSurfaceView.start();
-		factory.getView().start();
+		//factory.getView().start();
 	}
 
 	// public void enableGesture()
