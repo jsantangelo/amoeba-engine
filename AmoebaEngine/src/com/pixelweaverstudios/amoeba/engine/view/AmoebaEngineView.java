@@ -1,4 +1,13 @@
-package com.pixelweaverstudios.amoeba.engine;
+package com.pixelweaverstudios.amoeba.engine.view;
+
+import android.opengl.GLSurfaceView;
+import android.content.Context;
+import android.view.MotionEvent;
+
+import com.pixelweaverstudios.amoeba.engine.renderer.IAmoebaEngineRenderer;
+import com.pixelweaverstudios.amoeba.engine.input.GestureListener;
+import com.pixelweaverstudios.amoeba.engine.IAmoebaEngine;
+import com.pixelweaverstudios.amoeba.engine.AmoebaEngine;
 
 public class AmoebaEngineView extends GLSurfaceView
 	implements IAmoebaEngineView
@@ -8,9 +17,9 @@ public class AmoebaEngineView extends GLSurfaceView
 
 	IAmoebaEngine engine;
 
-	public AmoebaEngineView(Context context, IAmoebaEngine engine)
+	public AmoebaEngineView(IAmoebaEngine engine)
 	{
-		super(context);
+		super(AmoebaEngine.getContext());
 		this.engine = engine;
 
 		//TODO: Investigate if the following commented out line is necessary.
@@ -24,7 +33,7 @@ public class AmoebaEngineView extends GLSurfaceView
 
 	private void initializeGestureListener()
 	{
-		gestureListener = new GestureListener(context, engine);
+		gestureListener = new GestureListener(engine);
 	}
 
 	public void start()
@@ -50,7 +59,7 @@ public class AmoebaEngineView extends GLSurfaceView
 	@Override
 	public boolean onTouchEvent(MotionEvent event)
 	{
-		gestureListener.onTouchEvent(event);
+		return gestureListener.onTouchEvent(event);
 	}
 
 	@Override
