@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.view.Window;
 import android.view.WindowManager;
+import android.opengl.GLSurfaceView;
 
 import com.pixelweaverstudios.amoeba.engine.IAmoebaEngine;
 import com.pixelweaverstudios.amoeba.engine.AmoebaEngine;
@@ -45,7 +46,7 @@ public abstract class GameActivity extends Activity
 
 	public void setContentView()
 	{
-		setContentView(getEngine().getContentView());
+		setContentView((GLSurfaceView)getEngine().getContentView());
 	}
 
 	/**
