@@ -1,6 +1,6 @@
-package com.pixelweaverstudios.amoeba.engine;
+package com.pixelweaverstudios.amoeba.engine.input;
 
 public interface IGestureListener
 {
-	public boolean onTouchEvent(MotionEvent event);
+
 }
