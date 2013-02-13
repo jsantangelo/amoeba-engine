@@ -5,7 +5,8 @@ import android.view.MotionEvent;
 
 import com.pixelweaverstudios.amoeba.engine.renderer.IAmoebaEngineRenderer;
 import com.pixelweaverstudios.amoeba.engine.input.GestureListener;
-import com.pixelweaverstudios.amoeba.engine.IAmoebaEngine;
+//import com.pixelweaverstudios.amoeba.engine.IAmoebaEngine;
+import com.pixelweaverstudios.amoeba.engine.IEngineServices;
 import com.pixelweaverstudios.amoeba.engine.AmoebaEngine;
 
 public class AmoebaEngineView extends GLSurfaceView
@@ -14,17 +15,12 @@ public class AmoebaEngineView extends GLSurfaceView
 	private IAmoebaEngineRenderer renderer;
 	private GestureListener gestureListener;
 
-	IAmoebaEngine engine;
+	IEngineServices services;
 
-	public AmoebaEngineView(IAmoebaEngine engine)
+	public AmoebaEngineView(IEngineServices services)
 	{
 		super(AmoebaEngine.getContext());
-		this.engine = engine;
-
-		//TODO: Investigate if the following commented out line is necessary.
-		//I have a suspicion that it isn't, because we already get onTouchEvent via
-		//GLSurfaceView.
-		//getHolder().addCallback(this);
+		this.services = services;
 		
 		setFocusable(true);
 		initializeGestureListener();
@@ -32,7 +28,7 @@ public class AmoebaEngineView extends GLSurfaceView
 
 	private void initializeGestureListener()
 	{
-		gestureListener = new GestureListener(engine);
+		gestureListener = new GestureListener(services);
 	}
 
 	public void start()
@@ -74,15 +70,4 @@ public class AmoebaEngineView extends GLSurfaceView
 		super.onResume();
 		//Start my thread here
 	}
-
-	// public void enableGesture(int motionEventType)
-	// {
-
-	// }
-
-	// public void disableGesture(int motionEventType)
-	// {
-
-	// }
-
 }
