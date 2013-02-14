@@ -3,14 +3,14 @@ package com.pixelweaverstudios.amoeba.engine;
 import com.pixelweaverstudios.amoeba.engine.input.EngineEvent;
 import com.pixelweaverstudios.amoeba.engine.input.InputManager;
 
-public class EngineServices implements IEngineServices
+public class ServicesManager implements IServicesManager
 {
-	public EngineServices()
+	public ServicesManager()
 	{
-		createDefaultComponents();
+		createDefaultServices();
 	}
 
-	public void createDefaultComponents()
+	public void createDefaultServices()
 	{	
 		//ScreenManager screenManager = new ScreenManager();
 		//InputManager inputManager = new InputManager(this);

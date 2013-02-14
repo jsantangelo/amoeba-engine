@@ -4,7 +4,7 @@ import android.view.GestureDetector;
 import android.view.ScaleGestureDetector;
 import android.view.MotionEvent;
 
-import com.pixelweaverstudios.amoeba.engine.IEngineServices;
+import com.pixelweaverstudios.amoeba.engine.IServicesManager;
 import com.pixelweaverstudios.amoeba.engine.AmoebaEngine;
 import com.pixelweaverstudios.amoeba.engine.input.EngineEvent;
 
@@ -14,11 +14,11 @@ public class GestureListener implements GestureDetector.OnGestureListener,
 	private GestureDetector gestureDetector;
 	private ScaleGestureDetector scaleGestureDetector;
 
-	private IEngineServices services;
+	private IServicesManager services;
 
 	private boolean scrollingInProgress;
 
-	public GestureListener(IEngineServices services)
+	public GestureListener(IServicesManager services)
 	{
 		gestureDetector = new GestureDetector(AmoebaEngine.getContext(), this);
 		scaleGestureDetector = new ScaleGestureDetector(AmoebaEngine.getContext(), this);

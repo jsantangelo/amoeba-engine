@@ -12,23 +12,15 @@ import com.pixelweaverstudios.amoeba.engine.view.IAmoebaEngineView;
 public class AmoebaEngine implements IAmoebaEngine
 {
 	private IAmoebaEngineView view;
-	//private AmoebaEngineFactory factory;
-	private EngineServices services;
+	private IServicesManager services;
 	//private IScreenManager screenManager;
 	//private IGameLoop gameLoop;
 	private static Context context;
 
 	public AmoebaEngine(Context context)
 	{
-
-		//factory = new AmoebaEngineFactory(context, this);
-		services = new EngineServices();
+		services = new ServicesManager();
 		AmoebaEngine.context = context;
-
-		//factory.createDefaultComponents();
-
-		//Line below should be in factory
-		//view = new AmoebaEngineView(context, this);
 	}
 
 	public static Context getContext()
@@ -42,16 +34,6 @@ public class AmoebaEngine implements IAmoebaEngine
 		//glSurfaceView.start();
 		//factory.getView().start();
 	}
-
-	// public void enableGesture()
-	// {
-	// 	glSurfaceView.enableGesture(type);
-	// }
-
-	// public void disableGesture()
-	// {
-	// 	glSurfaceView.disableGesture(type);
-	// }
 
 	/**
 	 * Returns the ContentView of the Engine.

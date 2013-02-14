@@ -5,8 +5,7 @@ import android.view.MotionEvent;
 
 import com.pixelweaverstudios.amoeba.engine.renderer.IAmoebaEngineRenderer;
 import com.pixelweaverstudios.amoeba.engine.input.GestureListener;
-//import com.pixelweaverstudios.amoeba.engine.IAmoebaEngine;
-import com.pixelweaverstudios.amoeba.engine.IEngineServices;
+import com.pixelweaverstudios.amoeba.engine.IServicesManager;
 import com.pixelweaverstudios.amoeba.engine.AmoebaEngine;
 
 public class AmoebaEngineView extends GLSurfaceView
@@ -15,9 +14,9 @@ public class AmoebaEngineView extends GLSurfaceView
 	private IAmoebaEngineRenderer renderer;
 	private GestureListener gestureListener;
 
-	IEngineServices services;
+	IServicesManager services;
 
-	public AmoebaEngineView(IEngineServices services)
+	public AmoebaEngineView(IServicesManager services)
 	{
 		super(AmoebaEngine.getContext());
 		this.services = services;
