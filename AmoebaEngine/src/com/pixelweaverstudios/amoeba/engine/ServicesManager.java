@@ -1,7 +1,8 @@
 package com.pixelweaverstudios.amoeba.engine;
 
 import com.pixelweaverstudios.amoeba.engine.input.EngineEvent;
-import com.pixelweaverstudios.amoeba.engine.input.InputManager;
+import com.pixelweaverstudios.amoeba.engine.input.InputServices;
+import com.pixelweaverstudios.amoeba.engine.input.GestureListener;
 
 public class ServicesManager implements IServicesManager
 {
@@ -13,7 +14,11 @@ public class ServicesManager implements IServicesManager
 	public void createDefaultServices()
 	{	
 		//ScreenManager screenManager = new ScreenManager();
-		//InputManager inputManager = new InputManager(this);
+		
+		//Input Services
+		GestureListener gestureListener = new GestureListener(this);
+		InputServices inputServices = new InputServices(this, gestureListener);
+		
 		//Renderer renderer = new Renderer();
 		//GameLoop gameLoop = new GameLoop();
 		//View view = new View();

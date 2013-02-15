@@ -8,7 +8,8 @@ import com.pixelweaverstudios.amoeba.engine.IServicesManager;
 import com.pixelweaverstudios.amoeba.engine.AmoebaEngine;
 import com.pixelweaverstudios.amoeba.engine.input.EngineEvent;
 
-public class GestureListener implements GestureDetector.OnGestureListener,
+public class GestureListener implements IGestureListener,
+	GestureDetector.OnGestureListener,
 	ScaleGestureDetector.OnScaleGestureListener
 {
 	private GestureDetector gestureDetector;
