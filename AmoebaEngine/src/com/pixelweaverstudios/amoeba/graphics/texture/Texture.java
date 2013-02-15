@@ -1,6 +1,6 @@
 package com.pixelweaverstudios.amoeba.graphics.texture;
 
-import com.pixelweaverstudios.amoeba.graphics.utilities.TextureUtilities;
+import com.pixelweaverstudios.amoeba.graphics.utilities.ITextureUtilities;
 
 /**
  * @author Mike Testen
@@ -8,14 +8,16 @@ import com.pixelweaverstudios.amoeba.graphics.utilities.TextureUtilities;
  */
 public class Texture implements ITexture
 {
+	private ITextureUtilities textureUtilities;
 	private int handle, drawableId;
 	private int width, height;
 
 	/**
 	 *
 	 */
-	public Texture()
+	public Texture(ITextureUtilities textureUtilities)
 	{
+		this.textureUtilities = textureUtilities;
 		handle = -1;
 		drawableId = -1;
 		width = 0;
@@ -40,7 +42,7 @@ public class Texture implements ITexture
 	 */
 	public void load()
 	{
-		TextureUtilities.loadTextureFromResource(this);
+		textureUtilities.loadTextureFromResource(this);
 	}
 
 	/*
@@ -50,7 +52,7 @@ public class Texture implements ITexture
 	 */
 	public void unload()
 	{
-		TextureUtilities.unloadTexture(this);
+		textureUtilities.unloadTexture(this);
 	}
 
 	/*
@@ -60,7 +62,7 @@ public class Texture implements ITexture
 	 */
 	public boolean isLoaded()
 	{
-		return TextureUtilities.isTextureLoaded(getHandle());
+		return textureUtilities.isTextureLoaded(getHandle());
 	}
 
 	/*

@@ -4,9 +4,9 @@ import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.nio.IntBuffer;
 
-import com.pixelweaverstudios.amoeba.engine.AmoebaEngine;
 import com.pixelweaverstudios.amoeba.graphics.texture.ITexture;
 
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.opengl.GLES20;
@@ -16,38 +16,56 @@ import android.opengl.GLUtils;
  * @author Mike Testen
  * 
  */
-public class TextureUtilities
+public class GLES20TextureUtilities implements ITextureUtilities
 {
+	private Context context;
+	private int[] glIntStorage;
+
 	/**
-	 * @param handle
-	 * @return Whether the texture is loaded.
+	 * @param context
 	 */
-	public static boolean isTextureLoaded(int handle)
+	public GLES20TextureUtilities(Context context)
+	{
+		this.context = context;
+		glIntStorage = new int[1];
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.pixelweaverstudios.amoeba.graphics.utilities.ITextureUtilities#
+	 * isTextureLoaded(int)
+	 */
+	public boolean isTextureLoaded(int handle)
 	{
 		return GLES20.glIsTexture(handle);
 	}
 
-	/**
-	 * @return A new handle to be used in the binding of a texture.
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.pixelweaverstudios.amoeba.graphics.utilities.ITextureUtilities#
+	 * generateTextureHandle()
 	 */
-	public static int generateTextureHandle()
+	public int generateTextureHandle()
 	{
-		int[] temp = new int[1];
-
-		GLES20.glGenTextures(1, temp, 0);
-		if (temp[0] == 0)
+		GLES20.glGenTextures(1, glIntStorage, 0);
+		if (glIntStorage[0] == 0)
 		{
 			throw new RuntimeException("Unable to generate a new texture id.");
 		}
 
-		return temp[0];
+		return glIntStorage[0];
 	}
 
-	/**
-	 * @param context
-	 * @param texture
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.pixelweaverstudios.amoeba.graphics.utilities.ITextureUtilities#
+	 * loadTextureFromResource
+	 * (com.pixelweaverstudios.amoeba.graphics.texture.ITexture)
 	 */
-	public static void loadTextureFromResource(ITexture texture)
+	public void loadTextureFromResource(ITexture texture)
 	{
 		int textureHandle = texture.getHandle();
 		if (textureHandle == -1)
@@ -60,7 +78,8 @@ public class TextureUtilities
 			BitmapFactory.Options opts = new BitmapFactory.Options();
 			opts.inScaled = false;
 
-			Bitmap bmp = BitmapFactory.decodeResource(AmoebaEngine.getContext().getResources(), texture.getDrawable(), opts);
+			Bitmap bmp = BitmapFactory.decodeResource(context.getResources(),
+					texture.getDrawable(), opts);
 
 			GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, textureHandle);
 
@@ -80,22 +99,24 @@ public class TextureUtilities
 		}
 	}
 
-	/**
-	 * @param texture
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.pixelweaverstudios.amoeba.graphics.utilities.ITextureUtilities#
+	 * unloadTexture(com.pixelweaverstudios.amoeba.graphics.texture.ITexture)
 	 */
-	public static void unloadTexture(ITexture texture)
+	public void unloadTexture(ITexture texture)
 	{
 		int textureHandle = texture.getHandle();
 		if (textureHandle != -1)
 		{
 			IntBuffer texBuffer;
-			int tempID[] = new int[1];
-			tempID[0] = textureHandle;
+			glIntStorage[0] = textureHandle;
 
 			ByteBuffer bb = ByteBuffer.allocateDirect(4);
 			bb.order(ByteOrder.nativeOrder());
 			texBuffer = bb.asIntBuffer();
-			texBuffer.put(tempID);
+			texBuffer.put(glIntStorage);
 			texBuffer.position(0);
 
 			GLES20.glDeleteTextures(1, texBuffer);
