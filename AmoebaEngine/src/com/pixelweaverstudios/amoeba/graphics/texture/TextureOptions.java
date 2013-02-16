@@ -2,7 +2,7 @@ package com.pixelweaverstudios.amoeba.graphics.texture;
 
 import android.opengl.GLES20;
 
-public class TextureOptions
+public class TextureOptions implements ITextureOptions
 {
 	public final int minFilter;
 	public final int magFilter;
