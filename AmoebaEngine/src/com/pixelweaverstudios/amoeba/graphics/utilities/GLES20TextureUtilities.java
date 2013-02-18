@@ -5,6 +5,7 @@ import java.nio.ByteOrder;
 import java.nio.IntBuffer;
 
 import com.pixelweaverstudios.amoeba.graphics.texture.ITexture;
+import com.pixelweaverstudios.amoeba.graphics.texture.TextureOptions;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -82,13 +83,7 @@ public class GLES20TextureUtilities implements ITextureUtilities
 					texture.getDrawable(), opts);
 
 			GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, textureHandle);
-
-			GLES20.glTexParameterf(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_MIN_FILTER, GLES20.GL_LINEAR);
-			GLES20.glTexParameterf(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_MAG_FILTER, GLES20.GL_LINEAR);
-
-			GLES20.glTexParameterf(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_WRAP_S, GLES20.GL_CLAMP_TO_EDGE);
-			GLES20.glTexParameterf(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_WRAP_T, GLES20.GL_CLAMP_TO_EDGE);
-
+			TextureOptions.DEFAULT.apply();
 			GLUtils.texImage2D(GLES20.GL_TEXTURE_2D, 0, bmp, 0);
 
 			texture.setWidth(bmp.getWidth());
