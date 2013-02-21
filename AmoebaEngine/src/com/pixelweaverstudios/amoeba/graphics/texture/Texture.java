@@ -106,11 +106,11 @@ public class Texture implements ITexture
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see com.pixelweaverstudios.amoeba.graphics.texture.ITexture#setDrawable(int)
+	 * @see com.pixelweaverstudios.amoeba.graphics.texture.ITexture#setID(int)
 	 */
-	public void setDrawable(final int drawable)
+	public void setID(final int id)
 	{
-		this.drawableId = drawable;
+		this.drawableId = id;
 	}
 
 	/*
@@ -146,9 +146,9 @@ public class Texture implements ITexture
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see com.pixelweaverstudios.amoeba.graphics.texture.ITexture#getDrawable()
+	 * @see com.pixelweaverstudios.amoeba.graphics.texture.ITexture#getID()
 	 */
-	public int getDrawable()
+	public int getID()
 	{
 		return drawableId;
 	}

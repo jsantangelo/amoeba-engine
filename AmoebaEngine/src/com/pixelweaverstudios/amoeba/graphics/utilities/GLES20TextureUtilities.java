@@ -80,7 +80,7 @@ public class GLES20TextureUtilities implements ITextureUtilities
 			opts.inScaled = false;
 
 			Bitmap bmp = BitmapFactory.decodeResource(context.getResources(),
-					texture.getDrawable(), opts);
+					texture.getID(), opts);
 
 			GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, textureHandle);
 			TextureOptions.DEFAULT.apply();

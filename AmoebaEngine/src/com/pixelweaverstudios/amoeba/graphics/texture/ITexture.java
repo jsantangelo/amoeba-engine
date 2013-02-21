@@ -39,7 +39,7 @@ public interface ITexture
 	/**
 	 * @param drawable
 	 */
-	public void setDrawable(final int drawable);
+	public void setID(final int id);
 
 	/**
 	 * @return The width of the texture.
@@ -57,7 +57,7 @@ public interface ITexture
 	public int getHandle();
 
 	/**
-	 * @return The drawable id number that was used to generate the texture.
+	 * @return The id number that was used to generate the texture.
 	 */
-	public int getDrawable();
+	public int getID();
 }

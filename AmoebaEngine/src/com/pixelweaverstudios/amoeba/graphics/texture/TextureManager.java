@@ -23,9 +23,9 @@ public class TextureManager
 	 */
 	public void add(ITexture texture)
 	{
-		if (texture != null && texture.getDrawable() != -1)
+		if (texture != null && texture.getID() != -1)
 		{
-			textures.put(texture.getDrawable(), texture);
+			textures.put(texture.getID(), texture);
 		}
 	}
 
