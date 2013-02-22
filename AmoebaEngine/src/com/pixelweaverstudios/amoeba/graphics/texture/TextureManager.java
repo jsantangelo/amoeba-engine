@@ -8,20 +8,20 @@ import android.util.SparseArray;
  */
 public class TextureManager
 {
-	private SparseArray<ITexture> textures;
+	private SparseArray<Texture> textures;
 
 	/**
 	 * @param context
 	 */
 	public TextureManager()
 	{
-		this.textures = new SparseArray<ITexture>();
+		this.textures = new SparseArray<Texture>();
 	}
 
 	/**
 	 * @param texture
 	 */
-	public void add(ITexture texture)
+	public void add(Texture texture)
 	{
 		if (texture != null && texture.getID() != -1)
 		{
@@ -41,9 +41,9 @@ public class TextureManager
 	 * @param resource
 	 * @return
 	 */
-	public ITexture loadTexture(int resource)
+	public Texture loadTexture(int resource)
 	{
-		ITexture texture = getTexture(resource);
+		Texture texture = getTexture(resource);
 		texture.load();
 
 		return texture;
@@ -63,9 +63,9 @@ public class TextureManager
 	/**
 	 * @param resource
 	 */
-	public ITexture unloadTexture(int resource)
+	public Texture unloadTexture(int resource)
 	{
-		ITexture texture = getTexture(resource);
+		Texture texture = getTexture(resource);
 		texture.unload();
 
 		return texture;
@@ -86,7 +86,7 @@ public class TextureManager
 	 * @param resource
 	 * @return
 	 */
-	public ITexture getTexture(int resource)
+	public Texture getTexture(int resource)
 	{
 		return textures.get(resource);
 	}

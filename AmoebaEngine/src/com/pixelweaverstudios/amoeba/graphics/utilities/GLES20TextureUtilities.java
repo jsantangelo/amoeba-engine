@@ -4,7 +4,7 @@ import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.nio.IntBuffer;
 
-import com.pixelweaverstudios.amoeba.graphics.texture.ITexture;
+import com.pixelweaverstudios.amoeba.graphics.texture.Texture;
 import com.pixelweaverstudios.amoeba.graphics.texture.TextureOptions;
 
 import android.content.Context;
@@ -66,7 +66,7 @@ public class GLES20TextureUtilities implements ITextureUtilities
 	 * loadTextureFromResource
 	 * (com.pixelweaverstudios.amoeba.graphics.texture.ITexture)
 	 */
-	public void loadTextureFromResource(ITexture texture)
+	public void loadTextureFromResource(Texture texture)
 	{
 		int textureHandle = texture.getHandle();
 		if (textureHandle == -1)
@@ -100,7 +100,7 @@ public class GLES20TextureUtilities implements ITextureUtilities
 	 * @see com.pixelweaverstudios.amoeba.graphics.utilities.ITextureUtilities#
 	 * unloadTexture(com.pixelweaverstudios.amoeba.graphics.texture.ITexture)
 	 */
-	public void unloadTexture(ITexture texture)
+	public void unloadTexture(Texture texture)
 	{
 		int textureHandle = texture.getHandle();
 		if (textureHandle != -1)

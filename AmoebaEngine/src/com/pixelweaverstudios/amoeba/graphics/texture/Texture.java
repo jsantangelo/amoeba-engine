@@ -1,155 +1,63 @@
 package com.pixelweaverstudios.amoeba.graphics.texture;
 
-import com.pixelweaverstudios.amoeba.graphics.utilities.ITextureUtilities;
-
 /**
  * @author Mike Testen
  * 
  */
-public class Texture implements ITexture
+public interface Texture
 {
-	private ITextureUtilities textureUtilities;
-	private int handle, drawableId;
-	private int width, height;
+	/**
+	 * @param context
+	 */
+	public void load();
 
 	/**
 	 *
 	 */
-	public Texture(ITextureUtilities textureUtilities)
-	{
-		this.textureUtilities = textureUtilities;
-		handle = -1;
-		drawableId = -1;
-		width = 0;
-		height = 0;
-	}
+	public void unload();
 
 	/**
-	 * @param drawable
+	 * @return Whether the texture is loaded.
 	 */
-	public Texture(int drawable)
-	{
-		handle = -1;
-		drawableId = drawable;
-		width = 0;
-		height = 0;
-	}
+	public boolean isLoaded();
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.pixelweaverstudios.amoeba.graphics.texture.ITexture#setWidth(int)
+	/**
+	 * @param width
 	 */
-	public void load()
-	{
-		textureUtilities.loadTextureFromResource(this);
-	}
+	public void setWidth(final int width);
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.pixelweaverstudios.amoeba.graphics.texture.ITexture#setWidth(int)
+	/**
+	 * @param height
 	 */
-	public void unload()
-	{
-		textureUtilities.unloadTexture(this);
-	}
+	public void setHeight(final int height);
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.pixelweaverstudios.amoeba.graphics.texture.ITexture#setWidth(int)
+	/**
+	 * @param handle
 	 */
-	public boolean isLoaded()
-	{
-		return textureUtilities.isTextureLoaded(getHandle());
-	}
+	public void setHandle(final int handle);
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.pixelweaverstudios.amoeba.graphics.texture.ITexture#setWidth(int)
+	/**
+	 * @param id
 	 */
-	public void setWidth(final int width)
-	{
-		this.width = 0;
-		if (width >= 0)
-		{
-			this.width = width;
-		}
-	}
+	public void setID(final int id);
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.pixelweaverstudios.amoeba.graphics.texture.ITexture#setHeight(int)
+	/**
+	 * @return The width of the texture.
 	 */
-	public void setHeight(final int height)
-	{
-		this.height = 0;
-		if (height >= 0)
-		{
-			this.height = height;
-		}
-	}
+	public int getWidth();
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.pixelweaverstudios.amoeba.graphics.texture.ITexture#setHandle(int)
+	/**
+	 * @return The height of the texture.
 	 */
-	public void setHandle(final int handle)
-	{
-		this.handle = handle;
-	}
+	public int getHeight();
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.pixelweaverstudios.amoeba.graphics.texture.ITexture#setID(int)
+	/**
+	 * @return The handle that represents the texture.
 	 */
-	public void setID(final int id)
-	{
-		this.drawableId = id;
-	}
+	public int getHandle();
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.pixelweaverstudios.amoeba.graphics.texture.ITexture#getWidth()
+	/**
+	 * @return The id number that was used to generate the texture.
 	 */
-	public int getWidth()
-	{
-		return width;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.pixelweaverstudios.amoeba.graphics.texture.ITexture#getHeight()
-	 */
-	public int getHeight()
-	{
-		return height;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.pixelweaverstudios.amoeba.graphics.texture.ITexture#getHandle()
-	 */
-	public int getHandle()
-	{
-		return handle;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.pixelweaverstudios.amoeba.graphics.texture.ITexture#getID()
-	 */
-	public int getID()
-	{
-		return drawableId;
-	}
+	public int getID();
 }
