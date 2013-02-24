@@ -2,8 +2,6 @@ package com.pixelweaverstudios.amoeba.engine;
 
 import android.content.Context;
 
-import com.pixelweaverstudios.amoeba.engine.view.IAmoebaEngineView;
-
 /**
  * An interface defining the publicly accessible methods of the AmoebaEngine.
  */
