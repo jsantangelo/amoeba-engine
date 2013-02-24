@@ -1,9 +1,8 @@
 package com.pixelweaverstudios.amoeba.engine;
 
 import android.content.Context;
-//import android.opengl.GLSurfaceView;
 
-import com.pixelweaverstudios.amoeba.engine.view.IAmoebaEngineView;
+import com.pixelweaverstudios.amoeba.engine.;
 
 /**
  * The main class in which the AmoebaEngine is encapsulated. Provides access to
@@ -11,36 +10,32 @@ import com.pixelweaverstudios.amoeba.engine.view.IAmoebaEngineView;
  */
 public class AmoebaEngine implements IAmoebaEngine
 {
-	private IAmoebaEngineView view;
-	private IServicesManager services;
-	//private IScreenManager screenManager;
-	//private IGameLoop gameLoop;
-	private static Context context;
+	private static IAmoebaEngine instance = null;
 
-	public AmoebaEngine(Context context)
+	private IServicesManager services;
+	private Context context;
+
+	public AmoebaEngine()
 	{
 		services = new ServicesManager();
-		AmoebaEngine.context = context;
 	}
 
-	public static Context getContext()
+	public static IAmoebaEngine getInstance()
 	{
-		return context;
+		if (instance == null)
+		{
+			instance = new AmoebaEngine();
+		}
+		return instance;
 	}
 
-	public void start()
+	public setContext(Context context)
 	{
-		//Below is questionable. Needs more thought.
-		//glSurfaceView.start();
-		//factory.getView().start();
+		this.context = context;
 	}
 
-	/**
-	 * Returns the ContentView of the Engine.
-	 * @return the content view
-	 */
-	public IAmoebaEngineView getContentView()
+	public <T> T getService(ServiceTypes service)
 	{
-		return view;
+		return (T)(services.getService(service));
 	}
 }
