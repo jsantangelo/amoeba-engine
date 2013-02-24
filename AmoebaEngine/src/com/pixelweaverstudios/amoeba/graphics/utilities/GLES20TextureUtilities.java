@@ -17,7 +17,7 @@ import android.opengl.GLUtils;
  * @author Mike Testen
  * 
  */
-public class GLES20TextureUtilities implements ITextureUtilities
+public class GLES20TextureUtilities implements TextureUtilities
 {
 	private Context context;
 	private int[] glIntStorage;

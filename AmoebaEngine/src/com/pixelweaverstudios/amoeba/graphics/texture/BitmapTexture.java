@@ -1,6 +1,6 @@
 package com.pixelweaverstudios.amoeba.graphics.texture;
 
-import com.pixelweaverstudios.amoeba.graphics.utilities.ITextureUtilities;
+import com.pixelweaverstudios.amoeba.graphics.utilities.TextureUtilities;
 
 /**
  * @author Mike Testen
@@ -8,14 +8,14 @@ import com.pixelweaverstudios.amoeba.graphics.utilities.ITextureUtilities;
  */
 public class BitmapTexture implements Texture
 {
-	private ITextureUtilities textureUtilities;
+	private TextureUtilities textureUtilities;
 	private int handle, drawableId;
 	private int width, height;
 
 	/**
 	 *
 	 */
-	public BitmapTexture(ITextureUtilities textureUtilities)
+	public BitmapTexture(TextureUtilities textureUtilities)
 	{
 		this.textureUtilities = textureUtilities;
 		handle = -1;

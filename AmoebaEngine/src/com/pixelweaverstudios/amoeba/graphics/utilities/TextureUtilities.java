@@ -3,7 +3,7 @@ package com.pixelweaverstudios.amoeba.graphics.utilities;
 import com.pixelweaverstudios.amoeba.graphics.texture.Texture;
 import com.pixelweaverstudios.amoeba.graphics.texture.TextureOptions;
 
-public interface ITextureUtilities
+public interface TextureUtilities
 {
 	/**
 	 * @param handle
