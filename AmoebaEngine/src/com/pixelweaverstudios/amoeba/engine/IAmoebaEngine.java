@@ -1,5 +1,7 @@
 package com.pixelweaverstudios.amoeba.engine;
 
+import android.content.Context;
+
 import com.pixelweaverstudios.amoeba.engine.view.IAmoebaEngineView;
 
 /**
@@ -16,11 +18,14 @@ public interface IAmoebaEngine
 	// public void enableGesture(GestureType type);
 	// public void disableGesture(GestureType type);
 
-	public void start();
+	//public void start();
 
 	/**
 	 * Returns the ContentView instance of the Engine.
 	 * @return the content view
 	 */
-	public IAmoebaEngineView getContentView();
+	//public IAmoebaEngineView getContentView();
+	
+	public void setContext(Context context);
+	public Context getContext();
 }

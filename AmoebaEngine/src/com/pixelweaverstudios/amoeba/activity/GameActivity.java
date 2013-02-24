@@ -5,8 +5,10 @@ import android.os.Bundle;
 import android.view.Window;
 import android.view.WindowManager;
 import android.opengl.GLSurfaceView;
+import android.content.Context;
 
 import com.pixelweaverstudios.amoeba.engine.AmoebaEngine;
+import com.pixelweaverstudios.amoeba.engine.IAmoebaEngine;
 
 /**
  * An extension of Activity meant to be inherited.
@@ -28,7 +30,7 @@ public abstract class GameActivity extends Activity
 		super.onCreate(savedInstanceState);
 		//TODO: make more generic? other things need to be done when
 		//new activity starts
-		AmoebaEngine.getInstance().setContext(this);
+		AmoebaEngine.getInstance().setContext((Context)this);
 
 		setWindowFeatures();
 		setContentView();
@@ -43,6 +45,6 @@ public abstract class GameActivity extends Activity
 
 	public void setContentView()
 	{
-		setContentView((GLSurfaceView)getEngine().getContentView());
+		//setContentView((GLSurfaceView)getEngine().getContentView());
 	}
 }

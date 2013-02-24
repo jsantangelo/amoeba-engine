@@ -1,9 +1,6 @@
 package com.pixelweaverstudios.amoeba.examples;
 
-import android.os.Bundle;
-
-import com.pixelweaverstudios.amoeba.activity.GameActivity;
-import com.pixelweaverstudios.amoeba.engine.IAmoebaEngine;
+import com.pixelweaverstudios.amoeba.application.GameApplication;
 
 /**
  * A basic game written to prove, through use, the interface of the AmoebaEngine.

@@ -2,7 +2,10 @@ package com.pixelweaverstudios.amoeba.engine;
 
 import android.content.Context;
 
-import com.pixelweaverstudios.amoeba.engine.;
+//import com.pixelweaverstudios.amoeba.engine.service.*;
+import com.pixelweaverstudios.amoeba.engine.service.IServicesManager;
+import com.pixelweaverstudios.amoeba.engine.service.ServicesManager;
+import com.pixelweaverstudios.amoeba.engine.service.ServiceType;
 
 /**
  * The main class in which the AmoebaEngine is encapsulated. Provides access to
@@ -29,13 +32,24 @@ public class AmoebaEngine implements IAmoebaEngine
 		return instance;
 	}
 
-	public setContext(Context context)
+	public void attachToEngine(Context context)
+	{
+		setContext(context);
+		//create services and tie together all services for callbacks
+	}
+
+	public void setContext(Context context)
 	{
 		this.context = context;
 	}
 
-	public <T> T getService(ServiceTypes service)
+	public <T> T getService(ServiceType service)
 	{
 		return (T)(services.getService(service));
+	}
+
+	public Context getContext()
+	{
+		return context;
 	}
 }
