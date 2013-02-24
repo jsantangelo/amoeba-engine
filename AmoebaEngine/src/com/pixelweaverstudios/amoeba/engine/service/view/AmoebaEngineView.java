@@ -1,33 +1,35 @@
-package com.pixelweaverstudios.amoeba.engine.view;
+package com.pixelweaverstudios.amoeba.engine.service.view;
 
 import android.opengl.GLSurfaceView;
 import android.view.MotionEvent;
+import android.content.Context;
 
-import com.pixelweaverstudios.amoeba.engine.renderer.IAmoebaEngineRenderer;
-import com.pixelweaverstudios.amoeba.engine.input.GestureListener;
-import com.pixelweaverstudios.amoeba.engine.IServicesManager;
+import com.pixelweaverstudios.amoeba.engine.service.renderer.IAmoebaEngineRenderer;
+import com.pixelweaverstudios.amoeba.engine.service.IServicesManager;
 import com.pixelweaverstudios.amoeba.engine.AmoebaEngine;
+import com.pixelweaverstudios.amoeba.engine.IAmoebaEngine;
 
 public class AmoebaEngineView extends GLSurfaceView
 	implements IAmoebaEngineView
 {
 	private IAmoebaEngineRenderer renderer;
-	private GestureListener gestureListener;
+	//private IGestureListener gestureListener;
+	private Context context;
 
 	IServicesManager services;
 
 	public AmoebaEngineView(IServicesManager services)
 	{
-		super(AmoebaEngine.getContext());
+		super(AmoebaEngine.getInstance().getContext());
 		this.services = services;
 		
 		setFocusable(true);
-		initializeGestureListener();
+		//initializeGestureListener();
 	}
 
 	private void initializeGestureListener()
 	{
-		gestureListener = new GestureListener(services);
+		//gestureListener = new GestureListener(services);
 	}
 
 	public void start()
@@ -53,7 +55,10 @@ public class AmoebaEngineView extends GLSurfaceView
 	@Override
 	public boolean onTouchEvent(MotionEvent event)
 	{
-		return gestureListener.onTouchEvent(event);
+		//return gestureListener.onTouchEvent(event);
+		//View needs to route to InputService, who routes to GestureListener,
+		//who routes back to InputService, and down to whoever needs input
+		return true;
 	}
 
 	@Override

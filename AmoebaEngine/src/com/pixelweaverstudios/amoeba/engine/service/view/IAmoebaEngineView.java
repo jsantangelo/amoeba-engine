@@ -1,6 +1,6 @@
-package com.pixelweaverstudios.amoeba.engine.view;
+package com.pixelweaverstudios.amoeba.engine.service.view;
 
-public interface IAmoebaEngineView //implements IGestureConfigurator
+public interface IAmoebaEngineView
 {
 	public void start();
 }
