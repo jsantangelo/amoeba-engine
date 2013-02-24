@@ -6,20 +6,18 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.opengl.GLSurfaceView;
 
-import com.pixelweaverstudios.amoeba.engine.IAmoebaEngine;
 import com.pixelweaverstudios.amoeba.engine.AmoebaEngine;
 
 /**
- * An extension of Activity meant to be inherited by the end-user's main Activity.
+ * An extension of Activity meant to be inherited.
  * @see Activity
  */
 public abstract class GameActivity extends Activity
 {
-	private IAmoebaEngine engine;
-
 	/**
-	 * Is invoked when the Android OS system creates this Activity. onCreate
-	 * is the entry point for all Android applications.
+	 * Invoked when the Android OS system starts this Activity (potentially
+	 * invoked from an Intent). onCreate is the entry point for all Android
+	 * activities.
 	 *
 	 * @param savedInstanceState object that holds the instance state of an
 	 *  application for later recreation if necessary
@@ -28,11 +26,10 @@ public abstract class GameActivity extends Activity
 	public void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
-	}
+		//TODO: make more generic? other things need to be done when
+		//new activity starts
+		AmoebaEngine.getInstance().setContext(this);
 
-	public void start()
-	{
-		engine.start();
 		setWindowFeatures();
 		setContentView();
 	}
@@ -47,18 +44,5 @@ public abstract class GameActivity extends Activity
 	public void setContentView()
 	{
 		setContentView((GLSurfaceView)getEngine().getContentView());
-	}
-
-	/**
-	 * Returns a single instance of the engine.
-	 * @return IAmoebaEngine
-	 */
-	public IAmoebaEngine getEngine()
-	{
-		if (engine == null)
-		{
-			engine = new AmoebaEngine(this);
-		}
-		return engine;
 	}
 }
