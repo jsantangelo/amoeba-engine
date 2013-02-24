@@ -1,8 +1,7 @@
-package com.pixelweaverstudios.amoeba.engine.renderer;
+package com.pixelweaverstudios.amoeba.engine.service.renderer;
 
 import android.opengl.GLSurfaceView;
 import javax.microedition.khronos.opengles.GL10;
-//import android.opengl.EGLConfig;
 import javax.microedition.khronos.egl.EGLConfig;
 
 import com.pixelweaverstudios.amoeba.engine.IAmoebaEngine;
