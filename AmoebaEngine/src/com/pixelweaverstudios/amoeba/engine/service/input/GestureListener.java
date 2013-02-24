@@ -1,12 +1,12 @@
-package com.pixelweaverstudios.amoeba.engine.input;
+package com.pixelweaverstudios.amoeba.engine.service.input;
 
 import android.view.GestureDetector;
 import android.view.ScaleGestureDetector;
 import android.view.MotionEvent;
+import android.content.Context;
 
-import com.pixelweaverstudios.amoeba.engine.IServicesManager;
 import com.pixelweaverstudios.amoeba.engine.AmoebaEngine;
-import com.pixelweaverstudios.amoeba.engine.input.EngineEvent;
+import com.pixelweaverstudios.amoeba.engine.IAmoebaEngine;
 
 public class GestureListener implements IGestureListener,
 	GestureDetector.OnGestureListener,
@@ -15,16 +15,19 @@ public class GestureListener implements IGestureListener,
 	private GestureDetector gestureDetector;
 	private ScaleGestureDetector scaleGestureDetector;
 
-	private IServicesManager services;
+	private IInputServices inputServices;
 
 	private boolean scrollingInProgress;
 
-	public GestureListener(IServicesManager services)
-	{
-		gestureDetector = new GestureDetector(AmoebaEngine.getContext(), this);
-		scaleGestureDetector = new ScaleGestureDetector(AmoebaEngine.getContext(), this);
+	private Context context;
 
-		this.services = services;
+	public GestureListener(IInputServices inputServices)
+	{
+		context = AmoebaEngine.getInstance().getContext();
+		gestureDetector = new GestureDetector(context, this);
+		scaleGestureDetector = new ScaleGestureDetector(context, this);
+
+		this.inputServices = inputServices;
 
 		scrollingInProgress = false;
 	}
@@ -38,7 +41,7 @@ public class GestureListener implements IGestureListener,
 		if (event.getAction() == MotionEvent.ACTION_UP)
 		{
 			scrollingInProgress = false;
-			services.handleInputEvent(new EngineEvent(EngineEvent.EventType.SCROLLEND));
+			inputServices.handleInputEvent(new EngineEvent(EngineEvent.EventType.SCROLLEND));
 		}
 		return true;
 	}
@@ -48,7 +51,7 @@ public class GestureListener implements IGestureListener,
 	{
 		EngineEvent inputEvent = new EngineEvent(EngineEvent.EventType.DOWN);
 		inputEvent.setMotionEvent(event);
-		services.handleInputEvent(inputEvent);
+		inputServices.handleInputEvent(inputEvent);
 		return true;
 	}
 
@@ -58,7 +61,7 @@ public class GestureListener implements IGestureListener,
 		inputEvent.setStartingEvent(event1);
 		inputEvent.setEndingEvent(event2);
 		inputEvent.setVelocityVector(velocityX, velocityY);
-		services.handleInputEvent(inputEvent);
+		inputServices.handleInputEvent(inputEvent);
 		return true;
 	}
 
@@ -66,7 +69,7 @@ public class GestureListener implements IGestureListener,
 	{
 		EngineEvent inputEvent = new EngineEvent(EngineEvent.EventType.LONGPRESS);
 		inputEvent.setMotionEvent(event);
-		services.handleInputEvent(inputEvent);
+		inputServices.handleInputEvent(inputEvent);
 	}
 
 	public boolean onScroll(MotionEvent event1, MotionEvent event2, float distanceX, float distanceY)
@@ -78,7 +81,7 @@ public class GestureListener implements IGestureListener,
 			inputEvent.setStartingEvent(event1);
 			inputEvent.setEndingEvent(event2);
 			inputEvent.setDistanceVector(distanceX, distanceY);
-			services.handleInputEvent(inputEvent);
+			inputServices.handleInputEvent(inputEvent);
 		}
 		return true;
 	}
@@ -87,14 +90,14 @@ public class GestureListener implements IGestureListener,
 	{
 		EngineEvent inputEvent = new EngineEvent(EngineEvent.EventType.SHOWPRESS);
 		inputEvent.setMotionEvent(event);
-		services.handleInputEvent(inputEvent);
+		inputServices.handleInputEvent(inputEvent);
 	}
 
 	public boolean onSingleTapUp(MotionEvent event)
 	{
 		EngineEvent inputEvent = new EngineEvent(EngineEvent.EventType.SINGLETAP);
 		inputEvent.setMotionEvent(event);
-		services.handleInputEvent(inputEvent);
+		inputServices.handleInputEvent(inputEvent);
 		return true;
 	}
 
@@ -104,7 +107,7 @@ public class GestureListener implements IGestureListener,
 	{
 		EngineEvent inputEvent = new EngineEvent(EngineEvent.EventType.SCALEBEGIN);
 		inputEvent.setScaleDetector(detector);
-		services.handleInputEvent(inputEvent);
+		inputServices.handleInputEvent(inputEvent);
 		return true;
 	}
 
@@ -112,7 +115,7 @@ public class GestureListener implements IGestureListener,
 	{
 		EngineEvent inputEvent = new EngineEvent(EngineEvent.EventType.SCALE);
 		inputEvent.setScaleDetector(detector);
-		services.handleInputEvent(inputEvent);
+		inputServices.handleInputEvent(inputEvent);
 		return true;
 	}
 
@@ -120,6 +123,6 @@ public class GestureListener implements IGestureListener,
 	{
 		EngineEvent inputEvent = new EngineEvent(EngineEvent.EventType.SCALEEND);
 		inputEvent.setScaleDetector(detector);
-		services.handleInputEvent(inputEvent);
+		inputServices.handleInputEvent(inputEvent);
 	}
 }

@@ -1,14 +1,20 @@
-package com.pixelweaverstudios.amoeba.engine.input;
-
-import com.pixelweaverstudios.amoeba.engine.IServicesManager;
+package com.pixelweaverstudios.amoeba.engine.service.input;
 
 public class InputServices implements IInputServices
 {
-	IGestureListener gestureListener;
-
-	public InputServices(IGestureListener gestureListener)
+	public InputServices()
 	{
-		this.services = services;
-		this.gestureListener = gestureListener;
+		//will eventually save off reference to whowever needs to be called back
+		//by input events. InputServices is essentially an event router.
+	}
+
+	public void handleInputEvent(EngineEvent event)
+	{
+
+	}
+
+	public void start()
+	{
+		
 	}
 }

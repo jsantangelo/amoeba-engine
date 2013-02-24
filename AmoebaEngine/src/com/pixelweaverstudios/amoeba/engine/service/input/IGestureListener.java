@@ -1,4 +1,4 @@
-package com.pixelweaverstudios.amoeba.engine.input;
+package com.pixelweaverstudios.amoeba.engine.service.input;
 
 public interface IGestureListener
 {
