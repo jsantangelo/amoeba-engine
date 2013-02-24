@@ -1,8 +1,9 @@
 package com.pixelweaverstudios.amoeba.engine.service;
 
+import java.util.EnumMap;
+
 //Input
-import com.pixelweaverstudios.amoeba.engine.input.InputServices;
-import com.pixelweaverstudios.amoeba.engine.input.GestureListener;
+import com.pixelweaverstudios.amoeba.engine.service.input.*;
 
 public class ServicesManager implements IServicesManager
 {
@@ -16,9 +17,9 @@ public class ServicesManager implements IServicesManager
 	public void createDefaultServices()
 	{			
 		//Input Services
-		IInputServices inputServices = new InputServices(gestureListener);
+		IInputServices inputServices = new InputServices();
 		IGestureListener gestureListener = new GestureListener(inputServices);
-		services.put(INPUT, inputServices);
+		services.put(ServiceType.INPUT, inputServices);
 		
 		//Renderer renderer = new Renderer();
 		//GameLoop gameLoop = new GameLoop();
