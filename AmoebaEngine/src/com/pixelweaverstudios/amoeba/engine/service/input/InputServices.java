@@ -2,12 +2,11 @@ package com.pixelweaverstudios.amoeba.engine.input;
 
 import com.pixelweaverstudios.amoeba.engine.IServicesManager;
 
-public class InputServices
+public class InputServices implements IInputServices
 {
 	IGestureListener gestureListener;
-	IServicesManager services;
 
-	public InputServices(IServicesManager services, IGestureListener gestureListener)
+	public InputServices(IGestureListener gestureListener)
 	{
 		this.services = services;
 		this.gestureListener = gestureListener;

@@ -14,12 +14,10 @@ public class ServicesManager implements IServicesManager
 	}
 
 	public void createDefaultServices()
-	{	
-		//ScreenManager screenManager = new ScreenManager();
-		
+	{			
 		//Input Services
-		GestureListener gestureListener = new GestureListener(this);
-		InputServices inputServices = new InputServices(this, gestureListener);
+		IInputServices inputServices = new InputServices(gestureListener);
+		IGestureListener gestureListener = new GestureListener(inputServices);
 		services.put(INPUT, inputServices);
 		
 		//Renderer renderer = new Renderer();
