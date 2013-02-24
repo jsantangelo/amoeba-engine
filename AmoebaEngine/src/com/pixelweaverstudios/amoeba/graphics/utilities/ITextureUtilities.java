@@ -1,6 +1,7 @@
 package com.pixelweaverstudios.amoeba.graphics.utilities;
 
 import com.pixelweaverstudios.amoeba.graphics.texture.Texture;
+import com.pixelweaverstudios.amoeba.graphics.texture.TextureOptions;
 
 public interface ITextureUtilities
 {
@@ -25,4 +26,9 @@ public interface ITextureUtilities
 	 * @param texture
 	 */
 	public void unloadTexture(Texture texture);
+	
+	/**
+	 * @param options
+	 */
+	public void applyTextureOptions(TextureOptions options);
 }

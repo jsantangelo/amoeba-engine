@@ -79,11 +79,10 @@ public class GLES20TextureUtilities implements ITextureUtilities
 			BitmapFactory.Options opts = new BitmapFactory.Options();
 			opts.inScaled = false;
 
-			Bitmap bmp = BitmapFactory.decodeResource(context.getResources(),
-					texture.getID(), opts);
+			Bitmap bmp = BitmapFactory.decodeResource(context.getResources(), texture.getID(), opts);
 
 			GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, textureHandle);
-			TextureOptions.DEFAULT.apply();
+			applyTextureOptions(TextureOptions.DEFAULT);
 			GLUtils.texImage2D(GLES20.GL_TEXTURE_2D, 0, bmp, 0);
 
 			texture.setWidth(bmp.getWidth());
@@ -116,5 +115,19 @@ public class GLES20TextureUtilities implements ITextureUtilities
 
 			GLES20.glDeleteTextures(1, texBuffer);
 		}
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.pixelweaverstudios.amoeba.graphics.utilities.ITextureUtilities#
+	 * applyTextureOptions(com.pixelweaverstudios.amoeba.graphics.texture.TextureOptions)
+	 */
+	public void applyTextureOptions(TextureOptions options)
+	{
+		GLES20.glTexParameterf(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_MIN_FILTER, options.minFilter);
+		GLES20.glTexParameterf(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_MAG_FILTER, options.magFilter);
+		GLES20.glTexParameterf(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_WRAP_S, options.wrapS);
+		GLES20.glTexParameterf(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_WRAP_T, options.wrapT);
 	}
 }
