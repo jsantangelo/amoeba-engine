@@ -10,13 +10,13 @@ import com.pixelweaverstudios.amoeba.graphics.utilities.ShaderUtilities;
  */
 public class ShaderProgram implements IShaderProgram
 {
-	private ArrayList<IShader> shaders;
+	private ArrayList<Shader> shaders;
 	private int handle;
 
 	/**
 	 * @param shaders
 	 */
-	public ShaderProgram(final ArrayList<IShader> shaders)
+	public ShaderProgram(final ArrayList<Shader> shaders)
 	{
 		if (shaders.size() <= 0)
 		{

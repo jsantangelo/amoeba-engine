@@ -2,7 +2,7 @@ package com.pixelweaverstudios.amoeba.graphics.utilities;
 
 import java.util.ArrayList;
 
-import com.pixelweaverstudios.amoeba.graphics.shader.IShader;
+import com.pixelweaverstudios.amoeba.graphics.shader.Shader;
 
 import android.opengl.GLES20;
 import android.util.Log;
@@ -64,7 +64,7 @@ public class ShaderUtilities
 	 * @param programHandle
 	 * @param shaders
 	 */
-	public static void attachShadersToProgram(int programHandle, ArrayList<IShader> shaders)
+	public static void attachShadersToProgram(int programHandle, ArrayList<Shader> shaders)
 	{
 		for (int i = 0; i < shaders.size(); i++)
 		{
