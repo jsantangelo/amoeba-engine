@@ -40,6 +40,6 @@ public abstract class Shader
 	 */
 	public void compile()
 	{
-		handle = ShaderUtilities.createShaderFromSource(source, type);
+		handle = ShaderUtilities.compileShaderFromSource(source, type);
 	}
 }

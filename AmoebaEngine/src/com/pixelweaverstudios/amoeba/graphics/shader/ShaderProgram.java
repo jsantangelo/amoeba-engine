@@ -8,30 +8,29 @@ import com.pixelweaverstudios.amoeba.graphics.utilities.ShaderUtilities;
  * @author Mike Testen
  * 
  */
-public class ShaderProgram implements IShaderProgram
+public abstract class ShaderProgram
 {
-	private ArrayList<Shader> shaders;
-	private int handle;
+	protected ArrayList<Shader> shaders;
+	protected int handle;
 
 	/**
-	 * @param shaders
-	 */
-	public ShaderProgram(final ArrayList<Shader> shaders)
-	{
-		if (shaders.size() <= 0)
-		{
-			throw new RuntimeException("No shaders were provided to create the program.");
-		}
-
-		this.shaders = shaders;
-	}
-
-	/**
-	 * (non-Javadoc)
 	 * 
-	 * @see com.pixelweaverstudios.amoeba.graphics.shader.IShaderProgram#compileAndLink()
 	 */
-	public int compileAndLink()
+	public void compile()
+	{
+		for(Shader shader : shaders)
+		{
+			if(shader.getHandle() > 0)
+			{
+				shader.compile();
+			}
+		}
+	}
+	
+	/**
+	 * @return The handle that represents the program.
+	 */
+	public int link()
 	{
 		handle = ShaderUtilities.generateProgramHandle();
 		ShaderUtilities.attachShadersToProgram(handle, shaders);
@@ -46,9 +45,7 @@ public class ShaderProgram implements IShaderProgram
 	}
 
 	/**
-	 * (non-Javadoc)
 	 * 
-	 * @see com.pixelweaverstudios.amoeba.graphics.shader.IShaderProgram#use()
 	 */
 	public void use()
 	{
@@ -56,15 +53,13 @@ public class ShaderProgram implements IShaderProgram
 	}
 
 	/**
-	 * (non-Javadoc)
-	 * 
-	 * @see com.pixelweaverstudios.amoeba.graphics.shader.IShaderProgram#isInUse()
+	 * @return Whether the program is currently in use.
 	 */
 	public boolean isInUse()
 	{
 		return(ShaderUtilities.isProgramInUse(handle));
 	}
-
+	
 	/**
 	 * 
 	 */
@@ -77,9 +72,8 @@ public class ShaderProgram implements IShaderProgram
 	}
 
 	/**
-	 * (non-Javadoc)
-	 * 
-	 * @see com.pixelweaverstudios.amoeba.graphics.shader.IShaderProgram#getAttributeLocation(java.lang.String)
+	 * @param attributeName
+	 * @return The location handle of the attribute.
 	 */
 	public int getAttributeLocation(final String attributeName)
 	{
@@ -87,9 +81,8 @@ public class ShaderProgram implements IShaderProgram
 	}
 
 	/**
-	 * (non-Javadoc)
-	 * 
-	 * @see com.pixelweaverstudios.amoeba.graphics.shader.IShaderProgram#getUniformLocation(java.lang.String)
+	 * @param uniformName
+	 * @return The location handle of the uniform.
 	 */
 	public int getUniformLocation(final String uniformName)
 	{
@@ -97,9 +90,7 @@ public class ShaderProgram implements IShaderProgram
 	}
 
 	/**
-	 * (non-Javadoc)
-	 * 
-	 * @see com.pixelweaverstudios.amoeba.graphics.shader.IShaderProgram#getHandle()
+	 * @return The handle that represents the program.
 	 */
 	public int getHandle()
 	{

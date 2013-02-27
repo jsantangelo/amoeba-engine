@@ -20,7 +20,7 @@ public class ShaderUtilities
 	 * @param shaderType
 	 * @return
 	 */
-	public static int createShaderFromSource(String shaderSource, int shaderType)
+	public static int compileShaderFromSource(String shaderSource, int shaderType)
 	{
 		int handle = GLES20.glCreateShader(shaderType);
 		if (handle == 0)
