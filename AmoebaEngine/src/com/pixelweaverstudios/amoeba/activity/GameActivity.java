@@ -8,7 +8,7 @@ import android.opengl.GLSurfaceView;
 import android.content.Context;
 
 import com.pixelweaverstudios.amoeba.engine.AmoebaEngine;
-import com.pixelweaverstudios.amoeba.engine.IAmoebaEngine;
+import com.pixelweaverstudios.amoeba.engine.service.ServiceType;
 
 /**
  * An extension of Activity meant to be inherited.
@@ -16,7 +16,7 @@ import com.pixelweaverstudios.amoeba.engine.IAmoebaEngine;
  */
 public abstract class GameActivity extends Activity
 {
-	private IAmoebaEngine engine;
+	private AmoebaEngine engine;
 
 	/**
 	 * Invoked when the Android OS system starts this Activity (potentially
@@ -58,6 +58,6 @@ public abstract class GameActivity extends Activity
 		//This starts the engine/game. When the content view is created, we will
 		//get surface created callbacks which will start the thread, input systems, etc.
 		//This is the end of the line.
-		setContentView(engine.getService<GLSurfaceView>(ServiceType.VIEW));
+		setContentView((GLSurfaceView)engine.getService(ServiceType.VIEW));
 	}
 }
