@@ -3,33 +3,23 @@ package com.pixelweaverstudios.amoeba.engine.service.view;
 import android.opengl.GLSurfaceView;
 import android.view.MotionEvent;
 import android.content.Context;
+import android.view.SurfaceHolder;
 
-import com.pixelweaverstudios.amoeba.engine.service.renderer.IAmoebaEngineRenderer;
 import com.pixelweaverstudios.amoeba.engine.service.IServicesManager;
 import com.pixelweaverstudios.amoeba.engine.AmoebaEngine;
-import com.pixelweaverstudios.amoeba.engine.IAmoebaEngine;
+import com.pixelweaverstudios.amoeba.engine.service.ServiceType;
 
-public class AmoebaEngineView extends GLSurfaceView
-	implements IAmoebaEngineView
+public class EngineView extends GLSurfaceView
+	implements ViewService
 {
-	private IAmoebaEngineRenderer renderer;
-	//private IGestureListener gestureListener;
+	//private IAmoebaEngineRenderer renderer;
 	private Context context;
 
-	IServicesManager services;
-
-	public AmoebaEngineView(IServicesManager services)
+	public EngineView()
 	{
 		super(AmoebaEngine.getInstance().getContext());
-		this.services = services;
 		
 		setFocusable(true);
-		//initializeGestureListener();
-	}
-
-	private void initializeGestureListener()
-	{
-		//gestureListener = new GestureListener(services);
 	}
 
 	public void start()
@@ -37,12 +27,20 @@ public class AmoebaEngineView extends GLSurfaceView
 		initializeRenderer();
 	}
 
+	public void onRequestRender()
+	{
+		requestRender();
+	}
+
+	public SurfaceHolder getSurfaceHolder()
+	{
+		return getHolder();
+	}
+
 	private void initializeRenderer()
 	{
-		//renderer = new GLES20Renderer(engine); - TODO (Mike)
-		//Renderer creation can be (should be?) separate from setting the renderer for this
-		//surface. setRenderer() should not be moved from this function though.
-		setRenderer(renderer);
+		//Renderer creation must happen before this call
+		setRenderer((GLSurfaceView.Renderer)(AmoebaEngine.getInstance().getService(ServiceType.RENDERER)));
 		setRenderMode(GLSurfaceView.RENDERMODE_WHEN_DIRTY);
 	}
 
@@ -72,6 +70,6 @@ public class AmoebaEngineView extends GLSurfaceView
 	public void onResume()
 	{
 		super.onResume();
-		//Start my thread here
+		//Start GameThreadService here
 	}
 }
