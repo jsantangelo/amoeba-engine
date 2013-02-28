@@ -2,8 +2,8 @@ package com.pixelweaverstudios.amoeba.engine;
 
 import android.content.Context;
 
-import com.pixelweaverstudios.amoeba.engine.service.IServicesManager;
 import com.pixelweaverstudios.amoeba.engine.service.ServicesManager;
+import com.pixelweaverstudios.amoeba.engine.service.EngineServicesManager;
 import com.pixelweaverstudios.amoeba.engine.service.ServiceType;
 import com.pixelweaverstudios.amoeba.engine.service.Service;
 
@@ -15,12 +15,12 @@ public class AmoebaEngine
 {
 	private static AmoebaEngine instance = null;
 
-	private IServicesManager services;
+	private ServicesManager services;
 	private Context context;
 
 	public AmoebaEngine()
 	{
-		services = new ServicesManager();
+		services = new EngineServicesManager();
 	}
 
 	public static AmoebaEngine getInstance()

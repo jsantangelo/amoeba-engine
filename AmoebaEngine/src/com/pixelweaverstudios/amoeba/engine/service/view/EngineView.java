@@ -5,7 +5,7 @@ import android.view.MotionEvent;
 import android.content.Context;
 import android.view.SurfaceHolder;
 
-import com.pixelweaverstudios.amoeba.engine.service.IServicesManager;
+import com.pixelweaverstudios.amoeba.engine.service.ServicesManager;
 import com.pixelweaverstudios.amoeba.engine.AmoebaEngine;
 import com.pixelweaverstudios.amoeba.engine.service.ServiceType;
 
