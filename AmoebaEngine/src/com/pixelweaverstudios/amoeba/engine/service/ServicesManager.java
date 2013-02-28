@@ -2,8 +2,12 @@ package com.pixelweaverstudios.amoeba.engine.service;
 
 import java.util.EnumMap;
 
-//Input
-import com.pixelweaverstudios.amoeba.engine.service.input.*;
+import com.pixelweaverstudios.amoeba.engine.service.input.IInputServices;
+import com.pixelweaverstudios.amoeba.engine.service.input.InputServices;
+import com.pixelweaverstudios.amoeba.engine.service.input.IGestureListener;
+import com.pixelweaverstudios.amoeba.engine.service.input.GestureListener;
+import com.pixelweaverstudios.amoeba.engine.service.gamethread.GameThreadService;
+import com.pixelweaverstudios.amoeba.engine.service.gamethread.StandardGameThread;
 
 public class ServicesManager implements IServicesManager
 {
@@ -22,8 +26,13 @@ public class ServicesManager implements IServicesManager
 		services.put(ServiceType.INPUT, inputServices);
 		
 		//Renderer renderer = new Renderer();
-		//GameLoop gameLoop = new GameLoop();
+		
 		//View view = new View();
+
+		//Thread Services
+		GameThreadService gameThread = new StandardGameThread();
+
+		
 	}
 	
 	public Service getService(ServiceType service)
