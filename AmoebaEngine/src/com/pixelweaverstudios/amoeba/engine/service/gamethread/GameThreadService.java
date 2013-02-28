@@ -1,6 +1,8 @@
-package com.pixelweaverstudios.amoeba.engine.service.gameloop;
+package com.pixelweaverstudios.amoeba.engine.service.gamethread;
 
-public interface GameLoop extends Service, Thread
+import com.pixelweaverstudios.amoeba.engine.service.Service;
+
+public interface GameThreadService extends Service
 {
 	public void setRunning(boolean running);
 }

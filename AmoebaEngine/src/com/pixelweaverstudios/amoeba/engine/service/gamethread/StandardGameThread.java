@@ -1,6 +1,12 @@
-package com.pixelweaverstudios.amoeba.engine.service.gameloop;
+package com.pixelweaverstudios.amoeba.engine.service.gamethread;
 
-public class StandardGameThread implements GameThreadService
+import android.view.SurfaceHolder;
+
+import com.pixelweaverstudios.amoeba.engine.service.ServiceType;
+import com.pixelweaverstudios.amoeba.engine.service.view.ViewService;
+import com.pixelweaverstudios.amoeba.engine.AmoebaEngine;
+
+public class StandardGameThread extends Thread implements GameThreadService
 {
 	private ViewService viewService;
 	private SurfaceHolder surfaceHolder;
@@ -11,11 +17,11 @@ public class StandardGameThread implements GameThreadService
 	private static final int MAX_FRAME_SKIPS = 5;
 	private static final int FRAME_PERIOD = 1000 / MAX_FPS;
 
-	public StandardGameLoop()
+	public StandardGameThread()
 	{
 		super();
 
-		viewService = AmoebaEngine.getInstance().getService<ViewService>(ServiceType.VIEW);
+		viewService = (ViewService)AmoebaEngine.getInstance().getService(ServiceType.VIEW);
 		surfaceHolder = viewService.getSurfaceHolder();
 	}
 
@@ -46,7 +52,9 @@ public class StandardGameThread implements GameThreadService
 
 					//TODO: next line likely not necessary
 					//viewService.onUpdate();
-					viewService.requestRender();
+					//render requests must go to view. Renderer is responsible for
+					//invoking onDraw on the callback router
+					viewService.onRequestRender();
 
 					timeDiff = System.currentTimeMillis() - beginTime;
 					sleepTime = (int)(FRAME_PERIOD - timeDiff);
@@ -63,9 +71,10 @@ public class StandardGameThread implements GameThreadService
 						}
 					}
 
-					while (sleepTime < 0 && framsSkipped < MAX_FRAME_SKIPS)
+					while (sleepTime < 0 && framesSkipped < MAX_FRAME_SKIPS)
 					{
-						viewService.onUpdate();
+						//viewService.onUpdate();
+						//want to invoke onUpdate on the callbackrouter, not view
 						sleepTime =+ FRAME_PERIOD;
 						++framesSkipped;
 					}
