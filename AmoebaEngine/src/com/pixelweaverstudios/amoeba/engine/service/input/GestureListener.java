@@ -6,28 +6,26 @@ import android.view.MotionEvent;
 import android.content.Context;
 
 import com.pixelweaverstudios.amoeba.engine.AmoebaEngine;
-import com.pixelweaverstudios.amoeba.engine.IAmoebaEngine;
 
-public class GestureListener implements IGestureListener,
-	GestureDetector.OnGestureListener,
+public class GestureListener implements GestureDetector.OnGestureListener,
 	ScaleGestureDetector.OnScaleGestureListener
 {
 	private GestureDetector gestureDetector;
 	private ScaleGestureDetector scaleGestureDetector;
 
-	private IInputServices inputServices;
+	private InputService inputService;
 
 	private boolean scrollingInProgress;
 
 	private Context context;
 
-	public GestureListener(IInputServices inputServices)
+	public GestureListener(InputService inputService)
 	{
 		context = AmoebaEngine.getInstance().getContext();
 		gestureDetector = new GestureDetector(context, this);
 		scaleGestureDetector = new ScaleGestureDetector(context, this);
 
-		this.inputServices = inputServices;
+		this.inputService = inputService;
 
 		scrollingInProgress = false;
 	}
@@ -41,7 +39,7 @@ public class GestureListener implements IGestureListener,
 		if (event.getAction() == MotionEvent.ACTION_UP)
 		{
 			scrollingInProgress = false;
-			inputServices.handleInputEvent(new EngineEvent(EngineEvent.EventType.SCROLLEND));
+			inputService.handleInputEvent(new EngineEvent(EngineEvent.EventType.SCROLLEND));
 		}
 		return true;
 	}
@@ -51,7 +49,7 @@ public class GestureListener implements IGestureListener,
 	{
 		EngineEvent inputEvent = new EngineEvent(EngineEvent.EventType.DOWN);
 		inputEvent.setMotionEvent(event);
-		inputServices.handleInputEvent(inputEvent);
+		inputService.handleInputEvent(inputEvent);
 		return true;
 	}
 
@@ -61,7 +59,7 @@ public class GestureListener implements IGestureListener,
 		inputEvent.setStartingEvent(event1);
 		inputEvent.setEndingEvent(event2);
 		inputEvent.setVelocityVector(velocityX, velocityY);
-		inputServices.handleInputEvent(inputEvent);
+		inputService.handleInputEvent(inputEvent);
 		return true;
 	}
 
@@ -69,7 +67,7 @@ public class GestureListener implements IGestureListener,
 	{
 		EngineEvent inputEvent = new EngineEvent(EngineEvent.EventType.LONGPRESS);
 		inputEvent.setMotionEvent(event);
-		inputServices.handleInputEvent(inputEvent);
+		inputService.handleInputEvent(inputEvent);
 	}
 
 	public boolean onScroll(MotionEvent event1, MotionEvent event2, float distanceX, float distanceY)
@@ -81,7 +79,7 @@ public class GestureListener implements IGestureListener,
 			inputEvent.setStartingEvent(event1);
 			inputEvent.setEndingEvent(event2);
 			inputEvent.setDistanceVector(distanceX, distanceY);
-			inputServices.handleInputEvent(inputEvent);
+			inputService.handleInputEvent(inputEvent);
 		}
 		return true;
 	}
@@ -90,14 +88,14 @@ public class GestureListener implements IGestureListener,
 	{
 		EngineEvent inputEvent = new EngineEvent(EngineEvent.EventType.SHOWPRESS);
 		inputEvent.setMotionEvent(event);
-		inputServices.handleInputEvent(inputEvent);
+		inputService.handleInputEvent(inputEvent);
 	}
 
 	public boolean onSingleTapUp(MotionEvent event)
 	{
 		EngineEvent inputEvent = new EngineEvent(EngineEvent.EventType.SINGLETAP);
 		inputEvent.setMotionEvent(event);
-		inputServices.handleInputEvent(inputEvent);
+		inputService.handleInputEvent(inputEvent);
 		return true;
 	}
 
@@ -107,7 +105,7 @@ public class GestureListener implements IGestureListener,
 	{
 		EngineEvent inputEvent = new EngineEvent(EngineEvent.EventType.SCALEBEGIN);
 		inputEvent.setScaleDetector(detector);
-		inputServices.handleInputEvent(inputEvent);
+		inputService.handleInputEvent(inputEvent);
 		return true;
 	}
 
@@ -115,7 +113,7 @@ public class GestureListener implements IGestureListener,
 	{
 		EngineEvent inputEvent = new EngineEvent(EngineEvent.EventType.SCALE);
 		inputEvent.setScaleDetector(detector);
-		inputServices.handleInputEvent(inputEvent);
+		inputService.handleInputEvent(inputEvent);
 		return true;
 	}
 
@@ -123,6 +121,6 @@ public class GestureListener implements IGestureListener,
 	{
 		EngineEvent inputEvent = new EngineEvent(EngineEvent.EventType.SCALEEND);
 		inputEvent.setScaleDetector(detector);
-		inputServices.handleInputEvent(inputEvent);
+		inputService.handleInputEvent(inputEvent);
 	}
 }

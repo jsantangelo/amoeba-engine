@@ -1,8 +1,8 @@
 package com.pixelweaverstudios.amoeba.engine.service.input;
 
-public class InputServices implements IInputServices
+public class EngineInput implements InputService
 {
-	public InputServices()
+	public EngineInput()
 	{
 		//will eventually save off reference to whowever needs to be called back
 		//by input events. InputServices is essentially an event router.
