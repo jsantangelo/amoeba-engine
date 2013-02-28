@@ -8,7 +8,7 @@ public class EngineInput implements InputService
 		//by input events. InputServices is essentially an event router.
 	}
 
-	public void handleInputEvent(EngineEvent event)
+	public void handleInputEvent(InputEvent event)
 	{
 
 	}

@@ -36,10 +36,10 @@ public class GestureListener implements GestureDetector.OnGestureListener,
 		gestureDetector.onTouchEvent(event);
 		scaleGestureDetector.onTouchEvent(event);
 
-		if (event.getAction() == MotionEvent.ACTION_UP)
+		if (event.getAction() == MotionEvent.ACTION_UP && scrollingInProgress)
 		{
 			scrollingInProgress = false;
-			inputService.handleInputEvent(new EngineEvent(EngineEvent.EventType.SCROLLEND));
+			inputService.handleInputEvent(new InputEvent(InputEvent.EventType.SCROLLEND));
 		}
 		return true;
 	}
@@ -47,7 +47,7 @@ public class GestureListener implements GestureDetector.OnGestureListener,
 	//methods implementing OnGestureListener
 	public boolean onDown(MotionEvent event)
 	{
-		EngineEvent inputEvent = new EngineEvent(EngineEvent.EventType.DOWN);
+		InputEvent inputEvent = new InputEvent(InputEvent.EventType.DOWN);
 		inputEvent.setMotionEvent(event);
 		inputService.handleInputEvent(inputEvent);
 		return true;
@@ -55,7 +55,7 @@ public class GestureListener implements GestureDetector.OnGestureListener,
 
 	public boolean onFling(MotionEvent event1, MotionEvent event2, float velocityX, float velocityY)
 	{
-		EngineEvent inputEvent = new EngineEvent(EngineEvent.EventType.FLING);
+		InputEvent inputEvent = new InputEvent(InputEvent.EventType.FLING);
 		inputEvent.setStartingEvent(event1);
 		inputEvent.setEndingEvent(event2);
 		inputEvent.setVelocityVector(velocityX, velocityY);
@@ -65,7 +65,7 @@ public class GestureListener implements GestureDetector.OnGestureListener,
 
 	public void onLongPress(MotionEvent event)
 	{
-		EngineEvent inputEvent = new EngineEvent(EngineEvent.EventType.LONGPRESS);
+		InputEvent inputEvent = new InputEvent(InputEvent.EventType.LONGPRESS);
 		inputEvent.setMotionEvent(event);
 		inputService.handleInputEvent(inputEvent);
 	}
@@ -75,7 +75,7 @@ public class GestureListener implements GestureDetector.OnGestureListener,
 		if (!scaleGestureDetector.isInProgress())
 		{
 			scrollingInProgress = true;
-			EngineEvent inputEvent = new EngineEvent(EngineEvent.EventType.SCROLL);
+			InputEvent inputEvent = new InputEvent(InputEvent.EventType.SCROLL);
 			inputEvent.setStartingEvent(event1);
 			inputEvent.setEndingEvent(event2);
 			inputEvent.setDistanceVector(distanceX, distanceY);
@@ -86,14 +86,14 @@ public class GestureListener implements GestureDetector.OnGestureListener,
 
 	public void onShowPress(MotionEvent event)
 	{
-		EngineEvent inputEvent = new EngineEvent(EngineEvent.EventType.SHOWPRESS);
+		InputEvent inputEvent = new InputEvent(InputEvent.EventType.SHOWPRESS);
 		inputEvent.setMotionEvent(event);
 		inputService.handleInputEvent(inputEvent);
 	}
 
 	public boolean onSingleTapUp(MotionEvent event)
 	{
-		EngineEvent inputEvent = new EngineEvent(EngineEvent.EventType.SINGLETAP);
+		InputEvent inputEvent = new InputEvent(InputEvent.EventType.SINGLETAP);
 		inputEvent.setMotionEvent(event);
 		inputService.handleInputEvent(inputEvent);
 		return true;
@@ -103,7 +103,7 @@ public class GestureListener implements GestureDetector.OnGestureListener,
 	//Methods implementing OnScaleGestureListener
 	public boolean onScaleBegin(ScaleGestureDetector detector)
 	{
-		EngineEvent inputEvent = new EngineEvent(EngineEvent.EventType.SCALEBEGIN);
+		InputEvent inputEvent = new InputEvent(InputEvent.EventType.SCALEBEGIN);
 		inputEvent.setScaleDetector(detector);
 		inputService.handleInputEvent(inputEvent);
 		return true;
@@ -111,7 +111,7 @@ public class GestureListener implements GestureDetector.OnGestureListener,
 
 	public boolean onScale(ScaleGestureDetector detector)
 	{
-		EngineEvent inputEvent = new EngineEvent(EngineEvent.EventType.SCALE);
+		InputEvent inputEvent = new InputEvent(InputEvent.EventType.SCALE);
 		inputEvent.setScaleDetector(detector);
 		inputService.handleInputEvent(inputEvent);
 		return true;
@@ -119,7 +119,7 @@ public class GestureListener implements GestureDetector.OnGestureListener,
 
 	public void onScaleEnd(ScaleGestureDetector detector)
 	{
-		EngineEvent inputEvent = new EngineEvent(EngineEvent.EventType.SCALEEND);
+		InputEvent inputEvent = new InputEvent(InputEvent.EventType.SCALEEND);
 		inputEvent.setScaleDetector(detector);
 		inputService.handleInputEvent(inputEvent);
 	}

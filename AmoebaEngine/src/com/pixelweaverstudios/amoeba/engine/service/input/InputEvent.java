@@ -3,7 +3,7 @@ package com.pixelweaverstudios.amoeba.engine.service.input;
 import android.view.MotionEvent;
 import android.view.ScaleGestureDetector;
 
-public class EngineEvent
+public class InputEvent
 {
 
 	public class InputVector<X, Y>
@@ -28,7 +28,7 @@ public class EngineEvent
 	private InputVector<Float, Float> vector;
 	private ScaleGestureDetector scaleGestureDetector;
 
-	public EngineEvent(EventType type)
+	public InputEvent(EventType type)
 	{
 		eventType = type;
 
@@ -77,10 +77,10 @@ public class EngineEvent
 	//FLING
 	public void setVelocityVector(float velocityX, float velocityY)
 	{
-		vector = new InputVector(velocityX, velocityY);
+		vector = new InputVector<Float, Float>(velocityX, velocityY);
 	}
 
-	public InputVector getVelocityVector()
+	public InputVector<Float, Float> getVelocityVector()
 	{
 		return vector;
 	}
@@ -88,10 +88,10 @@ public class EngineEvent
 	//SCROLL
 	public void setDistanceVector(float velocityX, float velocityY)
 	{
-		vector = new InputVector(velocityX, velocityY);
+		vector = new InputVector<Float, Float>(velocityX, velocityY);
 	}
 
-	public InputVector getDistanceVector()
+	public InputVector<Float, Float> getDistanceVector()
 	{
 		return vector;
 	}
