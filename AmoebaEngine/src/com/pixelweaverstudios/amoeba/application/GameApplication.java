@@ -21,6 +21,8 @@ public abstract class GameApplication extends Application
 
 		AmoebaEngine.getInstance();
 		//customize engine here if desired
-		//add/start loading screen activity
+		//add/start loading screen activity via intent invocation
+		//Application is now done; we won't be coming back here unless the application
+		//is entirely destroyed (cleaned up) by the OS.
 	}
 }

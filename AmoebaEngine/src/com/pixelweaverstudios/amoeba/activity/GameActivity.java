@@ -16,6 +16,8 @@ import com.pixelweaverstudios.amoeba.engine.IAmoebaEngine;
  */
 public abstract class GameActivity extends Activity
 {
+	private IAmoebaEngine engine;
+
 	/**
 	 * Invoked when the Android OS system starts this Activity (potentially
 	 * invoked from an Intent). onCreate is the entry point for all Android
@@ -29,12 +31,20 @@ public abstract class GameActivity extends Activity
 	{
 		super.onCreate(savedInstanceState);
 		//TODO: make more generic? other things need to be done when
-		//new activity starts
-		AmoebaEngine.getInstance().setContext((Context)this);
+		//new activity starts, example:
+		//AmoebaEngine.getInstance().attachToEngine(this);
+		engine = AmoebaEngine.getInstance();
+		engine.setContext((Context)this);
 
+		registerForCallbacks();
 		setWindowFeatures();
 		setContentView();
 	}
+
+	//register for callbacks here, example:
+	//engine.register(myInputHandler, CallbackType.INPUT);
+	//This is to be implemented by sub classes, ie user-land (hence abstract)
+	abstract public void registerForCallbacks();
 
 	public void setWindowFeatures()
 	{
@@ -45,6 +55,9 @@ public abstract class GameActivity extends Activity
 
 	public void setContentView()
 	{
-		//setContentView((GLSurfaceView)getEngine().getContentView());
+		//This starts the engine/game. When the content view is created, we will
+		//get surface created callbacks which will start the thread, input systems, etc.
+		//This is the end of the line.
+		setContentView(engine.getService<GLSurfaceView>(ServiceType.VIEW));
 	}
 }
