@@ -5,10 +5,6 @@ import android.opengl.GLES20;
 import com.pixelweaverstudios.amoeba.graphics.shader.Shader;
 import com.pixelweaverstudios.amoeba.graphics.shader.ShaderConstants;
 
-/**
- * @author Mike Testen
- *
- */
 public class TextureFragmentShader extends Shader
 {
 	/**

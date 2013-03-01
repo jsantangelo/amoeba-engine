@@ -1,9 +1,5 @@
 package com.pixelweaverstudios.amoeba.graphics.texture;
 
-/**
- * @author Mike Testen
- * 
- */
 public interface Texture
 {
 	/**

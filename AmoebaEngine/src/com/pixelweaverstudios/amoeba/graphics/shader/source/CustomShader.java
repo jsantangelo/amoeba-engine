@@ -2,10 +2,6 @@ package com.pixelweaverstudios.amoeba.graphics.shader.source;
 
 import com.pixelweaverstudios.amoeba.graphics.shader.Shader;
 
-/**
- * @author Mike Testen
- * 
- */
 public class CustomShader extends Shader
 {
 	/**

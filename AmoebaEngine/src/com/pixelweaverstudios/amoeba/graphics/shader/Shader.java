@@ -2,10 +2,6 @@ package com.pixelweaverstudios.amoeba.graphics.shader;
 
 import com.pixelweaverstudios.amoeba.graphics.utilities.ShaderUtilities;
 
-/**
- * @author Mike Testen
- * 
- */
 public abstract class Shader
 {
 	protected String source;

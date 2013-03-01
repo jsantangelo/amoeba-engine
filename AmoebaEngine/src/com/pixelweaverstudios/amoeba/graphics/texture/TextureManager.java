@@ -2,10 +2,6 @@ package com.pixelweaverstudios.amoeba.graphics.texture;
 
 import android.util.SparseArray;
 
-/**
- * @author Mike Testen
- * 
- */
 public class TextureManager
 {
 	private SparseArray<Texture> textures;

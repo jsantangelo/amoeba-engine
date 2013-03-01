@@ -13,10 +13,6 @@ import android.graphics.BitmapFactory;
 import android.opengl.GLES20;
 import android.opengl.GLUtils;
 
-/**
- * @author Mike Testen
- * 
- */
 public class GLES20TextureUtilities implements TextureUtilities
 {
 	private Context context;

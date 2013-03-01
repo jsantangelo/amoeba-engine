@@ -2,10 +2,6 @@ package com.pixelweaverstudios.amoeba.graphics.texture;
 
 import com.pixelweaverstudios.amoeba.graphics.utilities.TextureUtilities;
 
-/**
- * @author Mike Testen
- * 
- */
 public class BitmapTexture implements Texture
 {
 	private TextureUtilities textureUtilities;

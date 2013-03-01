@@ -7,10 +7,6 @@ import com.pixelweaverstudios.amoeba.graphics.shader.Shader;
 import android.opengl.GLES20;
 import android.util.Log;
 
-/**
- * @author Mike Testen
- * 
- */
 public class ShaderUtilities
 {
 	private static final String TAG = "ShaderUtilities";

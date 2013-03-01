@@ -4,10 +4,6 @@ import java.util.ArrayList;
 
 import com.pixelweaverstudios.amoeba.graphics.utilities.ShaderUtilities;
 
-/**
- * @author Mike Testen
- * 
- */
 public abstract class ShaderProgram
 {
 	protected ArrayList<Shader> shaders;

@@ -5,10 +5,6 @@ import java.util.ArrayList;
 import com.pixelweaverstudios.amoeba.graphics.shader.ShaderProgram;
 import com.pixelweaverstudios.amoeba.graphics.shader.Shader;
 
-/**
- * @author Mike Testen
- * 
- */
 public class CustomShaderProgram extends ShaderProgram
 {
 	/**
