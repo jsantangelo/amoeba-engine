@@ -4,33 +4,25 @@ import com.pixelweaverstudios.amoeba.graphics.utilities.TextureUtilities;
 
 public class BitmapTexture implements Texture
 {
-	private TextureUtilities textureUtilities;
+	private TextureUtilities utilities;
 	private int handle, drawableId;
 	private int width, height;
 
 	/**
-	 *
+	 * @param utilities
+	 * @param options
+	 * @param drawableId
 	 */
-	public BitmapTexture(TextureUtilities textureUtilities)
+	public BitmapTexture(TextureUtilities utilities, int drawableId)
 	{
-		this.textureUtilities = textureUtilities;
+		this.utilities = utilities;
+		this.drawableId = drawableId;
+
 		handle = -1;
-		drawableId = -1;
 		width = 0;
 		height = 0;
 	}
-
-	/**
-	 * @param drawable
-	 */
-	public BitmapTexture(int drawable)
-	{
-		handle = -1;
-		drawableId = drawable;
-		width = 0;
-		height = 0;
-	}
-
+	
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -38,7 +30,7 @@ public class BitmapTexture implements Texture
 	 */
 	public void load()
 	{
-		textureUtilities.loadTextureFromResource(this);
+		utilities.loadTextureFromResource(this);
 	}
 
 	/*
@@ -48,7 +40,7 @@ public class BitmapTexture implements Texture
 	 */
 	public void unload()
 	{
-		textureUtilities.unloadTexture(this);
+		utilities.unloadTexture(this);
 	}
 
 	/*
@@ -58,7 +50,7 @@ public class BitmapTexture implements Texture
 	 */
 	public boolean isLoaded()
 	{
-		return textureUtilities.isTextureLoaded(getHandle());
+		return utilities.isTextureLoaded(getHandle());
 	}
 
 	/*
