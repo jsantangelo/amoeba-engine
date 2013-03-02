@@ -4,6 +4,13 @@
 	<property name="build.name" value="classes.jar" />
 	<property name="deployable.name" value="AmoebaEngine.jar" />
 
+	<target name="-pre-build">
+		<echo message="Running Android lint..." />
+		<exec executable="lint">
+			<arg value="." />
+		</exec>
+	</target>
+
 	<target name="-post-build">	
 		<copy file="${out.dir}/${build.name}" todir="${deploy.dir}" />
 		<move file="${deploy.dir}/${build.name}" tofile="${deploy.dir}/${deployable.name}" />
