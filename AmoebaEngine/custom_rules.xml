@@ -6,7 +6,7 @@
 
 	<target name="-pre-build">
 		<echo message="Running Android lint..." />
-		<exec executable="lint">
+		<exec executable="${sdk.dir}/tools/lint">
 			<arg value="." />
 		</exec>
 	</target>
