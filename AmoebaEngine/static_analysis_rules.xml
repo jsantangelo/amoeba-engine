@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="static_analysis_rules">
+	<target name="check-for-checkstyle" if="${checkstyle.enabled}">
+		<available file="${checkstyle.dir}/checkstyle-5.6-all.jar" property="checkstyle.present" />
+	</target>
+
+	<property name="checkstyle.config" value="../staticanalysis/checkstyle/checkstyle_checks.xml" />
+
+	<target name="run-checkstyle" depends="check-for-checkstyle" if="checkstyle.present">
+		<taskdef resource="checkstyletask.properties" classpath="${checkstyle.dir}/checkstyle-5.6-all.jar"/>
+
+		<checkstyle config="${checkstyle.config}">
+			<fileset dir="${source.dir}" includes="**/*.java" />
+		</checkstyle>
+	</target>
+
+	<target name="run-staticanalysis" depends="run-checkstyle" />
+</project>

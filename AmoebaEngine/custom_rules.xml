@@ -4,14 +4,15 @@
 	<property name="build.name" value="classes.jar" />
 	<property name="deployable.name" value="AmoebaEngine.jar" />
 
-	<target name="-pre-build">
+	<target name="-pre-build" depends="run-staticanalysis">
 		<echo message="Running Android lint..." />
 		<exec executable="${sdk.dir}/tools/lint">
 			<arg value="." />
 		</exec>
 	</target>
 
-	<target name="-post-build">	
+	<target name="-post-build">
+		<echo message="Deploying jar file..." />
 		<copy file="${out.dir}/${build.name}" todir="${deploy.dir}" />
 		<move file="${deploy.dir}/${build.name}" tofile="${deploy.dir}/${deployable.name}" />
 	</target>

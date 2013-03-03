@@ -55,6 +55,12 @@
     />
 
     <!--
+        Import static analysis tasks to be run on the code as part of the 
+        pre-build process.
+    -->
+    <import file="static_analysis_rules.xml" optional="true" />
+    
+    <!--
         Import per project custom build rules if present at the root of the project.
         This is the place to put custom intermediary targets such as:
             -pre-build
