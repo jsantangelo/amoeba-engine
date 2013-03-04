@@ -6,6 +6,9 @@ import com.pixelweaverstudios.amoeba.engine.service.ServiceType;
 import com.pixelweaverstudios.amoeba.engine.service.view.ViewService;
 import com.pixelweaverstudios.amoeba.engine.AmoebaEngine;
 
+/**
+ * Implementation of the {SOMETYPE} of game loop.
+ */
 public class StandardGameThread extends Thread implements GameThreadService
 {
 	private ViewService viewService;
@@ -17,6 +20,9 @@ public class StandardGameThread extends Thread implements GameThreadService
 	private static final int MAX_FRAME_SKIPS = 5;
 	private static final int FRAME_PERIOD = 1000 / MAX_FPS;
 
+	/**
+	 * Constructor.
+	 */
 	public StandardGameThread()
 	{
 		super();
@@ -25,16 +31,27 @@ public class StandardGameThread extends Thread implements GameThreadService
 		surfaceHolder = viewService.getSurfaceHolder();
 	}
 
+	/**
+	 * Starts the game thread.
+	 */
 	public void start()
 	{
 		//TODO: Figure how out this service starts.
 	}
 
+	/**
+	 * Sets the state (running or not-running) of the game thread.
+	 * @param running whether or not the thread should be running
+	 */
 	public void setRunning(boolean running)
 	{
 		this.running = running;
 	}
 
+	/**
+	 * The main executable body of the underlying thread, called when the
+	 * thread starts.
+	 */
 	@Override
 	public void run()
 	{
