@@ -41,4 +41,3 @@ When defining the package for a given class, the package line should be the firs
 	import android.app.Activity;
 
 	import com.pixelweaverstudios.amoeba.activity.GameActivity;
-

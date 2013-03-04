@@ -6,7 +6,7 @@ Amoeba Engine is a game engine for the Android platform, designed to be lightwei
 How To Use
 ----------
 
-Amoeba Engine is distributed as a jar, and can therefore be included/referenced by your project as a library. The overall design of Amoeba Engine, including the interfaces that can be implemented with your own custom implementation, and other documentation necessary to build your game around Amoeba Engine can be found in doc/design.md.
+Amoeba Engine is distributed as a jar, and can therefore be included/referenced by your project as a library. The overall design of Amoeba Engine, including the interfaces that can be implemented with your own custom implementation, and other documentation necessary to build your game around Amoeba Engine can be found in [the design document](doc/design.md).
 
 How To Compile From Source
 --------------------------
@@ -36,11 +36,7 @@ To clean out any files generated as part of the build process, simply run:
 
 	ant clean
 
-Using Eclipse
--------------
+How To Contribute
+-----------------
 
-The project can be imported into Eclipse in the same way as any other java project.  After the repository is cloned to your system, open Eclipse and select File > Import.  You can choose General > Existing Projects into Workspace, Android > Existing Android Code into Workspace, or Git > Projects from Git (if you have a git plugin installed).
-
-Navigate to and select the folder of the repository on you system and Eclipse should recognize the AmoebaEngine project.  Select the AmoebaEngine project and be sure NOT to copy the project into the workspace.
-
-To view the packages in the library in an easier to read format go to Package Explorer (Ctrl+F10) > Package Presentation > Hierarchical.
+Please see [the developer's guide](doc/developers_guide.md).
