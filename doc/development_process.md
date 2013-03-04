@@ -50,13 +50,38 @@ Checkstyle Static Analysis
 
 This project employs [checkstyle](http://checkstyle.sourceforge.net) as a means of [static code analysis](http://en.wikipedia.org/wiki/Static_program_analysis). All commits should not have any checkstyle errors (checkstyle errors prohibit successful builds).
 
+To use checkstyle, it must first be acquired. The easiest way to do this if you are in the MACOSX environment is to use [homebrew](http://mxcl.github.com/homebrew/). See their documentation on how to get homebrew.
+
+Once homebrew is installed, you can now easily obtain checkstyle.
+
+As of `3/3/2013`, homebrew is currently distributing checkstyle version 5.5 (due to the checkstyle distrbution having a faulty default configuration file). Because this project uses a custom configuration file, checkstyle version 5.6 can be used, and is required. To install checkstyle 5.6 with homebrew, type the following commands:
+
+	git checkout -b checkstyle5.6 de08098
+	brew install checkstyle
+	checkout master
+	git branch -d checkstyle5.6
+
+If you would like to see the available versions of checkstyle, type:
+
+	brew version checkstyle
+
+If you do not wish to use homebrew, simply download version 5.6 directly from checkstyle's home page, and install it in the directory of your choosing.
+
+Now that you have checktyle 5.6, you will need to enable it in the build system. To do so, open up the `ant.properties` file found in the `AmoebaEngine/` directory. Where specified, enable checkstype by making sure the appropriate marked line reads:
+
+	checkstyle.enabled=true
+
+Finally, enter the absolute path to checkstyle (see the file for details) on the appropriate line.
+
+Checkstyle errors will prohibit a successful build. If you need to disable checkstyle in the build process for whatever reason, simply set the `checkstyle.enabled` flag to false.
+
 Making Commits
 --------------
 
 When making commits, use the following commit message format:
 
 	[#issueNum] - commitMessage
-	OR
+OR
 	[#issueNum] commitMessage
 
 For example:
