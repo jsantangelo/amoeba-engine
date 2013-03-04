@@ -7,7 +7,7 @@
 	<property name="checkstyle.config" value="../staticanalysis/checkstyle/checkstyle_checks.xml" />
 
 	<target name="run-checkstyle" depends="check-for-checkstyle" if="checkstyle.present">
-		<taskdef resource="checkstyletask.properties" classpath="${checkstyle.dir}/checkstyle-5.6-all.jar"/>
+		<taskdef resource="checkstyletask.properties" classpath="${checkstyle.dir}/checkstyle-5.6-all.jar:/Users/jamessantangelo/Documents/dev/pixelweaver-studios/amoeba-engine/staticanalysis/checkstyle/cs.jar"/>
 
 		<checkstyle config="${checkstyle.config}">
 			<fileset dir="${source.dir}" includes="**/*.java" />
