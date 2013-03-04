@@ -44,16 +44,26 @@ public abstract class GameActivity extends Activity
 	//register for callbacks here, example:
 	//engine.register(myInputHandler, CallbackType.INPUT);
 	//This is to be implemented by sub classes, ie user-land (hence abstract)
-	abstract public void registerForCallbacks();
+	/**
+	 * Register for callbacks provided by AmoebaEngine services.
+	 */
+	abstract private void registerForCallbacks();
 
-	public void setWindowFeatures()
+	/**
+	 * Sets window features of the Activity.
+	 */
+	private void setWindowFeatures()
 	{
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
 			WindowManager.LayoutParams.FLAG_FULLSCREEN);
 	}
 
-	public void setContentView()
+	/**
+	 * Set the ContentView of the Activity to the ViewService as supplied by
+	 * the AmoebaEngine.
+	 */
+	private void setContentView()
 	{
 		//This starts the engine/game. When the content view is created, we will
 		//get surface created callbacks which will start the thread, input systems, etc.
