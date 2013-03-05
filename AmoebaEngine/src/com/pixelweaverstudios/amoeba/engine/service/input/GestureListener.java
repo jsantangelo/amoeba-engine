@@ -26,16 +26,16 @@ public class GestureListener implements GestureDetector.OnGestureListener,
 
 	/**
 	 * Constructor. Creates underlying Android gesture detectors.
-	 * @param  inputService hook to main input service to be called back on
+	 * @param  service hook to main input service to be called back on
 	 *                      input interpretation
 	 */
-	public GestureListener(InputService inputService)
+	public GestureListener(final InputService service)
 	{
 		context = AmoebaEngine.getInstance().getContext();
 		gestureDetector = new GestureDetector(context, this);
 		scaleGestureDetector = new ScaleGestureDetector(context, this);
 
-		this.inputService = inputService;
+		inputService = service;
 
 		scrollingInProgress = false;
 	}
@@ -46,7 +46,7 @@ public class GestureListener implements GestureDetector.OnGestureListener,
 	 * @param  event raw motion event from the Android OS
 	 * @return       whether or not to continue getting motion events
 	 */
-	public boolean onTouchEvent(MotionEvent event)
+	public boolean onTouchEvent(final MotionEvent event)
 	{
 		gestureDetector.onTouchEvent(event);
 		scaleGestureDetector.onTouchEvent(event);
@@ -65,7 +65,7 @@ public class GestureListener implements GestureDetector.OnGestureListener,
 	 * @param  event interpreted Android OS down event
 	 * @return       whether or not the event was consumed
 	 */
-	public boolean onDown(MotionEvent event)
+	public boolean onDown(final MotionEvent event)
 	{
 		InputEvent inputEvent = new InputEvent(InputEvent.EventType.DOWN);
 		inputEvent.setMotionEvent(event);
@@ -81,7 +81,8 @@ public class GestureListener implements GestureDetector.OnGestureListener,
 	 * @param  velocityY velocity along y-axis in pixels per second
 	 * @return           whether or not this event was consumed
 	 */
-	public boolean onFling(MotionEvent event1, MotionEvent event2, float velocityX, float velocityY)
+	public boolean onFling(final MotionEvent event1, final MotionEvent event2,
+		final float velocityX, final float velocityY)
 	{
 		InputEvent inputEvent = new InputEvent(InputEvent.EventType.FLING);
 		inputEvent.setStartingEvent(event1);
@@ -95,7 +96,7 @@ public class GestureListener implements GestureDetector.OnGestureListener,
 	 * Implements OnGestureListener's callback for "long press" events.
 	 * @param event interpreted Android OS down event
 	 */
-	public void onLongPress(MotionEvent event)
+	public void onLongPress(final MotionEvent event)
 	{
 		InputEvent inputEvent = new InputEvent(InputEvent.EventType.LONGPRESS);
 		inputEvent.setMotionEvent(event);
@@ -110,7 +111,8 @@ public class GestureListener implements GestureDetector.OnGestureListener,
 	 * @param  distanceY distance along the y-axis since last "scroll" event
 	 * @return           whether this event was consumed
 	 */
-	public boolean onScroll(MotionEvent event1, MotionEvent event2, float distanceX, float distanceY)
+	public boolean onScroll(final MotionEvent event1, final MotionEvent event2,
+		final float distanceX, final float distanceY)
 	{
 		if (!scaleGestureDetector.isInProgress())
 		{
@@ -128,7 +130,7 @@ public class GestureListener implements GestureDetector.OnGestureListener,
 	 * Implements OnGestureListener's callback for "down but not finished" events.
 	 * @param event interpreted Android OS event
 	 */
-	public void onShowPress(MotionEvent event)
+	public void onShowPress(final MotionEvent event)
 	{
 		InputEvent inputEvent = new InputEvent(InputEvent.EventType.SHOWPRESS);
 		inputEvent.setMotionEvent(event);
@@ -140,7 +142,7 @@ public class GestureListener implements GestureDetector.OnGestureListener,
 	 * @param  event interpreted Android OS event
 	 * @return       whether or not the event was consumed
 	 */
-	public boolean onSingleTapUp(MotionEvent event)
+	public boolean onSingleTapUp(final MotionEvent event)
 	{
 		InputEvent inputEvent = new InputEvent(InputEvent.EventType.SINGLETAP);
 		inputEvent.setMotionEvent(event);
@@ -149,11 +151,11 @@ public class GestureListener implements GestureDetector.OnGestureListener,
 	}
 
 	/**
-	 * Implements OnScaleGestureListener's callback for "scale beginning" events
+	 * Implements OnScaleGestureListener's callback for "scale beginning" events.
 	 * @param  detector detector reporting the event
 	 * @return          whether or not to continue processing this scale event
 	 */
-	public boolean onScaleBegin(ScaleGestureDetector detector)
+	public boolean onScaleBegin(final ScaleGestureDetector detector)
 	{
 		InputEvent inputEvent = new InputEvent(InputEvent.EventType.SCALEBEGIN);
 		inputEvent.setScaleDetector(detector);
@@ -162,11 +164,11 @@ public class GestureListener implements GestureDetector.OnGestureListener,
 	}
 
 	/**
-	 * Implements OnScaleGestureListener's callback for "scale continuing" events
+	 * Implements OnScaleGestureListener's callback for "scale continuing" events.
 	 * @param  detector detector reporting the event
 	 * @return          whether or not to continue processing this scale event
 	 */
-	public boolean onScale(ScaleGestureDetector detector)
+	public boolean onScale(final ScaleGestureDetector detector)
 	{
 		InputEvent inputEvent = new InputEvent(InputEvent.EventType.SCALE);
 		inputEvent.setScaleDetector(detector);
@@ -175,10 +177,10 @@ public class GestureListener implements GestureDetector.OnGestureListener,
 	}
 
 	/**
-	 * Implements OnScaleGestureListener's callback for "scale ending" events
+	 * Implements OnScaleGestureListener's callback for "scale ending" events.
 	 * @param detector detector reporting the event
 	 */
-	public void onScaleEnd(ScaleGestureDetector detector)
+	public void onScaleEnd(final ScaleGestureDetector detector)
 	{
 		InputEvent inputEvent = new InputEvent(InputEvent.EventType.SCALEEND);
 		inputEvent.setScaleDetector(detector);

@@ -18,7 +18,7 @@ public class EngineInput implements InputService
 	 * Processes an input event.
 	 * @param event and InputEvent from the core Android OS
 	 */
-	public void handleInputEvent(InputEvent event)
+	public void handleInputEvent(final InputEvent event)
 	{
 
 	}
@@ -28,6 +28,6 @@ public class EngineInput implements InputService
 	 */
 	public void start()
 	{
-		
+
 	}
 }
