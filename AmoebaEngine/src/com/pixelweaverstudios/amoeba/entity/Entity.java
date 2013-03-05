@@ -6,10 +6,10 @@ public interface Entity
 	public float getY();
 	public void setX(final float x);
 	public void setY(final float y);
-	
+
 	public float getRotation();
 	public void setRotation(final float rotation);
-	
+
 	public boolean isScaled();
 	public float getScale();
 	public float getScaleX();

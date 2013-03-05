@@ -3,48 +3,58 @@ package com.pixelweaverstudios.amoeba.engine.service.texture;
 import com.pixelweaverstudios.amoeba.engine.service.Service;
 import com.pixelweaverstudios.amoeba.graphics.texture.Texture;
 
+/**
+ * The texture service maintains a collection of textures.
+ */
 public interface TextureService extends Service
 {
 	/**
-	 * @param texture
+	 * Add a texture to be managed by the texture service.
+	 * @param texture Texture to be added to the collection.
 	 */
 	public void add(Texture texture);
-	
+
 	/**
-	 * @param resource
+	 * Remove a texture from the texture service.
+	 * @param resource The resource ID representing the texture to be removed.
 	 */
 	public void remove(int resource);
-	
+
 	/**
-	 * @param resource
-	 * @return
+	 * Load a texture in the texture service collection.
+	 * @param resource The resource ID representing the texture to be loaded.
+	 * @return The loaded texture object.
 	 */
 	public Texture loadTexture(int resource);
-	
+
 	/**
-	 * 
+	 * Load all textures currently maintained by the texture service.
 	 */
 	public void loadAllTextures();
-	
+
 	/**
-	 * @param resource
+	 * Unload a texture in the texture service collection.
+	 * @param resource The resource ID representing the texture to be loaded.
+	 * @return The unloaded texture object.
 	 */
 	public Texture unloadTexture(int resource);
 
 	/**
-	 * 
+	 * Unload all texture currently maintained by the texture service.
 	 */
 	public void unloadAllTextures();
 
 	/**
-	 * @param resource
-	 * @return
+	 * Get a texture from the texture service using its resource ID.
+	 * @param resource The resource ID representing the texture.
+	 * @return The texture associated with the resource ID.
 	 */
 	public Texture getTexture(int resource);
 
 	/**
-	 * @param resource
-	 * @return
+	 * Get the handle of a texture from its resource ID.
+	 * @param resource The resource ID representing the texture.
+	 * @return The texture handle associated with the resource ID.
 	 */
 	public int getTextureID(int resource);
 }
