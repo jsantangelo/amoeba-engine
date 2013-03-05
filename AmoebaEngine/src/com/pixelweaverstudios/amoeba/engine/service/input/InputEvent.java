@@ -13,20 +13,38 @@ public class InputEvent
 	/**
 	 * Helper class to hold vector information.
 	 */
-	public class InputVector<X, Y>
+	public class InputVector<T>
 	{
-		public final X x;
-		public final Y y;
+		private final T x;
+		private final T y;
 
 		/**
 		 * Constructor.
-		 * @param  x some "x" value
-		 * @param  y some "y" value
+		 * @param  xVar some "x" value
+		 * @param  yVar some "y" value
 		 */
-		public InputVector(X x, Y y)
+		public InputVector(final T xVar, final T yVar)
 		{
-			this.x = x;
-			this.y = y;
+			x = xVar;
+			y = yVar;
+		}
+
+		/**
+		 * Returns the "x" value of the InputVector.
+		 * @return the "x" value
+		 */
+		public T getX()
+		{
+			return x;
+		}
+
+		/**
+		 * Returns the "y" value of the InputVector.
+		 * @return the "y" value
+		 */
+		public T getY()
+		{
+			return y;
 		}
 	}
 
@@ -42,18 +60,19 @@ public class InputEvent
 
 	private EventType eventType;
 	private MotionEvent event1, event2;
-	private InputVector<Float, Float> vector;
+	private InputVector<Float> vector;
 	private ScaleGestureDetector scaleGestureDetector;
 
 	/**
 	 * Constructor. Initializes all values to empty or null, except for type.
 	 * @param  type type of event
 	 */
-	public InputEvent(EventType type)
+	public InputEvent(final EventType type)
 	{
 		eventType = type;
 
-		event1 = event2 = null;
+		event1 = null;
+		event2 = null;
 		vector = null;
 		scaleGestureDetector = null;
 	}
@@ -72,7 +91,7 @@ public class InputEvent
 	 * SHOWPRESS, and SINGLETAP events.
 	 * @param event the motion event
 	 */
-	public void setMotionEvent(MotionEvent event)
+	public void setMotionEvent(final MotionEvent event)
 	{
 		event1 = event;
 	}
@@ -91,7 +110,7 @@ public class InputEvent
 	 * SCROLL events.
 	 * @param event the motion event
 	 */
-	public void setStartingEvent(MotionEvent event)
+	public void setStartingEvent(final MotionEvent event)
 	{
 		event1 = event;
 	}
@@ -101,7 +120,7 @@ public class InputEvent
 	 * SCROLL events.
 	 * @param event the motion event
 	 */
-	public void setEndingEvent(MotionEvent event)
+	public void setEndingEvent(final MotionEvent event)
 	{
 		event2 = event;
 	}
@@ -129,16 +148,16 @@ public class InputEvent
 	 * @param velocityX velocity on the x-axis
 	 * @param velocityY velocity on the y-axis
 	 */
-	public void setVelocityVector(float velocityX, float velocityY)
+	public void setVelocityVector(final float velocityX, final float velocityY)
 	{
-		vector = new InputVector<Float, Float>(velocityX, velocityY);
+		vector = new InputVector<Float>(velocityX, velocityY);
 	}
 
 	/**
 	 * Returns the velocity vector of FLING events.
 	 * @return the velocity vector
 	 */
-	public InputVector<Float, Float> getVelocityVector()
+	public InputVector<Float> getVelocityVector()
 	{
 		return vector;
 	}
@@ -148,16 +167,16 @@ public class InputEvent
 	 * @param distanceX distance along the x-axis
 	 * @param distanceY distance along the y-axis
 	 */
-	public void setDistanceVector(float distanceX, float distanceY)
+	public void setDistanceVector(final float distanceX, final float distanceY)
 	{
-		vector = new InputVector<Float, Float>(distanceX, distanceY);
+		vector = new InputVector<Float>(distanceX, distanceY);
 	}
 
 	/**
 	 * Returns the distance vector of a SCROLL event.
 	 * @return the distance vector
 	 */
-	public InputVector<Float, Float> getDistanceVector()
+	public InputVector<Float> getDistanceVector()
 	{
 		return vector;
 	}
@@ -165,11 +184,11 @@ public class InputEvent
 	/**
 	 * Sets the scale detector of a scale-type input event. Used by SCALEBEGIN,
 	 * SCALE, and SCALEEND events.
-	 * @param scaleGestureDetector the reporting detector
+	 * @param detector the reporting detector
 	 */
-	public void setScaleDetector(ScaleGestureDetector scaleGestureDetector)
+	public void setScaleDetector(final ScaleGestureDetector detector)
 	{
-		this.scaleGestureDetector = scaleGestureDetector;
+		scaleGestureDetector = detector;
 	}
 
 	/**

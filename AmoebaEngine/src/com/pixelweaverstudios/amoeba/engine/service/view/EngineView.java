@@ -5,7 +5,6 @@ import android.view.MotionEvent;
 import android.content.Context;
 import android.view.SurfaceHolder;
 
-import com.pixelweaverstudios.amoeba.engine.service.ServicesManager;
 import com.pixelweaverstudios.amoeba.engine.AmoebaEngine;
 import com.pixelweaverstudios.amoeba.engine.service.ServiceType;
 
@@ -24,7 +23,7 @@ public class EngineView extends GLSurfaceView implements ViewService
 	public EngineView()
 	{
 		super(AmoebaEngine.getInstance().getContext());
-		
+
 		setFocusable(true);
 	}
 
@@ -61,7 +60,7 @@ public class EngineView extends GLSurfaceView implements ViewService
 	private void initializeRenderer()
 	{
 		//Renderer creation must happen before this call
-		setRenderer((GLSurfaceView.Renderer)(AmoebaEngine.getInstance().getService(ServiceType.RENDERER)));
+		setRenderer((GLSurfaceView.Renderer) (AmoebaEngine.getInstance().getService(ServiceType.RENDERER)));
 		setRenderMode(GLSurfaceView.RENDERMODE_WHEN_DIRTY);
 	}
 
@@ -77,7 +76,7 @@ public class EngineView extends GLSurfaceView implements ViewService
 	 * @return       whether or not the motion event was consumed
 	 */
 	@Override
-	public boolean onTouchEvent(MotionEvent event)
+	public boolean onTouchEvent(final MotionEvent event)
 	{
 		//return gestureListener.onTouchEvent(event);
 		//View needs to route to InputService, who routes to GestureListener,

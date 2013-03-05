@@ -8,6 +8,6 @@ import com.pixelweaverstudios.amoeba.application.GameApplication;
  */
 public class TestGame extends GameApplication
 {
-	//TODO: Figure out what to do if user decides to subclass the gameapplication
+	//Figure out what to do if user decides to subclass the gameapplication
 	//GameApplication should not be required to be subclassed
 }
