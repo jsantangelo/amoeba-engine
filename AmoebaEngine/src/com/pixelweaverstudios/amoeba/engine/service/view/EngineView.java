@@ -9,12 +9,18 @@ import com.pixelweaverstudios.amoeba.engine.service.ServicesManager;
 import com.pixelweaverstudios.amoeba.engine.AmoebaEngine;
 import com.pixelweaverstudios.amoeba.engine.service.ServiceType;
 
-public class EngineView extends GLSurfaceView
-	implements ViewService
+/**
+ * Implements the ViewService service component provided by AmoebaEngine.
+ * Responsible for acting as the View to which draws are made. Also the
+ * entry point for raw MotionEvents from the Android OS.
+ */
+public class EngineView extends GLSurfaceView implements ViewService
 {
-	//private IAmoebaEngineRenderer renderer;
 	private Context context;
 
+	/**
+	 * Constructor.
+	 */
 	public EngineView()
 	{
 		super(AmoebaEngine.getInstance().getContext());
@@ -22,21 +28,36 @@ public class EngineView extends GLSurfaceView
 		setFocusable(true);
 	}
 
+	/**
+	 * Notifies the View that the parent Activity is ready to begin
+	 * game execution. Prepares/finishe all setup.
+	 */
 	public void start()
 	{
 		initializeRenderer();
 	}
 
+	/**
+	 * Callback from the GameThreadService to request a render on the attached
+	 * RendererService.
+	 */
 	public void onRequestRender()
 	{
 		requestRender();
 	}
 
+	/**
+	 * Returns the SurfaceHolder of this View.
+	 * @return the Surface Holder attached to this View
+	 */
 	public SurfaceHolder getSurfaceHolder()
 	{
 		return getHolder();
 	}
 
+	/**
+	 * Prepares the RendererService for game execution.
+	 */
 	private void initializeRenderer()
 	{
 		//Renderer creation must happen before this call
@@ -49,7 +70,12 @@ public class EngineView extends GLSurfaceView
 	//* handle onSurfaceChanged (for screen dimension change handling, ie device rotation)
 	//* handle onSurfaceDestroyed (to stop the game loop thread)
 
-	//Methods from GLSurfaceView/SurfaceView/View
+	/**
+	 * Overrides GLSurfaceView's callback on motion events from the Android OS.
+	 * Responsible for defering to the InputService.
+	 * @param  event raw motion event, yet to be processed
+	 * @return       whether or not the motion event was consumed
+	 */
 	@Override
 	public boolean onTouchEvent(MotionEvent event)
 	{
@@ -59,6 +85,10 @@ public class EngineView extends GLSurfaceView
 		return true;
 	}
 
+	/**
+	 * Overrides GLSurfaceView's callback on View pause. Stops the
+	 * GameThreadService thread execution.
+	 */
 	@Override
 	public void onPause()
 	{
@@ -66,6 +96,10 @@ public class EngineView extends GLSurfaceView
 		super.onPause();
 	}
 
+	/**
+	 * Overrides GLSurfaceView's callback on View resume. Starts the
+	 * GameThreadService thread execution.
+	 */
 	@Override
 	public void onResume()
 	{
