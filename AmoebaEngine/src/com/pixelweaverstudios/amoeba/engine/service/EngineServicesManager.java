@@ -49,7 +49,7 @@ public class EngineServicesManager implements ServicesManager
 	 * @param  service service type
 	 * @return         request service provided by AmoebaEngine
 	 */
-	public Service getService(ServiceType service)
+	public Service getService(final ServiceType service)
 	{
 		return services.get(service);
 	}

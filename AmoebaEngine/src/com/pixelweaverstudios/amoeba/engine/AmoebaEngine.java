@@ -16,7 +16,7 @@ public class AmoebaEngine
 	private static AmoebaEngine instance = null;
 
 	private ServicesManager services;
-	private Context context;
+	private Context currentContext;
 
 	/**
 	 * Constructor.
@@ -44,7 +44,7 @@ public class AmoebaEngine
 	 * an Activity on creation before the engine is used.
 	 * @param context the Android context
 	 */
-	public void attachToEngine(Context context)
+	public void attachToEngine(final Context context)
 	{
 		setContext(context);
 		//create services and tie together all services for callbacks
@@ -55,9 +55,9 @@ public class AmoebaEngine
 	 * AmoebaEngine services.
 	 * @param context the Android context
 	 */
-	public void setContext(Context context)
+	public void setContext(final Context context)
 	{
-		this.context = context;
+		currentContext = context;
 	}
 
 	/**
@@ -65,7 +65,7 @@ public class AmoebaEngine
 	 * @param  service service type
 	 * @return         the requested service
 	 */
-	public Service getService(ServiceType service)
+	public Service getService(final ServiceType service)
 	{
 		return services.getService(service);
 	}

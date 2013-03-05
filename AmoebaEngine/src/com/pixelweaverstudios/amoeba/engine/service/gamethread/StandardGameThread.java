@@ -14,11 +14,16 @@ public class StandardGameThread extends Thread implements GameThreadService
 	private ViewService viewService;
 	private SurfaceHolder surfaceHolder;
 
-	private boolean running = false;
+	private static final String TAG = this.getClass().getSimpleName();
+
+	private boolean isRunning = false;
+
+	//Need to figure out what and why this number is 1000.
+	private static final int ONE_THOUSAND = 1000;
 
 	private static final int MAX_FPS = 60;
 	private static final int MAX_FRAME_SKIPS = 5;
-	private static final int FRAME_PERIOD = 1000 / MAX_FPS;
+	private static final int FRAME_PERIOD = ONE_THOUSAND / MAX_FPS;
 
 	/**
 	 * Constructor.
@@ -27,7 +32,7 @@ public class StandardGameThread extends Thread implements GameThreadService
 	{
 		super();
 
-		viewService = (ViewService)AmoebaEngine.getInstance().getService(ServiceType.VIEW);
+		viewService = (ViewService) AmoebaEngine.getInstance().getService(ServiceType.VIEW);
 		surfaceHolder = viewService.getSurfaceHolder();
 	}
 
@@ -36,16 +41,16 @@ public class StandardGameThread extends Thread implements GameThreadService
 	 */
 	public void start()
 	{
-		//TODO: Figure how out this service starts.
+		//Figure how out this service starts.
 	}
 
 	/**
 	 * Sets the state (running or not-running) of the game thread.
 	 * @param running whether or not the thread should be running
 	 */
-	public void setRunning(boolean running)
+	public void setRunning(final boolean running)
 	{
-		this.running = running;
+		isRunning = running;
 	}
 
 	/**
@@ -58,23 +63,23 @@ public class StandardGameThread extends Thread implements GameThreadService
 		long beginTime, timeDiff;
 		int sleepTime = 0, framesSkipped;
 
-		while (running)
+		while (isRunning)
 		{
 			try
 			{
-				synchronized(surfaceHolder)
+				synchronized (surfaceHolder)
 				{
 					beginTime = System.currentTimeMillis();
 					framesSkipped = 0;
 
-					//TODO: next line likely not necessary
+					//Next commented out line likely not necessary.
 					//viewService.onUpdate();
 					//render requests must go to view. Renderer is responsible for
 					//invoking onDraw on the callback router
 					viewService.onRequestRender();
 
 					timeDiff = System.currentTimeMillis() - beginTime;
-					sleepTime = (int)(FRAME_PERIOD - timeDiff);
+					sleepTime = (int) (FRAME_PERIOD - timeDiff);
 
 					if (sleepTime > 0)
 					{
@@ -84,7 +89,7 @@ public class StandardGameThread extends Thread implements GameThreadService
 						}
 						catch (InterruptedException e)
 						{
-							//Thread interrupted
+							Log.e(TAG, "Thread interrupted: " + e);
 						}
 					}
 
@@ -92,14 +97,14 @@ public class StandardGameThread extends Thread implements GameThreadService
 					{
 						//viewService.onUpdate();
 						//want to invoke onUpdate on the callbackrouter, not view
-						sleepTime =+ FRAME_PERIOD;
+						sleepTime += FRAME_PERIOD;
 						++framesSkipped;
 					}
 				}
 			}
 			catch (Exception e)
 			{
-				//Exception during gameloop
+				Log.e(TAG, "Generic error: " + e);
 			}
 		}
 	}

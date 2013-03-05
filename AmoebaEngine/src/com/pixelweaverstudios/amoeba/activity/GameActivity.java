@@ -27,14 +27,14 @@ public abstract class GameActivity extends Activity
 	 *  application for later recreation if necessary
 	 */
 	@Override
-	public void onCreate(Bundle savedInstanceState)
+	public void onCreate(final Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
-		//TODO: make more generic? other things need to be done when
-		//new activity starts, example:
+		//Should probably make this more generic. oOher things need to
+		//be done when a new activity starts. Example:
 		//AmoebaEngine.getInstance().attachToEngine(this);
 		engine = AmoebaEngine.getInstance();
-		engine.setContext((Context)this);
+		engine.setContext((Context) this);
 
 		registerForCallbacks();
 		setWindowFeatures();
@@ -47,7 +47,7 @@ public abstract class GameActivity extends Activity
 	/**
 	 * Register for callbacks provided by AmoebaEngine services.
 	 */
-	abstract private void registerForCallbacks();
+	private abstract void registerForCallbacks();
 
 	/**
 	 * Sets window features of the Activity.
@@ -68,6 +68,6 @@ public abstract class GameActivity extends Activity
 		//This starts the engine/game. When the content view is created, we will
 		//get surface created callbacks which will start the thread, input systems, etc.
 		//This is the end of the line.
-		setContentView((GLSurfaceView)engine.getService(ServiceType.VIEW));
+		setContentView((GLSurfaceView) engine.getService(ServiceType.VIEW));
 	}
 }

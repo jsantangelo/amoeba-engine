@@ -3,7 +3,7 @@ package com.pixelweaverstudios.amoeba.engine.service.gamethread;
 import com.pixelweaverstudios.amoeba.engine.service.Service;
 
 /**
- * Service responsible for the main game loop thread,
+ * Service responsible for the main game loop thread.
  */
 public interface GameThreadService extends Service
 {
