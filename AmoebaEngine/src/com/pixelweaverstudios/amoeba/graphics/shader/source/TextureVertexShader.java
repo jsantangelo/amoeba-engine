@@ -15,9 +15,9 @@ public class TextureVertexShader extends Shader
 	 */
 	public TextureVertexShader()
 	{
-		type = GLES20.GL_VERTEX_SHADER;
-		handle = -1;
-		source =
+		setType(GLES20.GL_VERTEX_SHADER);
+		setHandle(-1);
+		setSource(
 			"uniform mat4 " + ShaderConstants.UNIFORM_MVPMATRIX + ";\n" +
 			"attribute vec4 " + ShaderConstants.ATTRIBUTE_POSITION + ";\n" +
 			"attribute vec4 " + ShaderConstants.ATTRIBUTE_COLOR + ";\n" +
@@ -29,6 +29,6 @@ public class TextureVertexShader extends Shader
 			"	" + ShaderConstants.VARYING_COLOR + " = " + ShaderConstants.ATTRIBUTE_COLOR + ";\n" +
 			"	" + ShaderConstants.VARYING_TEXTURECOORDINATES + "=" + ShaderConstants.ATTRIBUTE_TEXTURECOORDINATES + ";\n" +
 			"	gl_Position = " + ShaderConstants.UNIFORM_MVPMATRIX + "*" + ShaderConstants.ATTRIBUTE_POSITION + ";\n" +
-			"}\n";
+			"}\n");
 	}
 }

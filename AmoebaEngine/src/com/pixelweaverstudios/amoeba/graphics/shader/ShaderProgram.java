@@ -9,8 +9,8 @@ import com.pixelweaverstudios.amoeba.graphics.utilities.ShaderUtilities;
  */
 public abstract class ShaderProgram
 {
-	protected ArrayList<Shader> shaders;
-	protected int handle;
+	private ArrayList<Shader> shaders;
+	private int handle;
 
 	/**
 	 * Compile all shaders in the program.
@@ -99,5 +99,32 @@ public abstract class ShaderProgram
 	public int getHandle()
 	{
 		return handle;
+	}
+
+	/**
+	 * Get the shaders for the program.
+	 * @return The shaders of this program.
+	 */
+	protected ArrayList<Shader> getShaders()
+	{
+		return shaders;
+	}
+
+	/**
+	 * Set the handle that represents this program.
+	 * @param programHandle The handle that represents this program.
+	 */
+	protected void setHandle(final int programHandle)
+	{
+		handle = programHandle;
+	}
+
+	/**
+	 * Set the shaders that make up this program.
+	 * @param programShaders The shaders that make up the program.
+	 */
+	protected void setShaders(final ArrayList<Shader> programShaders)
+	{
+		shaders = programShaders;
 	}
 }

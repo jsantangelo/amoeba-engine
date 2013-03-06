@@ -21,6 +21,6 @@ public class CustomShaderProgram extends ShaderProgram
 			throw new RuntimeException("No shaders were provided to create the program.");
 		}
 
-		this.shaders = shaders;
+		setShaders(shaders);
 	}
 }

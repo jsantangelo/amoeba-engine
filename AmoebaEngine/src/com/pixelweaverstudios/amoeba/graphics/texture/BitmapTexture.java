@@ -8,18 +8,19 @@ import com.pixelweaverstudios.amoeba.graphics.utilities.TextureUtilities;
 public class BitmapTexture implements Texture
 {
 	private final TextureUtilities utilities;
-	private int handle, drawableId;
+	private int handle;
+	private int drawableID;
 	private int width, height;
 
 	/**
 	 * The constructor for BitmapTexture.
-	 * @param utilities The utilities used to perform OpenGL functionality.
-	 * @param drawableId The id of the resource representing the texture.
+	 * @param textureUtilities The utilities used to perform OpenGL functionality.
+	 * @param id The id of the resource representing the texture.
 	 */
-	public BitmapTexture(final TextureUtilities utilities, final int drawableId)
+	public BitmapTexture(final TextureUtilities textureUtilities, final int id)
 	{
-		this.utilities = utilities;
-		this.drawableId = drawableId;
+		this.utilities = textureUtilities;
+		drawableID = id;
 
 		handle = -1;
 		width = 0;
@@ -53,37 +54,37 @@ public class BitmapTexture implements Texture
 
 	/**
 	 * Set the width of the texture.
-	 * @param width The new width of the texture.
+	 * @param textureWidth The new width of the texture.
 	 */
-	public void setWidth(final int width)
+	public void setWidth(final int textureWidth)
 	{
 		this.width = 0;
 		if (width >= 0)
 		{
-			this.width = width;
+			width = textureWidth;
 		}
 	}
 
 	/**
 	 * Set the height of the texture.
-	 * @param height The new height of the texture.
+	 * @param textureHeight The new height of the texture.
 	 */
-	public void setHeight(final int height)
+	public void setHeight(final int textureHeight)
 	{
 		this.height = 0;
 		if (height >= 0)
 		{
-			this.height = height;
+			height = textureHeight;
 		}
 	}
 
 	/**
 	 * Set the OpenGL handle of the texture.
-	 * @param handle The new handle of the texture.
+	 * @param textureHandle The new handle of the texture.
 	 */
-	public void setHandle(final int handle)
+	public void setHandle(final int textureHandle)
 	{
-		this.handle = handle;
+		handle = textureHandle;
 	}
 
 	/**
@@ -92,7 +93,7 @@ public class BitmapTexture implements Texture
 	 */
 	public void setID(final int id)
 	{
-		this.drawableId = id;
+		drawableID = id;
 	}
 
 	/**
@@ -128,6 +129,6 @@ public class BitmapTexture implements Texture
 	 */
 	public int getID()
 	{
-		return drawableId;
+		return drawableID;
 	}
 }

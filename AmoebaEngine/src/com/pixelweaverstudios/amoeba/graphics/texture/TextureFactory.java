@@ -1,12 +1,24 @@
 package com.pixelweaverstudios.amoeba.graphics.texture;
 
-public class TextureFactory
+/**
+ * TextureFactory provides functionality to create textures.
+ */
+public final class TextureFactory
 {
 	/**
-	 * @param drawableId
-	 * @return
+	 * Constructor for TextureFactory. (Hidden)
 	 */
-	public static Texture createTexture(int drawableId)
+	private TextureFactory()
+	{
+
+	}
+
+	/**
+	 * Create a texture from drawable resources.
+	 * @param drawableId The id of the bitmap in drawable resources.
+	 * @return The new texture.
+	 */
+	public static Texture createTexture(final int drawableId)
 	{
 		Texture texture = null;
 

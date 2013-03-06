@@ -18,16 +18,18 @@ import com.pixelweaverstudios.amoeba.graphics.texture.TextureOptions;
  */
 public class GLES20TextureUtilities implements TextureUtilities
 {
+	private static final int NUM_BYTES_IN_INT = 4;
+
 	private final Context context;
 	private final int[] glIntStorage;
 
 	/**
 	 * Constructor for GLES20TextureUtilities.
-	 * @param context The activity's context.
+	 * @param activityContext The activity's context.
 	 */
-	public GLES20TextureUtilities(final Context context)
+	public GLES20TextureUtilities(final Context activityContext)
 	{
-		this.context = context;
+		context = activityContext;
 		glIntStorage = new int[1];
 	}
 
@@ -99,7 +101,7 @@ public class GLES20TextureUtilities implements TextureUtilities
 			IntBuffer texBuffer;
 			glIntStorage[0] = textureHandle;
 
-			ByteBuffer bb = ByteBuffer.allocateDirect(4);
+			ByteBuffer bb = ByteBuffer.allocateDirect(NUM_BYTES_IN_INT);
 			bb.order(ByteOrder.nativeOrder());
 			texBuffer = bb.asIntBuffer();
 			texBuffer.put(glIntStorage);
@@ -115,9 +117,9 @@ public class GLES20TextureUtilities implements TextureUtilities
 	 */
 	public void applyTextureOptions(final TextureOptions options)
 	{
-		GLES20.glTexParameterf(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_MIN_FILTER, options.minFilter);
-		GLES20.glTexParameterf(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_MAG_FILTER, options.magFilter);
-		GLES20.glTexParameterf(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_WRAP_S, options.wrapS);
-		GLES20.glTexParameterf(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_WRAP_T, options.wrapT);
+		GLES20.glTexParameterf(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_MIN_FILTER, options.getMinFilter());
+		GLES20.glTexParameterf(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_MAG_FILTER, options.getMagFilter());
+		GLES20.glTexParameterf(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_WRAP_S, options.getWrapS());
+		GLES20.glTexParameterf(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_WRAP_T, options.getWrapT());
 	}
 }

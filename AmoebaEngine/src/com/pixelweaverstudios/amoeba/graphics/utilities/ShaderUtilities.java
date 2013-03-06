@@ -10,9 +10,17 @@ import com.pixelweaverstudios.amoeba.graphics.shader.Shader;
 /**
  * ShaderUtilities provides a wrapper around common texture related OpenGL functions.
  */
-public class ShaderUtilities
+public final class ShaderUtilities
 {
 	private static final String TAG = "ShaderUtilities";
+
+	/**
+	 * Constructor for ShaderUtilities. (Hidden)
+	 */
+	private ShaderUtilities()
+	{
+
+	}
 
 	/**
 	 * Compile a shader given the source code and type.

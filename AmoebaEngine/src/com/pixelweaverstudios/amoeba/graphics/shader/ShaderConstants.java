@@ -3,8 +3,16 @@ package com.pixelweaverstudios.amoeba.graphics.shader;
 /**
  * ShaderConstants is a collection of variables used in shaders.
  */
-public class ShaderConstants
+public final class ShaderConstants
 {
+	/**
+	 * Constructor for ShaderConstants. (Hidden).
+	 */
+	private ShaderConstants()
+	{
+
+	}
+
 	public static final String ATTRIBUTE_COLOR = "a_Color";
 	public static final String ATTRIBUTE_POSITION = "a_Position";
 	public static final String ATTRIBUTE_TEXTURECOORDINATES = "a_TextureCoordinates";

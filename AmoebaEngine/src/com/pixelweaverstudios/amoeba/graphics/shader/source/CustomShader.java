@@ -14,8 +14,8 @@ public class CustomShader extends Shader
 	 */
 	public CustomShader(final String shaderSource, final int shaderType)
 	{
-		source = shaderSource;
-		type = shaderType;
-		handle = -1;
+		setSource(shaderSource);
+		setType(shaderType);
+		setHandle(-1);
 	}
 }

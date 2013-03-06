@@ -15,9 +15,9 @@ public class TextureFragmentShader extends Shader
 	 */
 	public TextureFragmentShader()
 	{
-		type = GLES20.GL_FRAGMENT_SHADER;
-		handle = -1;
-		source =
+		setType(GLES20.GL_FRAGMENT_SHADER);
+		setHandle(-1);
+		setSource(
 			"precision mediump float;\n" +
 			"uniform sampler2D " + ShaderConstants.UNIFORM_TEXTURE + ";\n" +
 			"varying vec4 " + ShaderConstants.VARYING_COLOR + ";\n" +
@@ -25,6 +25,6 @@ public class TextureFragmentShader extends Shader
 			"void main()\n" +
 			"{\n" +
 			"	gl_FragColor = (" + ShaderConstants.VARYING_COLOR + "* texture2D(" + ShaderConstants.UNIFORM_TEXTURE + ", " + ShaderConstants.VARYING_TEXTURECOORDINATES + "));\n" +
-			"}\n";
+			"}\n");
 	}
 }

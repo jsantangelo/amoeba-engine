@@ -7,8 +7,8 @@ import com.pixelweaverstudios.amoeba.graphics.utilities.ShaderUtilities;
  */
 public abstract class Shader
 {
-	protected String source;
-	protected int handle, type;
+	private String source;
+	private int handle, type;
 
 	/**
 	 * Get the source code for the shader.
@@ -43,5 +43,32 @@ public abstract class Shader
 	public void compile()
 	{
 		handle = ShaderUtilities.compileShaderFromSource(source, type);
+	}
+
+	/**
+	 * Set the source of the shader.
+	 * @param shaderSource The new shader source.
+	 */
+	protected void setSource(final String shaderSource)
+	{
+		source = shaderSource;
+	}
+
+	/**
+	 * Set the type of the shader.
+	 * @param shaderType The new shader type.
+	 */
+	protected void setType(final int shaderType)
+	{
+		type = shaderType;
+	}
+
+	/**
+	 * Set the handle of the shader.
+	 * @param shaderHandle The new shader handle.
+	 */
+	protected void setHandle(final int shaderHandle)
+	{
+		handle = shaderHandle;
 	}
 }
