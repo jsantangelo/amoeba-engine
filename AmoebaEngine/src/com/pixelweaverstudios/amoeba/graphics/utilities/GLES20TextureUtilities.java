@@ -4,45 +4,46 @@ import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.nio.IntBuffer;
 
-import com.pixelweaverstudios.amoeba.graphics.texture.Texture;
-import com.pixelweaverstudios.amoeba.graphics.texture.TextureOptions;
-
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.opengl.GLES20;
 import android.opengl.GLUtils;
 
+import com.pixelweaverstudios.amoeba.graphics.texture.Texture;
+import com.pixelweaverstudios.amoeba.graphics.texture.TextureOptions;
+
+/**
+ * GLES20TextureUtilities provide an implementation of TextureUtilities using GLES20.
+ */
 public class GLES20TextureUtilities implements TextureUtilities
 {
-	private Context context;
-	private int[] glIntStorage;
+	private final Context context;
+	private final int[] glIntStorage;
 
 	/**
-	 * @param context
+	 * Constructor for GLES20TextureUtilities.
+	 * @param context The activity's context.
 	 */
-	public GLES20TextureUtilities(Context context)
+	public GLES20TextureUtilities(final Context context)
 	{
 		this.context = context;
 		glIntStorage = new int[1];
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.pixelweaverstudios.amoeba.graphics.utilities.ITextureUtilities#
-	 * isTextureLoaded(int)
+	/**
+	 * Determine whether a texture with a given handle is loaded into OpenGL.
+	 * @param handle The OpenGL handle of the texture to check.
+	 * @return Whether the texture is loaded.
 	 */
-	public boolean isTextureLoaded(int handle)
+	public boolean isTextureLoaded(final int handle)
 	{
 		return GLES20.glIsTexture(handle);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.pixelweaverstudios.amoeba.graphics.utilities.ITextureUtilities#
-	 * generateTextureHandle()
+	/**
+	 * Generate an OpenGL handle to be used for a texture.
+	 * @return A new handle to be used in the binding of a texture.
 	 */
 	public int generateTextureHandle()
 	{
@@ -55,14 +56,11 @@ public class GLES20TextureUtilities implements TextureUtilities
 		return glIntStorage[0];
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.pixelweaverstudios.amoeba.graphics.utilities.ITextureUtilities#
-	 * loadTextureFromResource
-	 * (com.pixelweaverstudios.amoeba.graphics.texture.ITexture)
+	/**
+	 * Load a texture from a resource into OpenGL.
+	 * @param texture The texture to be loaded.
 	 */
-	public void loadTextureFromResource(Texture texture)
+	public void loadTextureFromResource(final Texture texture)
 	{
 		int textureHandle = texture.getHandle();
 		if (textureHandle == -1)
@@ -89,13 +87,11 @@ public class GLES20TextureUtilities implements TextureUtilities
 		}
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.pixelweaverstudios.amoeba.graphics.utilities.ITextureUtilities#
-	 * unloadTexture(com.pixelweaverstudios.amoeba.graphics.texture.ITexture)
+	/**
+	 * Unload a texture from OpenGL.
+	 * @param texture The texture to be unloaded.
 	 */
-	public void unloadTexture(Texture texture)
+	public void unloadTexture(final Texture texture)
 	{
 		int textureHandle = texture.getHandle();
 		if (textureHandle != -1)
@@ -113,13 +109,11 @@ public class GLES20TextureUtilities implements TextureUtilities
 		}
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.pixelweaverstudios.amoeba.graphics.utilities.ITextureUtilities#
-	 * applyTextureOptions(com.pixelweaverstudios.amoeba.graphics.texture.TextureOptions)
+	/**
+	 * Apply OpenGL texture options.
+	 * @param options The options to be applied.
 	 */
-	public void applyTextureOptions(TextureOptions options)
+	public void applyTextureOptions(final TextureOptions options)
 	{
 		GLES20.glTexParameterf(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_MIN_FILTER, options.minFilter);
 		GLES20.glTexParameterf(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_MAG_FILTER, options.magFilter);

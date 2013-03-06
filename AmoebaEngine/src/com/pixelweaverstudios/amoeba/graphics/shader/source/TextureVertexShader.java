@@ -5,16 +5,19 @@ import android.opengl.GLES20;
 import com.pixelweaverstudios.amoeba.graphics.shader.Shader;
 import com.pixelweaverstudios.amoeba.graphics.shader.ShaderConstants;
 
+/**
+ * TextureVertexShader is a basic vertex shader that is used to display an unmodified texture.
+ */
 public class TextureVertexShader extends Shader
 {
 	/**
-	 * 
+	 * Constructor for TextureVertexShader.
 	 */
 	public TextureVertexShader()
 	{
 		type = GLES20.GL_VERTEX_SHADER;
 		handle = -1;
-		source = 
+		source =
 			"uniform mat4 " + ShaderConstants.UNIFORM_MVPMATRIX + ";\n" +
 			"attribute vec4 " + ShaderConstants.ATTRIBUTE_POSITION + ";\n" +
 			"attribute vec4 " + ShaderConstants.ATTRIBUTE_COLOR + ";\n" +

@@ -12,7 +12,7 @@ public class TextureOptions
 	public final int magFilter;
 	public final float wrapS;
 	public final float wrapT;
-	
+
 	public TextureOptions(final int minFilter, final int magFilter, final int wrapS, final int wrapT)
 	{
 		this.minFilter = minFilter;

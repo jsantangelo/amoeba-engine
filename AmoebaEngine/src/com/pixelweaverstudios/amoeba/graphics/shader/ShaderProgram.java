@@ -4,26 +4,30 @@ import java.util.ArrayList;
 
 import com.pixelweaverstudios.amoeba.graphics.utilities.ShaderUtilities;
 
+/**
+ * ShaderProgram is the base class for all programs.
+ */
 public abstract class ShaderProgram
 {
 	protected ArrayList<Shader> shaders;
 	protected int handle;
 
 	/**
-	 * 
+	 * Compile all shaders in the program.
 	 */
 	public void compile()
 	{
-		for(Shader shader : shaders)
+		for (Shader shader : shaders)
 		{
-			if(shader.getHandle() > 0)
+			if (shader.getHandle() > 0)
 			{
 				shader.compile();
 			}
 		}
 	}
-	
+
 	/**
+	 * Link the shaders in the program.
 	 * @return The handle that represents the program.
 	 */
 	public int link()
@@ -41,7 +45,7 @@ public abstract class ShaderProgram
 	}
 
 	/**
-	 * 
+	 * Use the program.
 	 */
 	public void use()
 	{
@@ -49,15 +53,16 @@ public abstract class ShaderProgram
 	}
 
 	/**
+	 * Determine whether the program is currently in use.
 	 * @return Whether the program is currently in use.
 	 */
 	public boolean isInUse()
 	{
-		return(ShaderUtilities.isProgramInUse(handle));
+		return (ShaderUtilities.isProgramInUse(handle));
 	}
-	
+
 	/**
-	 * 
+	 * Stop using the program if it is currently in use.
 	 */
 	public void stopUsing()
 	{
@@ -68,7 +73,8 @@ public abstract class ShaderProgram
 	}
 
 	/**
-	 * @param attributeName
+	 * Retrieve the location of an attribute in the program.
+	 * @param attributeName The name of the attribute to be retrieved.
 	 * @return The location handle of the attribute.
 	 */
 	public int getAttributeLocation(final String attributeName)
@@ -77,7 +83,8 @@ public abstract class ShaderProgram
 	}
 
 	/**
-	 * @param uniformName
+	 * Retrieve the location of a uniform in the program.
+	 * @param uniformName The name of the uniform to be retrieved.
 	 * @return The location handle of the uniform.
 	 */
 	public int getUniformLocation(final String uniformName)
@@ -86,6 +93,7 @@ public abstract class ShaderProgram
 	}
 
 	/**
+	 * Get the handle for the program.
 	 * @return The handle that represents the program.
 	 */
 	public int getHandle()

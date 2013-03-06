@@ -2,18 +2,21 @@ package com.pixelweaverstudios.amoeba.graphics.texture;
 
 import com.pixelweaverstudios.amoeba.graphics.utilities.TextureUtilities;
 
+/**
+ * BitmapTexture is a texture implementation that uses bitmaps to load the texture.
+ */
 public class BitmapTexture implements Texture
 {
-	private TextureUtilities utilities;
+	private final TextureUtilities utilities;
 	private int handle, drawableId;
 	private int width, height;
 
 	/**
-	 * @param utilities
-	 * @param options
-	 * @param drawableId
+	 * The constructor for BitmapTexture.
+	 * @param utilities The utilities used to perform OpenGL functionality.
+	 * @param drawableId The id of the resource representing the texture.
 	 */
-	public BitmapTexture(TextureUtilities utilities, int drawableId)
+	public BitmapTexture(final TextureUtilities utilities, final int drawableId)
 	{
 		this.utilities = utilities;
 		this.drawableId = drawableId;
@@ -22,41 +25,35 @@ public class BitmapTexture implements Texture
 		width = 0;
 		height = 0;
 	}
-	
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.pixelweaverstudios.amoeba.graphics.texture.Texture#load()
+
+	/**
+	 * Load the texture into OpenGL.
 	 */
 	public void load()
 	{
 		utilities.loadTextureFromResource(this);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.pixelweaverstudios.amoeba.graphics.texture.Texture#unload()
+	/**
+	 * Unload the texture from OpenGL.
 	 */
 	public void unload()
 	{
 		utilities.unloadTexture(this);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.pixelweaverstudios.amoeba.graphics.texture.Texture#isLoaded()
+	/**
+	 * Determine whether the texture is currently loaded.
+	 * @return Whether the texture is loaded.
 	 */
 	public boolean isLoaded()
 	{
 		return utilities.isTextureLoaded(getHandle());
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.pixelweaverstudios.amoeba.graphics.texture.Texture#setWidth(int)
+	/**
+	 * Set the width of the texture.
+	 * @param width The new width of the texture.
 	 */
 	public void setWidth(final int width)
 	{
@@ -67,11 +64,9 @@ public class BitmapTexture implements Texture
 		}
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * com.pixelweaverstudios.amoeba.graphics.texture.Texture#setHeight(int)
+	/**
+	 * Set the height of the texture.
+	 * @param height The new height of the texture.
 	 */
 	public void setHeight(final int height)
 	{
@@ -82,61 +77,54 @@ public class BitmapTexture implements Texture
 		}
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * com.pixelweaverstudios.amoeba.graphics.texture.Texture#setHandle(int)
+	/**
+	 * Set the OpenGL handle of the texture.
+	 * @param handle The new handle of the texture.
 	 */
 	public void setHandle(final int handle)
 	{
 		this.handle = handle;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.pixelweaverstudios.amoeba.graphics.texture.Texture#setID(int)
+	/**
+	 * Set the id of the texture.
+	 * @param id The new id of the texture.
 	 */
 	public void setID(final int id)
 	{
 		this.drawableId = id;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.pixelweaverstudios.amoeba.graphics.texture.Texture#getWidth()
+	/**
+	 * Get the width of the texture.
+	 * @return The width of the texture.
 	 */
 	public int getWidth()
 	{
 		return width;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.pixelweaverstudios.amoeba.graphics.texture.Texture#getHeight()
+	/**
+	 * Get the height of the texture.
+	 * @return The height of the texture.
 	 */
 	public int getHeight()
 	{
 		return height;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.pixelweaverstudios.amoeba.graphics.texture.Texture#getHandle()
+	/**
+	 * Get the OpenGL handle of the texture.
+	 * @return The handle that represents the texture.
 	 */
 	public int getHandle()
 	{
 		return handle;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.pixelweaverstudios.amoeba.graphics.texture.Texture#getID()
+	/**
+	 * Get the ID of the texture.
+	 * @return The id number that was used to generate the texture.
 	 */
 	public int getID()
 	{

@@ -5,16 +5,19 @@ import android.opengl.GLES20;
 import com.pixelweaverstudios.amoeba.graphics.shader.Shader;
 import com.pixelweaverstudios.amoeba.graphics.shader.ShaderConstants;
 
+/**
+ * TextureFragmentShader is a basic fragment shader that is used to display an unmodified texture.
+ */
 public class TextureFragmentShader extends Shader
 {
 	/**
-	 * 
+	 * The constructor for TextureFragmentShader.
 	 */
 	public TextureFragmentShader()
 	{
 		type = GLES20.GL_FRAGMENT_SHADER;
 		handle = -1;
-		source = 
+		source =
 			"precision mediump float;\n" +
 			"uniform sampler2D " + ShaderConstants.UNIFORM_TEXTURE + ";\n" +
 			"varying vec4 " + ShaderConstants.VARYING_COLOR + ";\n" +
