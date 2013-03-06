@@ -80,13 +80,11 @@ Making Commits
 
 When making commits, use the following commit message format:
 
-	[#issueNum] - commitMessage
-OR
 	[#issueNum] commitMessage
 
 For example:
 
-	[#10] - Created the developer's guide document.
+	[#10] Created the developer's guide document.
 
 The #NUM part of the commit is important; github will automagically enter a message on an issue's page link to this commit.
 
