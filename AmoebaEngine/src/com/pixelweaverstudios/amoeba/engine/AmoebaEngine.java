@@ -76,6 +76,6 @@ public class AmoebaEngine
 	 */
 	public Context getContext()
 	{
-		return context;
+		return currentContext;
 	}
 }

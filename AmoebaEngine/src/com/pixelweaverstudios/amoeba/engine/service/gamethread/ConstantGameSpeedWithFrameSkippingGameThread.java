@@ -1,6 +1,7 @@
 package com.pixelweaverstudios.amoeba.engine.service.gamethread;
 
 import android.view.SurfaceHolder;
+import android.util.Log;
 
 import com.pixelweaverstudios.amoeba.engine.service.ServiceType;
 import com.pixelweaverstudios.amoeba.engine.service.view.ViewService;
@@ -14,7 +15,7 @@ public class ConstantGameSpeedWithFrameSkippingGameThread extends Thread impleme
 	private ViewService viewService;
 	private SurfaceHolder surfaceHolder;
 
-	private static final String TAG = this.getClass().getSimpleName();
+	private static final String TAG = GameThreadService.class.getSimpleName();
 
 	private boolean isRunning = false;
 

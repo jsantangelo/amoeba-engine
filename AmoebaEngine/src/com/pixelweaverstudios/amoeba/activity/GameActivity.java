@@ -47,7 +47,7 @@ public abstract class GameActivity extends Activity
 	/**
 	 * Register for callbacks provided by AmoebaEngine services.
 	 */
-	private abstract void registerForCallbacks();
+	abstract void registerForCallbacks();
 
 	/**
 	 * Sets window features of the Activity.
