@@ -6,7 +6,7 @@ import com.pixelweaverstudios.amoeba.engine.service.input.InputService;
 import com.pixelweaverstudios.amoeba.engine.service.input.EngineInput;
 import com.pixelweaverstudios.amoeba.engine.service.input.GestureListener;
 import com.pixelweaverstudios.amoeba.engine.service.gamethread.GameThreadService;
-import com.pixelweaverstudios.amoeba.engine.service.gamethread.StandardGameThread;
+import com.pixelweaverstudios.amoeba.engine.service.gamethread.ConstantGameSpeedWithFrameSkippingGameThread;
 
 /**
  * Implementation of the ServicesManager component of AmoebaEngine. Responsible
@@ -41,7 +41,7 @@ public class EngineServicesManager implements ServicesManager
 		//View view = new View();
 
 		//Thread Services
-		GameThreadService gameThread = new StandardGameThread();
+		GameThreadService gameThread = new ConstantGameSpeedWithFrameSkippingGameThread();
 	}
 
 	/**

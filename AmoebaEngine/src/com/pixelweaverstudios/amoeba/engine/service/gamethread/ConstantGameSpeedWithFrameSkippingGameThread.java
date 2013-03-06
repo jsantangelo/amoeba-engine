@@ -7,9 +7,9 @@ import com.pixelweaverstudios.amoeba.engine.service.view.ViewService;
 import com.pixelweaverstudios.amoeba.engine.AmoebaEngine;
 
 /**
- * Implementation of the {SOMETYPE} of game loop.
+ * Implementation of the ConstantGameSpeedWithFrameSkipping type of game loop.
  */
-public class StandardGameThread extends Thread implements GameThreadService
+public class ConstantGameSpeedWithFrameSkippingGameThread extends Thread implements GameThreadService
 {
 	private ViewService viewService;
 	private SurfaceHolder surfaceHolder;
@@ -28,7 +28,7 @@ public class StandardGameThread extends Thread implements GameThreadService
 	/**
 	 * Constructor.
 	 */
-	public StandardGameThread()
+	public ConstantGameSpeedWithFrameSkippingGameThread()
 	{
 		super();
 
@@ -72,15 +72,21 @@ public class StandardGameThread extends Thread implements GameThreadService
 					beginTime = System.currentTimeMillis();
 					framesSkipped = 0;
 
-					//Next commented out line likely not necessary.
+					//Update game state.
 					//viewService.onUpdate();
-					//render requests must go to view. Renderer is responsible for
-					//invoking onDraw on the callback router
+
+					//Request a render callback from the Renderer,
+					//by way of the ViewService,
 					viewService.onRequestRender();
 
+					//Calculate how long this update cycle took
 					timeDiff = System.currentTimeMillis() - beginTime;
+					//Calculate length of time to sleep
 					sleepTime = (int) (FRAME_PERIOD - timeDiff);
 
+					//If the cycle took less time than the allotted frame
+					//time length (the frame rate), sleep for the rest
+					//of the time.
 					if (sleepTime > 0)
 					{
 						try
@@ -93,6 +99,9 @@ public class StandardGameThread extends Thread implements GameThreadService
 						}
 					}
 
+					//If the cycle took more time than the allotted frame
+					//time length (the frame rate), catch up on update cycles
+					//by skipping render cycles.
 					while (sleepTime < 0 && framesSkipped < MAX_FRAME_SKIPS)
 					{
 						//viewService.onUpdate();
