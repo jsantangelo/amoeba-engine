@@ -1,6 +1,6 @@
-package com.pixelweaverstudios.amoeba.graphics.texture;
+package org.amoeba.graphics.texture;
 
-import com.pixelweaverstudios.amoeba.graphics.utilities.TextureUtilities;
+import org.amoeba.graphics.utilities.TextureUtilities;
 
 /**
  * BitmapTexture is a texture implementation that uses bitmaps to load the texture.

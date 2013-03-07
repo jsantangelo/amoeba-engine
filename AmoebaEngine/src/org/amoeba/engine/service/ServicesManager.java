@@ -1,4 +1,4 @@
-package com.pixelweaverstudios.amoeba.engine.service;
+package org.amoeba.engine.service;
 
 /**
  * Manages all Services provided by AmoebaEngine. Responsible for creating,

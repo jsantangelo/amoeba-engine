@@ -1,6 +1,6 @@
-package com.pixelweaverstudios.amoeba.entity.shape;
+package org.amoeba.entity.shape;
 
-import com.pixelweaverstudios.amoeba.entity.Entity;
+import org.amoeba.entity.Entity;
 
 /**
  * Shape is an object in a scene that has a size and can collide with other objects.

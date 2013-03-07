@@ -1,11 +1,12 @@
-package com.pixelweaverstudios.amoeba.engine;
+package org.amoeba.engine;
+
+import org.amoeba.engine.service.EngineServicesManager;
+import org.amoeba.engine.service.Service;
+import org.amoeba.engine.service.ServiceType;
+import org.amoeba.engine.service.ServicesManager;
 
 import android.content.Context;
 
-import com.pixelweaverstudios.amoeba.engine.service.ServicesManager;
-import com.pixelweaverstudios.amoeba.engine.service.EngineServicesManager;
-import com.pixelweaverstudios.amoeba.engine.service.ServiceType;
-import com.pixelweaverstudios.amoeba.engine.service.Service;
 
 /**
  * The main class in which the AmoebaEngine is encapsulated. Provides access to

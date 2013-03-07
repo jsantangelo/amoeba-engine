@@ -1,6 +1,6 @@
-package com.pixelweaverstudios.amoeba.graphics.shader;
+package org.amoeba.graphics.shader;
 
-import com.pixelweaverstudios.amoeba.graphics.utilities.ShaderUtilities;
+import org.amoeba.graphics.utilities.ShaderUtilities;
 
 /**
  * Shader is a base class for all shaders.

@@ -1,4 +1,4 @@
-package com.pixelweaverstudios.amoeba.graphics.shader;
+package org.amoeba.graphics.shader;
 
 /**
  * ShaderConstants is a collection of variables used in shaders.

@@ -1,11 +1,12 @@
-package com.pixelweaverstudios.amoeba.engine.service.gamethread;
+package org.amoeba.engine.service.gamethread;
+
+import org.amoeba.engine.AmoebaEngine;
+import org.amoeba.engine.service.ServiceType;
+import org.amoeba.engine.service.view.ViewService;
 
 import android.view.SurfaceHolder;
 import android.util.Log;
 
-import com.pixelweaverstudios.amoeba.engine.service.ServiceType;
-import com.pixelweaverstudios.amoeba.engine.service.view.ViewService;
-import com.pixelweaverstudios.amoeba.engine.AmoebaEngine;
 
 /**
  * Implementation of the ConstantGameSpeedWithFrameSkipping type of game loop.

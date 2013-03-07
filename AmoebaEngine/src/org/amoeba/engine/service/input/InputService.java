@@ -1,6 +1,6 @@
-package com.pixelweaverstudios.amoeba.engine.service.input;
+package org.amoeba.engine.service.input;
 
-import com.pixelweaverstudios.amoeba.engine.service.Service;
+import org.amoeba.engine.service.Service;
 
 /**
  * Service maintained by AmoebaEngine, responsible for the initial handling

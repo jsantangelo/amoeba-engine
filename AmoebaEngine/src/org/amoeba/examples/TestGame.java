@@ -1,6 +1,6 @@
-package com.pixelweaverstudios.amoeba.examples;
+package org.amoeba.examples;
 
-import com.pixelweaverstudios.amoeba.application.GameApplication;
+import org.amoeba.application.GameApplication;
 
 /**
  * A basic game written to prove, through use, the interface of the AmoebaEngine.

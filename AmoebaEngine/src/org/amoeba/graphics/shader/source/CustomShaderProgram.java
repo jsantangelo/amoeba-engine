@@ -1,9 +1,10 @@
-package com.pixelweaverstudios.amoeba.graphics.shader.source;
+package org.amoeba.graphics.shader.source;
 
 import java.util.ArrayList;
 
-import com.pixelweaverstudios.amoeba.graphics.shader.Shader;
-import com.pixelweaverstudios.amoeba.graphics.shader.ShaderProgram;
+import org.amoeba.graphics.shader.Shader;
+import org.amoeba.graphics.shader.ShaderProgram;
+
 
 /**
  * CustomShaderProgram is a ShaderProgram that is provided a collection of shaders.

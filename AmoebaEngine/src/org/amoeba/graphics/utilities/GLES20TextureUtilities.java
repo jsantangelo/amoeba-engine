@@ -1,8 +1,11 @@
-package com.pixelweaverstudios.amoeba.graphics.utilities;
+package org.amoeba.graphics.utilities;
 
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.nio.IntBuffer;
+
+import org.amoeba.graphics.texture.Texture;
+import org.amoeba.graphics.texture.TextureOptions;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -10,8 +13,6 @@ import android.graphics.BitmapFactory;
 import android.opengl.GLES20;
 import android.opengl.GLUtils;
 
-import com.pixelweaverstudios.amoeba.graphics.texture.Texture;
-import com.pixelweaverstudios.amoeba.graphics.texture.TextureOptions;
 
 /**
  * GLES20TextureUtilities provide an implementation of TextureUtilities using GLES20.

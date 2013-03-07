@@ -1,8 +1,9 @@
-package com.pixelweaverstudios.amoeba.engine.service.view;
+package org.amoeba.engine.service.view;
+
+import org.amoeba.engine.service.Service;
 
 import android.view.SurfaceHolder;
 
-import com.pixelweaverstudios.amoeba.engine.service.Service;
 
 /**
  * Service provided by AmoebaEngine, responsible for acting as the View for a

@@ -1,4 +1,4 @@
-package com.pixelweaverstudios.amoeba.graphics.texture;
+package org.amoeba.graphics.texture;
 
 /**
  * TextureFactory provides functionality to create textures.

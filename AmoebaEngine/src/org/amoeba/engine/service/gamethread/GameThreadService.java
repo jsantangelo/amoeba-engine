@@ -1,6 +1,6 @@
-package com.pixelweaverstudios.amoeba.engine.service.gamethread;
+package org.amoeba.engine.service.gamethread;
 
-import com.pixelweaverstudios.amoeba.engine.service.Service;
+import org.amoeba.engine.service.Service;
 
 /**
  * Service responsible for the main game loop thread.

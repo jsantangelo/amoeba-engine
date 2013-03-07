@@ -1,8 +1,9 @@
-package com.pixelweaverstudios.amoeba.graphics.shader;
+package org.amoeba.graphics.shader;
 
 import java.util.ArrayList;
 
-import com.pixelweaverstudios.amoeba.graphics.utilities.ShaderUtilities;
+import org.amoeba.graphics.utilities.ShaderUtilities;
+
 
 /**
  * ShaderProgram is the base class for all programs.

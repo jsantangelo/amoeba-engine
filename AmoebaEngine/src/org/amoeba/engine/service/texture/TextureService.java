@@ -1,7 +1,8 @@
-package com.pixelweaverstudios.amoeba.engine.service.texture;
+package org.amoeba.engine.service.texture;
 
-import com.pixelweaverstudios.amoeba.engine.service.Service;
-import com.pixelweaverstudios.amoeba.graphics.texture.Texture;
+import org.amoeba.engine.service.Service;
+import org.amoeba.graphics.texture.Texture;
+
 
 /**
  * The texture service maintains a collection of textures.

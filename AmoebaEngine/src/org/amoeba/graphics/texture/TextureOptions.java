@@ -1,4 +1,4 @@
-package com.pixelweaverstudios.amoeba.graphics.texture;
+package org.amoeba.graphics.texture;
 
 import android.opengl.GLES20;
 

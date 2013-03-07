@@ -1,8 +1,9 @@
-package com.pixelweaverstudios.amoeba.engine.service.texture;
+package org.amoeba.engine.service.texture;
+
+import org.amoeba.graphics.texture.Texture;
 
 import android.util.SparseArray;
 
-import com.pixelweaverstudios.amoeba.graphics.texture.Texture;
 
 /**
  * The texture service maintains a collection of textures.

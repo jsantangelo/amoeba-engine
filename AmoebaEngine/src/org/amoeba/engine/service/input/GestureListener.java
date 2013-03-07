@@ -1,11 +1,12 @@
-package com.pixelweaverstudios.amoeba.engine.service.input;
+package org.amoeba.engine.service.input;
+
+import org.amoeba.engine.AmoebaEngine;
 
 import android.view.GestureDetector;
 import android.view.ScaleGestureDetector;
 import android.view.MotionEvent;
 import android.content.Context;
 
-import com.pixelweaverstudios.amoeba.engine.AmoebaEngine;
 
 /**
  * Responsible for interpreting raw touch events from the Android OS, and

@@ -1,8 +1,9 @@
-package com.pixelweaverstudios.amoeba.application;
+package org.amoeba.application;
+
+import org.amoeba.engine.AmoebaEngine;
 
 import android.app.Application;
 
-import com.pixelweaverstudios.amoeba.engine.AmoebaEngine;
 
 /**
  * A subclass of Application meant to be inherited by the end-user's main Application.

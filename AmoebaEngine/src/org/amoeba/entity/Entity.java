@@ -1,4 +1,4 @@
-package com.pixelweaverstudios.amoeba.entity;
+package org.amoeba.entity;
 
 /**
  * Entity is an object in a scene.

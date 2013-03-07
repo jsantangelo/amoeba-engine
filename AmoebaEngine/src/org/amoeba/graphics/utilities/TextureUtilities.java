@@ -1,7 +1,7 @@
-package com.pixelweaverstudios.amoeba.graphics.utilities;
+package org.amoeba.graphics.utilities;
 
-import com.pixelweaverstudios.amoeba.graphics.texture.Texture;
-import com.pixelweaverstudios.amoeba.graphics.texture.TextureOptions;
+import org.amoeba.graphics.texture.Texture;
+import org.amoeba.graphics.texture.TextureOptions;
 
 /**
  * TextureUtilities provides a wrapper around common texture related OpenGL functions.

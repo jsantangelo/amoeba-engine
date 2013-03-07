@@ -1,11 +1,12 @@
-package com.pixelweaverstudios.amoeba.graphics.utilities;
+package org.amoeba.graphics.utilities;
 
 import java.util.ArrayList;
+
+import org.amoeba.graphics.shader.Shader;
 
 import android.opengl.GLES20;
 import android.util.Log;
 
-import com.pixelweaverstudios.amoeba.graphics.shader.Shader;
 
 /**
  * ShaderUtilities provides a wrapper around common texture related OpenGL functions.

@@ -1,4 +1,4 @@
-package com.pixelweaverstudios.amoeba.engine.service.input;
+package org.amoeba.engine.service.input;
 
 /**
  * Implementation of the service responsible for input interpretation.

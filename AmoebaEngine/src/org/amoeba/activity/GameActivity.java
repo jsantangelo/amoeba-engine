@@ -1,4 +1,7 @@
-package com.pixelweaverstudios.amoeba.activity;
+package org.amoeba.activity;
+
+import org.amoeba.engine.AmoebaEngine;
+import org.amoeba.engine.service.ServiceType;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -7,8 +10,6 @@ import android.view.WindowManager;
 import android.opengl.GLSurfaceView;
 import android.content.Context;
 
-import com.pixelweaverstudios.amoeba.engine.AmoebaEngine;
-import com.pixelweaverstudios.amoeba.engine.service.ServiceType;
 
 /**
  * An extension of Activity meant to be inherited.

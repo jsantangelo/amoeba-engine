@@ -1,12 +1,13 @@
-package com.pixelweaverstudios.amoeba.engine.service.view;
+package org.amoeba.engine.service.view;
+
+import org.amoeba.engine.AmoebaEngine;
+import org.amoeba.engine.service.ServiceType;
 
 import android.opengl.GLSurfaceView;
 import android.view.MotionEvent;
 import android.content.Context;
 import android.view.SurfaceHolder;
 
-import com.pixelweaverstudios.amoeba.engine.AmoebaEngine;
-import com.pixelweaverstudios.amoeba.engine.service.ServiceType;
 
 /**
  * Implements the ViewService service component provided by AmoebaEngine.

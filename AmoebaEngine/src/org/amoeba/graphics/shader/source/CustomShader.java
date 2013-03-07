@@ -1,6 +1,6 @@
-package com.pixelweaverstudios.amoeba.graphics.shader.source;
+package org.amoeba.graphics.shader.source;
 
-import com.pixelweaverstudios.amoeba.graphics.shader.Shader;
+import org.amoeba.graphics.shader.Shader;
 
 /**
  * CustomShader is a Shader that is provided with a source and type.

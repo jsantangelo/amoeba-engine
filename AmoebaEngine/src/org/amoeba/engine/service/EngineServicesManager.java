@@ -1,12 +1,13 @@
-package com.pixelweaverstudios.amoeba.engine.service;
+package org.amoeba.engine.service;
 
 import java.util.EnumMap;
 
-import com.pixelweaverstudios.amoeba.engine.service.input.InputService;
-import com.pixelweaverstudios.amoeba.engine.service.input.EngineInput;
-import com.pixelweaverstudios.amoeba.engine.service.input.GestureListener;
-import com.pixelweaverstudios.amoeba.engine.service.gamethread.GameThreadService;
-import com.pixelweaverstudios.amoeba.engine.service.gamethread.ConstantGameSpeedWithFrameSkippingGameThread;
+import org.amoeba.engine.service.gamethread.ConstantGameSpeedWithFrameSkippingGameThread;
+import org.amoeba.engine.service.gamethread.GameThreadService;
+import org.amoeba.engine.service.input.EngineInput;
+import org.amoeba.engine.service.input.GestureListener;
+import org.amoeba.engine.service.input.InputService;
+
 
 /**
  * Implementation of the ServicesManager component of AmoebaEngine. Responsible

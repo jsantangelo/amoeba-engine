@@ -1,4 +1,4 @@
-package com.pixelweaverstudios.amoeba.engine.service;
+package org.amoeba.engine.service;
 
 /**
  * Defines all services provided by AmoebaEngine.
