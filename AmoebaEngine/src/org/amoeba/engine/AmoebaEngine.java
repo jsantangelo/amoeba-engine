@@ -1,12 +1,16 @@
 package org.amoeba.engine;
 
-import org.amoeba.engine.service.EngineServicesManager;
-import org.amoeba.engine.service.Service;
-import org.amoeba.engine.service.ServiceType;
-import org.amoeba.engine.service.ServicesManager;
-
 import android.content.Context;
 
+import org.amoeba.engine.routing.DrawListener;
+import org.amoeba.engine.routing.EngineRouter;
+import org.amoeba.engine.routing.InputListener;
+import org.amoeba.engine.routing.Router;
+import org.amoeba.engine.routing.UpdateListener;
+import org.amoeba.engine.service.EngineServicesManager;
+import org.amoeba.engine.service.Service;
+import org.amoeba.engine.service.ServicesManager;
+import org.amoeba.engine.service.ServiceType;
 
 /**
  * The main class in which the AmoebaEngine is encapsulated. Provides access to
@@ -16,6 +20,7 @@ public class AmoebaEngine
 {
 	private static AmoebaEngine instance = null;
 
+	private Router router;
 	private ServicesManager services;
 	private Context currentContext;
 
@@ -24,7 +29,9 @@ public class AmoebaEngine
 	 */
 	public AmoebaEngine()
 	{
-		services = new EngineServicesManager();
+		router = new EngineRouter();
+
+		services = new EngineServicesManager(router);
 	}
 
 	/**
@@ -48,7 +55,6 @@ public class AmoebaEngine
 	public void attachToEngine(final Context context)
 	{
 		setContext(context);
-		//create services and tie together all services for callbacks
 	}
 
 	/**
@@ -78,5 +84,32 @@ public class AmoebaEngine
 	public Context getContext()
 	{
 		return currentContext;
+	}
+
+	/**
+	 * Registers a listener for draw callbacks.
+	 * @param listener entity that wishes to recieve draw callbacks
+	 */
+	public void registerForDraw(final DrawListener listener)
+	{
+		router.registerForDraw(listener);
+	}
+
+	/**
+	 * Registers a listener for update callbacks.
+	 * @param listener entity that wishes to recieve update callbacks.
+	 */
+	public void registerForUpdate(final UpdateListener listener)
+	{
+		router.registerForUpdate(listener);
+	}
+
+	/**
+	 * Registers a listener for input event callbacks.
+	 * @param listener entity that wishes to recieve input callbacks.
+	 */
+	public void registerForInput(final InputListener listener)
+	{
+		router.registerForInput(listener);
 	}
 }

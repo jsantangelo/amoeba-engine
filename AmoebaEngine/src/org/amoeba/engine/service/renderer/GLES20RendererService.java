@@ -6,6 +6,8 @@ import javax.microedition.khronos.opengles.GL10;
 import android.opengl.GLES20;
 import android.opengl.Matrix;
 
+import org.amoeba.engine.routing.Router;
+
 /**
  * GLES20RendererService is an implementation of RendererService using OpenGL ES 2.0.
  */
@@ -19,19 +21,26 @@ public class GLES20RendererService implements RendererService
 
 	private int screenWidth, screenHeight;
 
+	private Router callbackRouter;
+
 	/**
-	 * Constructor for GLES20RendererService.
+	 * Constructor.
+	 * @param  router entity to be called on draw events
 	 */
-	public GLES20RendererService()
+	public GLES20RendererService(final Router router)
 	{
+		callbackRouter = router;
+
 		screenWidth = 1;
 		screenHeight = 1;
 	}
 
-	@Override
-	public void attachEngine()
+	/**
+	 * Completes this service's setup, and begins execution.
+	 */
+	public void start()
 	{
-		// Not sure what this does.
+		//Need to figure out how this service starts.
 	}
 
 	/**
@@ -44,6 +53,7 @@ public class GLES20RendererService implements RendererService
 	{
         GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT);
         // Call back engine with MVP matrix.
+        // callbackRouter.invokeDraw();
 	}
 
 	/**

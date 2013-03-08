@@ -2,12 +2,17 @@ package org.amoeba.engine.service;
 
 import java.util.EnumMap;
 
+import org.amoeba.engine.routing.Router;
 import org.amoeba.engine.service.gamethread.ConstantGameSpeedWithFrameSkippingGameThread;
 import org.amoeba.engine.service.gamethread.GameThreadService;
 import org.amoeba.engine.service.input.EngineInput;
-import org.amoeba.engine.service.input.GestureListener;
 import org.amoeba.engine.service.input.InputService;
-
+import org.amoeba.engine.service.renderer.RendererService;
+import org.amoeba.engine.service.renderer.GLES20RendererService;
+import org.amoeba.engine.service.texture.EngineTextureService;
+import org.amoeba.engine.service.texture.TextureService;
+import org.amoeba.engine.service.view.EngineView;
+import org.amoeba.engine.service.view.ViewService;
 
 /**
  * Implementation of the ServicesManager component of AmoebaEngine. Responsible
@@ -17,12 +22,15 @@ import org.amoeba.engine.service.input.InputService;
 public class EngineServicesManager implements ServicesManager
 {
 	private EnumMap<ServiceType, Service> services;
+	private Router callbackRouter;
 
 	/**
-	 * Constructor.
+	 * Constructor. Responsible for creating default services.
+	 * @param  router will accept callbacks and notify listeners
 	 */
-	public EngineServicesManager()
+	public EngineServicesManager(final Router router)
 	{
+		callbackRouter = router;
 		createDefaultServices();
 	}
 
@@ -33,16 +41,25 @@ public class EngineServicesManager implements ServicesManager
 	public void createDefaultServices()
 	{
 		//Input Services
-		InputService inputServices = new EngineInput();
-		GestureListener gestureListener = new GestureListener(inputServices);
-		services.put(ServiceType.INPUT, inputServices);
+		InputService inputService = new EngineInput(callbackRouter);
+		services.put(ServiceType.INPUT, inputService);
 
-		//Renderer renderer = new Renderer();
+		//Renderer Services
+		RendererService rendererService = new GLES20RendererService(callbackRouter);
+		services.put(ServiceType.RENDERER, rendererService);
 
-		//View view = new View();
+		//View Services
+		ViewService viewService = new EngineView(rendererService, inputService);
+		services.put(ServiceType.VIEW, viewService);
 
 		//Thread Services
-		GameThreadService gameThread = new ConstantGameSpeedWithFrameSkippingGameThread();
+		GameThreadService threadService =
+			new ConstantGameSpeedWithFrameSkippingGameThread(callbackRouter, viewService);
+		services.put(ServiceType.THREAD, threadService);
+
+		//Texture Services
+		TextureService textureService = new EngineTextureService();
+		services.put(ServiceType.TEXTURE, textureService);
 	}
 
 	/**

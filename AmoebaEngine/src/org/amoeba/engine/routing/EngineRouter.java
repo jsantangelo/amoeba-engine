@@ -9,7 +9,7 @@ import org.amoeba.engine.service.input.InputEvent;
  * Responsible for accepting invocations from services, and routing them to
  * relevant, registered listeners.
  */
-public class EngineRouter
+public class EngineRouter implements Router
 {
 	private Set<DrawListener> drawListeners = null;
 	private Set<UpdateListener> updateListeners = null;

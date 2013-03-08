@@ -5,5 +5,5 @@ package org.amoeba.engine.service;
  */
 public enum ServiceType
 {
-	GAMELOOP, INPUT, RENDERER, SCREENMANAGER, TEXTUERMANAGER, VIEW
+	THREAD, INPUT, RENDERER, TEXTURE, VIEW
 }

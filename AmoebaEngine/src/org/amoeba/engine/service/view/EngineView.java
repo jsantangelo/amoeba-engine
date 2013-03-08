@@ -1,13 +1,13 @@
 package org.amoeba.engine.service.view;
 
-import org.amoeba.engine.AmoebaEngine;
-import org.amoeba.engine.service.ServiceType;
-
+import android.content.Context;
 import android.opengl.GLSurfaceView;
 import android.view.MotionEvent;
-import android.content.Context;
 import android.view.SurfaceHolder;
 
+import org.amoeba.engine.AmoebaEngine;
+import org.amoeba.engine.service.input.InputService;
+import org.amoeba.engine.service.renderer.RendererService;
 
 /**
  * Implements the ViewService service component provided by AmoebaEngine.
@@ -17,13 +17,21 @@ import android.view.SurfaceHolder;
 public class EngineView extends GLSurfaceView implements ViewService
 {
 	private Context context;
+	private RendererService rendererService;
+	private InputService inputService;
 
 	/**
 	 * Constructor.
+	 * @param  renderer     GLRenderer to be attached to this view
+	 * @param  input Service to be called on raw MotionEvent receipt from
+	 *                      the Android OS
 	 */
-	public EngineView()
+	public EngineView(final RendererService renderer, final InputService input)
 	{
 		super(AmoebaEngine.getInstance().getContext());
+
+		rendererService = renderer;
+		inputService = input;
 
 		setFocusable(true);
 	}
@@ -60,8 +68,7 @@ public class EngineView extends GLSurfaceView implements ViewService
 	 */
 	private void initializeRenderer()
 	{
-		//Renderer creation must happen before this call
-		setRenderer((GLSurfaceView.Renderer) (AmoebaEngine.getInstance().getService(ServiceType.RENDERER)));
+		setRenderer((GLSurfaceView.Renderer) rendererService);
 		setRenderMode(GLSurfaceView.RENDERMODE_WHEN_DIRTY);
 	}
 
@@ -79,9 +86,7 @@ public class EngineView extends GLSurfaceView implements ViewService
 	@Override
 	public boolean onTouchEvent(final MotionEvent event)
 	{
-		//return gestureListener.onTouchEvent(event);
-		//View needs to route to InputService, who routes to GestureListener,
-		//who routes back to InputService, and down to whoever needs input
+		inputService.handleRawInputEvent(event);
 		return true;
 	}
 

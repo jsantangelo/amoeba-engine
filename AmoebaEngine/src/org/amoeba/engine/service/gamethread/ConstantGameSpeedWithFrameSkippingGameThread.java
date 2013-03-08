@@ -1,22 +1,19 @@
 package org.amoeba.engine.service.gamethread;
 
-import org.amoeba.engine.AmoebaEngine;
-import org.amoeba.engine.service.ServiceType;
-import org.amoeba.engine.service.view.ViewService;
-
 import android.view.SurfaceHolder;
 import android.util.Log;
 
+import org.amoeba.engine.routing.Router;
+import org.amoeba.engine.service.view.ViewService;
 
 /**
  * Implementation of the ConstantGameSpeedWithFrameSkipping type of game loop.
  */
 public class ConstantGameSpeedWithFrameSkippingGameThread extends Thread implements GameThreadService
 {
-	private ViewService viewService;
 	private SurfaceHolder surfaceHolder;
 
-	private static final String TAG = GameThreadService.class.getSimpleName();
+	private static final String TAG = "GameThreadService";
 
 	private boolean isRunning = false;
 
@@ -27,14 +24,20 @@ public class ConstantGameSpeedWithFrameSkippingGameThread extends Thread impleme
 	private static final int MAX_FRAME_SKIPS = 5;
 	private static final int FRAME_PERIOD = ONE_THOUSAND / MAX_FPS;
 
+	private Router callbackRouter;
+	private ViewService viewService;
+
 	/**
 	 * Constructor.
+	 * @param  router entity to be called on update events
+	 * @param  view   entity to be called on draw events (to request a render)
 	 */
-	public ConstantGameSpeedWithFrameSkippingGameThread()
+	public ConstantGameSpeedWithFrameSkippingGameThread(final Router router, final ViewService view)
 	{
 		super();
 
-		viewService = (ViewService) AmoebaEngine.getInstance().getService(ServiceType.VIEW);
+		callbackRouter = router;
+		viewService = view;
 		surfaceHolder = viewService.getSurfaceHolder();
 	}
 
@@ -75,7 +78,7 @@ public class ConstantGameSpeedWithFrameSkippingGameThread extends Thread impleme
 					framesSkipped = 0;
 
 					//Update game state.
-					//viewService.onUpdate();
+					callbackRouter.invokeUpdate();
 
 					//Request a render callback from the Renderer,
 					//by way of the ViewService,
@@ -106,8 +109,7 @@ public class ConstantGameSpeedWithFrameSkippingGameThread extends Thread impleme
 					//by skipping render cycles.
 					while (sleepTime < 0 && framesSkipped < MAX_FRAME_SKIPS)
 					{
-						//viewService.onUpdate();
-						//want to invoke onUpdate on the callbackrouter, not view
+						callbackRouter.invokeUpdate();
 						sleepTime += FRAME_PERIOD;
 						++framesSkipped;
 					}

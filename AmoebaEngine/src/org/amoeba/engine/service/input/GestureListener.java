@@ -1,12 +1,11 @@
 package org.amoeba.engine.service.input;
 
-import org.amoeba.engine.AmoebaEngine;
-
-import android.view.GestureDetector;
-import android.view.ScaleGestureDetector;
-import android.view.MotionEvent;
 import android.content.Context;
+import android.view.GestureDetector;
+import android.view.MotionEvent;
+import android.view.ScaleGestureDetector;
 
+import org.amoeba.engine.AmoebaEngine;
 
 /**
  * Responsible for interpreting raw touch events from the Android OS, and
@@ -55,7 +54,7 @@ public class GestureListener implements GestureDetector.OnGestureListener,
 		if (event.getAction() == MotionEvent.ACTION_UP && scrollingInProgress)
 		{
 			scrollingInProgress = false;
-			inputService.handleInputEvent(new InputEvent(InputEvent.EventType.SCROLLEND));
+			inputService.handleProcessedInputEvent(new InputEvent(InputEvent.EventType.SCROLLEND));
 		}
 		return true;
 	}
@@ -70,7 +69,7 @@ public class GestureListener implements GestureDetector.OnGestureListener,
 	{
 		InputEvent inputEvent = new InputEvent(InputEvent.EventType.DOWN);
 		inputEvent.setMotionEvent(event);
-		inputService.handleInputEvent(inputEvent);
+		inputService.handleProcessedInputEvent(inputEvent);
 		return true;
 	}
 
@@ -89,7 +88,7 @@ public class GestureListener implements GestureDetector.OnGestureListener,
 		inputEvent.setStartingEvent(event1);
 		inputEvent.setEndingEvent(event2);
 		inputEvent.setVelocityVector(velocityX, velocityY);
-		inputService.handleInputEvent(inputEvent);
+		inputService.handleProcessedInputEvent(inputEvent);
 		return true;
 	}
 
@@ -101,7 +100,7 @@ public class GestureListener implements GestureDetector.OnGestureListener,
 	{
 		InputEvent inputEvent = new InputEvent(InputEvent.EventType.LONGPRESS);
 		inputEvent.setMotionEvent(event);
-		inputService.handleInputEvent(inputEvent);
+		inputService.handleProcessedInputEvent(inputEvent);
 	}
 
 	/**
@@ -122,7 +121,7 @@ public class GestureListener implements GestureDetector.OnGestureListener,
 			inputEvent.setStartingEvent(event1);
 			inputEvent.setEndingEvent(event2);
 			inputEvent.setDistanceVector(distanceX, distanceY);
-			inputService.handleInputEvent(inputEvent);
+			inputService.handleProcessedInputEvent(inputEvent);
 		}
 		return true;
 	}
@@ -135,7 +134,7 @@ public class GestureListener implements GestureDetector.OnGestureListener,
 	{
 		InputEvent inputEvent = new InputEvent(InputEvent.EventType.SHOWPRESS);
 		inputEvent.setMotionEvent(event);
-		inputService.handleInputEvent(inputEvent);
+		inputService.handleProcessedInputEvent(inputEvent);
 	}
 
 	/**
@@ -147,7 +146,7 @@ public class GestureListener implements GestureDetector.OnGestureListener,
 	{
 		InputEvent inputEvent = new InputEvent(InputEvent.EventType.SINGLETAP);
 		inputEvent.setMotionEvent(event);
-		inputService.handleInputEvent(inputEvent);
+		inputService.handleProcessedInputEvent(inputEvent);
 		return true;
 	}
 
@@ -160,7 +159,7 @@ public class GestureListener implements GestureDetector.OnGestureListener,
 	{
 		InputEvent inputEvent = new InputEvent(InputEvent.EventType.SCALEBEGIN);
 		inputEvent.setScaleDetector(detector);
-		inputService.handleInputEvent(inputEvent);
+		inputService.handleProcessedInputEvent(inputEvent);
 		return true;
 	}
 
@@ -173,7 +172,7 @@ public class GestureListener implements GestureDetector.OnGestureListener,
 	{
 		InputEvent inputEvent = new InputEvent(InputEvent.EventType.SCALE);
 		inputEvent.setScaleDetector(detector);
-		inputService.handleInputEvent(inputEvent);
+		inputService.handleProcessedInputEvent(inputEvent);
 		return true;
 	}
 
@@ -185,6 +184,6 @@ public class GestureListener implements GestureDetector.OnGestureListener,
 	{
 		InputEvent inputEvent = new InputEvent(InputEvent.EventType.SCALEEND);
 		inputEvent.setScaleDetector(detector);
-		inputService.handleInputEvent(inputEvent);
+		inputService.handleProcessedInputEvent(inputEvent);
 	}
 }

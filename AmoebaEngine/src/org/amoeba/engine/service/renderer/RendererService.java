@@ -1,19 +1,22 @@
 package org.amoeba.engine.service.renderer;
 
-import android.opengl.GLSurfaceView;
 import javax.microedition.khronos.opengles.GL10;
 import javax.microedition.khronos.egl.EGLConfig;
+
+import android.opengl.GLSurfaceView;
+
+import org.amoeba.engine.service.Service;
 
 /**
  * Service provided by AmoebaEngine, responsible for acting as the "renderer"
  * of the main View (ViewService) of a given Activity.
  */
-public interface RendererService extends GLSurfaceView.Renderer
+public interface RendererService extends Service, GLSurfaceView.Renderer
 {
 	/**
-	 * Notifies the service of the creation of a new Activity.
+	 * Notifies this service to begin execution.
 	 */
-	public void attachEngine();
+	public void start();
 
 	/**
 	 * Callback to handle render requests when triggered on the attached View
