@@ -1,15 +1,20 @@
 package org.amoeba.graphics.texture;
 
-import android.opengl.GLES20;
 
 /**
  * TextureOptions provides storage for various texture options.
  */
 public class TextureOptions
 {
-	public static final TextureOptions CLAMP_NEAREST = new TextureOptions(GLES20.GL_NEAREST, GLES20.GL_NEAREST, GLES20.GL_CLAMP_TO_EDGE, GLES20.GL_CLAMP_TO_EDGE);
-	public static final TextureOptions CLAMP_LINEAR = new TextureOptions(GLES20.GL_LINEAR, GLES20.GL_LINEAR, GLES20.GL_CLAMP_TO_EDGE, GLES20.GL_CLAMP_TO_EDGE);
-	public static final TextureOptions DEFAULT = CLAMP_LINEAR;
+	/**
+	 * The various types of preset TextureOptions.
+	 */
+	public enum Preset
+	{
+		DEFAULT,
+		CLAMP_NEAREST,
+		CLAMP_LINEAR
+	};
 
 	private final int minFilter;
 	private final int magFilter;

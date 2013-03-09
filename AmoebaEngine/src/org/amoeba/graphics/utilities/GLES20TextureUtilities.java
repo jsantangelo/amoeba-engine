@@ -6,6 +6,7 @@ import java.nio.IntBuffer;
 
 import org.amoeba.graphics.texture.Texture;
 import org.amoeba.graphics.texture.TextureOptions;
+import org.amoeba.graphics.texture.TextureOptions.Preset;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -20,6 +21,10 @@ import android.opengl.GLUtils;
 public class GLES20TextureUtilities implements TextureUtilities
 {
 	private static final int NUM_BYTES_IN_INT = 4;
+	private static final TextureOptions CLAMP_NEAREST_OPTIONS = new TextureOptions(GLES20.GL_NEAREST, GLES20.GL_NEAREST, GLES20.GL_CLAMP_TO_EDGE, GLES20.GL_CLAMP_TO_EDGE);
+	private static final TextureOptions CLAMP_LINEAR_OPTIONS = new TextureOptions(GLES20.GL_LINEAR, GLES20.GL_LINEAR, GLES20.GL_CLAMP_TO_EDGE, GLES20.GL_CLAMP_TO_EDGE);
+	private static final TextureOptions DEFAULT_OPTIONS = CLAMP_LINEAR_OPTIONS;
+
 
 	private final Context context;
 	private final int[] glIntStorage;
@@ -79,7 +84,7 @@ public class GLES20TextureUtilities implements TextureUtilities
 			Bitmap bmp = BitmapFactory.decodeResource(context.getResources(), texture.getID(), opts);
 
 			GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, textureHandle);
-			applyTextureOptions(TextureOptions.DEFAULT);
+			applyTextureOptions(DEFAULT_OPTIONS);
 			GLUtils.texImage2D(GLES20.GL_TEXTURE_2D, 0, bmp, 0);
 
 			texture.setWidth(bmp.getWidth());
@@ -110,6 +115,29 @@ public class GLES20TextureUtilities implements TextureUtilities
 
 			GLES20.glDeleteTextures(1, texBuffer);
 		}
+	}
+
+	/**
+	 * Get a preset TextureOptions.
+	 * @param preset The requested type of texture options.
+	 * @return The requested texture options.
+	 */
+	public TextureOptions getTextureOptionsPreset(final Preset preset)
+	{
+		TextureOptions options = null;
+		switch(preset)
+		{
+			case CLAMP_NEAREST:
+				options = CLAMP_NEAREST_OPTIONS;
+				break;
+			case CLAMP_LINEAR:
+				options = CLAMP_NEAREST_OPTIONS;
+				break;
+			default:
+				options = DEFAULT_OPTIONS;
+		}
+
+		return options;
 	}
 
 	/**

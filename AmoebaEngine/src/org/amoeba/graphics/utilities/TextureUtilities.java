@@ -2,6 +2,7 @@ package org.amoeba.graphics.utilities;
 
 import org.amoeba.graphics.texture.Texture;
 import org.amoeba.graphics.texture.TextureOptions;
+import org.amoeba.graphics.texture.TextureOptions.Preset;
 
 /**
  * TextureUtilities provides a wrapper around common texture related OpenGL functions.
@@ -32,6 +33,13 @@ public interface TextureUtilities
 	 * @param texture The texture to be unloaded.
 	 */
 	public void unloadTexture(Texture texture);
+
+	/**
+	 * Get a preset TextureOptions.
+	 * @param preset The requested type of texture options.
+	 * @return The requested texture options.
+	 */
+	public TextureOptions getTextureOptionsPreset(Preset preset);
 
 	/**
 	 * Apply OpenGL texture options.
