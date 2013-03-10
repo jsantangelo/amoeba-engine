@@ -9,9 +9,8 @@ import org.amoeba.engine.service.input.InputEvent;
 import android.opengl.GLES20;
 import android.os.Bundle;
 import android.util.Log;
-import android.content.Intent;
 
-public class LoadingScreen extends GameActivity
+public class MainMenuScreen extends GameActivity
 	implements DrawListener, UpdateListener, InputListener
 {
 	private static final String TAG = "Amoeba.Fire";
@@ -37,11 +36,11 @@ public class LoadingScreen extends GameActivity
 
 		if (someNumber < 200)
 		{
-			GLES20.glClearColor(0.0f, 0.0f, 1.0f, 1.0f);
+			GLES20.glClearColor(1.0f, 0.5f, 0.0f, 1.0f);
 		}
 		else
 		{
-			GLES20.glClearColor(1.0f, 0.0f, 1.0f, 1.0f);
+			GLES20.glClearColor(1.0f, 0.0f, 0.0f, 1.0f);
 		}
 	}
 
@@ -60,10 +59,5 @@ public class LoadingScreen extends GameActivity
 	{
 		Log.d(TAG, "onInputEvent handled");
 
-		if (event.getEventType() == InputEvent.EventType.LONGPRESS)
-		{
-			Intent intent = new Intent(this, MainMenuScreen.class);
-			startActivity(intent);
-		}
 	}
 }
