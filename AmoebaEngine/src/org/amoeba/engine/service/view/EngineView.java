@@ -4,7 +4,6 @@ import android.content.Context;
 import android.opengl.GLSurfaceView;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
-import android.util.Log;
 
 import org.amoeba.engine.service.input.InputService;
 import org.amoeba.engine.service.renderer.RendererService;
