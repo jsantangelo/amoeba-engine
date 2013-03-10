@@ -7,7 +7,7 @@
 	<property name="activity" value=".LoadingScreen" />
 
 	<target name="-delete-engine-library">
-		<delete file="${jar.libs.dir}/AmoebaEngine.jar" quiet="true" />
+		<delete file="${jar.libs.dir}/${engine.lib}" quiet="true" />
 	</target>
 
 	<target name="-pre-build" depends="-delete-engine-library">

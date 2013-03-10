@@ -19,6 +19,24 @@ public abstract class GameActivity extends Activity
 	private ViewService view;
 
 	/**
+	 * Returnes the AmoebaEngine for this Activity.
+	 * @return the engine
+	 */
+	protected AmoebaEngine getEngine()
+	{
+		return engine;
+	}
+
+	/**
+	 * Returns the ViewService for this Activity.
+	 * @return the ViewService
+	 */
+	protected ViewService getView()
+	{
+		return view;
+	}
+
+	/**
 	 * Invoked when the Android OS system creates this Activity. Responsible
 	 * for making a new AmoebaEngine, and saving key values to be used
 	 * by end-users.
