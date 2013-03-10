@@ -7,7 +7,6 @@ import org.amoeba.engine.routing.UpdateListener;
 import org.amoeba.engine.service.input.InputEvent;
 
 import android.opengl.GLES20;
-import android.opengl.GLSurfaceView;
 import android.os.Bundle;
 import android.util.Log;
 
@@ -18,14 +17,10 @@ public class LoadingScreen extends GameActivity
 
 	private static int someNumber = 0;
 
-    @Override
-    public void onCreate(final Bundle savedInstanceState)
+    //Must be implemented. Use to do anything needed before game starts.
+    public void initialize()
     {
-        super.onCreate(savedInstanceState);
-
         registerForCallbacks();
-
-        setContentView((GLSurfaceView) getView());
     }
 
     private void registerForCallbacks()

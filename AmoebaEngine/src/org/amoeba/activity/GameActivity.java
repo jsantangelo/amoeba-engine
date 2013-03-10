@@ -1,6 +1,7 @@
 package org.amoeba.activity;
 
 import android.app.Activity;
+import android.opengl.GLSurfaceView;
 import android.os.Bundle;
 import android.view.Window;
 import android.view.WindowManager;
@@ -54,7 +55,16 @@ public abstract class GameActivity extends Activity
 		view = (ViewService) engine.getService(ServiceType.VIEW);
 
 		setWindowFeatures();
+
+		initialize();
+
+		setContentView((GLSurfaceView) view);
 	}
+
+	/**
+	 * Initialization/setup meant to be done by any sub classes (end-user).
+	 */
+	public abstract void initialize();
 
 	/**
 	 * Sets window features of the Activity.
