@@ -9,6 +9,7 @@ import org.amoeba.engine.service.input.InputEvent;
 import android.opengl.GLES20;
 import android.os.Bundle;
 import android.util.Log;
+import android.content.Intent;
 
 public class MainMenuScreen extends GameActivity
 	implements DrawListener, UpdateListener, InputListener
@@ -32,24 +33,20 @@ public class MainMenuScreen extends GameActivity
 
 	public void onDraw()
 	{
-		Log.d(TAG, "onDraw handled");
-
-		if (someNumber < 200)
+		if (someNumber < 100)
 		{
-			GLES20.glClearColor(1.0f, 0.5f, 0.0f, 1.0f);
+			GLES20.glClearColor(0.601f, 0.801f, 0.195f, 1.0f);
 		}
 		else
 		{
-			GLES20.glClearColor(1.0f, 0.0f, 0.0f, 1.0f);
+			GLES20.glClearColor(0.417f, 0.555f, 0.137f, 1.0f);
 		}
 	}
 
 	public void onUpdate()
 	{
-		Log.d(TAG, "onUpdate handled");
-
 		++someNumber;
-		if (someNumber > 400)
+		if (someNumber > 200)
 		{
 			someNumber = 0;
 		}
@@ -59,5 +56,10 @@ public class MainMenuScreen extends GameActivity
 	{
 		Log.d(TAG, "onInputEvent handled");
 
+		if (event.getEventType() == InputEvent.EventType.LONGPRESS)
+		{
+			Intent intent = new Intent(this, LoadingScreen.class);
+			startActivity(intent);
+		}
 	}
 }

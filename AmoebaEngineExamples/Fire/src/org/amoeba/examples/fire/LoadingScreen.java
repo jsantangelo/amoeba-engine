@@ -33,24 +33,20 @@ public class LoadingScreen extends GameActivity
 
 	public void onDraw()
 	{
-		Log.d(TAG, "onDraw handled");
-
-		if (someNumber < 200)
+		if (someNumber < 100)
 		{
-			GLES20.glClearColor(0.0f, 0.0f, 1.0f, 1.0f);
+			GLES20.glClearColor(0.371f, 0.617f, 0.625f, 1.0f);
 		}
 		else
 		{
-			GLES20.glClearColor(1.0f, 0.0f, 1.0f, 1.0f);
+			GLES20.glClearColor(0.273f, 0.507f, 0.703f, 1.0f);
 		}
 	}
 
 	public void onUpdate()
 	{
-		Log.d(TAG, "onUpdate handled");
-
 		++someNumber;
-		if (someNumber > 400)
+		if (someNumber > 200)
 		{
 			someNumber = 0;
 		}
