@@ -9,25 +9,13 @@ public interface Entity
 	 * Get the X-Position of the entity.
 	 * @return The x-position of the entity.
 	 */
-	public float getX();
+	public Coordinates getPosition();
 
 	/**
-	 * Get the Y-Position of the entity.
-	 * @return The y-position of the entity.
+	 * Set the coordinates of the entity.
+	 * @param coordinates The coordinates representing the position of the entity.
 	 */
-	public float getY();
-
-	/**
-	 * Set the X-Position of the entity.
-	 * @param x The new x=position of the entity.
-	 */
-	public void setX(final float x);
-
-	/**
-	 * Set the Y-Position of the entity.
-	 * @param y The new y-position of the entity.
-	 */
-	public void setY(final float y);
+	public void setPosition(final Coordinates coordinates);
 
 	/**
 	 * Get the rotation of the entity.
@@ -36,22 +24,16 @@ public interface Entity
 	public float getRotation();
 
 	/**
-	 * Set the rotation of the entity.
-	 * @param rotation the new rotation of the entity.
+	 * Set the rotation angle in degrees of the entity.
+	 * @param angle The new rotation angle in degrees of the entity.
 	 */
-	public void setRotation(final float rotation);
+	public void setRotation(final float angle);
 
 	/**
 	 * Determine whether the entity is scaled.
 	 * @return Whether the entity is scaled.
 	 */
 	public boolean isScaled();
-
-	/**
-	 * Get the overall scale of the entity.
-	 * @return The scale of the entity.
-	 */
-	public float getScale();
 
 	/**
 	 * Get the scale of the entity in the X-direction.
