@@ -11,42 +11,29 @@ import org.amoeba.engine.service.view.ViewService;
  */
 public class ConstantGameSpeedWithFrameSkippingGameThread extends Thread implements GameThreadService
 {
-	private SurfaceHolder surfaceHolder;
-
 	private static final String TAG = "GameThreadService";
+
+	private SurfaceHolder surfaceHolder;
+	private ViewService viewService;
+	private Router callbackRouter;
 
 	private boolean isRunning = false;
 
 	//Need to figure out what and why this number is 1000.
 	private static final int ONE_THOUSAND = 1000;
-
 	private static final int MAX_FPS = 60;
 	private static final int MAX_FRAME_SKIPS = 5;
 	private static final int FRAME_PERIOD = ONE_THOUSAND / MAX_FPS;
 
-	private Router callbackRouter;
-	private ViewService viewService;
-
 	/**
 	 * Constructor.
 	 * @param  router entity to be called on update events
-	 * @param  view   entity to be called on draw events (to request a render)
 	 */
-	public ConstantGameSpeedWithFrameSkippingGameThread(final Router router, final ViewService view)
+	public ConstantGameSpeedWithFrameSkippingGameThread(final Router router)
 	{
 		super();
 
 		callbackRouter = router;
-		viewService = view;
-		surfaceHolder = viewService.getSurfaceHolder();
-	}
-
-	/**
-	 * Starts the game thread.
-	 */
-	public void start()
-	{
-		//Figure how out this service starts.
 	}
 
 	/**
@@ -59,6 +46,16 @@ public class ConstantGameSpeedWithFrameSkippingGameThread extends Thread impleme
 	}
 
 	/**
+	 * Sets the ViewService for this GameThreadService.
+	 * @param view the ViewService to be called back for render requests
+	 */
+	public void setViewService(final ViewService view)
+	{
+		viewService = view;
+		surfaceHolder = viewService.getSurfaceHolder();
+	}
+
+	/**
 	 * The main executable body of the underlying thread, called when the
 	 * thread starts.
 	 */
@@ -67,6 +64,8 @@ public class ConstantGameSpeedWithFrameSkippingGameThread extends Thread impleme
 	{
 		long beginTime, timeDiff;
 		int sleepTime = 0, framesSkipped;
+
+		Log.d("amoeba", "starting game thread");
 
 		while (isRunning)
 		{

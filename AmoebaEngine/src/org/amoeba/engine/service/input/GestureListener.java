@@ -5,8 +5,6 @@ import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.ScaleGestureDetector;
 
-import org.amoeba.engine.AmoebaEngine;
-
 /**
  * Responsible for interpreting raw touch events from the Android OS, and
  * returning usable information in the form of EngineEvents to game
@@ -22,16 +20,14 @@ public class GestureListener implements GestureDetector.OnGestureListener,
 
 	private boolean scrollingInProgress;
 
-	private Context context;
-
 	/**
 	 * Constructor. Creates underlying Android gesture detectors.
+	 * @param context current Activity context
 	 * @param  service hook to main input service to be called back on
 	 *                      input interpretation
 	 */
-	public GestureListener(final InputService service)
+	public GestureListener(final Context context, final InputService service)
 	{
-		context = AmoebaEngine.getInstance().getContext();
 		gestureDetector = new GestureDetector(context, this);
 		scaleGestureDetector = new ScaleGestureDetector(context, this);
 

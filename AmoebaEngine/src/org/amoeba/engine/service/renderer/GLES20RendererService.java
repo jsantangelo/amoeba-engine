@@ -35,23 +35,15 @@ public class GLES20RendererService implements RendererService
 	}
 
 	/**
-	 * Completes this service's setup, and begins execution.
-	 */
-	public void start()
-	{
-		//Need to figure out how this service starts.
-	}
-
-	/**
 	 * Callback to handle render requests when triggered on the attached View
 	 * (ViewService).
 	 * @param unused unused GL10 handle
 	 */
-	@Override
 	public void onDrawFrame(final GL10 unused)
 	{
         GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT);
-        // callbackRouter.invokeDraw(camera);
+        //callbackRouter.invokeDraw(camera);
+        callbackRouter.invokeDraw();
 	}
 
 	/**
@@ -60,7 +52,6 @@ public class GLES20RendererService implements RendererService
 	 * @param width  width of new screen dimensions
 	 * @param height height of new screen dimensions
 	 */
-	@Override
 	public void onSurfaceChanged(final GL10 unused, final int width, final int height)
 	{
         screenWidth = width;
@@ -75,10 +66,9 @@ public class GLES20RendererService implements RendererService
 	 * @param unused unused GL10 handle
 	 * @param config GL config
 	 */
-	@Override
 	public void onSurfaceCreated(final GL10 unused, final EGLConfig config)
 	{
-		GLES20.glClearColor(0.0f, 0.0f, 0.0f, 1f);
+		GLES20.glClearColor(0.0f, 1.0f, 0.0f, 1f);
         GLES20.glDisable(GLES20.GL_DEPTH_TEST);
         GLES20.glBlendFunc(GLES20.GL_SRC_ALPHA, GLES20.GL_ONE_MINUS_SRC_ALPHA);
         GLES20.glEnable(GLES20.GL_BLEND);

@@ -14,11 +14,6 @@ import org.amoeba.engine.service.Service;
 public interface RendererService extends Service, GLSurfaceView.Renderer
 {
 	/**
-	 * Notifies this service to begin execution.
-	 */
-	public void start();
-
-	/**
 	 * Callback to handle render requests when triggered on the attached View
 	 * (ViewService).
 	 * @param unused unused GL10 handle

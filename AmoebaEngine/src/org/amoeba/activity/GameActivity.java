@@ -1,15 +1,13 @@
 package org.amoeba.activity;
 
-import org.amoeba.engine.AmoebaEngine;
-import org.amoeba.engine.service.ServiceType;
-
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.Window;
 import android.view.WindowManager;
-import android.opengl.GLSurfaceView;
-import android.content.Context;
 
+import org.amoeba.engine.AmoebaEngine;
+import org.amoeba.engine.service.ServiceType;
+import org.amoeba.engine.service.view.ViewService;
 
 /**
  * An extension of Activity meant to be inherited.
@@ -18,11 +16,12 @@ import android.content.Context;
 public abstract class GameActivity extends Activity
 {
 	private AmoebaEngine engine;
+	private ViewService view;
 
 	/**
-	 * Invoked when the Android OS system starts this Activity (potentially
-	 * invoked from an Intent). onCreate is the entry point for all Android
-	 * activities.
+	 * Invoked when the Android OS system creates this Activity. Responsible
+	 * for making a new AmoebaEngine, and saving key values to be used
+	 * by end-users.
 	 *
 	 * @param savedInstanceState object that holds the instance state of an
 	 *  application for later recreation if necessary
@@ -31,24 +30,13 @@ public abstract class GameActivity extends Activity
 	public void onCreate(final Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
-		//Should probably make this more generic. oOher things need to
-		//be done when a new activity starts. Example:
-		//AmoebaEngine.getInstance().attachToEngine(this);
-		engine = AmoebaEngine.getInstance();
-		engine.setContext((Context) this);
 
-		registerForCallbacks();
+		engine = new AmoebaEngine(this);
+
+		view = (ViewService) engine.getService(ServiceType.VIEW);
+
 		setWindowFeatures();
-		setContentView();
 	}
-
-	//register for callbacks here, example:
-	//engine.register(myInputHandler, CallbackType.INPUT);
-	//This is to be implemented by sub classes, ie user-land (hence abstract)
-	/**
-	 * Register for callbacks provided by AmoebaEngine services.
-	 */
-	abstract void registerForCallbacks();
 
 	/**
 	 * Sets window features of the Activity.
@@ -61,14 +49,24 @@ public abstract class GameActivity extends Activity
 	}
 
 	/**
-	 * Set the ContentView of the Activity to the ViewService as supplied by
-	 * the AmoebaEngine.
+	 * Callback from the Android OS when this Activity is resumed. This includes
+	 * the initial start. Responsible for notifying the view.
 	 */
-	private void setContentView()
+	@Override
+	public void onResume()
 	{
-		//This starts the engine/game. When the content view is created, we will
-		//get surface created callbacks which will start the thread, input systems, etc.
-		//This is the end of the line.
-		setContentView((GLSurfaceView) engine.getService(ServiceType.VIEW));
+		super.onResume();
+		view.onResume();
+	}
+
+	/**
+	 * Callback from the Android OS when this Activity is paused. Responsible
+	 * for notifying the view.
+	 */
+	@Override
+	public void onPause()
+	{
+		super.onPause();
+		view.onPause();
 	}
 }

@@ -12,10 +12,4 @@ public interface ServicesManager
 	 * @return         a Service provided by AmoebaEngine
 	 */
 	public Service getService(ServiceType service);
-
-	/**
-	 * Notifies maintained Services that the Activity is ready to begin game
-	 * execution.
-	 */
-	public void start();
 }

@@ -1,9 +1,8 @@
 package org.amoeba.engine.service.view;
 
-import org.amoeba.engine.service.Service;
-
 import android.view.SurfaceHolder;
 
+import org.amoeba.engine.service.Service;
 
 /**
  * Service provided by AmoebaEngine, responsible for acting as the View for a
@@ -21,4 +20,16 @@ public interface ViewService extends Service
 	 * @return the Surface Holder
 	 */
 	public SurfaceHolder getSurfaceHolder();
+
+	/**
+	 * Notifies the View that the owning Activity has been paused by the
+	 * Android OS.
+	 */
+	public void onPause();
+
+	/**
+	 * Notifies the View that the owning Activity has been resumed by the
+	 * Android OS.
+	 */
+	public void onResume();
 }

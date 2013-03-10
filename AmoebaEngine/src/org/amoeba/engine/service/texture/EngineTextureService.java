@@ -1,9 +1,8 @@
 package org.amoeba.engine.service.texture;
 
-import org.amoeba.graphics.texture.Texture;
-
 import android.util.SparseArray;
 
+import org.amoeba.graphics.texture.Texture;
 
 /**
  * The texture service maintains a collection of textures.
@@ -109,11 +108,4 @@ public class EngineTextureService implements TextureService
 		return textures.get(resource).getHandle();
 	}
 
-	/**
-	 * Start the Texture Service.
-	 */
-	public void start()
-	{
-
-	}
 }

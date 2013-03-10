@@ -18,53 +18,17 @@ import org.amoeba.engine.service.ServiceType;
  */
 public class AmoebaEngine
 {
-	private static AmoebaEngine instance = null;
-
 	private Router router;
 	private ServicesManager services;
-	private Context currentContext;
 
 	/**
-	 * Constructor.
+	 * Constructor. Responsible for creating the EngineRouter and ServicesManager.
+	 * @param context the current Activity context
 	 */
-	public AmoebaEngine()
+	public AmoebaEngine(final Context context)
 	{
 		router = new EngineRouter();
-
-		services = new EngineServicesManager(router);
-	}
-
-	/**
-	 * Returns the static instance of AmoebaEngine.
-	 * @return the instance of AmoebaEngine
-	 */
-	public static AmoebaEngine getInstance()
-	{
-		if (instance == null)
-		{
-			instance = new AmoebaEngine();
-		}
-		return instance;
-	}
-
-	/**
-	 * Prepares the engine for a newly created Activity. To be called by
-	 * an Activity on creation before the engine is used.
-	 * @param context the Android context
-	 */
-	public void attachToEngine(final Context context)
-	{
-		setContext(context);
-	}
-
-	/**
-	 * Set the context held by AmoebaEngine to the provided context for use by
-	 * AmoebaEngine services.
-	 * @param context the Android context
-	 */
-	public void setContext(final Context context)
-	{
-		currentContext = context;
+		services = new EngineServicesManager(context, router);
 	}
 
 	/**
@@ -75,15 +39,6 @@ public class AmoebaEngine
 	public Service getService(final ServiceType service)
 	{
 		return services.getService(service);
-	}
-
-	/**
-	 * Retrieve the context held by the AmoebaEngine.
-	 * @return the current Android context saved by AmoebaEngine
-	 */
-	public Context getContext()
-	{
-		return currentContext;
 	}
 
 	/**

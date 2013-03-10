@@ -2,6 +2,8 @@ package org.amoeba.engine.service;
 
 import java.util.EnumMap;
 
+import android.content.Context;
+
 import org.amoeba.engine.routing.Router;
 import org.amoeba.engine.service.gamethread.ConstantGameSpeedWithFrameSkippingGameThread;
 import org.amoeba.engine.service.gamethread.GameThreadService;
@@ -23,14 +25,18 @@ public class EngineServicesManager implements ServicesManager
 {
 	private EnumMap<ServiceType, Service> services;
 	private Router callbackRouter;
+	private Context currentContext;
 
 	/**
 	 * Constructor. Responsible for creating default services.
+	 * @param  context current Activity context
 	 * @param  router will accept callbacks and notify listeners
 	 */
-	public EngineServicesManager(final Router router)
+	public EngineServicesManager(final Context context, final Router router)
 	{
+		currentContext = context;
 		callbackRouter = router;
+		services = new EnumMap<ServiceType, Service>(ServiceType.class);
 		createDefaultServices();
 	}
 
@@ -38,24 +44,24 @@ public class EngineServicesManager implements ServicesManager
 	 * Creates the services of the AmoebaEngine with the default implementations
 	 * provided with the Engine. Ties together all services if necessary.
 	 */
-	public void createDefaultServices()
+	private void createDefaultServices()
 	{
 		//Input Services
-		InputService inputService = new EngineInput(callbackRouter);
+		InputService inputService = new EngineInput(currentContext, callbackRouter);
 		services.put(ServiceType.INPUT, inputService);
 
 		//Renderer Services
 		RendererService rendererService = new GLES20RendererService(callbackRouter);
 		services.put(ServiceType.RENDERER, rendererService);
 
-		//View Services
-		ViewService viewService = new EngineView(rendererService, inputService);
-		services.put(ServiceType.VIEW, viewService);
-
 		//Thread Services
 		GameThreadService threadService =
-			new ConstantGameSpeedWithFrameSkippingGameThread(callbackRouter, viewService);
+			new ConstantGameSpeedWithFrameSkippingGameThread(callbackRouter);
 		services.put(ServiceType.THREAD, threadService);
+
+		//View Services
+		ViewService viewService = new EngineView(currentContext, rendererService, inputService, threadService);
+		services.put(ServiceType.VIEW, viewService);
 
 		//Texture Services
 		TextureService textureService = new EngineTextureService();
@@ -72,15 +78,4 @@ public class EngineServicesManager implements ServicesManager
 		return services.get(service);
 	}
 
-	/**
-	 * Notifies all services to prepare for execution (and therefore finalize all
-	 * setup).
-	 */
-	public void start()
-	{
-		for (Service service : services.values())
-		{
-			service.start();
-		}
-	}
 }

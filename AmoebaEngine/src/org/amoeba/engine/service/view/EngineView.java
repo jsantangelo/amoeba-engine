@@ -4,44 +4,46 @@ import android.content.Context;
 import android.opengl.GLSurfaceView;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
+import android.util.Log;
 
-import org.amoeba.engine.AmoebaEngine;
 import org.amoeba.engine.service.input.InputService;
 import org.amoeba.engine.service.renderer.RendererService;
+import org.amoeba.engine.service.gamethread.GameThreadService;
 
 /**
  * Implements the ViewService service component provided by AmoebaEngine.
  * Responsible for acting as the View to which draws are made. Also the
  * entry point for raw MotionEvents from the Android OS.
  */
-public class EngineView extends GLSurfaceView implements ViewService
+public class EngineView extends GLSurfaceView
+	implements ViewService, SurfaceHolder.Callback
 {
-	private Context context;
+	private static final String TAG = "EngineView";
+
 	private RendererService rendererService;
 	private InputService inputService;
+	private GameThreadService threadService;
 
 	/**
 	 * Constructor.
-	 * @param  renderer     GLRenderer to be attached to this view
-	 * @param  input Service to be called on raw MotionEvent receipt from
-	 *                      the Android OS
+	 * @param context current Activity context
+	 * @param renderer GLRenderer to be attached to this view
+	 * @param input Service to be called on raw MotionEvent receipt from
+	 *              the Android OS
+	 * @param thread thread to be managed by the view
 	 */
-	public EngineView(final RendererService renderer, final InputService input)
+	public EngineView(final Context context, final RendererService renderer,
+		final InputService input, final GameThreadService thread)
 	{
-		super(AmoebaEngine.getInstance().getContext());
+		super(context);
 
 		rendererService = renderer;
 		inputService = input;
+		threadService = thread;
 
 		setFocusable(true);
-	}
 
-	/**
-	 * Notifies the View that the parent Activity is ready to begin
-	 * game execution. Prepares/finishe all setup.
-	 */
-	public void start()
-	{
+		getSurfaceHolder().addCallback(this);
 		initializeRenderer();
 	}
 
@@ -68,14 +70,55 @@ public class EngineView extends GLSurfaceView implements ViewService
 	 */
 	private void initializeRenderer()
 	{
+		Log.d("amoeba", "setting renderer");
 		setRenderer((GLSurfaceView.Renderer) rendererService);
 		setRenderMode(GLSurfaceView.RENDERMODE_WHEN_DIRTY);
 	}
 
-	//TODO - need to determine when/where/who will register themselves with
-	//the SurfaceHolder as a SurfaceHolder.Callback, to do the following:
-	//* handle onSurfaceChanged (for screen dimension change handling, ie device rotation)
-	//* handle onSurfaceDestroyed (to stop the game loop thread)
+	/**
+	 * Callback when the Surface to which this View is attached changes.
+	 * @param holder Reporting holder
+	 * @param format format
+	 * @param width  width of new dimensions
+	 * @param height height of new dimensions
+	 */
+	public void surfaceChanged(final SurfaceHolder holder, final int format,
+		final int width, final int height)
+	{
+		super.surfaceChanged(holder, format, width, height);
+	}
+
+	/**
+	 * Callback when the Surface to which this View is attached is created.
+	 * @param holder Reporting holder
+	 */
+	public void surfaceCreated(final SurfaceHolder holder)
+	{
+		super.surfaceCreated(holder);
+	}
+
+	/**
+	 * Callback when the Surface to which this View is attached is destroyed.
+	 * @param holder Reporting holder
+	 */
+	public void surfaceDestroyed(final SurfaceHolder holder)
+	{
+		super.surfaceDestroyed(holder);
+		boolean retry = true;
+		threadService.setRunning(false);
+		while (retry)
+		{
+			try
+			{
+				((Thread) threadService).join();
+				retry = false;
+			}
+			catch (InterruptedException e)
+			{
+				Log.e(TAG, "Exception: " + e);
+			}
+		}
+	}
 
 	/**
 	 * Overrides GLSurfaceView's callback on motion events from the Android OS.
@@ -109,6 +152,19 @@ public class EngineView extends GLSurfaceView implements ViewService
 	public void onResume()
 	{
 		super.onResume();
-		//Start GameThreadService here
+
+		threadService.setViewService(this);
+		setRenderMode(GLSurfaceView.RENDERMODE_WHEN_DIRTY);
+		requestRender();
+
+		try
+		{
+			threadService.setRunning(true);
+			((Thread) threadService).start();
+		}
+		catch (Exception e)
+		{
+			Log.e(TAG, "Exception: " + e);
+		}
 	}
 }
