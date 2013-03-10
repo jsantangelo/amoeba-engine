@@ -1,4 +1,4 @@
-package org.amoeba.engine.service.gamethread;
+package org.amoeba.engine.service.thread;
 
 import android.view.SurfaceHolder;
 import android.util.Log;
@@ -9,15 +9,13 @@ import org.amoeba.engine.service.view.ViewService;
 /**
  * Implementation of the ConstantGameSpeedWithFrameSkipping type of game loop.
  */
-public class ConstantGameSpeedWithFrameSkippingGameThread extends Thread implements GameThreadService
+public class ConstantGameSpeedWithFrameSkippingGameThread extends Thread
 {
-	private static final String TAG = "GameThreadService";
+	private static final String TAG = "AmoebaEngine.ConstantSpeedFrameSkip";
 
 	private SurfaceHolder surfaceHolder;
 	private ViewService viewService;
 	private Router callbackRouter;
-
-	private boolean isRunning = false;
 
 	//Need to figure out what and why this number is 1000.
 	private static final int ONE_THOUSAND = 1000;
@@ -28,29 +26,14 @@ public class ConstantGameSpeedWithFrameSkippingGameThread extends Thread impleme
 	/**
 	 * Constructor.
 	 * @param  router entity to be called on update events
+	 * @param view view to be called on render requests
 	 */
-	public ConstantGameSpeedWithFrameSkippingGameThread(final Router router)
+	public ConstantGameSpeedWithFrameSkippingGameThread(final Router router,
+		final ViewService view)
 	{
 		super();
 
 		callbackRouter = router;
-	}
-
-	/**
-	 * Sets the state (running or not-running) of the game thread.
-	 * @param running whether or not the thread should be running
-	 */
-	public void setRunning(final boolean running)
-	{
-		isRunning = running;
-	}
-
-	/**
-	 * Sets the ViewService for this GameThreadService.
-	 * @param view the ViewService to be called back for render requests
-	 */
-	public void setViewService(final ViewService view)
-	{
 		viewService = view;
 		surfaceHolder = viewService.getSurfaceHolder();
 	}
@@ -65,9 +48,7 @@ public class ConstantGameSpeedWithFrameSkippingGameThread extends Thread impleme
 		long beginTime, timeDiff;
 		int sleepTime = 0, framesSkipped;
 
-		Log.d("amoeba", "starting game thread");
-
-		while (isRunning)
+		while (!isInterrupted())
 		{
 			try
 			{

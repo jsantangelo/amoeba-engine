@@ -8,7 +8,8 @@ import android.util.Log;
 
 import org.amoeba.engine.service.input.InputService;
 import org.amoeba.engine.service.renderer.RendererService;
-import org.amoeba.engine.service.gamethread.GameThreadService;
+import org.amoeba.engine.service.thread.ThreadService;
+import org.amoeba.engine.service.thread.ThreadType;
 
 /**
  * Implements the ViewService service component provided by AmoebaEngine.
@@ -18,11 +19,11 @@ import org.amoeba.engine.service.gamethread.GameThreadService;
 public class EngineView extends GLSurfaceView
 	implements ViewService, SurfaceHolder.Callback
 {
-	private static final String TAG = "EngineView";
+	private static final String TAG = "AmoebaEngine.EngineView";
 
 	private RendererService rendererService;
 	private InputService inputService;
-	private GameThreadService threadService;
+	private ThreadService threadService;
 
 	/**
 	 * Constructor.
@@ -33,7 +34,7 @@ public class EngineView extends GLSurfaceView
 	 * @param thread thread to be managed by the view
 	 */
 	public EngineView(final Context context, final RendererService renderer,
-		final InputService input, final GameThreadService thread)
+		final InputService input, final ThreadService thread)
 	{
 		super(context);
 
@@ -70,7 +71,6 @@ public class EngineView extends GLSurfaceView
 	 */
 	private void initializeRenderer()
 	{
-		Log.d("amoeba", "setting renderer");
 		setRenderer((GLSurfaceView.Renderer) rendererService);
 		setRenderMode(GLSurfaceView.RENDERMODE_WHEN_DIRTY);
 	}
@@ -104,20 +104,7 @@ public class EngineView extends GLSurfaceView
 	public void surfaceDestroyed(final SurfaceHolder holder)
 	{
 		super.surfaceDestroyed(holder);
-		boolean retry = true;
-		threadService.setRunning(false);
-		while (retry)
-		{
-			try
-			{
-				((Thread) threadService).join();
-				retry = false;
-			}
-			catch (InterruptedException e)
-			{
-				Log.e(TAG, "Exception: " + e);
-			}
-		}
+		threadService.stopThread();
 	}
 
 	/**
@@ -152,19 +139,9 @@ public class EngineView extends GLSurfaceView
 	public void onResume()
 	{
 		super.onResume();
+		setRenderMode(GLSurfaceView.RENDERMODE_WHEN_DIRTY);
 
 		threadService.setViewService(this);
-		setRenderMode(GLSurfaceView.RENDERMODE_WHEN_DIRTY);
-		requestRender();
-
-		try
-		{
-			threadService.setRunning(true);
-			((Thread) threadService).start();
-		}
-		catch (Exception e)
-		{
-			Log.e(TAG, "Exception: " + e);
-		}
+		threadService.startThread(ThreadType.CONSTANTSPEEDFRAMESKIP);
 	}
 }

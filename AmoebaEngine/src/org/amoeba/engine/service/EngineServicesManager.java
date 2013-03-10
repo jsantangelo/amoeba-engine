@@ -5,8 +5,8 @@ import java.util.EnumMap;
 import android.content.Context;
 
 import org.amoeba.engine.routing.Router;
-import org.amoeba.engine.service.gamethread.ConstantGameSpeedWithFrameSkippingGameThread;
-import org.amoeba.engine.service.gamethread.GameThreadService;
+import org.amoeba.engine.service.thread.ThreadService;
+import org.amoeba.engine.service.thread.EngineThreadService;
 import org.amoeba.engine.service.input.EngineInput;
 import org.amoeba.engine.service.input.InputService;
 import org.amoeba.engine.service.renderer.RendererService;
@@ -55,8 +55,7 @@ public class EngineServicesManager implements ServicesManager
 		services.put(ServiceType.RENDERER, rendererService);
 
 		//Thread Services
-		GameThreadService threadService =
-			new ConstantGameSpeedWithFrameSkippingGameThread(callbackRouter);
+		ThreadService threadService = new EngineThreadService(callbackRouter);
 		services.put(ServiceType.THREAD, threadService);
 
 		//View Services
