@@ -1,10 +1,8 @@
 package org.amoeba.examples.fire;
 
 import org.amoeba.activity.GameActivity;
-import org.amoeba.engine.routing.DrawListener;
-import org.amoeba.engine.routing.InputListener;
-import org.amoeba.engine.routing.UpdateListener;
 import org.amoeba.engine.service.input.InputEvent;
+import org.amoeba.graphics.camera.Camera;
 
 import android.opengl.GLES20;
 import android.os.Bundle;
@@ -12,26 +10,13 @@ import android.util.Log;
 import android.content.Intent;
 
 public class MainMenuScreen extends GameActivity
-	implements DrawListener, UpdateListener, InputListener
 {
 	private static final String TAG = "Amoeba.Fire";
 
 	private static int someNumber = 0;
 
-	//Must be implemented. Use to do anything needed before game starts.
-	public void initialize()
-	{
-		registerForCallbacks();
-	}
-
-	private void registerForCallbacks()
-	{
-		getEngine().registerForDraw(this);
-		getEngine().registerForUpdate(this);
-		getEngine().registerForInput(this);
-	}
-
-	public void onDraw()
+	@Override
+	public void onDraw(final Camera camera)
 	{
 		if (someNumber < 100)
 		{
@@ -43,6 +28,7 @@ public class MainMenuScreen extends GameActivity
 		}
 	}
 
+	@Override
 	public void onUpdate()
 	{
 		++someNumber;
@@ -52,6 +38,7 @@ public class MainMenuScreen extends GameActivity
 		}
 	}
 
+	@Override
 	public void onInputEvent(final InputEvent event)
 	{
 		Log.d(TAG, "onInputEvent handled");
