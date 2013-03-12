@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="custom_rules">
+	<property name="root.dir" value="../.." />
+	<property name="enginedeploy.dir" value="${root.dir}/AmoebaEngine/deploy" />
+	<property name="engine.lib" value="AmoebaEngine.jar" />
+	<property name="package.name" value="org.amoeba.examples.fire" />
+	<property name="activity" value=".LoadingScreen" />
+
+	<target name="delete-existing-engine-library">
+		<delete file="${jar.libs.dir}/${engine.lib}" quiet="true" />
+	</target>
+
+	<target name="get-engine-library" depends="delete-existing-engine-library">
+		<echo message="Retrieving latest AmoebaEngine library..." />
+		<copy file="${enginedeploy.dir}/${engine.lib}" todir="${jar.libs.dir}" />
+	</target>
+
+	<target name="run">
+		<exec executable="adb">
+			<arg value="shell"/>
+			<arg value="am"/>
+			<arg value="start"/>
+			<arg value="-a"/>
+			<arg value="android.intent.action.MAIN"/>
+			<arg value="-n"/>
+			<arg value="${package.name}/${activity}"/>
+		</exec>
+	</target>
+
+	<target name="-pre-clean">
+		<delete file="${jar.libs.dir}/${engine.lib}" quiet="true" />
+	</target>
+</project>

@@ -42,8 +42,7 @@ public class GLES20RendererService implements RendererService
 	public void onDrawFrame(final GL10 unused)
 	{
         GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT);
-        //callbackRouter.invokeDraw(camera);
-        callbackRouter.invokeDraw();
+        callbackRouter.invokeDraw(camera);
 	}
 
 	/**

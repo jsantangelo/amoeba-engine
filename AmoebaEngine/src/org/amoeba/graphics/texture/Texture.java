@@ -46,6 +46,12 @@ public interface Texture
 	public void setID(final int id);
 
 	/**
+	 * Set the options used to load this texture.
+	 * @param options The options for this texture.
+	 */
+	public void setOptions(final TextureOptions options);
+
+	/**
 	 * Get the width of the texture.
 	 * @return The width of the texture.
 	 */
@@ -68,4 +74,10 @@ public interface Texture
 	 * @return The id number that was used to generate the texture.
 	 */
 	public int getID();
+
+	/**
+	 * Get the options of this texture.
+	 * @return The options used to load the texture.
+	 */
+	public TextureOptions getOptions();
 }

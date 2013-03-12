@@ -1,6 +1,7 @@
 package org.amoeba.engine.routing;
 
 import org.amoeba.engine.service.input.InputEvent;
+import org.amoeba.graphics.camera.Camera;
 
 /**
  * Responsible for accepting callbacks from various services and routing them
@@ -10,8 +11,9 @@ public interface Router
 {
 	/**
 	 * Invokes a draw callback, notifying all listeners of a draw event.
+	 * @param camera The camera.
 	 */
-	public void invokeDraw();
+	public void invokeDraw(Camera camera);
 
 	/**
 	 * Registers a DrawListener to be called back.

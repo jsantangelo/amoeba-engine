@@ -8,6 +8,7 @@ import org.amoeba.graphics.utilities.TextureUtilities;
 public class BitmapTexture implements Texture
 {
 	private final TextureUtilities utilities;
+	private TextureOptions options;
 	private int handle;
 	private int drawableID;
 	private int width, height;
@@ -15,11 +16,13 @@ public class BitmapTexture implements Texture
 	/**
 	 * The constructor for BitmapTexture.
 	 * @param textureUtilities The utilities used to perform OpenGL functionality.
+	 * @param textureOptions The options used to load the texture.
 	 * @param id The id of the resource representing the texture.
 	 */
-	public BitmapTexture(final TextureUtilities textureUtilities, final int id)
+	public BitmapTexture(final TextureUtilities textureUtilities, final TextureOptions textureOptions, final int id)
 	{
-		this.utilities = textureUtilities;
+		utilities = textureUtilities;
+		options = textureOptions;
 		drawableID = id;
 
 		handle = -1;
@@ -97,6 +100,15 @@ public class BitmapTexture implements Texture
 	}
 
 	/**
+	 * Set the options used to load this texture.
+	 * @param textureOptions The options for this texture.
+	 */
+	public void setOptions(final TextureOptions textureOptions)
+	{
+		options = textureOptions;
+	}
+
+	/**
 	 * Get the width of the texture.
 	 * @return The width of the texture.
 	 */
@@ -130,5 +142,14 @@ public class BitmapTexture implements Texture
 	public int getID()
 	{
 		return drawableID;
+	}
+
+	/**
+	 * Get the options of this texture.
+	 * @return The options used to load the texture.
+	 */
+	public TextureOptions getOptions()
+	{
+		return options;
 	}
 }

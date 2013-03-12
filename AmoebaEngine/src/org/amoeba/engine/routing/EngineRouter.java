@@ -1,9 +1,10 @@
 package org.amoeba.engine.routing;
 
-import java.util.Set;
 import java.util.HashSet;
+import java.util.Set;
 
 import org.amoeba.engine.service.input.InputEvent;
+import org.amoeba.graphics.camera.Camera;
 
 /**
  * Responsible for accepting invocations from services, and routing them to
@@ -74,20 +75,22 @@ public class EngineRouter implements Router
 
 	/**
 	 * Called by services triggering draw callbacks.
+	 * @param camera The camera.
 	 */
-	public void invokeDraw()
+	public void invokeDraw(final Camera camera)
 	{
-		notifyDrawListeners();
+		notifyDrawListeners(camera);
 	}
 
 	/**
 	 * Notifies any registered draw listeners of the draw callback.
+	 * @param camera The camera.
 	 */
-	private void notifyDrawListeners()
+	private void notifyDrawListeners(final Camera camera)
 	{
 		for (DrawListener listener : drawListeners)
 		{
-			listener.onDraw();
+			listener.onDraw(camera);
 		}
 	}
 
