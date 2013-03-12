@@ -6,6 +6,7 @@ import org.amoeba.engine.routing.DrawListener;
 import org.amoeba.engine.routing.EngineRouter;
 import org.amoeba.engine.routing.InputListener;
 import org.amoeba.engine.routing.Router;
+import org.amoeba.engine.routing.SurfaceListener;
 import org.amoeba.engine.routing.UpdateListener;
 import org.amoeba.engine.service.EngineServicesManager;
 import org.amoeba.engine.service.Service;
@@ -63,8 +64,17 @@ public class AmoebaEngine
 	 * Registers a listener for input event callbacks.
 	 * @param listener entity that wishes to recieve input callbacks.
 	 */
-	public void registerForInput(final InputListener listener)
+	public void registerForInputEvents(final InputListener listener)
 	{
-		router.registerForInput(listener);
+		router.registerForInputEvents(listener);
+	}
+
+	/**
+	 * Registers a listener for input event callbacks.
+	 * @param listener entity that wishes to recieve input callbacks.
+	 */
+	public void registerForSurfaceEvents(final SurfaceListener listener)
+	{
+		router.registerForSurfaceEvents(listener);
 	}
 }

@@ -33,14 +33,32 @@ public interface Router
 	public void registerForUpdate(final UpdateListener listener);
 
 	/**
-	 * Invoke an input event callback, notifing all listeners of an input event.
+	 * Invoke an input event callback, notifying all listeners of an input event.
 	 * @param inputEvent contains all information about the input event
 	 */
 	public void invokeInputEvent(InputEvent inputEvent);
 
 	/**
 	 * Registers an InputListener to be called back.
-	 * @param listener entity to be called back.
+	 * @param listener entity to be called back
 	 */
-	public void registerForInput(final InputListener listener);
+	public void registerForInputEvents(final InputListener listener);
+
+	/**
+	 * Registers a SurfaceListener to be called back.
+	 * @param listener entity to be called back
+	 */
+	public void registerForSurfaceEvents(final SurfaceListener listener);
+
+	/**
+	 * Invoke a surface creation callback, notifying all listeners of the event.
+	 */
+	public void invokeSurfaceCreationEvent();
+
+	/**
+	 * Invoke a surface change callback, notifying all listeners of the event.
+	 * @param width  width of new screen dimensions
+	 * @param height height of new screen dimensions
+	 */
+	public void invokeSurfaceChangedEvent(final int width, final int height);
 }

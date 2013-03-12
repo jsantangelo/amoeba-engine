@@ -58,6 +58,8 @@ public class GLES20RendererService implements RendererService
 
         GLES20.glViewport(0, 0, screenWidth, screenHeight);
         camera.setBounds(screenWidth, screenHeight);
+
+        callbackRouter.invokeSurfaceChangedEvent(width, height);
 	}
 
 	/**
@@ -71,5 +73,7 @@ public class GLES20RendererService implements RendererService
         GLES20.glDisable(GLES20.GL_DEPTH_TEST);
         GLES20.glBlendFunc(GLES20.GL_SRC_ALPHA, GLES20.GL_ONE_MINUS_SRC_ALPHA);
         GLES20.glEnable(GLES20.GL_BLEND);
+
+        callbackRouter.invokeSurfaceCreationEvent();
 	}
 }

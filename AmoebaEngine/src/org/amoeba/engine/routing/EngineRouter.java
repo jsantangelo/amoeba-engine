@@ -15,6 +15,7 @@ public class EngineRouter implements Router
 	private Set<DrawListener> drawListeners = null;
 	private Set<UpdateListener> updateListeners = null;
 	private Set<InputListener> inputListeners = null;
+	private Set<SurfaceListener> surfaceListeners = null;
 
 	/**
 	 * Constructor. Responsible for creating the listener collections.
@@ -24,6 +25,7 @@ public class EngineRouter implements Router
 		drawListeners = new HashSet<DrawListener>();
 		updateListeners = new HashSet<UpdateListener>();
 		inputListeners = new HashSet<InputListener>();
+		surfaceListeners = new HashSet<SurfaceListener>();
 	}
 
 	/**
@@ -34,6 +36,7 @@ public class EngineRouter implements Router
 		drawListeners.clear();
 		updateListeners.clear();
 		inputListeners.clear();
+		surfaceListeners.clear();
 	}
 
 	/**
@@ -98,7 +101,7 @@ public class EngineRouter implements Router
 	 * Registers an InputListener to be called back.
 	 * @param listener entity to be called back.
 	 */
-	public void registerForInput(final InputListener listener)
+	public void registerForInputEvents(final InputListener listener)
 	{
 		inputListeners.add(listener);
 	}
@@ -121,6 +124,57 @@ public class EngineRouter implements Router
 		for (InputListener listener : inputListeners)
 		{
 			listener.onInputEvent(inputEvent);
+		}
+	}
+
+	/**
+	 * Registers a SurfaceListener to be called back.
+	 * @param listener entity to be called back
+	 */
+	public void registerForSurfaceEvents(final SurfaceListener listener)
+	{
+		surfaceListeners.add(listener);
+	}
+
+	/**
+	 * Called by services triggering SurfaceCreation events.
+	 */
+	public void invokeSurfaceCreationEvent()
+	{
+		notifySurfaceListenersOfSurfaceCreation();
+	}
+
+	/**
+	 * Called by services triggering SurfaceChange events.
+	 * @param width  width of new screen dimensions
+	 * @param height height of new screen dimensions
+	 */
+	public void invokeSurfaceChangedEvent(final int width, final int height)
+	{
+		notifySurfaceListenersOfSurfaceChange(width, height);
+	}
+
+	/**
+	 * Notifies any registered surface listeners of the surface creation callback.
+	 */
+	private void notifySurfaceListenersOfSurfaceCreation()
+	{
+		for (SurfaceListener listener : surfaceListeners)
+		{
+			listener.onSurfaceCreated();
+		}
+	}
+
+	/**
+	 * Notifies any registered surface listeners of the surface change callback.
+	 * @param width  width of new screen dimensions
+	 * @param height height of new screen dimensions
+	 */
+	private void notifySurfaceListenersOfSurfaceChange(final int width, final int height)
+	{
+		for (SurfaceListener listener : surfaceListeners)
+		{
+			listener.onSurfaceChanged(width, height);
 		}
 	}
 }
