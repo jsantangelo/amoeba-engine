@@ -1,10 +1,10 @@
-package org.amoeba.engine.service.thread;
-
-import android.view.SurfaceHolder;
-import android.util.Log;
+package org.amoeba.engine.service.thread.implementation;
 
 import org.amoeba.engine.routing.Router;
 import org.amoeba.engine.service.view.ViewService;
+
+import android.util.Log;
+import android.view.SurfaceHolder;
 
 /**
  * Implementation of the ConstantGameSpeedWithFrameSkipping type of game loop.

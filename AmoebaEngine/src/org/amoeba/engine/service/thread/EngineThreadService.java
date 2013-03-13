@@ -1,9 +1,11 @@
 package org.amoeba.engine.service.thread;
 
-import android.util.Log;
-
 import org.amoeba.engine.routing.Router;
+import org.amoeba.engine.service.thread.implementation.BasicGameThread;
+import org.amoeba.engine.service.thread.implementation.ConstantGameSpeedWithFrameSkippingGameThread;
 import org.amoeba.engine.service.view.ViewService;
+
+import android.util.Log;
 
 /**
  * Service responsible for the main game loop thread handling.
