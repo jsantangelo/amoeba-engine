@@ -23,8 +23,8 @@ public class TextureVertexShader extends Shader
 			"attribute vec4 " + ShaderConstants.ATTRIBUTE_POSITION + ";\n" +
 			"attribute vec4 " + ShaderConstants.ATTRIBUTE_COLOR + ";\n" +
 			"attribute vec2 " + ShaderConstants.ATTRIBUTE_TEXTURECOORDINATES + ";\n" +
-			"varying vec4" + ShaderConstants.VARYING_COLOR + ";\n" +
-			"varying vec2" + ShaderConstants.VARYING_TEXTURECOORDINATES + ";\n" +
+			"varying vec4 " + ShaderConstants.VARYING_COLOR + ";\n" +
+			"varying vec2 " + ShaderConstants.VARYING_TEXTURECOORDINATES + ";\n" +
 			"void main()\n" +
 			"{\n" +
 			"	" + ShaderConstants.VARYING_COLOR + " = " + ShaderConstants.ATTRIBUTE_COLOR + ";\n" +

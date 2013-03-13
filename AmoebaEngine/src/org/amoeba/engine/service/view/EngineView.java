@@ -1,14 +1,14 @@
 package org.amoeba.engine.service.view;
 
-import android.content.Context;
-import android.opengl.GLSurfaceView;
-import android.view.MotionEvent;
-import android.view.SurfaceHolder;
-
 import org.amoeba.engine.service.input.InputService;
 import org.amoeba.engine.service.renderer.RendererService;
 import org.amoeba.engine.service.thread.ThreadService;
 import org.amoeba.engine.service.thread.ThreadType;
+
+import android.content.Context;
+import android.opengl.GLSurfaceView;
+import android.view.MotionEvent;
+import android.view.SurfaceHolder;
 
 /**
  * Implements the ViewService service component provided by AmoebaEngine.
@@ -70,7 +70,9 @@ public class EngineView extends GLSurfaceView
 	 */
 	private void initializeRenderer()
 	{
-		setRenderer((GLSurfaceView.Renderer) rendererService);
+		setDebugFlags(DEBUG_CHECK_GL_ERROR | DEBUG_LOG_GL_CALLS);
+		setEGLContextClientVersion(2);
+		setRenderer(rendererService);
 		setRenderMode(GLSurfaceView.RENDERMODE_WHEN_DIRTY);
 	}
 

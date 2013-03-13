@@ -52,6 +52,7 @@ public final class ShaderUtilities
 				handle = 0;
 			}
 		}
+
 		return handle;
 	}
 

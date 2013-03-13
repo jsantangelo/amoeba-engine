@@ -20,10 +20,7 @@ public abstract class ShaderProgram
 	{
 		for (Shader shader : shaders)
 		{
-			if (shader.getHandle() > 0)
-			{
-				shader.compile();
-			}
+			shader.compile();
 		}
 	}
 

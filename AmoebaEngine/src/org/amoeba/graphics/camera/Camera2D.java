@@ -38,6 +38,7 @@ public class Camera2D implements Camera
 		{
 			calculateViewMatrix();
 			calculateProjectionMatrix();
+			updateRequired = false;
 		}
 	}
 
@@ -47,8 +48,11 @@ public class Camera2D implements Camera
 	 */
 	protected void setX(final float x)
 	{
-		surfaceX = x;
-		updateRequired = true;
+		if (x != surfaceX)
+		{
+			surfaceX = x;
+			updateRequired = true;
+		}
 	}
 
 	/**
@@ -57,8 +61,11 @@ public class Camera2D implements Camera
 	 */
 	protected void setY(final float y)
 	{
-		surfaceY = y;
-		updateRequired = true;
+		if (y != surfaceY)
+		{
+			surfaceY = y;
+			updateRequired = true;
+		}
 	}
 
 	/**
@@ -96,8 +103,11 @@ public class Camera2D implements Camera
 	 */
 	protected void setWidth(final float width)
 	{
-		surfaceWidth = width;
-		updateRequired = true;
+		if (width != surfaceWidth)
+		{
+			surfaceWidth = width;
+			updateRequired = true;
+		}
 	}
 
 	/**
@@ -106,8 +116,11 @@ public class Camera2D implements Camera
 	 */
 	protected void setHeight(final float height)
 	{
-		surfaceHeight = height;
-		updateRequired = true;
+		if (height != surfaceHeight)
+		{
+			surfaceHeight = height;
+			updateRequired = true;
+		}
 	}
 
 	/**

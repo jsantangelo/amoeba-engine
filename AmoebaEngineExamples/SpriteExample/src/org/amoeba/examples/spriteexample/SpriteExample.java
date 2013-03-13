@@ -17,14 +17,15 @@ import org.amoeba.graphics.utilities.TextureUtilities;
 
 import android.opengl.GLES20;
 import android.opengl.Matrix;
-import android.util.Log;
+import android.os.SystemClock;
 
 public class SpriteExample extends GameActivity
 {
-	private float[] modelMatrix = new float[16];
 	private TextureShaderProgram program;
 	private TextureUtilities textureUtilities;
 	private Texture texture;
+
+	private float[] modelMatrix = new float[16];
 
 	private final FloatBuffer positionBuffer;
 	private final FloatBuffer colorBuffer;
@@ -45,15 +46,15 @@ public class SpriteExample extends GameActivity
 
 	public SpriteExample()
 	{
-		screenWidth = 0;
-		screenHeight = 0;
+		screenWidth = 1;
+		screenHeight = 1;
 		final float[] positionData =
 		{
 			// X, Y, Z
 			-0.5f, 0.50f, 0.0f,
 			-0.5f, -0.5f, 0.0f,
 			0.50f, 0.50f, 0.0f,
-			0.50f, -0.5f, 0.0f,
+			0.50f, -0.5f, 0.0f
 		};
 		final float[] colorData =
 		{
@@ -82,18 +83,18 @@ public class SpriteExample extends GameActivity
 		textureCoordBuffer = ByteBuffer.allocateDirect(textureCoordData.length * BYTES_PER_FLOAT).order(ByteOrder.nativeOrder()).asFloatBuffer();
 		textureCoordBuffer.put(textureCoordData).position(0);
 
-		program = new TextureShaderProgram();
-
 		textureUtilities = new GLES20TextureUtilities(this);
+
+		program = new TextureShaderProgram();
 		texture = new BitmapTexture(textureUtilities, textureUtilities.getTextureOptionsPreset(Preset.DEFAULT), R.drawable.happy);
 	}
 
 	@Override
 	public void onSurfaceCreated()
 	{
-		Log.e("SpriteExample", "Compiling program.");
 		program.compile();
 		program.link();
+
 		texture.load();
 	}
 
@@ -106,38 +107,47 @@ public class SpriteExample extends GameActivity
 
 	public void onDraw(final Camera camera)
 	{
-		Log.e("SpriteExample", "drawing");
 		program.use();
-		Matrix.setIdentityM(modelMatrix, 0);
-		Matrix.translateM(modelMatrix, 0, screenWidth / 2, screenHeight /2, 0);
-        Matrix.scaleM(modelMatrix, 0, 100f, 100f, 1.0f);
 
+		long time = SystemClock.uptimeMillis() % 10000L;
+		float angleInDegrees = (360.0f / 10000.0f) * ((int) time);
+		float scale = screenHeight / 2;
+
+		Matrix.setIdentityM(modelMatrix, 0);
+		Matrix.translateM(modelMatrix, 0, screenWidth / 2, screenHeight / 2, 0f);
+		Matrix.scaleM(modelMatrix, 0, scale, scale, 1.0f);
+		Matrix.rotateM(modelMatrix, 0, angleInDegrees, 0.0f, 0.0f, 1.0f);
+		drawTexture(texture, camera);
+
+		program.stopUsing();
+	}
+
+	private void drawTexture(final Texture texture, final Camera camera)
+	{
+		int textureUniformHandle = program.getUniformLocation(ShaderConstants.UNIFORM_TEXTURE);
 		GLES20.glActiveTexture(GLES20.GL_TEXTURE0);
 		GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, texture.getHandle());
-		GLES20.glUniform1i(program.getUniformLocation(ShaderConstants.UNIFORM_TEXTURE), 0);
+		GLES20.glUniform1i(textureUniformHandle, 0);
 
-		// Pass in the position information
 		int positionHandle = program.getAttributeLocation(ShaderConstants.ATTRIBUTE_POSITION);
 		positionBuffer.position(positionOffset);
 		GLES20.glVertexAttribPointer(positionHandle, positionDataSize, GLES20.GL_FLOAT, false, positionStrideBytes, positionBuffer);
 		GLES20.glEnableVertexAttribArray(positionHandle);
 
-		// Pass in the color information
 		int colorHandle = program.getAttributeLocation(ShaderConstants.ATTRIBUTE_COLOR);
 		colorBuffer.position(colorOffset);
 		GLES20.glVertexAttribPointer(colorHandle, colorDataSize, GLES20.GL_FLOAT, false, colorStrideBytes, colorBuffer);
 		GLES20.glEnableVertexAttribArray(colorHandle);
 
-		// Pass in the texture coordinate information
 		int textureCoordHandle = program.getAttributeLocation(ShaderConstants.ATTRIBUTE_TEXTURECOORDINATES);
 		textureCoordBuffer.position(textureOffset);
 		GLES20.glVertexAttribPointer(textureCoordHandle, textureDataSize, GLES20.GL_FLOAT, false, textureStrideBytes, textureCoordBuffer);
 		GLES20.glEnableVertexAttribArray(textureCoordHandle);
 
+		final float[] mvpMatrix = camera.calculateMVPMatrix(modelMatrix);
 		int mvpMatrixHandle = program.getUniformLocation(ShaderConstants.UNIFORM_MVPMATRIX);
-		GLES20.glUniformMatrix4fv(mvpMatrixHandle, 1, false, camera.calculateMVPMatrix(modelMatrix), 0);
+		GLES20.glUniformMatrix4fv(mvpMatrixHandle, 1, false, mvpMatrix, 0);
 		GLES20.glDrawArrays(GLES20.GL_TRIANGLE_STRIP, 0, 4);
-		program.stopUsing();
 	}
 
 	public void onUpdate()
