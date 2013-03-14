@@ -27,20 +27,16 @@ public class SpriteExample extends GameActivity
 
 	private float[] modelMatrix = new float[16];
 
-	private final FloatBuffer positionBuffer;
-	private final FloatBuffer colorBuffer;
-	private final FloatBuffer textureCoordBuffer;
+	private final FloatBuffer spriteBuffer;
 
 	private final int BYTES_PER_FLOAT = 4;
 	private final int positionOffset = 0;
 	private final int positionDataSize = 3;
-	private final int positionStrideBytes = positionDataSize * BYTES_PER_FLOAT;
-	private final int colorOffset = 0;
-	private final int colorDataSize = 4;
-	private final int colorStrideBytes = colorDataSize * BYTES_PER_FLOAT;
-	private final int textureOffset = 0;
+	private final int textureOffset = 3;
 	private final int textureDataSize = 2;
-	private final int textureStrideBytes = textureDataSize * BYTES_PER_FLOAT;
+	private final int colorOffset = 5;
+	private final int colorDataSize = 4;
+	private final int strideBytes = (positionDataSize + textureDataSize + colorDataSize) * BYTES_PER_FLOAT;
 
 	private int screenWidth, screenHeight;
 
@@ -48,40 +44,17 @@ public class SpriteExample extends GameActivity
 	{
 		screenWidth = 1;
 		screenHeight = 1;
-		final float[] positionData =
+		final float[] spriteData =
 		{
-			// X, Y, Z
-			-0.5f, 0.50f, 0.0f,
-			-0.5f, -0.5f, 0.0f,
-			0.50f, 0.50f, 0.0f,
-			0.50f, -0.5f, 0.0f
-		};
-		final float[] colorData =
-		{
-			// R, G, B, A
-			1.0f, 1.0f, 1.0f, 1.0f,
-			1.0f, 1.0f, 1.0f, 1.0f,
-			1.0f, 1.0f, 1.0f, 1.0f,
-			1.0f, 1.0f, 1.0f, 1.0f
+			// X,     Y,    Z,    U,    V,    R,    G,    B,    A
+			-0.5f, 0.50f, 0.0f, 0.0f, 0.0f, 1.0f, 1.0f, 1.0f, 1.0f,
+			-0.5f, -0.5f, 0.0f, 0.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f,
+			0.50f, 0.50f, 0.0f, 1.0f, 0.0f, 1.0f, 1.0f, 1.0f, 1.0f,
+			0.50f, -0.5f, 0.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f
 		};
 
-		final float[] textureCoordData =
-		{
-			// U, V
-			0.0f, 0.0f,
-			0.0f, 1.0f,
-			1.0f, 0.0f,
-			1.0f, 1.0f
-		};
-
-		positionBuffer = ByteBuffer.allocateDirect(positionData.length * BYTES_PER_FLOAT).order(ByteOrder.nativeOrder()).asFloatBuffer();
-		positionBuffer.put(positionData).position(0);
-
-		colorBuffer = ByteBuffer.allocateDirect(colorData.length * BYTES_PER_FLOAT).order(ByteOrder.nativeOrder()).asFloatBuffer();
-		colorBuffer.put(colorData).position(0);
-
-		textureCoordBuffer = ByteBuffer.allocateDirect(textureCoordData.length * BYTES_PER_FLOAT).order(ByteOrder.nativeOrder()).asFloatBuffer();
-		textureCoordBuffer.put(textureCoordData).position(0);
+		spriteBuffer = ByteBuffer.allocateDirect(spriteData.length * BYTES_PER_FLOAT).order(ByteOrder.nativeOrder()).asFloatBuffer();
+		spriteBuffer.put(spriteData).position(0);
 
 		textureUtilities = new GLES20TextureUtilities(this);
 
@@ -130,18 +103,18 @@ public class SpriteExample extends GameActivity
 		GLES20.glUniform1i(textureUniformHandle, 0);
 
 		int positionHandle = program.getAttributeLocation(ShaderConstants.ATTRIBUTE_POSITION);
-		positionBuffer.position(positionOffset);
-		GLES20.glVertexAttribPointer(positionHandle, positionDataSize, GLES20.GL_FLOAT, false, positionStrideBytes, positionBuffer);
+		spriteBuffer.position(positionOffset);
+		GLES20.glVertexAttribPointer(positionHandle, positionDataSize, GLES20.GL_FLOAT, false, strideBytes, spriteBuffer);
 		GLES20.glEnableVertexAttribArray(positionHandle);
 
 		int colorHandle = program.getAttributeLocation(ShaderConstants.ATTRIBUTE_COLOR);
-		colorBuffer.position(colorOffset);
-		GLES20.glVertexAttribPointer(colorHandle, colorDataSize, GLES20.GL_FLOAT, false, colorStrideBytes, colorBuffer);
+		spriteBuffer.position(colorOffset);
+		GLES20.glVertexAttribPointer(colorHandle, colorDataSize, GLES20.GL_FLOAT, false, strideBytes, spriteBuffer);
 		GLES20.glEnableVertexAttribArray(colorHandle);
 
 		int textureCoordHandle = program.getAttributeLocation(ShaderConstants.ATTRIBUTE_TEXTURECOORDINATES);
-		textureCoordBuffer.position(textureOffset);
-		GLES20.glVertexAttribPointer(textureCoordHandle, textureDataSize, GLES20.GL_FLOAT, false, textureStrideBytes, textureCoordBuffer);
+		spriteBuffer.position(textureOffset);
+		GLES20.glVertexAttribPointer(textureCoordHandle, textureDataSize, GLES20.GL_FLOAT, false, strideBytes, spriteBuffer);
 		GLES20.glEnableVertexAttribArray(textureCoordHandle);
 
 		final float[] mvpMatrix = camera.calculateMVPMatrix(modelMatrix);
