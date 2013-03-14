@@ -76,6 +76,11 @@ public class SpriteExample extends GameActivity
 
 	private void drawTexture(final Texture texture, final Camera camera)
 	{
+		int textureUniformHandle = program.getUniformLocation(ShaderConstants.UNIFORM_TEXTURE);
+		GLES20.glActiveTexture(GLES20.GL_TEXTURE0);
+		GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, texture.getHandle());
+		GLES20.glUniform1i(textureUniformHandle, 0);
+
 		spriteBuffer.bind();
 
 		final float[] mvpMatrix = camera.calculateMVPMatrix(modelMatrix);
