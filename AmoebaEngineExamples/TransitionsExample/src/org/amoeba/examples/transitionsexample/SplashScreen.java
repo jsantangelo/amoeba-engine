@@ -1,4 +1,4 @@
-package org.amoeba.examples.fire;
+package org.amoeba.examples.transitionsexample;
 
 import org.amoeba.activity.GameActivity;
 import org.amoeba.engine.service.input.InputEvent;
@@ -9,9 +9,9 @@ import android.os.Bundle;
 import android.util.Log;
 import android.content.Intent;
 
-public class LoadingScreen extends GameActivity
+public class SplashScreen extends GameActivity
 {
-	private static final String TAG = "Amoeba.Fire";
+	private static final String TAG = "Amoeba.SplashScreen";
 
 	private static int someNumber = 0;
 

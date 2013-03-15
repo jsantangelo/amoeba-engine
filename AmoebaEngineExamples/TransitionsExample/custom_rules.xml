@@ -3,8 +3,8 @@
 	<property name="root.dir" value="../.." />
 	<property name="enginedeploy.dir" value="${root.dir}/AmoebaEngine/deploy" />
 	<property name="engine.lib" value="AmoebaEngine.jar" />
-	<property name="package.name" value="org.amoeba.examples.fire" />
-	<property name="activity" value=".LoadingScreen" />
+	<property name="package.name" value="org.amoeba.examples.transitionsexample" />
+	<property name="activity" value=".SplashScreen" />
 
 	<target name="delete-existing-engine-library">
 		<delete file="${jar.libs.dir}/${engine.lib}" quiet="true" />

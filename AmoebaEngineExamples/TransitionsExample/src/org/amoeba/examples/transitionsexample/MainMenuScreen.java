@@ -1,4 +1,4 @@
-package org.amoeba.examples.fire;
+package org.amoeba.examples.transitionsexample;
 
 import org.amoeba.activity.GameActivity;
 import org.amoeba.engine.service.input.InputEvent;
@@ -11,7 +11,7 @@ import android.content.Intent;
 
 public class MainMenuScreen extends GameActivity
 {
-	private static final String TAG = "Amoeba.Fire";
+	private static final String TAG = "Amoeba.MainMenuScreen";
 
 	private static int someNumber = 0;
 
@@ -45,7 +45,7 @@ public class MainMenuScreen extends GameActivity
 
 		if (event.getEventType() == InputEvent.EventType.LONGPRESS)
 		{
-			Intent intent = new Intent(this, LoadingScreen.class);
+			Intent intent = new Intent(this, SplashScreen.class);
 			startActivity(intent);
 		}
 	}
