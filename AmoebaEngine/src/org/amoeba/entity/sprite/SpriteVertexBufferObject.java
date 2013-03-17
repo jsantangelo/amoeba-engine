@@ -29,10 +29,10 @@ public class SpriteVertexBufferObject implements VertexBufferObject
 	private static final float[] DEFAULT_SPRITE_DATA = new float[]
 	{
 		// X,     Y,    Z,    U,    V,    R,    G,    B,    A
-		-0.5f, 0.50f, 0.0f, 1.0f, 0.0f, 1.0f, 1.0f, 1.0f, 1.0f,
+		-0.5f, 0.50f, 0.0f, 0.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f,
 		-0.5f, -0.5f, 0.0f, 0.0f, 0.0f, 1.0f, 1.0f, 1.0f, 1.0f,
 		0.50f, 0.50f, 0.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f,
-		0.50f, -0.5f, 0.0f, 0.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f
+		0.50f, -0.5f, 0.0f, 1.0f, 0.0f, 1.0f, 1.0f, 1.0f, 1.0f
 	};
 
 	private float[] spriteData;
