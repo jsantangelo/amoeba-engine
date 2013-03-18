@@ -12,6 +12,7 @@ import org.amoeba.graphics.vbo.VertexBufferObject;
 import org.amoeba.graphics.vbo.VertexBufferObjectAttribute;
 import org.amoeba.graphics.vbo.VertexBufferObjectAttributeList;
 
+import android.graphics.Color;
 import android.opengl.GLES20;
 
 /**
@@ -26,6 +27,7 @@ public class SpriteVertexBufferObject implements VertexBufferObject
 	private static final int COLOR_DATA_SIZE = 4;
 	private static final int COLOR_OFFSET = 5;
 	private static final int NUMBER_SPRITE_ATTRIBUTES = 3;
+	private static final int NUMBER_VERTICES = 4;
 	private static final float[] DEFAULT_SPRITE_DATA = new float[]
 	{
 		// X,     Y,    Z,    U,    V,    R,    G,    B,    A
@@ -76,6 +78,38 @@ public class SpriteVertexBufferObject implements VertexBufferObject
 		byteBuffer.order(ByteOrder.nativeOrder());
 		spriteBuffer = byteBuffer.asFloatBuffer();
 		spriteBuffer.put(spriteData).position(0);
+	}
+
+	/**
+	 * Pack the color into the sprite buffer.
+	 * @param color The new color of the sprite.
+	 */
+	public void setColor(final int color)
+	{
+		final float red = Color.red(color) / 255.0f;
+		final float green = Color.green(color) / 255.0f;
+		final float blue = Color.blue(color) / 255.0f;
+		final float alpha = Color.alpha(color) / 255.0f;
+
+		setColor(red, green, blue, alpha);
+	}
+
+	/**
+	 * Pack the color into the sprite buffer.
+	 * @param red The red component of the color.
+	 * @param green The green component of the color.
+	 * @param blue The blue component of the color.
+	 * @param alpha The alpha component of the color.
+	 */
+	public void setColor(final float red, final float green, final float blue, final float alpha)
+	{
+		for(int i = 0; i < NUMBER_VERTICES; ++i)
+		{
+			spriteData[(i * attributeList.getStrideBytes()) + COLOR_OFFSET + 0] = red;
+			spriteData[(i * attributeList.getStrideBytes()) + COLOR_OFFSET + 1] = green;
+			spriteData[(i * attributeList.getStrideBytes()) + COLOR_OFFSET + 2] = blue;
+			spriteData[(i * attributeList.getStrideBytes()) + COLOR_OFFSET + 3] = alpha;
+		}
 	}
 
 	@Override
