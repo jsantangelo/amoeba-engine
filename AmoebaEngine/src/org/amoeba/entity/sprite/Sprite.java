@@ -54,6 +54,27 @@ public class Sprite extends Rectangle implements UpdateListener, DrawListener
 	}
 
 	/**
+	 * Pack the color into the sprite buffer.
+	 * @param color The new color of the sprite.
+	 */
+	public void setColor(final int color)
+	{
+		spriteBuffer.setColor(color);
+	}
+
+	/**
+	 * Pack the color into the sprite buffer.
+	 * @param red The red component of the color.
+	 * @param green The green component of the color.
+	 * @param blue The blue component of the color.
+	 * @param alpha The alpha component of the color.
+	 */
+	public void setColor(final float red, final float green, final float blue, final float alpha)
+	{
+		spriteBuffer.setColor(red, green, blue, alpha);
+	}
+
+	/**
 	 *
 	 */
 	public void onUpdate()

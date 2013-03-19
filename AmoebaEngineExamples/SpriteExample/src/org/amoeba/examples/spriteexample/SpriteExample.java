@@ -12,6 +12,7 @@ import org.amoeba.graphics.texture.TextureOptions.Preset;
 import org.amoeba.graphics.utilities.GLES20TextureUtilities;
 import org.amoeba.graphics.utilities.TextureUtilities;
 
+import android.graphics.Color;
 import android.os.SystemClock;
 
 public class SpriteExample extends GameActivity
@@ -50,21 +51,23 @@ public class SpriteExample extends GameActivity
 	{
 		screenWidth = width;
 		screenHeight = height;
+
+		sprite.setPosition(new Coordinates(screenWidth / 2, screenHeight / 2));
+		sprite.setScaleX(screenWidth / 2);
+		sprite.setScaleY(screenHeight / 2);
+		sprite.setColor(Color.BLUE);
 	}
 
 	public void onDraw(final Camera camera)
 	{
 		sprite.onDraw(camera);
 	}
+
 	public void onUpdate()
 	{
 		long time = SystemClock.uptimeMillis() % 10000L;
-        float angleInDegrees = (360.0f / 10000.0f) * ((int) time);
+		float angleInDegrees = (360.0f / 10000.0f) * ((int) time);
 
-
-		sprite.setPosition(new Coordinates(screenWidth/2, screenHeight/2));
-		sprite.setScaleX(screenWidth/2);
-		sprite.setScaleY(screenHeight/2);
 		sprite.setRotation(angleInDegrees);
 	}
 

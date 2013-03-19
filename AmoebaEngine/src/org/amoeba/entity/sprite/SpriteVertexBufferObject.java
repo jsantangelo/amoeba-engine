@@ -20,14 +20,19 @@ import android.opengl.GLES20;
  */
 public class SpriteVertexBufferObject implements VertexBufferObject
 {
+	private static final int NUMBER_VERTICES = 4;
+	private static final int NUMBER_SPRITE_ATTRIBUTES = 3;
 	private static final int POSITION_DATA_SIZE = 3;
 	private static final int POSITION_OFFSET = 0;
 	private static final int TEXTURE_COORDINATE_DATA_SIZE = 2;
 	private static final int TEXTURE_COORDINATE_OFFSET = 3;
 	private static final int COLOR_DATA_SIZE = 4;
 	private static final int COLOR_OFFSET = 5;
-	private static final int NUMBER_SPRITE_ATTRIBUTES = 3;
-	private static final int NUMBER_VERTICES = 4;
+	private static final int RED_OFFSET = 0;
+	private static final int GREEN_OFFSET = 1;
+	private static final int BLUE_OFFSET = 2;
+	private static final int ALPHA_OFFSET = 3;
+	private static final float MAX_COLOR_VALUE = 255.0f;
 	private static final float[] DEFAULT_SPRITE_DATA = new float[]
 	{
 		// X,     Y,    Z,    U,    V,    R,    G,    B,    A
@@ -86,10 +91,10 @@ public class SpriteVertexBufferObject implements VertexBufferObject
 	 */
 	public void setColor(final int color)
 	{
-		final float red = Color.red(color) / 255.0f;
-		final float green = Color.green(color) / 255.0f;
-		final float blue = Color.blue(color) / 255.0f;
-		final float alpha = Color.alpha(color) / 255.0f;
+		final float red = Color.red(color) / MAX_COLOR_VALUE;
+		final float green = Color.green(color) / MAX_COLOR_VALUE;
+		final float blue = Color.blue(color) / MAX_COLOR_VALUE;
+		final float alpha = Color.alpha(color) / MAX_COLOR_VALUE;
 
 		setColor(red, green, blue, alpha);
 	}
@@ -103,13 +108,15 @@ public class SpriteVertexBufferObject implements VertexBufferObject
 	 */
 	public void setColor(final float red, final float green, final float blue, final float alpha)
 	{
-		for(int i = 0; i < NUMBER_VERTICES; ++i)
+		final int stride = attributeList.getStrideBytes() / BufferConstants.BYTES_PER_FLOAT;
+		for (int i = 0; i < NUMBER_VERTICES; ++i)
 		{
-			spriteData[(i * attributeList.getStrideBytes()) + COLOR_OFFSET + 0] = red;
-			spriteData[(i * attributeList.getStrideBytes()) + COLOR_OFFSET + 1] = green;
-			spriteData[(i * attributeList.getStrideBytes()) + COLOR_OFFSET + 2] = blue;
-			spriteData[(i * attributeList.getStrideBytes()) + COLOR_OFFSET + 3] = alpha;
+			spriteData[(i * stride) + COLOR_OFFSET + RED_OFFSET] = red;
+			spriteData[(i * stride) + COLOR_OFFSET + GREEN_OFFSET] = green;
+			spriteData[(i * stride) + COLOR_OFFSET + BLUE_OFFSET] = blue;
+			spriteData[(i * stride) + COLOR_OFFSET + ALPHA_OFFSET] = alpha;
 		}
+		spriteBuffer.put(spriteData).position(0);
 	}
 
 	@Override
