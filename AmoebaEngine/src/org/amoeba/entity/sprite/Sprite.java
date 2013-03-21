@@ -2,7 +2,6 @@ package org.amoeba.entity.sprite;
 
 import org.amoeba.engine.routing.DrawListener;
 import org.amoeba.engine.routing.UpdateListener;
-import org.amoeba.entity.Coordinates;
 import org.amoeba.entity.shape.Rectangle;
 import org.amoeba.graphics.camera.Camera;
 import org.amoeba.graphics.shader.ShaderConstants;
@@ -29,18 +28,19 @@ public class Sprite extends Rectangle implements UpdateListener, DrawListener
 	 */
 	public Sprite(final Texture spriteTexture, final TextureShaderProgram textureProgram)
 	{
-		this(new Coordinates(0, 0), spriteTexture, textureProgram);
+		this(0f, 0f, spriteTexture, textureProgram);
 	}
 
 	/**
 	 * Constructor for Sprite.
-	 * @param position The position of the sprite.
+	 * @param x The x position of the sprite (left).
+	 * @param y The y position of the sprite (top).
 	 * @param spriteTexture The texture on this sprite.
 	 * @param textureProgram The program used to draw this sprite.
 	 */
-	public Sprite(final Coordinates position, final Texture spriteTexture, final TextureShaderProgram textureProgram)
+	public Sprite(final float x, final float y, final Texture spriteTexture, final TextureShaderProgram textureProgram)
 	{
-		super(position);
+		super(x, y);
 		texture = spriteTexture;
 		program = textureProgram;
 	}
@@ -91,7 +91,7 @@ public class Sprite extends Rectangle implements UpdateListener, DrawListener
 
 		final float[] modelMatrix = MatrixHelper.createMatrix(
 				getPosition(),
-				new Coordinates(getScaleX(), getScaleY()),
+				getScale(),
 				getRotation());
 
 		int textureUniformHandle = program.getUniformLocation(ShaderConstants.UNIFORM_TEXTURE);

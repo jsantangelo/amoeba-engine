@@ -1,21 +1,24 @@
 package org.amoeba.entity;
 
+import android.util.Pair;
+
 /**
  * Entity is an object in a scene.
  */
 public interface Entity
 {
 	/**
-	 * Get the X-Position of the entity.
-	 * @return The x-position of the entity.
+	 * Get the position of the entity.
+	 * @return The position of the entity.
 	 */
-	public Coordinates getPosition();
+	public Pair<Float, Float> getPosition();
 
 	/**
 	 * Set the coordinates of the entity.
-	 * @param coordinates The coordinates representing the position of the entity.
+	 * @param x The x position of the entity.
+	 * @param y The y position of the entity.
 	 */
-	public void setPosition(final Coordinates coordinates);
+	public void setPosition(final float x, final float y);
 
 	/**
 	 * Get the rotation of the entity.
@@ -36,6 +39,12 @@ public interface Entity
 	public boolean isScaled();
 
 	/**
+	 * Get the scale of the entity.
+	 * @return The scale of the entity in both the X and Y direction.
+	 */
+	public Pair<Float, Float> getScale();
+
+	/**
 	 * Get the scale of the entity in the X-direction.
 	 * @return The X scale of the entity.
 	 */
@@ -49,9 +58,9 @@ public interface Entity
 
 	/**
 	 * Set the both the X and Y scale of the entity.
-	 * @param scale The new scale of the entity.
+	 * @param scalingFactor The new scale of the entity.
 	 */
-	public void setScale(final float scale);
+	public void setScale(final float scalingFactor);
 
 	/**
 	 * Set the X scale of the entity.

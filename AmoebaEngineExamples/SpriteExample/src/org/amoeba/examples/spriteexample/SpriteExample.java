@@ -2,7 +2,6 @@ package org.amoeba.examples.spriteexample;
 
 import org.amoeba.activity.GameActivity;
 import org.amoeba.engine.service.input.InputEvent;
-import org.amoeba.entity.Coordinates;
 import org.amoeba.entity.sprite.Sprite;
 import org.amoeba.graphics.camera.Camera;
 import org.amoeba.graphics.shader.source.TextureShaderProgram;
@@ -52,7 +51,7 @@ public class SpriteExample extends GameActivity
 		screenWidth = width;
 		screenHeight = height;
 
-		sprite.setPosition(new Coordinates(screenWidth / 2, screenHeight / 2));
+		sprite.setPosition(screenWidth / 2, screenHeight / 2);
 		sprite.setScaleX(screenWidth / 2);
 		sprite.setScaleY(screenHeight / 2);
 		sprite.setColor(Color.BLUE);

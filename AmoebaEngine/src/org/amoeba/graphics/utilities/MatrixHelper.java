@@ -1,8 +1,7 @@
 package org.amoeba.graphics.utilities;
 
-import org.amoeba.entity.Coordinates;
-
 import android.opengl.Matrix;
+import android.util.Pair;
 
 /**
  * Matrix helper provides functions to help use matrices.
@@ -18,13 +17,13 @@ public final class MatrixHelper
 	 * @param rotation The rotation in the matrix.
 	 * @return A matrix with the given attributes.
 	 */
-	public static float[] createMatrix(final Coordinates translation, final Coordinates scale, final float rotation)
+	public static float[] createMatrix(final Pair<Float, Float> translation, final Pair<Float, Float> scale, final float rotation)
 	{
 		final float[] matrix = new float[MATRIX_SIZE];
 
 		Matrix.setIdentityM(matrix, 0);
-		Matrix.translateM(matrix, 0, translation.getX(), translation.getY(), 0f);
-		Matrix.scaleM(matrix, 0, scale.getX(), scale.getY(), 1.0f);
+		Matrix.translateM(matrix, 0, translation.first, translation.second, 0f);
+		Matrix.scaleM(matrix, 0, scale.first, scale.second, 1.0f);
 		Matrix.rotateM(matrix, 0, rotation, 0.0f, 0.0f, 1.0f);
 
 		return matrix;

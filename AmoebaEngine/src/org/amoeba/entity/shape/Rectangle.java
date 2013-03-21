@@ -1,14 +1,14 @@
 package org.amoeba.entity.shape;
 
-import org.amoeba.entity.Coordinates;
+import android.util.Pair;
 
 /**
  * Rectangle is a shape with a with and height.
  */
 public class Rectangle implements Shape
 {
-	private Coordinates position;
-	private float scaleWidth, scaleHeight;
+	private Pair<Float, Float> position;
+	private Pair<Float, Float> scale;
 	private float rotation;
 	private float width, height;
 
@@ -17,27 +17,29 @@ public class Rectangle implements Shape
 	 */
 	public Rectangle()
 	{
-		this(new Coordinates(0f, 0f), 1f, 1f);
+		this(0f, 0f, 1f, 1f);
 	}
 
 	/**
 	 * Constructor for Rectangle for a specific position and a width and height of 1.
-	 * @param coordinates The position of the rectangle (top-left).
+	 * @param x The x position of the rectangle (left).
+	 * @param y The y position of the rectangle (top).
 	 */
-	public Rectangle(final Coordinates coordinates)
+	public Rectangle(final float x, final float y)
 	{
-		this(coordinates, 1f, 1f);
+		this(x, y, 1f, 1f);
 	}
 
 	/**
 	 * Constructor for Rectangle for a specific position and size.
-	 * @param coordinates The position of the rectangle (top-left).
+	 * @param x The x position of the rectangle (left).
+	 * @param y The y position of the rectangle (top).
 	 * @param w The width of the rectangle.
 	 * @param h The height of the rectangle.
 	 */
-	public Rectangle(final Coordinates coordinates, final float w, final float h)
+	public Rectangle(final float x, final float y, final float w, final float h)
 	{
-		setPosition(coordinates);
+		setPosition(x, y);
 		setWidth(w);
 		setHeight(h);
 		setScale(1.0f);
@@ -87,15 +89,15 @@ public class Rectangle implements Shape
 	}
 
 	@Override
-	public Coordinates getPosition()
+	public Pair<Float, Float> getPosition()
 	{
 		return position;
 	}
 
 	@Override
-	public void setPosition(final Coordinates coordinates)
+	public void setPosition(final float x, final float y)
 	{
-		position = coordinates;
+		position = Pair.create(x, y);
 	}
 
 	@Override
@@ -117,33 +119,44 @@ public class Rectangle implements Shape
 	}
 
 	@Override
+	public Pair<Float, Float> getScale()
+	{
+		return scale;
+	}
+
+	@Override
 	public float getScaleX()
 	{
-		return scaleWidth;
+		return scale.first;
 	}
 
 	@Override
 	public float getScaleY()
 	{
-		return scaleHeight;
+		return scale.second;
 	}
 
 	@Override
-	public void setScale(final float scale)
+	public void setScale(final float scalingFactor)
 	{
-		setScaleX(scale);
-		setScaleY(scale);
+		scale = Pair.create(scalingFactor, scalingFactor);
 	}
 
 	@Override
 	public void setScaleX(final float scaleX)
 	{
-		scaleWidth = scaleX;
+		if (scale != null)
+		{
+			scale = Pair.create(scaleX, scale.second);
+		}
 	}
 
 	@Override
 	public void setScaleY(final float scaleY)
 	{
-		scaleHeight = scaleY;
+		if (scale != null)
+		{
+			scale = Pair.create(scale.first, scaleY);
+		}
 	}
 }
