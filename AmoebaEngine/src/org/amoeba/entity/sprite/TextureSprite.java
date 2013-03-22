@@ -1,7 +1,5 @@
 package org.amoeba.entity.sprite;
 
-import org.amoeba.engine.routing.DrawListener;
-import org.amoeba.engine.routing.UpdateListener;
 import org.amoeba.entity.shape.Rectangle;
 import org.amoeba.graphics.camera.Camera;
 import org.amoeba.graphics.shader.ShaderConstants;
@@ -10,23 +8,25 @@ import org.amoeba.graphics.texture.Texture;
 import org.amoeba.graphics.utilities.MatrixHelper;
 
 import android.opengl.GLES20;
+import android.util.Pair;
 
 /**
  *
  */
-public class Sprite extends Rectangle implements UpdateListener, DrawListener
+public class TextureSprite implements Sprite
 {
 	private static final int NUMBER_OF_VERTICES = 4;
 	private Texture texture;
 	private SpriteVertexBufferObject spriteBuffer;
 	private TextureShaderProgram program;
+	private Rectangle hitbox;
 
 	/**
 	 * Constructor for Sprite.
 	 * @param spriteTexture The texture on this sprite.
 	 * @param textureProgram The program used to draw this sprite.
 	 */
-	public Sprite(final Texture spriteTexture, final TextureShaderProgram textureProgram)
+	public TextureSprite(final Texture spriteTexture, final TextureShaderProgram textureProgram)
 	{
 		this(0f, 0f, spriteTexture, textureProgram);
 	}
@@ -38,53 +38,38 @@ public class Sprite extends Rectangle implements UpdateListener, DrawListener
 	 * @param spriteTexture The texture on this sprite.
 	 * @param textureProgram The program used to draw this sprite.
 	 */
-	public Sprite(final float x, final float y, final Texture spriteTexture, final TextureShaderProgram textureProgram)
+	public TextureSprite(final float x, final float y, final Texture spriteTexture, final TextureShaderProgram textureProgram)
 	{
-		super(x, y);
+		hitbox = new Rectangle(x, y);
 		texture = spriteTexture;
 		program = textureProgram;
 	}
 
-	/**
-	 *
-	 */
+	@Override
 	public void load()
 	{
 		spriteBuffer = new SpriteVertexBufferObject(program);
 	}
 
-	/**
-	 * Pack the color into the sprite buffer.
-	 * @param color The new color of the sprite.
-	 */
+	@Override
 	public void setColor(final int color)
 	{
 		spriteBuffer.setColor(color);
 	}
 
-	/**
-	 * Pack the color into the sprite buffer.
-	 * @param red The red component of the color.
-	 * @param green The green component of the color.
-	 * @param blue The blue component of the color.
-	 * @param alpha The alpha component of the color.
-	 */
+	@Override
 	public void setColor(final float red, final float green, final float blue, final float alpha)
 	{
 		spriteBuffer.setColor(red, green, blue, alpha);
 	}
 
-	/**
-	 *
-	 */
+	@Override
 	public void onUpdate()
 	{
 
 	}
 
-	/**
-	 * @param camera The camera.
-	 */
+	@Override
 	public void onDraw(final Camera camera)
 	{
 		program.use();
@@ -108,5 +93,101 @@ public class Sprite extends Rectangle implements UpdateListener, DrawListener
 		spriteBuffer.draw(GLES20.GL_TRIANGLE_STRIP, NUMBER_OF_VERTICES);
 
 		program.stopUsing();
+	}
+
+	@Override
+	public float getWidth()
+	{
+		return hitbox.getWidth();
+	}
+
+	@Override
+	public float getHeight()
+	{
+		return hitbox.getHeight();
+	}
+
+	@Override
+	public Rectangle getHitbox()
+	{
+		return hitbox;
+	}
+
+	@Override
+	public void setWidth(final float w)
+	{
+		hitbox.setWidth(w);
+	}
+
+	@Override
+	public void setHeight(final float h)
+	{
+		hitbox.setHeight(h);
+	}
+
+	@Override
+	public Pair<Float, Float> getPosition()
+	{
+		return hitbox.getPosition();
+	}
+
+	@Override
+	public void setPosition(final float x, final float y)
+	{
+		hitbox.setPosition(x, y);
+	}
+
+	@Override
+	public float getRotation()
+	{
+		return hitbox.getRotation();
+	}
+
+	@Override
+	public void setRotation(final float angle)
+	{
+		hitbox.setRotation(angle);
+	}
+
+	@Override
+	public boolean isScaled()
+	{
+		return hitbox.isScaled();
+	}
+
+	@Override
+	public Pair<Float, Float> getScale()
+	{
+		return hitbox.getScale();
+	}
+
+	@Override
+	public float getScaleX()
+	{
+		return hitbox.getScaleX();
+	}
+
+	@Override
+	public float getScaleY()
+	{
+		return hitbox.getScaleY();
+	}
+
+	@Override
+	public void setScale(final float scalingFactor)
+	{
+		hitbox.setScale(scalingFactor);
+	}
+
+	@Override
+	public void setScaleX(final float scaleX)
+	{
+		hitbox.setScaleX(scaleX);
+	}
+
+	@Override
+	public void setScaleY(final float scaleY)
+	{
+		hitbox.setScaleY(scaleY);
 	}
 }

@@ -3,6 +3,7 @@ package org.amoeba.examples.spriteexample;
 import org.amoeba.activity.GameActivity;
 import org.amoeba.engine.service.input.InputEvent;
 import org.amoeba.entity.sprite.Sprite;
+import org.amoeba.entity.sprite.TextureSprite;
 import org.amoeba.graphics.camera.Camera;
 import org.amoeba.graphics.shader.source.TextureShaderProgram;
 import org.amoeba.graphics.texture.BitmapTexture;
@@ -32,7 +33,7 @@ public class SpriteExample extends GameActivity
 
 		program = new TextureShaderProgram();
 		texture = new BitmapTexture(textureUtilities, textureUtilities.getTextureOptionsPreset(Preset.DEFAULT), R.drawable.happy);
-		sprite = new Sprite(texture, program);
+		sprite = new TextureSprite(texture, program);
 	}
 
 	@Override
