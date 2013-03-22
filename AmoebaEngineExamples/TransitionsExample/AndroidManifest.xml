@@ -26,10 +26,8 @@
         </activity>
         <activity
             android:name="MainMenuScreen"
-            android:label="@string/app_name" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="org.amoeba.examples.transitionsexample.SplashScreen" />
+            android:label="@string/app_name"
+            android:launchMode="singleInstance" >
         </activity>
     </application>
 </manifest>
