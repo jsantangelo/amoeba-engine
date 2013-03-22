@@ -45,8 +45,8 @@ public class MainMenuScreen extends GameActivity
 
 		if (event.getEventType() == InputEvent.EventType.LONGPRESS)
 		{
-			Intent intent = new Intent(this, SplashScreen.class);
-			startActivity(intent);
+			//Intent intent = new Intent(this, SplashScreen.class);
+			//startActivity(intent);
 		}
 	}
 }
