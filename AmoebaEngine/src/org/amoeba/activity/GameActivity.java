@@ -109,6 +109,7 @@ public class GameActivity extends Activity
 	protected void onDestroy()
 	{
 		Log.d(TAG, "GameActivity onDestroy...");
+		getEngine().deregisterForAll();
 		super.onDestroy();
 	}
 
