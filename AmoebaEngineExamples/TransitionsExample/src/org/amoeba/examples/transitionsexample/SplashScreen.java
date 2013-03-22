@@ -3,7 +3,7 @@ package org.amoeba.examples.transitionsexample;
 import org.amoeba.activity.GameActivity;
 import org.amoeba.engine.service.input.InputEvent;
 import org.amoeba.entity.sprite.Sprite;
-import org.amoeba.entity.Coordinates;
+import org.amoeba.entity.sprite.TextureSprite;
 import org.amoeba.graphics.camera.Camera;
 import org.amoeba.graphics.shader.ShaderConstants;
 import org.amoeba.graphics.shader.source.TextureShaderProgram;
@@ -51,7 +51,7 @@ public class SplashScreen extends GameActivity
 		amoeba_splash_texture = new BitmapTexture(textureUtilities,
 			textureUtilities.getTextureOptionsPreset(Preset.DEFAULT),
 			R.drawable.amoeba_splash);
-		amoeba_splash = new Sprite(amoeba_splash_texture, program);
+		amoeba_splash = new TextureSprite(amoeba_splash_texture, program);
 
 		fadeInAnimation = new AlphaAnimation(0.0f, 1.0f);
 		fadeInAnimation.setDuration(300);
@@ -83,7 +83,7 @@ public class SplashScreen extends GameActivity
 		screenWidth = width;
 		screenHeight = height;
 
-		amoeba_splash.setPosition(new Coordinates(screenWidth/2, screenHeight/2));
+		amoeba_splash.setPosition(screenWidth/2, screenHeight/2);
 		amoeba_splash.setScaleX(350.0f);
 		amoeba_splash.setScaleY(150.0f);
 	}
@@ -111,11 +111,5 @@ public class SplashScreen extends GameActivity
 			startActivity(intent);
 			finish();
 		}
-	}
-
-	@Override
-	public void onInputEvent(final InputEvent event)
-	{
-
 	}
 }
