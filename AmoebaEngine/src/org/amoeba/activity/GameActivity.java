@@ -5,6 +5,7 @@ import android.opengl.GLSurfaceView;
 import android.os.Bundle;
 import android.view.Window;
 import android.view.WindowManager;
+import android.util.Log;
 
 import org.amoeba.engine.AmoebaEngine;
 import org.amoeba.engine.routing.DrawListener;
@@ -23,6 +24,8 @@ import org.amoeba.graphics.camera.Camera;
 public class GameActivity extends Activity
 	implements DrawListener, UpdateListener, InputListener, SurfaceListener
 {
+	private static final String TAG = "Amoeba.GameActivity";
+
 	private AmoebaEngine engine;
 	private ViewService view;
 
@@ -53,8 +56,10 @@ public class GameActivity extends Activity
 	 *  application for later recreation if necessary
 	 */
 	@Override
-	public void onCreate(final Bundle savedInstanceState)
+	protected void onCreate(final Bundle savedInstanceState)
 	{
+		Log.d(TAG, "GameActivity onCreate...");
+
 		super.onCreate(savedInstanceState);
 
 		engine = new AmoebaEngine(this);
@@ -77,6 +82,34 @@ public class GameActivity extends Activity
 		getEngine().registerForUpdate(this);
 		getEngine().registerForInputEvents(this);
 		getEngine().registerForSurfaceEvents(this);
+	}
+
+	@Override
+	protected void onStart()
+	{
+		Log.d(TAG, "GameActivity onStart...");
+		super.onStart();
+	}
+
+	@Override
+	protected void onRestart()
+	{
+		Log.d(TAG, "GameActivity onRestart...");
+		super.onRestart();
+	}
+
+	@Override
+	protected void onStop()
+	{
+		Log.d(TAG, "GameActivity onStop...");
+		super.onStop();
+	}
+
+	@Override
+	protected void onDestroy()
+	{
+		Log.d(TAG, "GameActivity onDestroy...");
+		super.onDestroy();
 	}
 
 	/**
@@ -140,6 +173,7 @@ public class GameActivity extends Activity
 	@Override
 	public void onResume()
 	{
+		Log.d(TAG, "GameActivity onResume...");
 		super.onResume();
 		view.onResume();
 	}
@@ -151,6 +185,7 @@ public class GameActivity extends Activity
 	@Override
 	public void onPause()
 	{
+		Log.d(TAG, "GameActivity onPause...");
 		super.onPause();
 		view.onPause();
 	}

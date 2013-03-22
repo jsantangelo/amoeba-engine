@@ -9,6 +9,7 @@ import android.content.Context;
 import android.opengl.GLSurfaceView;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
+import android.util.Log;
 
 /**
  * Implements the ViewService service component provided by AmoebaEngine.
@@ -86,6 +87,7 @@ public class EngineView extends GLSurfaceView
 	public void surfaceChanged(final SurfaceHolder holder, final int format,
 		final int width, final int height)
 	{
+		Log.d(TAG, "Surface changed...");
 		super.surfaceChanged(holder, format, width, height);
 	}
 
@@ -95,6 +97,7 @@ public class EngineView extends GLSurfaceView
 	 */
 	public void surfaceCreated(final SurfaceHolder holder)
 	{
+		Log.d(TAG, "Surface created...");
 		super.surfaceCreated(holder);
 	}
 
@@ -104,8 +107,8 @@ public class EngineView extends GLSurfaceView
 	 */
 	public void surfaceDestroyed(final SurfaceHolder holder)
 	{
+		Log.d(TAG, "Surface destroyed...");
 		super.surfaceDestroyed(holder);
-		threadService.stopThread();
 	}
 
 	/**
@@ -128,7 +131,9 @@ public class EngineView extends GLSurfaceView
 	@Override
 	public void onPause()
 	{
+		Log.d(TAG, "View pausing...");
 		setRenderMode(GLSurfaceView.RENDERMODE_CONTINUOUSLY);
+		threadService.stopThread();
 		super.onPause();
 	}
 
@@ -139,6 +144,7 @@ public class EngineView extends GLSurfaceView
 	@Override
 	public void onResume()
 	{
+		Log.d(TAG, "View resuming...");
 		super.onResume();
 		setRenderMode(GLSurfaceView.RENDERMODE_WHEN_DIRTY);
 
