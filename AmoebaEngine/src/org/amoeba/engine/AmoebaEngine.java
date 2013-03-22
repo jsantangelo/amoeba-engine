@@ -77,4 +77,13 @@ public class AmoebaEngine
 	{
 		router.registerForSurfaceEvents(listener);
 	}
+
+	/**
+	 * Deregisters all listeners from the router, such that no invocations will
+	 * occur.
+	 */
+	public void deregisterForAll()
+	{
+		router.deregisterForAll();
+	}
 }

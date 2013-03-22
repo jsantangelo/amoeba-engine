@@ -12,6 +12,8 @@ import org.amoeba.graphics.camera.Camera;
  */
 public class EngineRouter implements Router
 {
+	private Object listenerMutex = null;
+
 	private Set<DrawListener> drawListeners = null;
 	private Set<UpdateListener> updateListeners = null;
 	private Set<InputListener> inputListeners = null;
@@ -22,6 +24,8 @@ public class EngineRouter implements Router
 	 */
 	public EngineRouter()
 	{
+		listenerMutex = new Object();
+
 		drawListeners = new HashSet<DrawListener>();
 		updateListeners = new HashSet<UpdateListener>();
 		inputListeners = new HashSet<InputListener>();
@@ -29,14 +33,25 @@ public class EngineRouter implements Router
 	}
 
 	/**
+	 * Deregisters all listeners from invocations.
+	 */
+	public void deregisterForAll()
+	{
+		resetListeners();
+	}
+
+	/**
 	 * Resets all listener collections to empty collections.
 	 */
-	public void resetListeners()
+	private void resetListeners()
 	{
-		drawListeners.clear();
-		updateListeners.clear();
-		inputListeners.clear();
-		surfaceListeners.clear();
+		synchronized (listenerMutex)
+		{
+			drawListeners.clear();
+			updateListeners.clear();
+			inputListeners.clear();
+			surfaceListeners.clear();
+		}
 	}
 
 	/**
@@ -45,7 +60,10 @@ public class EngineRouter implements Router
 	 */
 	public void registerForUpdate(final UpdateListener listener)
 	{
-		updateListeners.add(listener);
+		synchronized (listenerMutex)
+		{
+			updateListeners.add(listener);
+		}
 	}
 
 	/**
@@ -61,9 +79,12 @@ public class EngineRouter implements Router
 	 */
 	private void notifyUpdateListeners()
 	{
-		for (UpdateListener listener : updateListeners)
+		synchronized (listenerMutex)
 		{
-			listener.onUpdate();
+			for (UpdateListener listener : updateListeners)
+			{
+				listener.onUpdate();
+			}
 		}
 	}
 
@@ -73,7 +94,10 @@ public class EngineRouter implements Router
 	 */
 	public void registerForDraw(final DrawListener listener)
 	{
-		drawListeners.add(listener);
+		synchronized (listenerMutex)
+		{
+			drawListeners.add(listener);
+		}
 	}
 
 	/**
@@ -91,9 +115,12 @@ public class EngineRouter implements Router
 	 */
 	private void notifyDrawListeners(final Camera camera)
 	{
-		for (DrawListener listener : drawListeners)
+		synchronized (listenerMutex)
 		{
-			listener.onDraw(camera);
+			for (DrawListener listener : drawListeners)
+			{
+				listener.onDraw(camera);
+			}
 		}
 	}
 
@@ -103,7 +130,10 @@ public class EngineRouter implements Router
 	 */
 	public void registerForInputEvents(final InputListener listener)
 	{
-		inputListeners.add(listener);
+		synchronized (listenerMutex)
+		{
+			inputListeners.add(listener);
+		}
 	}
 
 	/**
@@ -121,9 +151,12 @@ public class EngineRouter implements Router
 	 */
 	private void notifyInputListeners(final InputEvent inputEvent)
 	{
-		for (InputListener listener : inputListeners)
+		synchronized (listenerMutex)
 		{
-			listener.onInputEvent(inputEvent);
+			for (InputListener listener : inputListeners)
+			{
+				listener.onInputEvent(inputEvent);
+			}
 		}
 	}
 
@@ -133,7 +166,10 @@ public class EngineRouter implements Router
 	 */
 	public void registerForSurfaceEvents(final SurfaceListener listener)
 	{
-		surfaceListeners.add(listener);
+		synchronized (listenerMutex)
+		{
+			surfaceListeners.add(listener);
+		}
 	}
 
 	/**
@@ -159,9 +195,12 @@ public class EngineRouter implements Router
 	 */
 	private void notifySurfaceListenersOfSurfaceCreation()
 	{
-		for (SurfaceListener listener : surfaceListeners)
+		synchronized (listenerMutex)
 		{
-			listener.onSurfaceCreated();
+			for (SurfaceListener listener : surfaceListeners)
+			{
+				listener.onSurfaceCreated();
+			}
 		}
 	}
 
@@ -172,9 +211,12 @@ public class EngineRouter implements Router
 	 */
 	private void notifySurfaceListenersOfSurfaceChange(final int width, final int height)
 	{
-		for (SurfaceListener listener : surfaceListeners)
+		synchronized (listenerMutex)
 		{
-			listener.onSurfaceChanged(width, height);
+			for (SurfaceListener listener : surfaceListeners)
+			{
+				listener.onSurfaceChanged(width, height);
+			}
 		}
 	}
 }

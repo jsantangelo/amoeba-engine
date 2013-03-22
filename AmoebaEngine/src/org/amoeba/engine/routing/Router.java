@@ -9,6 +9,12 @@ import org.amoeba.graphics.camera.Camera;
  */
 public interface Router
 {
+
+	/**
+	 * Removes all listeners currently stored, such that no invocations will occur.
+	 */
+	public void deregisterForAll();
+
 	/**
 	 * Invokes a draw callback, notifying all listeners of a draw event.
 	 * @param camera The camera.
