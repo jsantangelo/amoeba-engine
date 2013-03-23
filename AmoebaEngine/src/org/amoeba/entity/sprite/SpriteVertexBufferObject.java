@@ -91,12 +91,15 @@ public class SpriteVertexBufferObject implements VertexBufferObject
 	 */
 	public void setColor(final int color)
 	{
-		final float red = Color.red(color) / MAX_COLOR_VALUE;
-		final float green = Color.green(color) / MAX_COLOR_VALUE;
-		final float blue = Color.blue(color) / MAX_COLOR_VALUE;
-		final float alpha = Color.alpha(color) / MAX_COLOR_VALUE;
+		if (color != getColor())
+		{
+			final float red = Color.red(color) / MAX_COLOR_VALUE;
+			final float green = Color.green(color) / MAX_COLOR_VALUE;
+			final float blue = Color.blue(color) / MAX_COLOR_VALUE;
+			final float alpha = Color.alpha(color) / MAX_COLOR_VALUE;
 
-		setColor(red, green, blue, alpha);
+			setColor(red, green, blue, alpha);
+		}
 	}
 
 	/**
@@ -116,7 +119,22 @@ public class SpriteVertexBufferObject implements VertexBufferObject
 			spriteData[(i * stride) + COLOR_OFFSET + BLUE_OFFSET] = blue;
 			spriteData[(i * stride) + COLOR_OFFSET + ALPHA_OFFSET] = alpha;
 		}
+		spriteBuffer.position(0);
 		spriteBuffer.put(spriteData).position(0);
+	}
+
+	/**
+	 * Get the current color in the buffer.
+	 * @return The color currently stored in the buffer in the form of android.graphics.Color.
+	 */
+	public int getColor()
+	{
+		int red = (int) (spriteData[COLOR_OFFSET + RED_OFFSET] * MAX_COLOR_VALUE);
+		int green = (int) (spriteData[COLOR_OFFSET + GREEN_OFFSET] * MAX_COLOR_VALUE);
+		int blue = (int) (spriteData[COLOR_OFFSET + BLUE_OFFSET] * MAX_COLOR_VALUE);
+		int alpha = (int) (spriteData[COLOR_OFFSET + ALPHA_OFFSET] * MAX_COLOR_VALUE);
+
+		return Color.argb(alpha, red, green, blue);
 	}
 
 	@Override

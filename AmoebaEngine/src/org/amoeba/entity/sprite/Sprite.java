@@ -47,16 +47,23 @@ public interface Sprite extends Entity, UpdateListener, DrawListener
 
 	/**
 	 * Pack the color into the sprite buffer.
-	 * @param color The new color of the sprite.
+	 * @param color The new color of the sprite (as defined by android.graphics.Color).
 	 */
 	public void setColor(final int color);
 
 	/**
 	 * Pack the color into the sprite buffer.
-	 * @param red The red component of the color.
-	 * @param green The green component of the color.
-	 * @param blue The blue component of the color.
-	 * @param alpha The alpha component of the color.
+	 * @param red The red component of the color (0.0f - 1.0f).
+	 * @param green The green component of the color (0.0f - 1.0f).
+	 * @param blue The blue component of the color (0.0f - 1.0f).
+	 * @param alpha The alpha component of the color (0.0f - 1.0f).
 	 */
 	public void setColor(final float red, final float green, final float blue, final float alpha);
+
+	/**
+	 * Transition to a new color over a set time.
+	 * @param color The new color of the sprite (as defined by android.graphics.Color).
+	 * @param duration The time it takes to transition to the new color (milliseconds).
+	 */
+	public void setColor(final int color, final long duration);
 }

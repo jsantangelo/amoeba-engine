@@ -5,6 +5,7 @@ import org.amoeba.graphics.camera.Camera;
 import org.amoeba.graphics.shader.ShaderConstants;
 import org.amoeba.graphics.shader.source.TextureShaderProgram;
 import org.amoeba.graphics.texture.Texture;
+import org.amoeba.graphics.utilities.ColorTransition;
 import org.amoeba.graphics.utilities.MatrixHelper;
 
 import android.opengl.GLES20;
@@ -20,6 +21,7 @@ public class TextureSprite implements Sprite
 	private SpriteVertexBufferObject spriteBuffer;
 	private TextureShaderProgram program;
 	private Rectangle hitbox;
+	private ColorTransition colorTransition;
 
 	/**
 	 * Constructor for Sprite.
@@ -43,6 +45,7 @@ public class TextureSprite implements Sprite
 		hitbox = new Rectangle(x, y);
 		texture = spriteTexture;
 		program = textureProgram;
+		colorTransition = null;
 	}
 
 	@Override
@@ -64,9 +67,22 @@ public class TextureSprite implements Sprite
 	}
 
 	@Override
+	public void setColor(final int color, final long duration)
+	{
+		colorTransition = new ColorTransition(spriteBuffer.getColor(), color, duration);
+	}
+
+	@Override
 	public void onUpdate()
 	{
-
+		if (colorTransition != null)
+		{
+			setColor(colorTransition.getCurrentColor());
+			if (colorTransition.isTransitionComplete())
+			{
+				colorTransition = null;
+			}
+		}
 	}
 
 	@Override
