@@ -8,48 +8,30 @@ import org.amoeba.entity.shape.Rectangle;
 /**
  * Sprite is an entity that is used to display an image.
  */
-public interface Sprite extends Entity, UpdateListener, DrawListener
+public abstract class Sprite extends Rectangle implements Entity, UpdateListener, DrawListener
 {
+	/**
+	 * Constructor for Sprite.
+	 * @param x The x position of the rectangle (left).
+	 * @param y The y position of the rectangle (top).
+	 * @param w The width of the rectangle.
+	 * @param h The height of the rectangle.
+	 */
+	public Sprite(final float x, final float y, final float w, final float h)
+	{
+		super(x, y, w, h);
+	}
+
 	/**
 	 * Load the sprite.
 	 */
-	public void load();
-
-	/**
-	 * Get the width of the Rectangle.
-	 * @return The width of the rectangle.
-	 */
-	public float getWidth();
-
-	/**
-	 * Get the height of the rectangle.
-	 * @return The height of the rectangle.
-	 */
-	public float getHeight();
-
-	/**
-	 * Get a rectangle representing the shape of the sprite.
-	 * @return A rectangle representing the shape of the sprite.
-	 */
-	public Rectangle getHitbox();
-
-	/**
-	 * Set the width of the rectangle.
-	 * @param w The new width of the rectangle.
-	 */
-	public void setWidth(final float w);
-
-	/**
-	 * Set the height of the rectangle.
-	 * @param h The new height of the rectangle.
-	 */
-	public void setHeight(final float h);
+	public abstract void load();
 
 	/**
 	 * Pack the color into the sprite buffer.
 	 * @param color The new color of the sprite (as defined by android.graphics.Color).
 	 */
-	public void setColor(final int color);
+	public abstract void setColor(final int color);
 
 	/**
 	 * Pack the color into the sprite buffer.
@@ -58,12 +40,12 @@ public interface Sprite extends Entity, UpdateListener, DrawListener
 	 * @param blue The blue component of the color (0.0f - 1.0f).
 	 * @param alpha The alpha component of the color (0.0f - 1.0f).
 	 */
-	public void setColor(final float red, final float green, final float blue, final float alpha);
+	public abstract void setColor(final float red, final float green, final float blue, final float alpha);
 
 	/**
 	 * Transition to a new color over a set time.
 	 * @param color The new color of the sprite (as defined by android.graphics.Color).
 	 * @param duration The time it takes to transition to the new color (milliseconds).
 	 */
-	public void setColor(final int color, final long duration);
+	public abstract void setColor(final int color, final long duration);
 }

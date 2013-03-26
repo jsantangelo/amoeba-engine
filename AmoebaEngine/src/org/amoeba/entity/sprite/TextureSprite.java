@@ -1,6 +1,5 @@
 package org.amoeba.entity.sprite;
 
-import org.amoeba.entity.shape.Rectangle;
 import org.amoeba.graphics.camera.Camera;
 import org.amoeba.graphics.shader.ShaderConstants;
 import org.amoeba.graphics.shader.source.TextureShaderProgram;
@@ -9,18 +8,16 @@ import org.amoeba.graphics.utilities.ColorTransition;
 import org.amoeba.graphics.utilities.MatrixHelper;
 
 import android.opengl.GLES20;
-import android.util.Pair;
 
 /**
  *
  */
-public class TextureSprite implements Sprite
+public class TextureSprite extends Sprite
 {
 	private static final int NUMBER_OF_VERTICES = 4;
 	private Texture texture;
 	private SpriteVertexBufferObject spriteBuffer;
 	private TextureShaderProgram program;
-	private Rectangle hitbox;
 	private ColorTransition colorTransition;
 
 	/**
@@ -42,7 +39,7 @@ public class TextureSprite implements Sprite
 	 */
 	public TextureSprite(final float x, final float y, final Texture spriteTexture, final TextureShaderProgram textureProgram)
 	{
-		hitbox = new Rectangle(x, y);
+		super(x, y, 0f, 0f);
 		texture = spriteTexture;
 		program = textureProgram;
 		colorTransition = null;
@@ -109,101 +106,5 @@ public class TextureSprite implements Sprite
 		spriteBuffer.draw(GLES20.GL_TRIANGLE_STRIP, NUMBER_OF_VERTICES);
 
 		program.stopUsing();
-	}
-
-	@Override
-	public float getWidth()
-	{
-		return hitbox.getWidth();
-	}
-
-	@Override
-	public float getHeight()
-	{
-		return hitbox.getHeight();
-	}
-
-	@Override
-	public Rectangle getHitbox()
-	{
-		return hitbox;
-	}
-
-	@Override
-	public void setWidth(final float w)
-	{
-		hitbox.setWidth(w);
-	}
-
-	@Override
-	public void setHeight(final float h)
-	{
-		hitbox.setHeight(h);
-	}
-
-	@Override
-	public Pair<Float, Float> getPosition()
-	{
-		return hitbox.getPosition();
-	}
-
-	@Override
-	public void setPosition(final float x, final float y)
-	{
-		hitbox.setPosition(x, y);
-	}
-
-	@Override
-	public float getRotation()
-	{
-		return hitbox.getRotation();
-	}
-
-	@Override
-	public void setRotation(final float angle)
-	{
-		hitbox.setRotation(angle);
-	}
-
-	@Override
-	public boolean isScaled()
-	{
-		return hitbox.isScaled();
-	}
-
-	@Override
-	public Pair<Float, Float> getScale()
-	{
-		return hitbox.getScale();
-	}
-
-	@Override
-	public float getScaleX()
-	{
-		return hitbox.getScaleX();
-	}
-
-	@Override
-	public float getScaleY()
-	{
-		return hitbox.getScaleY();
-	}
-
-	@Override
-	public void setScale(final float scalingFactor)
-	{
-		hitbox.setScale(scalingFactor);
-	}
-
-	@Override
-	public void setScaleX(final float scaleX)
-	{
-		hitbox.setScaleX(scaleX);
-	}
-
-	@Override
-	public void setScaleY(final float scaleY)
-	{
-		hitbox.setScaleY(scaleY);
 	}
 }
