@@ -39,7 +39,7 @@ public class TextureSprite extends Sprite
 	 */
 	public TextureSprite(final float x, final float y, final Texture spriteTexture, final TextureShaderProgram textureProgram)
 	{
-		super(x, y, 0f, 0f);
+		super(x, y, spriteTexture.getWidth(), spriteTexture.getHeight());
 		texture = spriteTexture;
 		program = textureProgram;
 		colorTransition = null;
@@ -49,6 +49,16 @@ public class TextureSprite extends Sprite
 	public void load()
 	{
 		spriteBuffer = new SpriteVertexBufferObject(program);
+
+		if (getWidth() == 0)
+		{
+			setWidth(texture.getWidth());
+		}
+
+		if (getHeight() == 0)
+		{
+			setHeight(texture.getHeight());
+		}
 	}
 
 	@Override
