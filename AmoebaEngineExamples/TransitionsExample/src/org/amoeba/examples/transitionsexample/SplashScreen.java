@@ -16,10 +16,8 @@ import org.amoeba.graphics.utilities.TextureUtilities;
 import android.util.Log;
 import android.opengl.GLES20;
 import android.content.Intent;
-import android.os.SystemClock;
-import android.view.animation.Animation;
-import android.view.animation.AlphaAnimation;
 import android.view.View;
+import android.os.Handler;
 
 public class SplashScreen extends GameActivity
 {
@@ -27,63 +25,66 @@ public class SplashScreen extends GameActivity
 
 	private TextureShaderProgram program;
 	private TextureUtilities textureUtilities;
-	private Texture amoeba_splash_texture;
 
+	private Texture splash_background_texture;
+	private Sprite splash_background;
+
+	private Texture amoeba_splash_texture;
 	private Sprite amoeba_splash;
 
-	private static int screenWidth, screenHeight;
-
 	//Duration of the splash screen in milliseconds.
-	private static final int splashScreenDuration = 5000;
-	private static long timeToTransition = 0;
-	private static boolean transitioned = false;
-
-	Animation fadeInAnimation = null;
-	Animation fadeOutAnimation = null;
+	private static final int SPLASH_DISPLAY_TIME = 5000;
 
 	public SplashScreen()
 	{
-		screenWidth = 1;
-		screenHeight = 1;
-
 		textureUtilities = new GLES20TextureUtilities(this);
 		program = new TextureShaderProgram();
+
+		splash_background_texture = new BitmapTexture(textureUtilities,
+			textureUtilities.getTextureOptionsPreset(Preset.DEFAULT),
+			R.drawable.splash_bg);
+		splash_background = new TextureSprite(splash_background_texture, program);
+
 		amoeba_splash_texture = new BitmapTexture(textureUtilities,
 			textureUtilities.getTextureOptionsPreset(Preset.DEFAULT),
 			R.drawable.amoeba_splash);
 		amoeba_splash = new TextureSprite(amoeba_splash_texture, program);
 
-		fadeInAnimation = new AlphaAnimation(0.0f, 1.0f);
-		fadeInAnimation.setDuration(300);
+		new Handler().postDelayed(new Runnable()
+		{
+			public void run()
+			{
+				Intent intent = new Intent(SplashScreen.this, MainMenuScreen.class);
+				intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 
-		fadeOutAnimation = new AlphaAnimation(1.0f, 0.0f);
-		fadeOutAnimation.setDuration(300);
+				SplashScreen.this.startActivity(intent);
+				SplashScreen.this.finish();
+				overridePendingTransition(R.anim.fade_in, R.anim.hold);
+			}
+		}, SPLASH_DISPLAY_TIME);
 	}
 
 	@Override
 	public void onSurfaceCreated()
 	{
-		Log.d(TAG, "activity is doing surface created tasks...");
-
 		program.compile();
 		program.link();
 
+		splash_background_texture.load();
+		splash_background.load();
+
 		amoeba_splash_texture.load();
 		amoeba_splash.load();
-
-		transitioned = false;
-		timeToTransition = SystemClock.uptimeMillis() + splashScreenDuration;
-		Log.d(TAG, "current time = " + SystemClock.uptimeMillis());
-		Log.d(TAG, "time to transition = " + timeToTransition);
 	}
 
 	@Override
 	public void onSurfaceChanged(final int width, final int height)
 	{
-		screenWidth = width;
-		screenHeight = height;
+		splash_background.setPosition(width/2, height/2);
+		splash_background.setScaleX(width);
+		splash_background.setScaleY(height);
 
-		amoeba_splash.setPosition(screenWidth/2, screenHeight/2);
+		amoeba_splash.setPosition(width/2, height/2);
 		amoeba_splash.setScaleX(350.0f);
 		amoeba_splash.setScaleY(150.0f);
 	}
@@ -93,23 +94,8 @@ public class SplashScreen extends GameActivity
 	{
 		GLES20.glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
 
+		splash_background.onDraw(camera);
 		amoeba_splash.onDraw(camera);
 	}
 
-	@Override
-	public void onUpdate()
-	{
-		//Log.d(TAG, "transitioned = " + transitioned);
-		if (!transitioned &&
-			timeToTransition != 0 &&
-			SystemClock.uptimeMillis() > timeToTransition)
-		{
-			Log.d(TAG, "transitioning to mainscreen");
-			transitioned = true;
-			Intent intent = new Intent(this, MainMenuScreen.class);
-			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-			startActivity(intent);
-			finish();
-		}
-	}
 }

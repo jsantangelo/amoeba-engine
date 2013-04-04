@@ -190,4 +190,19 @@ public class GameActivity extends Activity
 		super.onPause();
 		view.onPause();
 	}
+
+	//public void startActivity(Class class)
+	//{
+
+	//}
+
+	//public void startActivity(Class class, TransitionType incomingTransition)
+	//{
+
+	//}
+
+	//public void startActivity(Class class, Animation incomingTransition)
+	//{
+
+	//}
 }
