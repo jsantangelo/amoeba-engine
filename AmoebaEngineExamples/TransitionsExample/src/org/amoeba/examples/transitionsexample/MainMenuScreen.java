@@ -152,10 +152,7 @@ public class MainMenuScreen extends GameActivity
 
 			if (checkForButtonCollision(touchPoint) != 0)
 			{
-				for (Pair<Texture, Sprite> pair : buttons.values())
-				{
-					pair.second.onDraw(camera);
-				}
+
 			}
 		}
 	}
