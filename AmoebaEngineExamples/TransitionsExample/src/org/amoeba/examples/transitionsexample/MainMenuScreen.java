@@ -132,7 +132,8 @@ public class MainMenuScreen extends GameActivity
 	@Override
 	public void onInputEvent(final InputEvent event)
 	{
-		if (event.getEventType() == InputEvent.EventType.SINGLETAP)
+		if (event.getEventType() == InputEvent.EventType.SINGLETAP ||
+			event.getEventType() == InputEvent.EventType.LONGPRESS)
 		{
 			MotionEvent touchPoint = event.getMotionEvent();
 			Log.d(TAG, "Single tap, coords: (" + touchPoint.getX() +
@@ -146,7 +147,7 @@ public class MainMenuScreen extends GameActivity
 
 				startActivity(intent);
 
-				overrideTransition(clickedResource);
+				overrideTransition(event.getEventType(), clickedResource);
 			}
 		}
 	}
@@ -172,18 +173,43 @@ public class MainMenuScreen extends GameActivity
 		return 0;
 	}
 
-	private void overrideTransition(Integer resource)
+	private void overrideTransition(InputEvent.EventType eventType, Integer resource)
 	{
 		switch(resource)
 		{
 			case R.drawable.none_button:
-				overridePendingTransition(R.anim.hold, R.anim.hold);
+				if (eventType == InputEvent.EventType.SINGLETAP)
+				{
+					//No transitions at all
+					overridePendingTransition(R.anim.hold, R.anim.hold);
+				}
+				else
+				{
+					//OS defaults
+				}
 				break;
 			case R.drawable.slide_button:
-				overridePendingTransition(R.anim.slide_from_left, R.anim.hold);
+				if (eventType == InputEvent.EventType.SINGLETAP)
+				{
+					//Incoming slides from left
+					overridePendingTransition(R.anim.slide_from_left, R.anim.hold);
+				}
+				else
+				{
+					//Incoming slides from left, as outgoing slides to right
+					overridePendingTransition(R.anim.slide_from_left, R.anim.slide_to_right);
+				}
 				break;
 			case R.drawable.fade_button:
-				overridePendingTransition(R.anim.fade_in, R.anim.hold);
+				if (eventType == InputEvent.EventType.SINGLETAP)
+				{
+					//Incoming fades in
+					overridePendingTransition(R.anim.fade_in, R.anim.hold);
+				}
+				else
+				{
+					//OS defaults
+				}
 				break;
 			default:
 				break;

@@ -33,7 +33,7 @@ public class SplashScreen extends GameActivity
 	private Sprite amoeba_splash;
 
 	//Duration of the splash screen in milliseconds.
-	private static final int SPLASH_DISPLAY_TIME = 5000;
+	private static final int SPLASH_DISPLAY_TIME = 2500;
 
 	public SplashScreen()
 	{
