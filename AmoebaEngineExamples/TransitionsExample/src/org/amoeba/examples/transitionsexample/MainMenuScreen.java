@@ -14,6 +14,7 @@ import org.amoeba.graphics.utilities.GLES20TextureUtilities;
 import org.amoeba.graphics.utilities.TextureUtilities;
 
 import android.util.Log;
+import android.util.Pair;
 import android.opengl.GLES20;
 import android.content.Intent;
 import android.view.View;
@@ -24,15 +25,6 @@ import java.util.HashMap;
 
 public class MainMenuScreen extends GameActivity
 {
-	private class Pair<X, Y> {
-		public final X first;
-		public final Y second;
-		public Pair(X x, Y y) {
-			first = x;
-			second = y;
-		}
-	}
-
 	private static final String TAG = "Amoeba.MainMenuScreen";
 
 	private TextureShaderProgram program;
@@ -45,6 +37,7 @@ public class MainMenuScreen extends GameActivity
 	private Sprite title;
 
 	private Map<Integer, Pair<Texture, Sprite> > buttons;
+	private Map<Integer, Class> destinations;
 
 	public MainMenuScreen()
 	{
@@ -62,20 +55,21 @@ public class MainMenuScreen extends GameActivity
 		title = new TextureSprite(title_texture, program);
 
 		buttons = new HashMap<Integer, Pair<Texture, Sprite> >();
+		destinations = new HashMap<Integer, Class>();
 
-		createButton(R.drawable.none_button, textureUtilities, program);
-		createButton(R.drawable.slide_button, textureUtilities, program);
-		createButton(R.drawable.fade_button, textureUtilities, program);
+		createButton(R.drawable.none_button, NoneScreen.class);
+		createButton(R.drawable.slide_button, SlideScreen.class);
+		createButton(R.drawable.fade_button, FadeScreen.class);
 	}
 
-	private void createButton(int resource, TextureUtilities textureUtilities,
-		TextureShaderProgram program)
+	private void createButton(int resource, Class destination)
 	{
 		Texture texture = new BitmapTexture(textureUtilities,
 			textureUtilities.getTextureOptionsPreset(Preset.DEFAULT),
 			resource);
 		Sprite sprite = new TextureSprite(texture, program);
 		buttons.put(resource, new Pair<Texture, Sprite>(texture, sprite));
+		destinations.put(resource, destination);
 	}
 
 	@Override
@@ -136,12 +130,6 @@ public class MainMenuScreen extends GameActivity
 	}
 
 	@Override
-	public void onUpdate()
-	{
-
-	}
-
-	@Override
 	public void onInputEvent(final InputEvent event)
 	{
 		if (event.getEventType() == InputEvent.EventType.SINGLETAP)
@@ -150,15 +138,55 @@ public class MainMenuScreen extends GameActivity
 			Log.d(TAG, "Single tap, coords: (" + touchPoint.getX() +
 				"," + touchPoint.getY() + ")");
 
-			if (checkForButtonCollision(touchPoint) != 0)
-			{
+			Integer clickedResource = checkForButtonCollision(touchPoint);
 
+			if (destinations.containsKey(clickedResource))
+			{
+				Intent intent = new Intent(this, destinations.get(clickedResource));
+
+				startActivity(intent);
+
+				overrideTransition(clickedResource);
 			}
 		}
 	}
 
 	private Integer checkForButtonCollision(MotionEvent event)
 	{
+		for (Map.Entry<Integer, Pair<Texture, Sprite> > entry : buttons.entrySet())
+		{
+			Pair<Float, Float> position = entry.getValue().second.getPosition();
+			float width = entry.getValue().second.getWidth();
+			float height = entry.getValue().second.getHeight();
+
+			if ((event.getX() > position.first - width/2.0f) &&
+				(event.getX() < position.first + width/2.0f))
+			{
+				if ((event.getY() > position.second - height/2.0f) &&
+					(event.getY() < position.second + height/2.0f))
+				{
+					return entry.getKey();
+				}
+			}
+		}
 		return 0;
+	}
+
+	private void overrideTransition(Integer resource)
+	{
+		switch(resource)
+		{
+			case R.drawable.none_button:
+				overridePendingTransition(R.anim.hold, R.anim.hold);
+				break;
+			case R.drawable.slide_button:
+				overridePendingTransition(R.anim.slide_from_left, R.anim.hold);
+				break;
+			case R.drawable.fade_button:
+				overridePendingTransition(R.anim.fade_in, R.anim.hold);
+				break;
+			default:
+				break;
+		}
 	}
 }

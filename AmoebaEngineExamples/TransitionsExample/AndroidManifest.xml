@@ -28,5 +28,17 @@
             android:name="MainMenuScreen"
             android:label="@string/app_name" >
         </activity>
+        <activity
+            android:name="NoneScreen"
+            android:label="@string/app_name" >
+        </activity>
+        <activity
+            android:name="SlideScreen"
+            android:label="@string/app_name" >
+        </activity>
+        <activity
+            android:name="FadeScreen"
+            android:label="@string/app_name" >
+        </activity>
     </application>
 </manifest>

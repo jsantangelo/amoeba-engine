@@ -97,5 +97,4 @@ public class SplashScreen extends GameActivity
 		splash_background.onDraw(camera);
 		amoeba_splash.onDraw(camera);
 	}
-
 }
