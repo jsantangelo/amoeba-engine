@@ -37,6 +37,22 @@ public class GestureListener implements GestureDetector.OnGestureListener,
 	}
 
 	/**
+	 * Enables longpress event detection.
+	 */
+	public void enableLongpress()
+	{
+		gestureDetector.setIsLongpressEnabled(true);
+	}
+
+	/**
+	 * Disables longpress event detection.
+	 */
+	public void disableLongpress()
+	{
+		gestureDetector.setIsLongpressEnabled(false);
+	}
+
+	/**
 	 * Handles raw touch events, and passes them to the gesture detectors for
 	 * interpretation. Will call back the main input service if necessary.
 	 * @param  event raw motion event from the Android OS

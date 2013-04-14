@@ -14,6 +14,7 @@ import org.amoeba.engine.routing.SurfaceListener;
 import org.amoeba.engine.routing.UpdateListener;
 import org.amoeba.engine.service.ServiceType;
 import org.amoeba.engine.service.input.InputEvent;
+import org.amoeba.engine.service.input.InputService;
 import org.amoeba.engine.service.view.ViewService;
 import org.amoeba.graphics.camera.Camera;
 
@@ -28,6 +29,7 @@ public class GameActivity extends Activity
 
 	private AmoebaEngine engine;
 	private ViewService view;
+	private InputService input;
 
 	/**
 	 * Returnes the AmoebaEngine for this Activity.
@@ -48,6 +50,15 @@ public class GameActivity extends Activity
 	}
 
 	/**
+	 * Returns the InputService for this Activity.
+	 * @return the InputService
+	 */
+	protected InputService getInputService()
+	{
+		return input;
+	}
+
+	/**
 	 * Invoked when the Android OS system creates this Activity. Responsible
 	 * for making a new AmoebaEngine, and saving key values to be used
 	 * by end-users.
@@ -65,6 +76,8 @@ public class GameActivity extends Activity
 		engine = new AmoebaEngine(this);
 
 		view = (ViewService) engine.getService(ServiceType.VIEW);
+
+		input = (InputService) engine.getService(ServiceType.INPUT);
 
 		setWindowFeatures();
 

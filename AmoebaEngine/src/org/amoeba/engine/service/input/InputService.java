@@ -21,4 +21,10 @@ public interface InputService extends Service
 	 * @param event raw MotionEvent from Android OS
 	 */
 	public void handleRawInputEvent(MotionEvent event);
+
+	/**
+	 * Enables or disables detection of LONGPRESS events.
+	 * @param enabled whether or not longpress gesture is enabled
+	 */
+	public void setLongpressEnabled(boolean enabled);
 }

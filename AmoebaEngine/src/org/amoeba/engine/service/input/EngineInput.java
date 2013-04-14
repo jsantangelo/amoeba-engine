@@ -44,4 +44,20 @@ public class EngineInput implements InputService
 		gestureListener.onTouchEvent(event);
 	}
 
+	/**
+	 * Enables or disables detection of LONGPRESS events.
+	 * @param enabled whether or not longpress gesture is enabled
+	 */
+	public void setLongpressEnabled(final boolean enabled)
+	{
+		if (!enabled)
+		{
+			gestureListener.disableLongpress();
+		}
+		else
+		{
+			gestureListener.enableLongpress();
+		}
+	}
+
 }
