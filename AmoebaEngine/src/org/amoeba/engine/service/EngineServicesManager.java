@@ -2,19 +2,17 @@ package org.amoeba.engine.service;
 
 import java.util.EnumMap;
 
-import android.content.Context;
-
 import org.amoeba.engine.routing.Router;
-import org.amoeba.engine.service.thread.ThreadService;
-import org.amoeba.engine.service.thread.EngineThreadService;
 import org.amoeba.engine.service.input.EngineInput;
 import org.amoeba.engine.service.input.InputService;
-import org.amoeba.engine.service.renderer.RendererService;
 import org.amoeba.engine.service.renderer.GLES20RendererService;
-import org.amoeba.engine.service.texture.EngineTextureService;
-import org.amoeba.engine.service.texture.TextureService;
+import org.amoeba.engine.service.renderer.RendererService;
+import org.amoeba.engine.service.thread.EngineThreadService;
+import org.amoeba.engine.service.thread.ThreadService;
 import org.amoeba.engine.service.view.EngineView;
 import org.amoeba.engine.service.view.ViewService;
+
+import android.content.Context;
 
 /**
  * Implementation of the ServicesManager component of AmoebaEngine. Responsible
@@ -61,10 +59,6 @@ public class EngineServicesManager implements ServicesManager
 		//View Services
 		ViewService viewService = new EngineView(currentContext, rendererService, inputService, threadService);
 		services.put(ServiceType.VIEW, viewService);
-
-		//Texture Services
-		TextureService textureService = new EngineTextureService();
-		services.put(ServiceType.TEXTURE, textureService);
 	}
 
 	/**
