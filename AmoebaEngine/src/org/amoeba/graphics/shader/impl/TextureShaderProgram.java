@@ -1,4 +1,4 @@
-package org.amoeba.graphics.shader.source;
+package org.amoeba.graphics.shader.impl;
 
 import java.util.ArrayList;
 

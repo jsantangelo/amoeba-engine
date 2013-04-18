@@ -1,4 +1,6 @@
-package org.amoeba.graphics.camera;
+package org.amoeba.graphics.camera.impl;
+
+import org.amoeba.graphics.camera.Camera;
 
 import android.opengl.Matrix;
 

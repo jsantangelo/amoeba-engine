@@ -1,4 +1,4 @@
-package org.amoeba.graphics.utilities;
+package org.amoeba.graphics.utilities.impl;
 
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
@@ -7,6 +7,7 @@ import java.nio.IntBuffer;
 import org.amoeba.graphics.texture.Texture;
 import org.amoeba.graphics.texture.TextureOptions;
 import org.amoeba.graphics.texture.TextureOptions.Preset;
+import org.amoeba.graphics.utilities.TextureUtilities;
 
 import android.content.Context;
 import android.graphics.Bitmap;

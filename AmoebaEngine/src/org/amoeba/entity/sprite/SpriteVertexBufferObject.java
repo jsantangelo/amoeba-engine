@@ -5,7 +5,7 @@ import java.nio.ByteOrder;
 import java.nio.FloatBuffer;
 
 import org.amoeba.graphics.shader.ShaderConstants;
-import org.amoeba.graphics.shader.source.TextureShaderProgram;
+import org.amoeba.graphics.shader.impl.TextureShaderProgram;
 import org.amoeba.graphics.utilities.BufferUtilities;
 import org.amoeba.graphics.vbo.BufferConstants;
 import org.amoeba.graphics.vbo.VertexBufferObject;

@@ -2,7 +2,7 @@ package org.amoeba.entity.sprite;
 
 import org.amoeba.graphics.camera.Camera;
 import org.amoeba.graphics.shader.ShaderConstants;
-import org.amoeba.graphics.shader.source.TextureShaderProgram;
+import org.amoeba.graphics.shader.impl.TextureShaderProgram;
 import org.amoeba.graphics.texture.Texture;
 import org.amoeba.graphics.utilities.ColorTransition;
 import org.amoeba.graphics.utilities.MatrixHelper;

@@ -1,5 +1,7 @@
-package org.amoeba.graphics.texture;
+package org.amoeba.graphics.texture.impl;
 
+import org.amoeba.graphics.texture.Texture;
+import org.amoeba.graphics.texture.TextureOptions;
 import org.amoeba.graphics.utilities.TextureUtilities;
 
 /**

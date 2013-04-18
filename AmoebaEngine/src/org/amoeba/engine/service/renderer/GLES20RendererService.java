@@ -5,7 +5,7 @@ import javax.microedition.khronos.opengles.GL10;
 
 import org.amoeba.engine.routing.Router;
 import org.amoeba.graphics.camera.Camera;
-import org.amoeba.graphics.camera.Camera2D;
+import org.amoeba.graphics.camera.impl.Camera2D;
 
 import android.opengl.GLES20;
 import android.util.Log;
