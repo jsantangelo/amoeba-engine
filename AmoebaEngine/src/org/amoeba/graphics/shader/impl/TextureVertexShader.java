@@ -2,6 +2,7 @@ package org.amoeba.graphics.shader.impl;
 
 import org.amoeba.graphics.shader.Shader;
 import org.amoeba.graphics.shader.ShaderConstants;
+import org.amoeba.graphics.utilities.ShaderUtilities;
 
 import android.opengl.GLES20;
 
@@ -13,10 +14,12 @@ public class TextureVertexShader extends Shader
 {
 	/**
 	 * Constructor for TextureVertexShader.
+	 * @param shaderUtilities The utilities to be used with this shader.
 	 */
-	public TextureVertexShader()
+	public TextureVertexShader(final ShaderUtilities shaderUtilities)
 	{
 		setType(GLES20.GL_VERTEX_SHADER);
+		setShaderUtilities(shaderUtilities);
 		setHandle(-1);
 		setSource(
 			"uniform mat4 " + ShaderConstants.UNIFORM_MVPMATRIX + ";\n" +

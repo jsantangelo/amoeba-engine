@@ -10,6 +10,7 @@ import org.amoeba.graphics.utilities.ShaderUtilities;
  */
 public abstract class ShaderProgram
 {
+	private ShaderUtilities shaderUtilities;
 	private ArrayList<Shader> shaders;
 	private int handle;
 
@@ -30,12 +31,12 @@ public abstract class ShaderProgram
 	 */
 	public int link()
 	{
-		handle = ShaderUtilities.generateProgramHandle();
-		ShaderUtilities.attachShadersToProgram(handle, shaders);
+		handle = shaderUtilities.generateProgramHandle();
+		shaderUtilities.attachShadersToProgram(handle, shaders);
 
-		if (!ShaderUtilities.linkProgram(handle))
+		if (!shaderUtilities.linkProgram(handle))
 		{
-			ShaderUtilities.deleteProgram(handle);
+			shaderUtilities.deleteProgram(handle);
 			handle = 0;
 		}
 
@@ -47,7 +48,7 @@ public abstract class ShaderProgram
 	 */
 	public void use()
 	{
-		ShaderUtilities.useProgram(handle);
+		shaderUtilities.useProgram(handle);
 	}
 
 	/**
@@ -56,7 +57,7 @@ public abstract class ShaderProgram
 	 */
 	public boolean isInUse()
 	{
-		return (ShaderUtilities.isProgramInUse(handle));
+		return (shaderUtilities.isProgramInUse(handle));
 	}
 
 	/**
@@ -66,7 +67,7 @@ public abstract class ShaderProgram
 	{
 		if (isInUse())
 		{
-			ShaderUtilities.useProgram(0);
+			shaderUtilities.useProgram(0);
 		}
 	}
 
@@ -77,7 +78,7 @@ public abstract class ShaderProgram
 	 */
 	public int getAttributeLocation(final String attributeName)
 	{
-		return ShaderUtilities.getAttributeLocation(handle, attributeName);
+		return shaderUtilities.getAttributeLocation(handle, attributeName);
 	}
 
 	/**
@@ -87,7 +88,7 @@ public abstract class ShaderProgram
 	 */
 	public int getUniformLocation(final String uniformName)
 	{
-		return ShaderUtilities.getUniformLocation(handle, uniformName);
+		return shaderUtilities.getUniformLocation(handle, uniformName);
 	}
 
 	/**

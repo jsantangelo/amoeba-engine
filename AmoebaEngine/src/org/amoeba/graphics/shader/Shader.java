@@ -7,6 +7,7 @@ import org.amoeba.graphics.utilities.ShaderUtilities;
  */
 public abstract class Shader
 {
+	private ShaderUtilities shaderUtilities;
 	private String source;
 	private int handle, type;
 
@@ -42,7 +43,7 @@ public abstract class Shader
 	 */
 	public void compile()
 	{
-		handle = ShaderUtilities.compileShaderFromSource(source, type);
+		handle = shaderUtilities.compileShaderFromSource(source, type);
 	}
 
 	/**
@@ -70,5 +71,14 @@ public abstract class Shader
 	protected void setHandle(final int shaderHandle)
 	{
 		handle = shaderHandle;
+	}
+
+	/**
+	 * Set the utilities to be used with this shader.
+	 * @param utilities The shader utilities.
+	 */
+	protected void setShaderUtilities(final ShaderUtilities utilities)
+	{
+		shaderUtilities = utilities;
 	}
 }

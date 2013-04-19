@@ -2,6 +2,7 @@ package org.amoeba.graphics.shader.impl;
 
 import org.amoeba.graphics.shader.Shader;
 import org.amoeba.graphics.shader.ShaderConstants;
+import org.amoeba.graphics.utilities.ShaderUtilities;
 
 import android.opengl.GLES20;
 
@@ -13,10 +14,12 @@ public class TextureFragmentShader extends Shader
 {
 	/**
 	 * The constructor for TextureFragmentShader.
+	 * @param shaderUtilities The utilities to be used with this shader.
 	 */
-	public TextureFragmentShader()
+	public TextureFragmentShader(final ShaderUtilities shaderUtilities)
 	{
 		setType(GLES20.GL_FRAGMENT_SHADER);
+		setShaderUtilities(shaderUtilities);
 		setHandle(-1);
 		setSource(
 			"precision mediump float;\n" +

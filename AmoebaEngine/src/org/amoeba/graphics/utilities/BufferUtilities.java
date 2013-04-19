@@ -4,32 +4,18 @@ import java.nio.Buffer;
 
 import org.amoeba.graphics.vbo.VertexBufferObjectAttribute;
 
-import android.opengl.GLES20;
-
 /**
  * BufferUtilities contains OpenGL functions for VBOs.
  */
-public final class BufferUtilities
+public interface BufferUtilities
 {
-	/**
-	 * Constructor for BufferUtilities. (Hidden)
-	 */
-	private BufferUtilities()
-	{
-
-	}
-
 	/**
 	 * Bind a Vertex Buffer Attribute in OpenGL.
 	 * @param attribute The attribute to be bound.
 	 * @param buffer The buffer containing the data.
 	 * @param stride The stride bytes for the buffer.
 	 */
-	public static void bindVertexAttribute(final VertexBufferObjectAttribute attribute, final Buffer buffer, final int stride)
-	{
-		GLES20.glVertexAttribPointer(attribute.getLocation(), attribute.getSize(), attribute.getType(), attribute.isNormalized(), stride, buffer);
-		GLES20.glEnableVertexAttribArray(attribute.getLocation());
-	}
+	public void bindVertexAttribute(final VertexBufferObjectAttribute attribute, final Buffer buffer, final int stride);
 
 	/**
 	 * Render primitives from the stored data.
@@ -37,8 +23,5 @@ public final class BufferUtilities
 	 * @param offset The offset to the data to be rendered.
 	 * @param count The number of vertices to be rendered.
 	 */
-	public static void drawVertexBuffer(final int mode, final int offset, final int count)
-	{
-		GLES20.glDrawArrays(mode, offset, count);
-	}
+	public void drawVertexBuffer(final int mode, final int offset, final int count);
 }

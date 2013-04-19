@@ -4,6 +4,7 @@ import org.amoeba.graphics.camera.Camera;
 import org.amoeba.graphics.shader.ShaderConstants;
 import org.amoeba.graphics.shader.impl.TextureShaderProgram;
 import org.amoeba.graphics.texture.Texture;
+import org.amoeba.graphics.utilities.BufferUtilities;
 import org.amoeba.graphics.utilities.ColorTransition;
 import org.amoeba.graphics.utilities.MatrixHelper;
 
@@ -19,15 +20,17 @@ public class TextureSprite extends Sprite
 	private SpriteVertexBufferObject spriteBuffer;
 	private TextureShaderProgram program;
 	private ColorTransition colorTransition;
+	private BufferUtilities bufferUtilities;
 
 	/**
 	 * Constructor for Sprite.
 	 * @param spriteTexture The texture on this sprite.
 	 * @param textureProgram The program used to draw this sprite.
+	 * @param utilities The utilities to be used.
 	 */
-	public TextureSprite(final Texture spriteTexture, final TextureShaderProgram textureProgram)
+	public TextureSprite(final Texture spriteTexture, final TextureShaderProgram textureProgram, final BufferUtilities utilities)
 	{
-		this(0f, 0f, spriteTexture, textureProgram);
+		this(0f, 0f, spriteTexture, textureProgram, utilities);
 	}
 
 	/**
@@ -36,19 +39,21 @@ public class TextureSprite extends Sprite
 	 * @param y The y position of the sprite (top).
 	 * @param spriteTexture The texture on this sprite.
 	 * @param textureProgram The program used to draw this sprite.
+	 * @param utilities The utilities to be used.
 	 */
-	public TextureSprite(final float x, final float y, final Texture spriteTexture, final TextureShaderProgram textureProgram)
+	public TextureSprite(final float x, final float y, final Texture spriteTexture, final TextureShaderProgram textureProgram, final BufferUtilities utilities)
 	{
 		super(x, y, spriteTexture.getWidth(), spriteTexture.getHeight());
 		texture = spriteTexture;
 		program = textureProgram;
+		bufferUtilities = utilities;
 		colorTransition = null;
 	}
 
 	@Override
 	public void load()
 	{
-		spriteBuffer = new SpriteVertexBufferObject(program);
+		spriteBuffer = new SpriteVertexBufferObject(program, bufferUtilities);
 
 		if (getWidth() == 0)
 		{

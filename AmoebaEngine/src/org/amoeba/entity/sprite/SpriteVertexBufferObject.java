@@ -46,17 +46,20 @@ public class SpriteVertexBufferObject implements VertexBufferObject
 	private int capacity;
 	private FloatBuffer spriteBuffer;
 	private VertexBufferObjectAttributeList attributeList;
+	private BufferUtilities bufferUtilities;
 
 	/**
 	 * Constructor for SpriteVertexBufferObject.
 	 * @param program A shader program used to display textures.
+	 * @param utilities The utilities to be used.
 	 */
-	public SpriteVertexBufferObject(final TextureShaderProgram program)
+	public SpriteVertexBufferObject(final TextureShaderProgram program, final BufferUtilities utilities)
 	{
 		spriteData = DEFAULT_SPRITE_DATA;
 		capacity = spriteData.length;
+		bufferUtilities = utilities;
 
-		attributeList = new VertexBufferObjectAttributeList(NUMBER_SPRITE_ATTRIBUTES);
+		attributeList = new VertexBufferObjectAttributeList(NUMBER_SPRITE_ATTRIBUTES, bufferUtilities);
 		attributeList.add(new VertexBufferObjectAttribute(
 				program.getAttributeLocation(ShaderConstants.ATTRIBUTE_POSITION),
 				ShaderConstants.ATTRIBUTE_POSITION,
@@ -158,12 +161,12 @@ public class SpriteVertexBufferObject implements VertexBufferObject
 	@Override
 	public void draw(final int mode, final int count)
 	{
-		BufferUtilities.drawVertexBuffer(mode, 0, count);
+		bufferUtilities.drawVertexBuffer(mode, 0, count);
 	}
 
 	@Override
 	public void draw(final int mode, final int offset, final int count)
 	{
-		BufferUtilities.drawVertexBuffer(mode, offset, count);
+		bufferUtilities.drawVertexBuffer(mode, offset, count);
 	}
 }

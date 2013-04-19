@@ -9,6 +9,7 @@ import org.amoeba.graphics.utilities.BufferUtilities;
  */
 public class VertexBufferObjectAttributeList
 {
+	private BufferUtilities bufferUtilities;
 	private int strideBytes;
 	private VertexBufferObjectAttribute[] attributes;
 	private int numAttributes;
@@ -16,10 +17,12 @@ public class VertexBufferObjectAttributeList
 	/**
 	 * Constructor for VertexBufferObjectAttributeList.
 	 * @param size The number of attributes in the list.
+	 * @param utilities The utilities to be used.
 	 */
-	public VertexBufferObjectAttributeList(final int size)
+	public VertexBufferObjectAttributeList(final int size, final BufferUtilities utilities)
 	{
 		attributes = new VertexBufferObjectAttribute[size];
+		bufferUtilities = utilities;
 		strideBytes = 0;
 		numAttributes = 0;
 	}
@@ -76,7 +79,7 @@ public class VertexBufferObjectAttributeList
 		for (VertexBufferObjectAttribute attribute : attributes)
 		{
 			buffer.position(attribute.getOffset());
-			BufferUtilities.bindVertexAttribute(attribute, buffer, strideBytes);
+			bufferUtilities.bindVertexAttribute(attribute, buffer, strideBytes);
 		}
 	}
 }
