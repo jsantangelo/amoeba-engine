@@ -22,5 +22,6 @@ public class TextureShaderProgram extends ShaderProgram
 		shaders.add(new TextureVertexShader(shaderUtilities));
 		shaders.add(new TextureFragmentShader(shaderUtilities));
 		setShaders(shaders);
+		setShaderUtilities(shaderUtilities);
 	}
 }

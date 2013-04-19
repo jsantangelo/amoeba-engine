@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import org.amoeba.graphics.shader.Shader;
 import org.amoeba.graphics.shader.ShaderProgram;
+import org.amoeba.graphics.utilities.ShaderUtilities;
 
 
 /**
@@ -14,8 +15,9 @@ public class CustomShaderProgram extends ShaderProgram
 	/**
 	 * Constructor for CustomShaderProgram.
 	 * @param shaders The collection of shaders in the program.
+	 * @param shaderUtilities The utilities to be used with this shader.
 	 */
-	public CustomShaderProgram(final ArrayList<Shader> shaders)
+	public CustomShaderProgram(final ArrayList<Shader> shaders, final ShaderUtilities shaderUtilities)
 	{
 		if (shaders.size() <= 0)
 		{
@@ -23,5 +25,6 @@ public class CustomShaderProgram extends ShaderProgram
 		}
 
 		setShaders(shaders);
+		setShaderUtilities(shaderUtilities);
 	}
 }

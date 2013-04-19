@@ -5,12 +5,16 @@ import org.amoeba.engine.service.input.InputEvent;
 import org.amoeba.entity.sprite.Sprite;
 import org.amoeba.entity.sprite.TextureSprite;
 import org.amoeba.graphics.camera.Camera;
-import org.amoeba.graphics.shader.source.TextureShaderProgram;
-import org.amoeba.graphics.texture.BitmapTexture;
+import org.amoeba.graphics.shader.impl.TextureShaderProgram;
 import org.amoeba.graphics.texture.Texture;
 import org.amoeba.graphics.texture.TextureOptions.Preset;
-import org.amoeba.graphics.utilities.GLES20TextureUtilities;
+import org.amoeba.graphics.texture.impl.BitmapTexture;
+import org.amoeba.graphics.utilities.BufferUtilities;
+import org.amoeba.graphics.utilities.ShaderUtilities;
 import org.amoeba.graphics.utilities.TextureUtilities;
+import org.amoeba.graphics.utilities.impl.GLES20BufferUtilities;
+import org.amoeba.graphics.utilities.impl.GLES20ShaderUtilities;
+import org.amoeba.graphics.utilities.impl.GLES20TextureUtilities;
 
 import android.graphics.Color;
 import android.os.SystemClock;
@@ -18,6 +22,8 @@ import android.os.SystemClock;
 public class SpriteExample extends GameActivity
 {
 	private TextureShaderProgram program;
+	private BufferUtilities bufferUtilities;
+	private ShaderUtilities shaderUtilities;
 	private TextureUtilities textureUtilities;
 	private Texture texture;
 	private Sprite sprite;
@@ -29,11 +35,13 @@ public class SpriteExample extends GameActivity
 		screenWidth = 1;
 		screenHeight = 1;
 
+		bufferUtilities = new GLES20BufferUtilities();
+		shaderUtilities = new GLES20ShaderUtilities();
 		textureUtilities = new GLES20TextureUtilities(this);
 
-		program = new TextureShaderProgram();
+		program = new TextureShaderProgram(shaderUtilities);
 		texture = new BitmapTexture(textureUtilities, textureUtilities.getTextureOptionsPreset(Preset.DEFAULT), R.drawable.happy);
-		sprite = new TextureSprite(texture, program);
+		sprite = new TextureSprite(texture, program, bufferUtilities);
 	}
 
 	@Override

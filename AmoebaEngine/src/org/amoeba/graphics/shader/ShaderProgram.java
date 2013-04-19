@@ -126,4 +126,13 @@ public abstract class ShaderProgram
 	{
 		shaders = programShaders;
 	}
+
+	/**
+	 * Set the shader utilities to use with this program.
+	 * @param utilities The shader utilities to use.
+	 */
+	protected void setShaderUtilities(final ShaderUtilities utilities)
+	{
+		shaderUtilities = utilities;
+	}
 }
