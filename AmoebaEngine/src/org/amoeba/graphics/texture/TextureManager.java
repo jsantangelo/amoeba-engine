@@ -3,14 +3,14 @@ package org.amoeba.graphics.texture;
 import android.util.SparseArray;
 
 /**
- * The texture service maintains a collection of textures.
+ * TextureManager maintains a collection of textures.
  */
 public class TextureManager
 {
 	private final SparseArray<Texture> textures;
 
 	/**
-	 * Constructor for EngineTextureService.
+	 * Constructor for TextureManager.
 	 */
 	public TextureManager()
 	{
@@ -54,7 +54,7 @@ public class TextureManager
 	/**
 	 * Load all textures currently maintained by the texture service.
 	 */
-	public void loadAllTextures()
+	public void loadTextures()
 	{
 		for (int index = 0; index < textures.size(); index++)
 		{
@@ -78,7 +78,7 @@ public class TextureManager
 	/**
 	 * Unload all texture currently maintained by the texture service.
 	 */
-	public void unloadAllTextures()
+	public void unloadTextures()
 	{
 		for (int index = 0; index < textures.size(); index++)
 		{
