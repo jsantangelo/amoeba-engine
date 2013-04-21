@@ -1,9 +1,6 @@
 package org.amoeba.graphics.shader;
 
-import java.util.ArrayList;
-
 import org.amoeba.graphics.utilities.ShaderUtilities;
-
 
 /**
  * ShaderProgram is the base class for all programs.
@@ -11,7 +8,8 @@ import org.amoeba.graphics.utilities.ShaderUtilities;
 public abstract class ShaderProgram
 {
 	private ShaderUtilities shaderUtilities;
-	private ArrayList<Shader> shaders;
+	private Shader fragmentShader;
+	private Shader vertexShader;
 	private int handle;
 
 	/**
@@ -19,10 +17,8 @@ public abstract class ShaderProgram
 	 */
 	public void compile()
 	{
-		for (Shader shader : shaders)
-		{
-			shader.compile();
-		}
+		fragmentShader.compile();
+		vertexShader.compile();
 	}
 
 	/**
@@ -32,7 +28,8 @@ public abstract class ShaderProgram
 	public int link()
 	{
 		handle = shaderUtilities.generateProgramHandle();
-		shaderUtilities.attachShadersToProgram(handle, shaders);
+		shaderUtilities.attachShaderToProgram(handle, vertexShader);
+		shaderUtilities.attachShaderToProgram(handle, fragmentShader);
 
 		if (!shaderUtilities.linkProgram(handle))
 		{
@@ -101,12 +98,21 @@ public abstract class ShaderProgram
 	}
 
 	/**
-	 * Get the shaders for the program.
-	 * @return The shaders of this program.
+	 * Get the fragment shader for the program.
+	 * @return The fragment shader for this program.
 	 */
-	protected ArrayList<Shader> getShaders()
+	protected Shader getFragmentShader()
 	{
-		return shaders;
+		return fragmentShader;
+	}
+
+	/**
+	 * Get the vertex shader for the program.
+	 * @return The vertex shader for this program.
+	 */
+	protected Shader getVertexShader()
+	{
+		return vertexShader;
 	}
 
 	/**
@@ -119,12 +125,21 @@ public abstract class ShaderProgram
 	}
 
 	/**
-	 * Set the shaders that make up this program.
-	 * @param programShaders The shaders that make up the program.
+	 * Set the fragment shader for this program.
+	 * @param shader The fragment shader for this program.
 	 */
-	protected void setShaders(final ArrayList<Shader> programShaders)
+	protected void setFragmentShader(final Shader shader)
 	{
-		shaders = programShaders;
+		fragmentShader = shader;
+	}
+
+	/**
+	 * Set the vertex shader for this program.
+	 * @param shader The vertex shader for this program.
+	 */
+	protected void setVertexShader(final Shader shader)
+	{
+		vertexShader = shader;
 	}
 
 	/**

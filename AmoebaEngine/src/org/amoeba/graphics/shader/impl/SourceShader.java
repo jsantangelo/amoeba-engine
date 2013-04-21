@@ -6,7 +6,7 @@ import org.amoeba.graphics.utilities.ShaderUtilities;
 /**
  * CustomShader is a Shader that is provided with a source and type.
  */
-public class CustomShader extends Shader
+public class SourceShader extends Shader
 {
 	/**
 	 * Constructor for CustomShader.
@@ -14,7 +14,7 @@ public class CustomShader extends Shader
 	 * @param shaderType The type of the shader (e.g. Vertex or Fragment).
 	 * @param shaderUtilities The utilities to be used with this shader.
 	 */
-	public CustomShader(final String shaderSource, final int shaderType, final ShaderUtilities shaderUtilities)
+	public SourceShader(final String shaderSource, final int shaderType, final ShaderUtilities shaderUtilities)
 	{
 		setSource(shaderSource);
 		setType(shaderType);

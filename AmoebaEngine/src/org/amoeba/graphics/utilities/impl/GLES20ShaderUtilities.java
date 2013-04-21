@@ -1,7 +1,5 @@
 package org.amoeba.graphics.utilities.impl;
 
-import java.util.ArrayList;
-
 import org.amoeba.graphics.shader.Shader;
 import org.amoeba.graphics.utilities.ShaderUtilities;
 
@@ -73,16 +71,13 @@ public class GLES20ShaderUtilities implements ShaderUtilities
 	}
 
 	/**
-	 * Attach a collection of shaders to a program.
-	 * @param programHandle The program with which the shaders will attach.
-	 * @param shaders The collections of shaders to be attached.
+	 * Attach a shader to a program.
+	 * @param programHandle The program with which the shader will be attached.
+	 * @param shader The shader to be attached.
 	 */
-	public void attachShadersToProgram(final int programHandle, final ArrayList<Shader> shaders)
+	public void attachShaderToProgram(final int programHandle, final Shader shader)
 	{
-		for (int i = 0; i < shaders.size(); i++)
-		{
-			GLES20.glAttachShader(programHandle, shaders.get(i).getHandle());
-		}
+		GLES20.glAttachShader(programHandle, shader.getHandle());
 	}
 
 	/**
@@ -177,5 +172,23 @@ public class GLES20ShaderUtilities implements ShaderUtilities
 		}
 
 		return uniform;
+	}
+
+	/**
+	 * Get the OpenGL integer value for a Fragment Shader.
+	 * @return The integer value representing GL_FRAGMENT_SHADER.
+	 */
+	public int getFragmentShaderId()
+	{
+		return GLES20.GL_FRAGMENT_SHADER;
+	}
+
+	/**
+	 * Get the OpenGL integer value for a Vertex Shader.
+	 * @return The integer value representing GL_VERTEX_SHADER.
+	 */
+	public int getVertexShaderId()
+	{
+		return GLES20.GL_VERTEX_SHADER;
 	}
 }

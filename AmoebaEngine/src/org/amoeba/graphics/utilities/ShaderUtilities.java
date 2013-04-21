@@ -1,7 +1,5 @@
 package org.amoeba.graphics.utilities;
 
-import java.util.ArrayList;
-
 import org.amoeba.graphics.shader.Shader;
 
 /**
@@ -25,11 +23,11 @@ public interface ShaderUtilities
 	public int generateProgramHandle();
 
 	/**
-	 * Attach a collection of shaders to a program.
-	 * @param programHandle The program with which the shaders will attach.
-	 * @param shaders The collections of shaders to be attached.
+	 * Attach a shader to a program.
+	 * @param programHandle The program with which the shader will be attached.
+	 * @param shader The shader to be attached.
 	 */
-	public void attachShadersToProgram(final int programHandle, final ArrayList<Shader> shaders);
+	public void attachShaderToProgram(final int programHandle, final Shader shader);
 
 	/**
 	 * Link a program with a given OpenGL program handle.
@@ -72,4 +70,16 @@ public interface ShaderUtilities
 	 * @return The OpenGL handle of the uniform.
 	 */
 	public int getUniformLocation(final int programHandle, final String uniformName);
+
+	/**
+	 * Get the OpenGL integer value for a Fragment Shader.
+	 * @return The integer value representing GL_FRAGMENT_SHADER.
+	 */
+	public int getFragmentShaderId();
+
+	/**
+	 * Get the OpenGL integer value for a Vertex Shader.
+	 * @return The integer value representing GL_VERTEX_SHADER.
+	 */
+	public int getVertexShaderId();
 }

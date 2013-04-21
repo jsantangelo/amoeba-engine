@@ -75,8 +75,8 @@ public class SpriteExample extends GameActivity
 		screenHeight = height;
 
 		sprite.setPosition(screenWidth / 2, screenHeight / 2);
-		sprite.setScaleX(screenWidth / 2);
-		sprite.setScaleY(screenHeight / 2);
+		sprite.setScaleX(screenWidth / 2); // Change to setWidth?
+		sprite.setScaleY(screenHeight / 2); // Change to setHeight?
 		sprite.setColor(Color.BLUE, 10000L);
 	}
 
