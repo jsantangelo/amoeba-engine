@@ -4,14 +4,14 @@ import org.amoeba.activity.GameActivity;
 import org.amoeba.engine.service.input.InputEvent;
 import org.amoeba.entity.sprite.Sprite;
 import org.amoeba.entity.sprite.SpriteManager;
-import org.amoeba.entity.sprite.TextureSprite;
+import org.amoeba.entity.sprite.impl.TextureSprite;
 import org.amoeba.graphics.camera.Camera;
 import org.amoeba.graphics.shader.ShaderProgramManager;
 import org.amoeba.graphics.shader.impl.TextureShaderProgram;
 import org.amoeba.graphics.texture.Texture;
+import org.amoeba.graphics.texture.TextureFactory;
 import org.amoeba.graphics.texture.TextureManager;
-import org.amoeba.graphics.texture.TextureOptions.Preset;
-import org.amoeba.graphics.texture.impl.BitmapTexture;
+import org.amoeba.graphics.texture.impl.BitmapTextureFactory;
 import org.amoeba.graphics.utilities.BufferUtilities;
 import org.amoeba.graphics.utilities.ShaderUtilities;
 import org.amoeba.graphics.utilities.TextureUtilities;
@@ -27,9 +27,12 @@ public class SpriteExample extends GameActivity
 	private BufferUtilities bufferUtilities;
 	private ShaderUtilities shaderUtilities;
 	private TextureUtilities textureUtilities;
+
 	private ShaderProgramManager shaderProgramManager;
 	private SpriteManager spriteManager;
 	private TextureManager textureManager;
+
+	private TextureFactory textureFactory;
 
 	private TextureShaderProgram program;
 	private Texture texture;
@@ -50,11 +53,11 @@ public class SpriteExample extends GameActivity
 		spriteManager = new SpriteManager();
 		textureManager = new TextureManager();
 
+		textureFactory = new BitmapTextureFactory(textureManager, textureUtilities);
+		texture = textureFactory.createTexture(R.drawable.happy);
+
 		program = new TextureShaderProgram(shaderUtilities);
 		shaderProgramManager.add(program);
-
-		texture = new BitmapTexture(textureUtilities, textureUtilities.getTextureOptionsPreset(Preset.DEFAULT), R.drawable.happy);
-		textureManager.add(texture);
 
 		sprite = new TextureSprite(texture, program, bufferUtilities);
 		spriteManager.add(sprite);
@@ -75,8 +78,6 @@ public class SpriteExample extends GameActivity
 		screenHeight = height;
 
 		sprite.setPosition(screenWidth / 2, screenHeight / 2);
-		sprite.setScaleX(screenWidth / 2); // Change to setWidth?
-		sprite.setScaleY(screenHeight / 2); // Change to setHeight?
 		sprite.setColor(Color.BLUE, 10000L);
 	}
 
