@@ -6,6 +6,7 @@ import org.amoeba.entity.sprite.Sprite;
 import org.amoeba.entity.sprite.SpriteManager;
 import org.amoeba.entity.sprite.TextureSprite;
 import org.amoeba.graphics.camera.Camera;
+import org.amoeba.graphics.shader.ShaderProgramManager;
 import org.amoeba.graphics.shader.impl.TextureShaderProgram;
 import org.amoeba.graphics.texture.Texture;
 import org.amoeba.graphics.texture.TextureManager;
@@ -26,6 +27,7 @@ public class SpriteExample extends GameActivity
 	private BufferUtilities bufferUtilities;
 	private ShaderUtilities shaderUtilities;
 	private TextureUtilities textureUtilities;
+	private ShaderProgramManager shaderProgramManager;
 	private SpriteManager spriteManager;
 	private TextureManager textureManager;
 
@@ -43,10 +45,13 @@ public class SpriteExample extends GameActivity
 		bufferUtilities = new GLES20BufferUtilities();
 		shaderUtilities = new GLES20ShaderUtilities();
 		textureUtilities = new GLES20TextureUtilities(this);
+
+		shaderProgramManager = new ShaderProgramManager();
 		spriteManager = new SpriteManager();
 		textureManager = new TextureManager();
 
 		program = new TextureShaderProgram(shaderUtilities);
+		shaderProgramManager.add(program);
 
 		texture = new BitmapTexture(textureUtilities, textureUtilities.getTextureOptionsPreset(Preset.DEFAULT), R.drawable.happy);
 		textureManager.add(texture);
@@ -58,9 +63,7 @@ public class SpriteExample extends GameActivity
 	@Override
 	public void onSurfaceCreated()
 	{
-		program.compile();
-		program.link();
-
+		shaderProgramManager.loadPrograms();
 		textureManager.loadTextures();
 		spriteManager.loadSprites();
 	}
