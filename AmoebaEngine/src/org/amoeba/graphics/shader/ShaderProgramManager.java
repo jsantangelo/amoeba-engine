@@ -42,25 +42,25 @@ public class ShaderProgramManager
 	}
 
 	/**
-	 * Check if a program exists given the vertex and fragment shaders' source.
+	 * Get a program given the vertex and fragment shaders' source.
 	 * @param vertexShader The source of the vertex shader.
 	 * @param fragmentShader The source of the fragment shader.
-	 * @return Whether the program was found in the collection.
+	 * @return The program if it was found in the collection.
 	 */
-	public boolean contains(final String vertexShader, final String fragmentShader)
+	public ShaderProgram getProgram(final String vertexShader, final String fragmentShader)
 	{
-		boolean found = false;
+		ShaderProgram foundProgram = null;
 
 		for (ShaderProgram program : programs)
 		{
 			if (program.getVertexShader().getSource() == vertexShader &&
 					program.getFragmentShader().getSource() == fragmentShader)
 			{
-				found = true;
+				foundProgram = program;
 				break;
 			}
 		}
 
-		return found;
+		return foundProgram;
 	}
 }

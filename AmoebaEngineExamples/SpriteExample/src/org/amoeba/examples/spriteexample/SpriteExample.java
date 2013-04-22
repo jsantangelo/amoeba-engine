@@ -3,12 +3,11 @@ package org.amoeba.examples.spriteexample;
 import org.amoeba.activity.GameActivity;
 import org.amoeba.engine.service.input.InputEvent;
 import org.amoeba.entity.sprite.Sprite;
+import org.amoeba.entity.sprite.SpriteFactory;
 import org.amoeba.entity.sprite.SpriteManager;
-import org.amoeba.entity.sprite.impl.TextureSprite;
+import org.amoeba.entity.sprite.impl.TextureSpriteFactory;
 import org.amoeba.graphics.camera.Camera;
 import org.amoeba.graphics.shader.ShaderProgramManager;
-import org.amoeba.graphics.shader.impl.TextureShaderProgram;
-import org.amoeba.graphics.texture.Texture;
 import org.amoeba.graphics.texture.TextureFactory;
 import org.amoeba.graphics.texture.TextureManager;
 import org.amoeba.graphics.texture.impl.BitmapTextureFactory;
@@ -33,9 +32,8 @@ public class SpriteExample extends GameActivity
 	private TextureManager textureManager;
 
 	private TextureFactory textureFactory;
+	private SpriteFactory spriteFactory;
 
-	private TextureShaderProgram program;
-	private Texture texture;
 	private Sprite sprite;
 
 	private int screenWidth, screenHeight;
@@ -54,13 +52,9 @@ public class SpriteExample extends GameActivity
 		textureManager = new TextureManager();
 
 		textureFactory = new BitmapTextureFactory(textureManager, textureUtilities);
-		texture = textureFactory.createTexture(R.drawable.happy);
+		spriteFactory = new TextureSpriteFactory(textureManager, textureFactory, shaderProgramManager, shaderUtilities, bufferUtilities, spriteManager);
 
-		program = new TextureShaderProgram(shaderUtilities);
-		shaderProgramManager.add(program);
-
-		sprite = new TextureSprite(texture, program, bufferUtilities);
-		spriteManager.add(sprite);
+		sprite = spriteFactory.createSprite(R.drawable.happy);
 	}
 
 	@Override
