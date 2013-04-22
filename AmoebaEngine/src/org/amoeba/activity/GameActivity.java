@@ -1,12 +1,5 @@
 package org.amoeba.activity;
 
-import android.app.Activity;
-import android.opengl.GLSurfaceView;
-import android.os.Bundle;
-import android.view.Window;
-import android.view.WindowManager;
-import android.util.Log;
-
 import org.amoeba.engine.AmoebaEngine;
 import org.amoeba.engine.routing.DrawListener;
 import org.amoeba.engine.routing.InputListener;
@@ -17,6 +10,13 @@ import org.amoeba.engine.service.input.InputEvent;
 import org.amoeba.engine.service.input.InputService;
 import org.amoeba.engine.service.view.ViewService;
 import org.amoeba.graphics.camera.Camera;
+
+import android.app.Activity;
+import android.opengl.GLSurfaceView;
+import android.os.Bundle;
+import android.util.Log;
+import android.view.Window;
+import android.view.WindowManager;
 
 /**
  * An extension of Activity meant to be inherited.
@@ -32,7 +32,7 @@ public class GameActivity extends Activity
 	private InputService input;
 
 	/**
-	 * Returnes the AmoebaEngine for this Activity.
+	 * Returns the AmoebaEngine for this Activity.
 	 * @return the engine
 	 */
 	protected AmoebaEngine getEngine()
