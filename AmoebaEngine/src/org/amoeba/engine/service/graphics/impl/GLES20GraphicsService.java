@@ -1,5 +1,6 @@
 package org.amoeba.engine.service.graphics.impl;
 
+import org.amoeba.engine.routing.Router;
 import org.amoeba.engine.service.graphics.GraphicsService;
 import org.amoeba.entity.sprite.SpriteFactory;
 import org.amoeba.entity.sprite.SpriteManager;
@@ -16,12 +17,15 @@ import org.amoeba.graphics.utilities.impl.GLES20ShaderUtilities;
 import org.amoeba.graphics.utilities.impl.GLES20TextureUtilities;
 
 import android.content.Context;
+import android.opengl.GLSurfaceView;
 
 /**
  * GLES20GraphicsService is an implementation of a GraphicsService for OpenGL ES 2.0.
  */
 public class GLES20GraphicsService implements GraphicsService
 {
+	private static final int GLES_VERSION = 2;
+
 	private final Context activityContext;
 
 	private final BufferUtilities bufferUtilities;
@@ -35,11 +39,14 @@ public class GLES20GraphicsService implements GraphicsService
 	private final TextureFactory textureFactory;
 	private final SpriteFactory spriteFactory;
 
+	private final GLSurfaceView.Renderer renderer;
+
 	/**
 	 * Constructor for GLES20GraphicsService.
 	 * @param context The activity context.
+	 * @param router The callback router.
 	 */
-	public GLES20GraphicsService(final Context context)
+	public GLES20GraphicsService(final Context context, final Router router)
 	{
 		activityContext = context;
 
@@ -53,6 +60,8 @@ public class GLES20GraphicsService implements GraphicsService
 
 		textureFactory = new BitmapTextureFactory(textureManager, textureUtilities);
 		spriteFactory = new TextureSpriteFactory(textureManager, textureFactory, shaderProgramManager, shaderUtilities, bufferUtilities, spriteManager);
+
+		renderer = new GLES20Renderer(router);
 	}
 
 	@Override
@@ -61,4 +70,15 @@ public class GLES20GraphicsService implements GraphicsService
 		return spriteFactory;
 	}
 
+	@Override
+	public GLSurfaceView.Renderer getRenderer()
+	{
+		return renderer;
+	}
+
+	@Override
+	public int getGLVersion()
+	{
+		return GLES_VERSION;
+	}
 }

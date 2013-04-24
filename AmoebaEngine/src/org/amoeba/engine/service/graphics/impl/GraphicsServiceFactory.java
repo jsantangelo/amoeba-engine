@@ -1,5 +1,6 @@
 package org.amoeba.engine.service.graphics.impl;
 
+import org.amoeba.engine.routing.Router;
 import org.amoeba.engine.service.graphics.GraphicsService;
 
 import android.app.ActivityManager;
@@ -24,9 +25,10 @@ public final class GraphicsServiceFactory
 	/**
 	 * Creates and returns a graphics service based off of the version of OpenGL.
 	 * @param context The activity context.
+	 * @param router The callback router.
 	 * @return A graphics service.
 	 */
-	public static GraphicsService getGraphicsService(final Context context)
+	public static GraphicsService getGraphicsService(final Context context, final Router router)
 	{
 		GraphicsService graphicsService = null;
 
@@ -34,7 +36,7 @@ public final class GraphicsServiceFactory
         final ConfigurationInfo configurationInfo = activityManager.getDeviceConfigurationInfo();
         if (configurationInfo.reqGlEsVersion >= GLES20)
         {
-        	graphicsService = new GLES20GraphicsService(context);
+        	graphicsService = new GLES20GraphicsService(context, router);
         }
 
 		return graphicsService;
