@@ -1,5 +1,7 @@
 package org.amoeba.engine.service.graphics;
 
+import org.amoeba.engine.routing.SurfaceListener;
+import org.amoeba.engine.service.Service;
 import org.amoeba.entity.sprite.SpriteFactory;
 
 import android.opengl.GLSurfaceView;
@@ -8,7 +10,7 @@ import android.opengl.GLSurfaceView;
  * Service provided by AmoebaEngine, responsible for preparing the
  * graphics framework.
  */
-public interface GraphicsService
+public interface GraphicsService extends Service, SurfaceListener
 {
 	/**
 	 * Get a Sprite Factory, used to create sprites.

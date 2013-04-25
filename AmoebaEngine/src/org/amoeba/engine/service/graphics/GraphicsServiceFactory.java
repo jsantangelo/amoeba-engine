@@ -1,7 +1,7 @@
-package org.amoeba.engine.service.graphics.impl;
+package org.amoeba.engine.service.graphics;
 
 import org.amoeba.engine.routing.Router;
-import org.amoeba.engine.service.graphics.GraphicsService;
+import org.amoeba.engine.service.graphics.impl.GLES20GraphicsService;
 
 import android.app.ActivityManager;
 import android.content.Context;

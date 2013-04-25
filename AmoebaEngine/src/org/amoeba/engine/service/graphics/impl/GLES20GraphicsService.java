@@ -62,6 +62,10 @@ public class GLES20GraphicsService implements GraphicsService
 		spriteFactory = new TextureSpriteFactory(textureManager, textureFactory, shaderProgramManager, shaderUtilities, bufferUtilities, spriteManager);
 
 		renderer = new GLES20Renderer(router);
+
+		router.registerForDraw(spriteManager);
+		router.registerForUpdate(spriteManager);
+		router.registerForSurfaceEvents(this);
 	}
 
 	@Override
@@ -80,5 +84,19 @@ public class GLES20GraphicsService implements GraphicsService
 	public int getGLVersion()
 	{
 		return GLES_VERSION;
+	}
+
+	@Override
+	public void onSurfaceCreated()
+	{
+		shaderProgramManager.loadPrograms();
+		textureManager.loadTextures();
+		spriteManager.loadSprites();
+	}
+
+	@Override
+	public void onSurfaceChanged(final int width, final int height)
+	{
+
 	}
 }

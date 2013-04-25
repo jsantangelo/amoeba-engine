@@ -1,15 +1,15 @@
 package org.amoeba.engine.service.view;
 
+import org.amoeba.engine.service.graphics.GraphicsService;
 import org.amoeba.engine.service.input.InputService;
-import org.amoeba.engine.service.renderer.RendererService;
 import org.amoeba.engine.service.thread.ThreadService;
 import org.amoeba.engine.service.thread.ThreadType;
 
 import android.content.Context;
 import android.opengl.GLSurfaceView;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
-import android.util.Log;
 
 /**
  * Implements the ViewService service component provided by AmoebaEngine.
@@ -21,24 +21,24 @@ public class EngineView extends GLSurfaceView
 {
 	private static final String TAG = "AmoebaEngine.EngineView";
 
-	private RendererService rendererService;
+	private GraphicsService graphicsService;
 	private InputService inputService;
 	private ThreadService threadService;
 
 	/**
 	 * Constructor.
 	 * @param context current Activity context
-	 * @param renderer GLRenderer to be attached to this view
+	 * @param graphics Graphics service
 	 * @param input Service to be called on raw MotionEvent receipt from
 	 *              the Android OS
 	 * @param thread thread to be managed by the view
 	 */
-	public EngineView(final Context context, final RendererService renderer,
+	public EngineView(final Context context, final GraphicsService graphics,
 		final InputService input, final ThreadService thread)
 	{
 		super(context);
 
-		rendererService = renderer;
+		graphicsService = graphics;
 		inputService = input;
 		threadService = thread;
 
@@ -72,8 +72,8 @@ public class EngineView extends GLSurfaceView
 	private void initializeRenderer()
 	{
 		setDebugFlags(DEBUG_CHECK_GL_ERROR | DEBUG_LOG_GL_CALLS);
-		setEGLContextClientVersion(2);
-		setRenderer(rendererService);
+		setEGLContextClientVersion(graphicsService.getGLVersion());
+		setRenderer(graphicsService.getRenderer());
 		setRenderMode(GLSurfaceView.RENDERMODE_WHEN_DIRTY);
 	}
 

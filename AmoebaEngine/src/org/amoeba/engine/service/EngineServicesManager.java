@@ -3,10 +3,10 @@ package org.amoeba.engine.service;
 import java.util.EnumMap;
 
 import org.amoeba.engine.routing.Router;
+import org.amoeba.engine.service.graphics.GraphicsService;
+import org.amoeba.engine.service.graphics.GraphicsServiceFactory;
 import org.amoeba.engine.service.input.EngineInput;
 import org.amoeba.engine.service.input.InputService;
-import org.amoeba.engine.service.renderer.GLES20RendererService;
-import org.amoeba.engine.service.renderer.RendererService;
 import org.amoeba.engine.service.thread.EngineThreadService;
 import org.amoeba.engine.service.thread.ThreadService;
 import org.amoeba.engine.service.view.EngineView;
@@ -48,16 +48,16 @@ public class EngineServicesManager implements ServicesManager
 		InputService inputService = new EngineInput(currentContext, callbackRouter);
 		services.put(ServiceType.INPUT, inputService);
 
-		//Renderer Services
-		RendererService rendererService = new GLES20RendererService(callbackRouter);
-		services.put(ServiceType.RENDERER, rendererService);
-
 		//Thread Services
 		ThreadService threadService = new EngineThreadService(callbackRouter);
 		services.put(ServiceType.THREAD, threadService);
 
+		//Graphics Services
+		GraphicsService graphicsService = GraphicsServiceFactory.getGraphicsService(currentContext, callbackRouter);
+		services.put(ServiceType.GRAPHICS, graphicsService);
+
 		//View Services
-		ViewService viewService = new EngineView(currentContext, rendererService, inputService, threadService);
+		ViewService viewService = new EngineView(currentContext, graphicsService, inputService, threadService);
 		services.put(ServiceType.VIEW, viewService);
 	}
 
