@@ -4,6 +4,7 @@ import org.amoeba.activity.GameActivity;
 import org.amoeba.entity.sprite.Sprite;
 
 import android.graphics.Color;
+import android.os.Bundle;
 import android.os.SystemClock;
 
 public class SpriteExample extends GameActivity
@@ -16,7 +17,12 @@ public class SpriteExample extends GameActivity
 	{
 		screenWidth = 1;
 		screenHeight = 1;
+	}
 
+	@Override
+	protected void onCreate(final Bundle savedInstanceState)
+	{
+		super.onCreate(savedInstanceState);
 		sprite = getGraphicsService().getSpriteFactory().createSprite(R.drawable.happy);
 	}
 
@@ -30,6 +36,7 @@ public class SpriteExample extends GameActivity
 		sprite.setColor(Color.BLUE, 10000L);
 	}
 
+	@Override
 	public void onUpdate()
 	{
 		long time = SystemClock.uptimeMillis() % 10000L;
