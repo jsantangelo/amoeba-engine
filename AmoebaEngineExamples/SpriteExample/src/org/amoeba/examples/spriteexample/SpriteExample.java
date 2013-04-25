@@ -11,14 +11,6 @@ public class SpriteExample extends GameActivity
 {
 	private Sprite sprite;
 
-	private int screenWidth, screenHeight;
-
-	public SpriteExample()
-	{
-		screenWidth = 1;
-		screenHeight = 1;
-	}
-
 	@Override
 	protected void onCreate(final Bundle savedInstanceState)
 	{
@@ -29,10 +21,7 @@ public class SpriteExample extends GameActivity
 	@Override
 	public void onSurfaceChanged(final int width, final int height)
 	{
-		screenWidth = width;
-		screenHeight = height;
-
-		sprite.setPosition(screenWidth / 2, screenHeight / 2);
+		sprite.setPosition(width / 2, height / 2);
 		sprite.setColor(Color.BLUE, 10000L);
 	}
 
@@ -44,5 +33,4 @@ public class SpriteExample extends GameActivity
 
 		sprite.setRotation(angleInDegrees);
 	}
-
 }
