@@ -1,11 +1,13 @@
 package org.amoeba.entity.shape;
 
+import org.amoeba.entity.Entity;
+
 import android.util.Pair;
 
 /**
  * Rectangle is a shape with a with and height.
  */
-public class Rectangle implements Shape
+public abstract class Rectangle implements Entity, Collidable
 {
 	private Pair<Float, Float> position;
 	private Pair<Float, Float> scale;
@@ -83,7 +85,7 @@ public class Rectangle implements Shape
 	}
 
 	@Override
-	public boolean isColliding(final Shape shape)
+	public boolean isColliding(final Collidable shape)
 	{
 		return false;
 	}
