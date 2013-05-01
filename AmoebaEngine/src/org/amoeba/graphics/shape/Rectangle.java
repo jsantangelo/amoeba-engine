@@ -1,13 +1,11 @@
-package org.amoeba.entity.shape;
-
-import org.amoeba.entity.Entity;
+package org.amoeba.graphics.shape;
 
 import android.util.Pair;
 
 /**
  * Rectangle is a shape with a with and height.
  */
-public abstract class Rectangle implements Entity, Collidable
+public class Rectangle implements Collidable
 {
 	private Pair<Float, Float> position;
 	private Pair<Float, Float> scale;
@@ -23,13 +21,13 @@ public abstract class Rectangle implements Entity, Collidable
 	}
 
 	/**
-	 * Constructor for Rectangle for a specific position and a width and height of 1.
-	 * @param x The x position of the rectangle (left).
-	 * @param y The y position of the rectangle (top).
+	 * Constructor for Rectangle for a specific width and height.
+	 * @param w The width of the rectangle.
+	 * @param h The height of the rectangle.
 	 */
-	public Rectangle(final float x, final float y)
+	public Rectangle(final float w, final float h)
 	{
-		this(x, y, 1f, 1f);
+		this(0f, 0f, w, h);
 	}
 
 	/**
@@ -90,75 +88,103 @@ public abstract class Rectangle implements Entity, Collidable
 		return false;
 	}
 
-	@Override
+	/**
+	 * Get the position of the entity.
+	 * @return The position of the entity.
+	 */
 	public Pair<Float, Float> getPosition()
 	{
 		return position;
 	}
 
-	@Override
+	/**
+	 * Set the coordinates of the entity.
+	 * @param x The x position of the entity.
+	 * @param y The y position of the entity.
+	 */
 	public void setPosition(final float x, final float y)
 	{
 		position = Pair.create(x, y);
 	}
 
-	@Override
+	/**
+	 * Get the rotation of the entity.
+	 * @return The rotation of the entity.
+	 */
 	public float getRotation()
 	{
 		return rotation;
 	}
 
-	@Override
+	/**
+	 * Set the rotation angle in degrees of the entity.
+	 * @param angle The new rotation angle in degrees of the entity.
+	 */
 	public void setRotation(final float angle)
 	{
 		rotation = angle;
 	}
 
-	@Override
+	/**
+	 * Determine whether the entity is scaled.
+	 * @return Whether the entity is scaled.
+	 */
 	public boolean isScaled()
 	{
 		return (getScaleX() != 1.0f || getScaleY() != 1.0f);
 	}
 
-	@Override
+	/**
+	 * Get the scale of the entity.
+	 * @return The scale of the entity in both the X and Y direction.
+	 */
 	public Pair<Float, Float> getScale()
 	{
 		return scale;
 	}
 
-	@Override
+	/**
+	 * Get the scale of the entity in the X-direction.
+	 * @return The X scale of the entity.
+	 */
 	public float getScaleX()
 	{
 		return scale.first;
 	}
 
-	@Override
+	/**
+	 * Get the scale of the entity in the Y-direction.
+	 * @return The Y scale of the entity.
+	 */
 	public float getScaleY()
 	{
 		return scale.second;
 	}
 
-	@Override
+	/**
+	 * Set the both the X and Y scale of the entity.
+	 * @param scalingFactor The new scale of the entity.
+	 */
 	public void setScale(final float scalingFactor)
 	{
 		scale = Pair.create(scalingFactor, scalingFactor);
 	}
 
-	@Override
+	/**
+	 * Set the X scale of the entity.
+	 * @param scaleX The new X scale of the entity.
+	 */
 	public void setScaleX(final float scaleX)
 	{
-		if (scale != null)
-		{
-			scale = Pair.create(scaleX, scale.second);
-		}
+		scale = Pair.create(scaleX, scale.second);
 	}
 
-	@Override
+	/**
+	 * Set the Y scale of the entity.
+	 * @param scaleY The new Y scale of the entity.
+	 */
 	public void setScaleY(final float scaleY)
 	{
-		if (scale != null)
-		{
-			scale = Pair.create(scale.first, scaleY);
-		}
+		scale = Pair.create(scale.first, scaleY);
 	}
 }

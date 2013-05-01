@@ -2,6 +2,7 @@ package org.amoeba.entity.shape;
 
 import org.amoeba.engine.routing.DrawListener;
 import org.amoeba.engine.routing.UpdateListener;
+import org.amoeba.graphics.shape.Rectangle;
 
 /**
  * Rectangle2D is Rectangle that can be drawn.

@@ -2,12 +2,13 @@ package org.amoeba.entity.sprite;
 
 import org.amoeba.engine.routing.DrawListener;
 import org.amoeba.engine.routing.UpdateListener;
-import org.amoeba.entity.shape.Rectangle;
+import org.amoeba.entity.Entity;
+import org.amoeba.graphics.shape.Rectangle;
 
 /**
  * Sprite is an entity that is used to display an image.
  */
-public abstract class Sprite extends Rectangle implements DrawListener, UpdateListener
+public abstract class Sprite extends Rectangle implements Entity, DrawListener, UpdateListener
 {
 	/**
 	 * Constructor for Sprite.

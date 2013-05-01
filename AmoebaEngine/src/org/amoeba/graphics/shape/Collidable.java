@@ -1,4 +1,4 @@
-package org.amoeba.entity.shape;
+package org.amoeba.graphics.shape;
 
 
 /**
