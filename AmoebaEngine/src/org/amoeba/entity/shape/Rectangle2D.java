@@ -2,12 +2,13 @@ package org.amoeba.entity.shape;
 
 import org.amoeba.engine.routing.DrawListener;
 import org.amoeba.engine.routing.UpdateListener;
+import org.amoeba.entity.Entity;
 import org.amoeba.graphics.shape.Rectangle;
 
 /**
  * Rectangle2D is Rectangle that can be drawn.
  */
-public abstract class Rectangle2D extends Rectangle implements DrawListener, UpdateListener
+public abstract class Rectangle2D extends Rectangle implements Entity, DrawListener, UpdateListener
 {
 	/**
 	 * Load the rectangle.

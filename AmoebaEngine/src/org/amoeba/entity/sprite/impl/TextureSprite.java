@@ -5,13 +5,13 @@ import org.amoeba.entity.sprite.SpriteVertexBufferObject;
 import org.amoeba.graphics.camera.Camera;
 import org.amoeba.graphics.shader.ShaderConstants;
 import org.amoeba.graphics.shader.impl.TextureShaderProgram;
+import org.amoeba.graphics.shape.Dimension;
 import org.amoeba.graphics.texture.Texture;
 import org.amoeba.graphics.utilities.BufferUtilities;
 import org.amoeba.graphics.utilities.ColorTransition;
 import org.amoeba.graphics.utilities.MatrixHelper;
 
 import android.opengl.GLES20;
-import android.util.Pair;
 
 /**
  *
@@ -105,10 +105,10 @@ public class TextureSprite extends Sprite
 	{
 		program.use();
 
-		Pair<Float, Float> size = Pair.create(getWidth() * getScaleX(), getHeight() * getScaleY());
+		Dimension scale = new Dimension(getWidth() * getScale().getWidth(), getHeight() * getScale().getHeight());
 		final float[] modelMatrix = MatrixHelper.createMatrix(
 				getPosition(),
-				size,
+				scale,
 				getRotation());
 
 		int textureUniformHandle = program.getUniformLocation(ShaderConstants.UNIFORM_TEXTURE);

@@ -1,19 +1,19 @@
 package org.amoeba.graphics.shape;
 
-import android.util.Pair;
 
 /**
  * Rectangle is a shape with a with and height.
  */
 public class Rectangle implements Collidable
 {
-	private Pair<Float, Float> position;
-	private Pair<Float, Float> scale;
+	private Point position;
+	private Dimension size;
+	private Dimension scale;
 	private float rotation;
-	private float width, height;
 
 	/**
-	 * Default constructor for Rectangle creates the rectangle at (0, 0) with a width and height of 1.
+	 * Default constructor for Rectangle.
+	 * Creates the rectangle at (0, 0) with a width and height of 1.
 	 */
 	public Rectangle()
 	{
@@ -28,6 +28,15 @@ public class Rectangle implements Collidable
 	public Rectangle(final float w, final float h)
 	{
 		this(0f, 0f, w, h);
+	}
+
+	/**
+	 * Constructor for Rectangle for a specific width and height.
+	 * @param dimension The width and height of the rectangle.
+	 */
+	public Rectangle(final Dimension dimension)
+	{
+		this(0f, 0f, dimension.getWidth(), dimension.getHeight());
 	}
 
 	/**
@@ -47,12 +56,26 @@ public class Rectangle implements Collidable
 	}
 
 	/**
+	 * Constructor for Rectangle for a specific position and size.
+	 * @param pos The position of the rectangle (top-left).
+	 * @param dimension The width and height of the rectangle.
+	 */
+	public Rectangle(final Point pos, final Dimension dimension)
+	{
+		setPosition(pos.getX(), pos.getY());
+		setWidth(dimension.getWidth());
+		setHeight(dimension.getHeight());
+		setScale(1.0f);
+		setRotation(0.0f);
+	}
+
+	/**
 	 * Get the width of the Rectangle.
 	 * @return The width of the rectangle.
 	 */
 	public float getWidth()
 	{
-		return width;
+		return size.getWidth();
 	}
 
 	/**
@@ -61,16 +84,25 @@ public class Rectangle implements Collidable
 	 */
 	public float getHeight()
 	{
-		return height;
+		return size.getHeight();
+	}
+
+	/**
+	 * Get the size of the rectangle.
+	 * @return The size of the rectangle.
+	 */
+	public Dimension getSize()
+	{
+		return size;
 	}
 
 	/**
 	 * Set the width of the rectangle.
-	 * @param w The new width of the rectangle.
+	 * @param w The width of the rectangle.
 	 */
 	public void setWidth(final float w)
 	{
-		width = w;
+		size.setWidth(w);
 	}
 
 	/**
@@ -79,37 +111,40 @@ public class Rectangle implements Collidable
 	 */
 	public void setHeight(final float h)
 	{
-		height = h;
-	}
-
-	@Override
-	public boolean isColliding(final Collidable shape)
-	{
-		return false;
+		size.setHeight(h);
 	}
 
 	/**
-	 * Get the position of the entity.
-	 * @return The position of the entity.
+	 * Get the position of the rectangle.
+	 * @return The position of the rectangle.
 	 */
-	public Pair<Float, Float> getPosition()
+	public Point getPosition()
 	{
 		return position;
 	}
 
 	/**
-	 * Set the coordinates of the entity.
-	 * @param x The x position of the entity.
-	 * @param y The y position of the entity.
+	 * Set the coordinates of the rectangle.
+	 * @param x The x position of the rectangle.
+	 * @param y The y position of the rectangle.
 	 */
 	public void setPosition(final float x, final float y)
 	{
-		position = Pair.create(x, y);
+		position.setPosition(x, y);
 	}
 
 	/**
-	 * Get the rotation of the entity.
-	 * @return The rotation of the entity.
+	 * Set the coordinates of the entity.
+	 * @param pos The x and y coordinates of the entity.
+	 */
+	public void setPosition(final Point pos)
+	{
+		position.setPosition(pos);
+	}
+
+	/**
+	 * Get the rotation of the rectangle.
+	 * @return The rotation of the rectangle.
 	 */
 	public float getRotation()
 	{
@@ -117,8 +152,8 @@ public class Rectangle implements Collidable
 	}
 
 	/**
-	 * Set the rotation angle in degrees of the entity.
-	 * @param angle The new rotation angle in degrees of the entity.
+	 * Set the rotation angle in degrees of the rectangle.
+	 * @param angle The new rotation angle in degrees of the rectangle.
 	 */
 	public void setRotation(final float angle)
 	{
@@ -126,65 +161,44 @@ public class Rectangle implements Collidable
 	}
 
 	/**
-	 * Determine whether the entity is scaled.
-	 * @return Whether the entity is scaled.
+	 * Determine whether the rectangle is scaled.
+	 * @return Whether the rectangle is scaled.
 	 */
 	public boolean isScaled()
 	{
-		return (getScaleX() != 1.0f || getScaleY() != 1.0f);
+		return (scale.getWidth() != 1.0f || scale.getHeight() != 1.0f);
 	}
 
 	/**
-	 * Get the scale of the entity.
+	 * Get the scale of the rectangle.
 	 * @return The scale of the entity in both the X and Y direction.
 	 */
-	public Pair<Float, Float> getScale()
+	public Dimension getScale()
 	{
 		return scale;
 	}
 
 	/**
-	 * Get the scale of the entity in the X-direction.
-	 * @return The X scale of the entity.
-	 */
-	public float getScaleX()
-	{
-		return scale.first;
-	}
-
-	/**
-	 * Get the scale of the entity in the Y-direction.
-	 * @return The Y scale of the entity.
-	 */
-	public float getScaleY()
-	{
-		return scale.second;
-	}
-
-	/**
-	 * Set the both the X and Y scale of the entity.
-	 * @param scalingFactor The new scale of the entity.
+	 * Set the both the X and Y scale of the rectangle.
+	 * @param scalingFactor The new scale of the rectangle.
 	 */
 	public void setScale(final float scalingFactor)
 	{
-		scale = Pair.create(scalingFactor, scalingFactor);
+		scale.setSize(scalingFactor, scalingFactor);
 	}
 
 	/**
-	 * Set the X scale of the entity.
-	 * @param scaleX The new X scale of the entity.
+	 * Set the scale of the rectangle.
+	 * @param s The scale of the rectangle.
 	 */
-	public void setScaleX(final float scaleX)
+	public void setScale(final Dimension s)
 	{
-		scale = Pair.create(scaleX, scale.second);
+		scale.setSize(s);
 	}
 
-	/**
-	 * Set the Y scale of the entity.
-	 * @param scaleY The new Y scale of the entity.
-	 */
-	public void setScaleY(final float scaleY)
+	@Override
+	public boolean isColliding(final Collidable shape)
 	{
-		scale = Pair.create(scale.first, scaleY);
+		return false;
 	}
 }
