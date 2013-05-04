@@ -1,15 +1,20 @@
 package org.amoeba.graphics.shape;
 
+import org.amoeba.graphics.utilities.CollisionHelper;
+
 
 /**
- * Shape is an object in a scene that has a size and can collide with other objects.
+ * Collidable objects are shapes that can collide with other shapes.
  */
-public interface Collidable
+public abstract class Collidable
 {
 	/**
-	 * Determine whether an entity is colliding with another entity.
-	 * @param entity The entity with which this entity may be colliding with.
-	 * @return Whether the entity is colliding with the other entity.
+	 * Determine whether a shape is colliding with another shape.
+	 * @param shape The shape with which this shape may be colliding.
+	 * @return Whether the shape is colliding with the other shape.
 	 */
-	public boolean isColliding(Collidable entity);
+	public boolean isColliding(final Collidable shape)
+	{
+		return CollisionHelper.isColliding(this, shape);
+	}
 }

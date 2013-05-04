@@ -3,7 +3,7 @@ package org.amoeba.graphics.shape;
 /**
  * Point holds 2D coordinates of the form (x, y).
  */
-public class Point
+public class Point extends Collidable
 {
 	private float xPosition, yPosition;
 

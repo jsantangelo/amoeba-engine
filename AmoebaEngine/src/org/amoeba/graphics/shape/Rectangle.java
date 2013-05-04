@@ -1,12 +1,9 @@
 package org.amoeba.graphics.shape;
 
-import org.amoeba.graphics.utilities.CollisionHelper;
-
-
 /**
  * Rectangle is a shape with a with and height.
  */
-public class Rectangle implements Collidable
+public class Rectangle extends Collidable
 {
 	private Point position;
 	private Dimension size;
@@ -196,11 +193,5 @@ public class Rectangle implements Collidable
 	public void setScale(final Dimension s)
 	{
 		scale.setSize(s);
-	}
-
-	@Override
-	public boolean isColliding(final Collidable shape)
-	{
-		return CollisionHelper.isColliding(this, shape);
 	}
 }
