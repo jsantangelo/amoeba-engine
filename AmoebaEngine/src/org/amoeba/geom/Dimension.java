@@ -1,4 +1,4 @@
-package org.amoeba.graphics.shape;
+package org.amoeba.geom;
 
 /**
  * Dimension holds a width and height.

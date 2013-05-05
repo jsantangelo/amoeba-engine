@@ -3,7 +3,7 @@ package org.amoeba.entity.sprite;
 import org.amoeba.engine.routing.DrawListener;
 import org.amoeba.engine.routing.UpdateListener;
 import org.amoeba.entity.Entity;
-import org.amoeba.graphics.shape.Rectangle;
+import org.amoeba.geom.Rectangle;
 
 /**
  * Sprite is an entity that is used to display an image.

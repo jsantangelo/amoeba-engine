@@ -1,4 +1,7 @@
-package org.amoeba.graphics.shape;
+package org.amoeba.geom;
+
+import org.amoeba.geom.collision.Collidable;
+
 
 /**
  * Line is a representation of a straight line between two points.

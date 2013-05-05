@@ -1,4 +1,7 @@
-package org.amoeba.graphics.shape;
+package org.amoeba.geom;
+
+import org.amoeba.geom.collision.Collidable;
+
 
 /**
  * Point holds 2D coordinates of the form (x, y).

@@ -1,6 +1,5 @@
-package org.amoeba.graphics.utilities;
+package org.amoeba.geom.collision;
 
-import org.amoeba.graphics.shape.Collidable;
 
 /**
  * CollisionHelper provides helper functions for collision between shapes.

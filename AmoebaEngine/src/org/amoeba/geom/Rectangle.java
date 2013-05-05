@@ -1,4 +1,7 @@
-package org.amoeba.graphics.shape;
+package org.amoeba.geom;
+
+import org.amoeba.geom.collision.Collidable;
+
 
 /**
  * Rectangle is a shape with a with and height.

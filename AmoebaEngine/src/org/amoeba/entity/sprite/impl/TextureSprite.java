@@ -2,10 +2,10 @@ package org.amoeba.entity.sprite.impl;
 
 import org.amoeba.entity.sprite.Sprite;
 import org.amoeba.entity.sprite.SpriteVertexBufferObject;
+import org.amoeba.geom.Dimension;
 import org.amoeba.graphics.camera.Camera;
 import org.amoeba.graphics.shader.ShaderConstants;
 import org.amoeba.graphics.shader.impl.TextureShaderProgram;
-import org.amoeba.graphics.shape.Dimension;
 import org.amoeba.graphics.texture.Texture;
 import org.amoeba.graphics.utilities.BufferUtilities;
 import org.amoeba.graphics.utilities.ColorTransition;

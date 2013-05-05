@@ -1,7 +1,7 @@
 package org.amoeba.graphics.utilities;
 
-import org.amoeba.graphics.shape.Dimension;
-import org.amoeba.graphics.shape.Point;
+import org.amoeba.geom.Dimension;
+import org.amoeba.geom.Point;
 
 import android.opengl.Matrix;
 

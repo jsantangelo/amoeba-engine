@@ -1,6 +1,5 @@
-package org.amoeba.graphics.shape;
+package org.amoeba.geom.collision;
 
-import org.amoeba.graphics.utilities.CollisionHelper;
 
 
 /**
