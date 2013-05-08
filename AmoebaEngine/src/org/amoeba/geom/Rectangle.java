@@ -4,7 +4,7 @@ import org.amoeba.geom.collision.Collidable;
 
 
 /**
- * Rectangle is a shape with a with and height.
+ * Rectangle is a shape with a width and height.
  */
 public class Rectangle extends Collidable
 {
@@ -15,7 +15,7 @@ public class Rectangle extends Collidable
 
 	/**
 	 * Default constructor for Rectangle.
-	 * Creates the rectangle at (0, 0) with a width and height of 1.
+	 * Creates the rectangle at (0, 0) with a width and height of 1.0f.
 	 */
 	public Rectangle()
 	{
@@ -136,8 +136,8 @@ public class Rectangle extends Collidable
 	}
 
 	/**
-	 * Set the coordinates of the entity.
-	 * @param pos The x and y coordinates of the entity.
+	 * Set the coordinates of the rectangle.
+	 * @param pos The x and y coordinates of the rectangle.
 	 */
 	public void setPosition(final Point pos)
 	{

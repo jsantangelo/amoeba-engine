@@ -36,4 +36,10 @@ public abstract class Rectangle2D extends Rectangle implements Entity, DrawListe
 	 * @param duration The time it takes to transition to the new color (milliseconds).
 	 */
 	public abstract void setColor(final int color, final long duration);
+
+	/**
+	 * Set whether the rectangle is filled. (Default true)
+	 * @param filled Whether the rectangle is filled.
+	 */
+	public abstract void setFill(boolean filled);
 }
