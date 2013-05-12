@@ -3,10 +3,13 @@
 	<property name="deploy.dir" value="deploy" />
 	<property name="build.name" value="classes.jar" />
 	<property name="deployable.name" value="AmoebaEngine.jar" />
+	<condition property="file.ext" value=".bat">
+	    <os family="windows" />
+	</condition>
 
 	<target name="-pre-build" depends="run-staticanalysis">
 		<echo message="Running Android lint..." />
-		<exec executable="${sdk.dir}/tools/lint">
+		<exec executable="${sdk.dir}/tools/lint${file.ext}">
 			<arg value="." />
 		</exec>
 	</target>
