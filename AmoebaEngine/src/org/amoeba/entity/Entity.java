@@ -1,6 +1,5 @@
 package org.amoeba.entity;
 
-import org.amoeba.geom.Dimension;
 import org.amoeba.geom.Point;
 
 /**
@@ -28,38 +27,14 @@ public interface Entity
 	public void setPosition(final Point position);
 
 	/**
-	 * Get the rotation of the entity.
-	 * @return The rotation of the entity.
+	 * Rotate the entity by a specific angle in degrees.
+	 * @param angle The amount in degrees in which the entity is rotated.
 	 */
-	public float getRotation();
+	public void rotate(final float angle);
 
 	/**
-	 * Set the rotation angle in degrees of the entity.
-	 * @param angle The new rotation angle in degrees of the entity.
+	 * Scale the entity by a given amount.
+	 * @param scalingFactor The new scale of the rectangle.
 	 */
-	public void setRotation(final float angle);
-
-	/**
-	 * Determine whether the entity is scaled.
-	 * @return Whether the entity is scaled.
-	 */
-	public boolean isScaled();
-
-	/**
-	 * Get the scale of the entity.
-	 * @return The scale of the entity in both the X and Y direction.
-	 */
-	public Dimension getScale();
-
-	/**
-	 * Set the both the X and Y scale of the entity.
-	 * @param scalingFactor The new scale of the entity.
-	 */
-	public void setScale(final float scalingFactor);
-
-	/**
-	 * Set the scale of the entity.
-	 * @param scale The scale of the entity.
-	 */
-	public void setScale(final Dimension scale);
+	public void scale(final float scalingFactor);
 }

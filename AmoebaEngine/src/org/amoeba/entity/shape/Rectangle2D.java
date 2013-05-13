@@ -3,6 +3,7 @@ package org.amoeba.entity.shape;
 import org.amoeba.engine.routing.DrawListener;
 import org.amoeba.engine.routing.UpdateListener;
 import org.amoeba.entity.Entity;
+import org.amoeba.geom.Dimension;
 import org.amoeba.geom.Rectangle;
 
 /**
@@ -10,6 +11,46 @@ import org.amoeba.geom.Rectangle;
  */
 public abstract class Rectangle2D extends Rectangle implements Entity, DrawListener, UpdateListener
 {
+	/**
+	 * Default constructor for Rectangle2D.
+	 * Creates the rectangle at (0, 0) with a width and height of 1.0f.
+	 */
+	public Rectangle2D()
+	{
+		super(0f, 0f, 1f, 1f);
+	}
+
+	/**
+	 * Constructor for Rectangle2D for a specific width and height.
+	 * @param w The width of the rectangle.
+	 * @param h The height of the rectangle.
+	 */
+	public Rectangle2D(final float w, final float h)
+	{
+		super(0f, 0f, w, h);
+	}
+
+	/**
+	 * Constructor for Rectangle2D for a specific width and height.
+	 * @param dimension The width and height of the rectangle.
+	 */
+	public Rectangle2D(final Dimension dimension)
+	{
+		super(0f, 0f, dimension.getWidth(), dimension.getHeight());
+	}
+
+	/**
+	 * Constructor for Rectangle2D for a specific position and size.
+	 * @param x The x position of the rectangle (left).
+	 * @param y The y position of the rectangle (top).
+	 * @param w The width of the rectangle.
+	 * @param h The height of the rectangle.
+	 */
+	public Rectangle2D(final float x, final float y, final float w, final float h)
+	{
+		super(x, y, w, h);
+	}
+
 	/**
 	 * Load the rectangle.
 	 */
@@ -37,9 +78,15 @@ public abstract class Rectangle2D extends Rectangle implements Entity, DrawListe
 	 */
 	public abstract void setColor(final int color, final long duration);
 
-	/**
-	 * Set whether the rectangle is filled. (Default true)
-	 * @param filled Whether the rectangle is filled.
-	 */
-	public abstract void setFill(boolean filled);
+	@Override
+	public void rotate(final float angle)
+	{
+
+	}
+
+	@Override
+	public void scale(final float scalingFactor)
+	{
+
+	}
 }

@@ -10,8 +10,6 @@ public class Rectangle extends Collidable
 {
 	private Point position;
 	private Dimension size;
-	private Dimension scale;
-	private float rotation;
 
 	/**
 	 * Default constructor for Rectangle.
@@ -53,8 +51,6 @@ public class Rectangle extends Collidable
 		setPosition(x, y);
 		setWidth(w);
 		setHeight(h);
-		setScale(1.0f);
-		setRotation(0.0f);
 	}
 
 	/**
@@ -67,8 +63,6 @@ public class Rectangle extends Collidable
 		setPosition(pos.getX(), pos.getY());
 		setWidth(dimension.getWidth());
 		setHeight(dimension.getHeight());
-		setScale(1.0f);
-		setRotation(0.0f);
 	}
 
 	/**
@@ -142,59 +136,5 @@ public class Rectangle extends Collidable
 	public void setPosition(final Point pos)
 	{
 		position.setPosition(pos);
-	}
-
-	/**
-	 * Get the rotation of the rectangle.
-	 * @return The rotation of the rectangle.
-	 */
-	public float getRotation()
-	{
-		return rotation;
-	}
-
-	/**
-	 * Set the rotation angle in degrees of the rectangle.
-	 * @param angle The new rotation angle in degrees of the rectangle.
-	 */
-	public void setRotation(final float angle)
-	{
-		rotation = angle;
-	}
-
-	/**
-	 * Determine whether the rectangle is scaled.
-	 * @return Whether the rectangle is scaled.
-	 */
-	public boolean isScaled()
-	{
-		return (scale.getWidth() != 1.0f || scale.getHeight() != 1.0f);
-	}
-
-	/**
-	 * Get the scale of the rectangle.
-	 * @return The scale of the entity in both the X and Y direction.
-	 */
-	public Dimension getScale()
-	{
-		return scale;
-	}
-
-	/**
-	 * Set the both the X and Y scale of the rectangle.
-	 * @param scalingFactor The new scale of the rectangle.
-	 */
-	public void setScale(final float scalingFactor)
-	{
-		scale.setSize(scalingFactor, scalingFactor);
-	}
-
-	/**
-	 * Set the scale of the rectangle.
-	 * @param s The scale of the rectangle.
-	 */
-	public void setScale(final Dimension s)
-	{
-		scale.setSize(s);
 	}
 }

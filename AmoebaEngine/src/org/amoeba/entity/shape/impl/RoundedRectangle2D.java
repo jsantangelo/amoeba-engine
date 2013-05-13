@@ -50,12 +50,4 @@ public class RoundedRectangle2D extends Rectangle2D
 		// TODO Auto-generated method stub
 
 	}
-
-	@Override
-	public void setFill(final boolean filled)
-	{
-		// TODO Auto-generated method stub
-
-	}
-
 }

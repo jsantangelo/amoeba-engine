@@ -105,11 +105,10 @@ public class TextureSprite extends Sprite
 	{
 		program.use();
 
-		Dimension scale = new Dimension(getWidth() * getScale().getWidth(), getHeight() * getScale().getHeight());
 		final float[] modelMatrix = MatrixHelper.createMatrix(
 				getPosition(),
-				scale,
-				getRotation());
+				new Dimension(1.0f, 1.0f),
+				0.0f);
 
 		int textureUniformHandle = program.getUniformLocation(ShaderConstants.UNIFORM_TEXTURE);
 		GLES20.glActiveTexture(GLES20.GL_TEXTURE0);
