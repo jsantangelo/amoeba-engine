@@ -12,10 +12,10 @@ public abstract class Sprite extends Rectangle2D implements Entity, DrawListener
 {
 	/**
 	 * Constructor for Sprite.
-	 * @param x The x position of the rectangle (left).
-	 * @param y The y position of the rectangle (top).
-	 * @param w The width of the rectangle.
-	 * @param h The height of the rectangle.
+	 * @param x The x position of the sprite (left).
+	 * @param y The y position of the sprite (top).
+	 * @param w The width of the sprite.
+	 * @param h The height of the sprite.
 	 */
 	public Sprite(final float x, final float y, final float w, final float h)
 	{
