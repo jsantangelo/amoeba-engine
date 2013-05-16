@@ -26,7 +26,7 @@ public class SplashScreen extends GameActivity
 
 		splash_background = getGraphicsService().getSpriteFactory().createSprite(R.drawable.splash_bg);
 		amoeba_splash = getGraphicsService().getSpriteFactory().createSprite(R.drawable.amoeba_splash);
-		
+
 		new Handler().postDelayed(new Runnable()
 		{
 			public void run()
@@ -45,12 +45,7 @@ public class SplashScreen extends GameActivity
 	public void onSurfaceChanged(final int width, final int height)
 	{
 		splash_background.setPosition(width/2, height/2);
-		splash_background.setScaleX(width);
-		splash_background.setScaleY(height);
-
 		amoeba_splash.setPosition(width/2, height/2);
-		amoeba_splash.setScaleX(350.0f);
-		amoeba_splash.setScaleY(150.0f);
 	}
 
 }
