@@ -31,6 +31,8 @@ public class MainMenuScreen extends GameActivity
 	@Override
 	protected void onCreate(final Bundle savedInstanceState)
 	{
+		super.onCreate(savedInstanceState);
+		
 		background = getGraphicsService().getSpriteFactory().createSprite(R.drawable.mainmenu_bg);
 		title = getGraphicsService().getSpriteFactory().createSprite(R.drawable.transition_title);
 
