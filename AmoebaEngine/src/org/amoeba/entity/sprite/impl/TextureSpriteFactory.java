@@ -60,10 +60,10 @@ public class TextureSpriteFactory implements SpriteFactory
 			shaderProgramManager.add(program);
 		}
 
-		sprite = new TextureSprite(texture, program, bufferUtilities);
+		TextureSpriteVertexBufferObject vbo = new TextureSpriteVertexBufferObject(program, bufferUtilities);
+		sprite = new TextureSprite(texture, program, vbo);
 		spriteManager.add(sprite);
 
 		return sprite;
 	}
-
 }
