@@ -10,6 +10,8 @@ public class Rectangle extends Collidable
 {
 	private Point position;
 	private Dimension size;
+	private Dimension scale;
+	private float rotation;
 
 	/**
 	 * Default constructor for Rectangle.
@@ -41,8 +43,8 @@ public class Rectangle extends Collidable
 
 	/**
 	 * Constructor for Rectangle for a specific position and size.
-	 * @param x The x position of the rectangle (left).
-	 * @param y The y position of the rectangle (top).
+	 * @param x The x position of the rectangle (center).
+	 * @param y The y position of the rectangle (center).
 	 * @param w The width of the rectangle.
 	 * @param h The height of the rectangle.
 	 */
@@ -51,11 +53,13 @@ public class Rectangle extends Collidable
 		setPosition(x, y);
 		setWidth(w);
 		setHeight(h);
+		setScale(1.0f);
+		setRotation(0.0f);
 	}
 
 	/**
 	 * Constructor for Rectangle for a specific position and size.
-	 * @param pos The position of the rectangle (top-left).
+	 * @param pos The position of the rectangle (center).
 	 * @param dimension The width and height of the rectangle.
 	 */
 	public Rectangle(final Point pos, final Dimension dimension)
@@ -63,6 +67,8 @@ public class Rectangle extends Collidable
 		setPosition(pos.getX(), pos.getY());
 		setWidth(dimension.getWidth());
 		setHeight(dimension.getHeight());
+		setScale(1.0f);
+		setRotation(0.0f);
 	}
 
 	/**
@@ -136,5 +142,77 @@ public class Rectangle extends Collidable
 	public void setPosition(final Point pos)
 	{
 		position.setPosition(pos);
+	}
+
+	/**
+	 * Get the rotation of the rectangle.
+	 * @return The rotation of the rectangle.
+	 */
+	public float getRotation()
+	{
+		return rotation;
+	}
+
+	/**
+	 * Set the rotation angle in degrees of the rectangle.
+	 * @param angle The new rotation angle in degrees of the rectangle.
+	 */
+	public void setRotation(final float angle)
+	{
+		rotation = angle;
+	}
+
+	/**
+	 * Rotate the rectangle by a specific amount.
+	 * @param angle The angle in degrees to rotate the rectangle.
+	 */
+	public void rotate(final float angle)
+	{
+		rotation += angle;
+	}
+
+	/**
+	 * Determine whether the rectangle is scaled.
+	 * @return Whether the rectangle is scaled.
+	 */
+	public boolean isScaled()
+	{
+		return (scale.getWidth() != 1.0f || scale.getHeight() != 1.0f);
+	}
+
+	/**
+	 * Get the scale of the rectangle.
+	 * @return The scale of the entity in both the X and Y direction.
+	 */
+	public Dimension getScale()
+	{
+		return scale;
+	}
+
+	/**
+	 * Set the both the X and Y scale of the rectangle.
+	 * @param scalingFactor The new scale of the rectangle.
+	 */
+	public void setScale(final float scalingFactor)
+	{
+		scale.setSize(scalingFactor, scalingFactor);
+	}
+
+	/**
+	 * Set the scale of the rectangle.
+	 * @param s The scale of the rectangle.
+	 */
+	public void setScale(final Dimension s)
+	{
+		scale.setSize(s);
+	}
+
+	/**
+	 * Scale the rectangle by a specified factor.
+	 * @param scalingFactor The amount to scale the rectangle.
+	 */
+	public void scale(final float scalingFactor)
+	{
+		scale.setSize(scale.getWidth() + scalingFactor, scale.getHeight() + scalingFactor);
 	}
 }
