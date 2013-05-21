@@ -77,16 +77,4 @@ public abstract class Rectangle2D extends Rectangle implements Entity, DrawListe
 	 * @param duration The time it takes to transition to the new color (milliseconds).
 	 */
 	public abstract void setColor(final int color, final long duration);
-
-	@Override
-	public void rotate(final float angle)
-	{
-
-	}
-
-	@Override
-	public void scale(final float scalingFactor)
-	{
-
-	}
 }

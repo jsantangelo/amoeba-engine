@@ -90,8 +90,8 @@ public class Circle extends Collidable
 	}
 
 	/**
-	 * Determine whether the rectangle is scaled.
-	 * @return Whether the rectangle is scaled.
+	 * Determine whether the circle is scaled.
+	 * @return Whether the circle is scaled.
 	 */
 	public boolean isScaled()
 	{
@@ -99,7 +99,7 @@ public class Circle extends Collidable
 	}
 
 	/**
-	 * Get the scale of the rectangle.
+	 * Get the scale of the circle.
 	 * @return The scale of the entity in both the X and Y direction.
 	 */
 	public Dimension getScale()
@@ -108,8 +108,8 @@ public class Circle extends Collidable
 	}
 
 	/**
-	 * Set the both the X and Y scale of the rectangle.
-	 * @param scalingFactor The new scale of the rectangle.
+	 * Set the both the X and Y scale of the circle.
+	 * @param scalingFactor The new scale of the circle.
 	 */
 	public void setScale(final float scalingFactor)
 	{
@@ -117,11 +117,20 @@ public class Circle extends Collidable
 	}
 
 	/**
-	 * Set the scale of the rectangle.
-	 * @param s The scale of the rectangle.
+	 * Set the scale of the circle.
+	 * @param s The scale of the circle.
 	 */
 	public void setScale(final Dimension s)
 	{
 		scale.setSize(s);
+	}
+
+	/**
+	 * Scale the circle by a specified factor.
+	 * @param scalingFactor The amount to scale the circle.
+	 */
+	public void scale(final float scalingFactor)
+	{
+		scale.setSize(scale.getWidth() + scalingFactor, scale.getHeight() + scalingFactor);
 	}
 }
