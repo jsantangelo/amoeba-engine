@@ -13,7 +13,7 @@ public class TextSprite extends Sprite
 	 */
 	public TextSprite(final String text)
 	{
-		super(0f, 0f, 0f, 0f);
+		super(0f, 0f);
 	}
 
 	@Override
@@ -56,6 +56,13 @@ public class TextSprite extends Sprite
 	{
 		// TODO Auto-generated method stub
 
+	}
+
+	@Override
+	public int getColor()
+	{
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 }

@@ -50,4 +50,11 @@ public class RoundedRectangle2D extends Rectangle2D
 		// TODO Auto-generated method stub
 
 	}
+
+	@Override
+	public int getColor()
+	{
+		// TODO Auto-generated method stub
+		return 0;
+	}
 }

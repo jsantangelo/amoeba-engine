@@ -51,4 +51,11 @@ public class BoxRectangle2D extends Rectangle2D
 
 	}
 
+	@Override
+	public int getColor()
+	{
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
 }

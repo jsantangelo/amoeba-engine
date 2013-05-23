@@ -7,7 +7,6 @@ import org.amoeba.graphics.camera.Camera;
 import org.amoeba.graphics.shader.ShaderConstants;
 import org.amoeba.graphics.shader.impl.TextureShaderProgram;
 import org.amoeba.graphics.texture.Texture;
-import org.amoeba.graphics.utilities.ColorTransition;
 import org.amoeba.graphics.utilities.MatrixHelper;
 
 import android.opengl.GLES20;
@@ -21,7 +20,6 @@ public class TextureSprite extends Sprite
 	private Texture texture;
 	private SpriteVertexBufferObject spriteBuffer;
 	private TextureShaderProgram program;
-	private ColorTransition colorTransition;
 
 	/**
 	 * Constructor for Sprite.
@@ -44,11 +42,10 @@ public class TextureSprite extends Sprite
 	 */
 	public TextureSprite(final float x, final float y, final Texture spriteTexture, final TextureShaderProgram textureProgram, final SpriteVertexBufferObject vbo)
 	{
-		super(x, y, spriteTexture.getWidth(), spriteTexture.getHeight());
+		super(x, y);
 		texture = spriteTexture;
 		program = textureProgram;
 		spriteBuffer = vbo;
-		colorTransition = null;
 	}
 
 	@Override
@@ -80,22 +77,9 @@ public class TextureSprite extends Sprite
 	}
 
 	@Override
-	public void setColor(final int color, final long duration)
+	public int getColor()
 	{
-		colorTransition = new ColorTransition(spriteBuffer.getColor(), color, duration);
-	}
-
-	@Override
-	public void onUpdate()
-	{
-		if (colorTransition != null)
-		{
-			setColor(colorTransition.getCurrentColor());
-			if (colorTransition.isTransitionComplete())
-			{
-				colorTransition = null;
-			}
-		}
+		return spriteBuffer.getColor();
 	}
 
 	@Override

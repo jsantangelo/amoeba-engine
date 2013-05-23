@@ -1,16 +1,17 @@
 package org.amoeba.entity.shape;
 
-import org.amoeba.engine.routing.DrawListener;
-import org.amoeba.engine.routing.UpdateListener;
 import org.amoeba.entity.Entity;
 import org.amoeba.geom.Dimension;
 import org.amoeba.geom.Rectangle;
+import org.amoeba.graphics.utilities.ColorTransition;
 
 /**
  * Rectangle2D is Rectangle that can be drawn.
  */
-public abstract class Rectangle2D extends Rectangle implements Entity, DrawListener, UpdateListener
+public abstract class Rectangle2D extends Rectangle implements Entity
 {
+	private ColorTransition colorTransition;
+
 	/**
 	 * Default constructor for Rectangle2D.
 	 * Creates the rectangle at (0, 0) with a width and height of 1.0f.
@@ -76,5 +77,27 @@ public abstract class Rectangle2D extends Rectangle implements Entity, DrawListe
 	 * @param color The new color of the (as defined by android.graphics.Color).
 	 * @param duration The time it takes to transition to the new color (milliseconds).
 	 */
-	public abstract void setColor(final int color, final long duration);
+	public void setColor(final int color, final long duration)
+	{
+		colorTransition = new ColorTransition(getColor(), color, duration);
+	}
+
+	/**
+	 * Get the current color of the rectangle.
+	 * @return The current color of the rectangle.
+	 */
+	public abstract int getColor();
+
+	@Override
+	public void onUpdate()
+	{
+		if (colorTransition != null)
+		{
+			setColor(colorTransition.getCurrentColor());
+			if (colorTransition.isTransitionComplete())
+			{
+				colorTransition = null;
+			}
+		}
+	}
 }

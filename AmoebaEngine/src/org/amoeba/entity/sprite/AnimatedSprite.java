@@ -16,7 +16,7 @@ public class AnimatedSprite extends Sprite
 	 */
 	public AnimatedSprite(final float x, final float y, final float w, final float h)
 	{
-		super(x, y, w, h);
+		super(x, y);
 	}
 
 	@Override
@@ -59,6 +59,13 @@ public class AnimatedSprite extends Sprite
 	{
 		// TODO Auto-generated method stub
 
+	}
+
+	@Override
+	public int getColor()
+	{
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 }

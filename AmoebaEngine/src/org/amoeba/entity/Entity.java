@@ -1,11 +1,13 @@
 package org.amoeba.entity;
 
+import org.amoeba.engine.routing.DrawListener;
+import org.amoeba.engine.routing.UpdateListener;
 import org.amoeba.geom.Point;
 
 /**
  * Entity is an object in a scene.
  */
-public interface Entity
+public interface Entity extends DrawListener, UpdateListener
 {
 	/**
 	 * Get the position of the entity.
