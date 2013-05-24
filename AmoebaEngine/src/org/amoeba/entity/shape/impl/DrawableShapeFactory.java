@@ -17,12 +17,4 @@ public class DrawableShapeFactory implements ShapeFactory
 		// TODO Auto-generated method stub
 		return null;
 	}
-
-	@Override
-	public Rectangle2D createRoundedRectangle(final Point position, final Dimension dimensions)
-	{
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 }

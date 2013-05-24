@@ -15,12 +15,4 @@ public interface ShapeFactory
 	 * @return A 2d rectangle.
 	 */
 	public Rectangle2D createRectangle(final Point position, final Dimension dimensions);
-
-	/**
-	 * Create a 2d rectangle.
-	 * @param position The position (x, y) of the rectangle.
-	 * @param dimensions The dimensions (width, height) of the rectangle.
-	 * @return A 2d rectangle.
-	 */
-	public Rectangle2D createRoundedRectangle(final Point position, final Dimension dimensions);
 }
