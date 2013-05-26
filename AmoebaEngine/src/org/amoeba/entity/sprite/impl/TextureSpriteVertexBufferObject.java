@@ -4,7 +4,7 @@ import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.nio.FloatBuffer;
 
-import org.amoeba.entity.sprite.SpriteVertexBufferObject;
+import org.amoeba.entity.EntityVertexBufferObject;
 import org.amoeba.graphics.shader.ShaderConstants;
 import org.amoeba.graphics.shader.impl.TextureShaderProgram;
 import org.amoeba.graphics.utilities.BufferUtilities;
@@ -18,7 +18,7 @@ import android.opengl.GLES20;
 /**
  * TextureSpriteVertexBufferObjectSpriteVertexBufferObject provides an implementation of a sprite VBO.
  */
-public class TextureSpriteVertexBufferObject implements SpriteVertexBufferObject
+public class TextureSpriteVertexBufferObject implements EntityVertexBufferObject
 {
 	private static final int NUMBER_VERTICES = 4;
 	private static final int NUMBER_SPRITE_ATTRIBUTES = 3;

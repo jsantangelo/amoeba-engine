@@ -1,11 +1,11 @@
-package org.amoeba.entity.sprite;
+package org.amoeba.entity;
 
 import org.amoeba.graphics.vbo.VertexBufferObject;
 
 /**
  * SpriteVertexBufferObject provides a VBO that is used for sprites.
  */
-public interface SpriteVertexBufferObject extends VertexBufferObject
+public interface EntityVertexBufferObject extends VertexBufferObject
 {
 	/**
 	 * Load the VBO.

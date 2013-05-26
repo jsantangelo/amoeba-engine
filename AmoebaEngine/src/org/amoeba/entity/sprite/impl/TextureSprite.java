@@ -1,7 +1,7 @@
 package org.amoeba.entity.sprite.impl;
 
+import org.amoeba.entity.EntityVertexBufferObject;
 import org.amoeba.entity.sprite.Sprite;
-import org.amoeba.entity.sprite.SpriteVertexBufferObject;
 import org.amoeba.geom.Dimension;
 import org.amoeba.graphics.camera.Camera;
 import org.amoeba.graphics.shader.ShaderConstants;
@@ -18,7 +18,7 @@ public class TextureSprite extends Sprite
 {
 	private static final int NUMBER_OF_VERTICES = 4;
 	private Texture texture;
-	private SpriteVertexBufferObject spriteBuffer;
+	private EntityVertexBufferObject spriteBuffer;
 	private TextureShaderProgram program;
 
 	/**
@@ -27,7 +27,7 @@ public class TextureSprite extends Sprite
 	 * @param textureProgram The program used to draw this sprite.
 	 * @param vbo The vertex buffer object for the sprite.
 	 */
-	public TextureSprite(final Texture spriteTexture, final TextureShaderProgram textureProgram, final SpriteVertexBufferObject vbo)
+	public TextureSprite(final Texture spriteTexture, final TextureShaderProgram textureProgram, final EntityVertexBufferObject vbo)
 	{
 		this(0f, 0f, spriteTexture, textureProgram, vbo);
 	}
@@ -40,7 +40,7 @@ public class TextureSprite extends Sprite
 	 * @param textureProgram The program used to draw this sprite.
 	 * @param vbo The vertex buffer object for the sprite.
 	 */
-	public TextureSprite(final float x, final float y, final Texture spriteTexture, final TextureShaderProgram textureProgram, final SpriteVertexBufferObject vbo)
+	public TextureSprite(final float x, final float y, final Texture spriteTexture, final TextureShaderProgram textureProgram, final EntityVertexBufferObject vbo)
 	{
 		super(x, y);
 		texture = spriteTexture;
