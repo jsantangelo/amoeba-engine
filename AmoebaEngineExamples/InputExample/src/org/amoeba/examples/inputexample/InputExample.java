@@ -56,7 +56,16 @@ public class InputExample extends GameActivity
 	public void onInputEvent(final InputEvent event)
 	{
         eventList.append(event.getEventType().toString() + "\n");
+        scrollText();
+	}
 
+    @Override
+    public void onBackPressed() {
+        eventList.append("BACK KEY PRESSED\n");
+        scrollText();
+    }
+
+    private void scrollText() {
         eventList.post(new Runnable()
         {
             public void run()
@@ -74,5 +83,5 @@ public class InputExample extends GameActivity
                 }    
             }
         });
-	}
+    }
 }
