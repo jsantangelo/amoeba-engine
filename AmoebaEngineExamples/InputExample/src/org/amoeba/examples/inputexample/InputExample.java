@@ -5,6 +5,7 @@ import org.amoeba.graphics.camera.Camera;
 import org.amoeba.engine.service.input.InputEvent;
 
 import android.app.Activity;
+import android.media.MediaPlayer;
 import android.opengl.GLES20;
 import android.opengl.GLSurfaceView;
 import android.os.Bundle;
@@ -39,7 +40,7 @@ public class InputExample extends GameActivity
         LayoutParams layoutParameters = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
         layoutParameters.addRule(RelativeLayout.ALIGN_TOP);
         eventList.setLayoutParams(layoutParameters);
-        eventList.setText("Touch the screen to see data on your inputs.\n\n");
+        eventList.setText("Touch the screen to see data on your inputs. Use the HOME key to exit the application.\n\n");
         eventList.setBackgroundColor(0x07000000);
         relativeLayout.addView(eventList);
 
@@ -63,6 +64,9 @@ public class InputExample extends GameActivity
     public void onBackPressed() {
         eventList.append("BACK KEY PRESSED\n");
         scrollText();
+
+        MediaPlayer smbCoinSound = MediaPlayer.create(this, R.raw.smw_coin);
+        smbCoinSound.start();
     }
 
     private void scrollText() {
