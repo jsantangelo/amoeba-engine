@@ -16,7 +16,7 @@ import android.graphics.Color;
 import android.opengl.GLES20;
 
 /**
- * TextureSpriteVertexBufferObjectSpriteVertexBufferObject provides an implementation of a sprite VBO.
+ * TextureSpriteVertexBufferObject provides an implementation of a Entity VBO to be used for Sprites.
  */
 public class TextureSpriteVertexBufferObject implements EntityVertexBufferObject
 {
