@@ -6,7 +6,7 @@ import java.nio.FloatBuffer;
 
 import org.amoeba.entity.EntityVertexBufferObject;
 import org.amoeba.graphics.shader.ShaderConstants;
-import org.amoeba.graphics.shader.impl.TextureShaderProgram;
+import org.amoeba.graphics.shader.ShaderProgram;
 import org.amoeba.graphics.utilities.BufferUtilities;
 import org.amoeba.graphics.vbo.BufferConstants;
 import org.amoeba.graphics.vbo.VertexBufferObjectAttribute;
@@ -48,14 +48,14 @@ public class TextureSpriteVertexBufferObject implements EntityVertexBufferObject
 	private VertexBufferObjectAttributeList attributeList;
 	private boolean isLoaded;
 	private final BufferUtilities bufferUtilities;
-	private final TextureShaderProgram shaderProgram;
+	private final ShaderProgram shaderProgram;
 
 	/**
-	 * Constructor for SpriteVertexBufferObject.
+	 * Constructor for TextureSpriteVertexBufferObject.
 	 * @param program A shader program used to display textures.
 	 * @param utilities The utilities to be used.
 	 */
-	public TextureSpriteVertexBufferObject(final TextureShaderProgram program, final BufferUtilities utilities)
+	public TextureSpriteVertexBufferObject(final ShaderProgram program, final BufferUtilities utilities)
 	{
 		spriteData = DEFAULT_SPRITE_DATA;
 		capacity = spriteData.length;
