@@ -3,7 +3,7 @@
 	<property name="deploy.dir" value="deploy" />
 	<property name="build.name" value="classes.jar" />
 	<property name="deployable.name" value="AmoebaEngine.jar" />
-	<condition property="file.ext" value=".bat">
+	<condition property="file.ext" value=".bat" else="">
 	    <os family="windows" />
 	</condition>
 
