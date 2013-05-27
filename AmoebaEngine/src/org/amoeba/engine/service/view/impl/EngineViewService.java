@@ -1,9 +1,10 @@
-package org.amoeba.engine.service.view;
+package org.amoeba.engine.service.view.impl;
 
 import org.amoeba.engine.service.graphics.GraphicsService;
 import org.amoeba.engine.service.input.InputService;
 import org.amoeba.engine.service.thread.ThreadService;
 import org.amoeba.engine.service.thread.ThreadType;
+import org.amoeba.engine.service.view.ViewService;
 
 import android.content.Context;
 import android.opengl.GLSurfaceView;
@@ -16,7 +17,7 @@ import android.view.SurfaceHolder;
  * Responsible for acting as the View to which draws are made. Also the
  * entry point for raw MotionEvents from the Android OS.
  */
-public class EngineView extends GLSurfaceView
+public class EngineViewService extends GLSurfaceView
 	implements ViewService, SurfaceHolder.Callback
 {
 	private static final String TAG = "AmoebaEngine.EngineView";
@@ -33,7 +34,7 @@ public class EngineView extends GLSurfaceView
 	 *              the Android OS
 	 * @param thread thread to be managed by the view
 	 */
-	public EngineView(final Context context, final GraphicsService graphics,
+	public EngineViewService(final Context context, final GraphicsService graphics,
 		final InputService input, final ThreadService thread)
 	{
 		super(context);

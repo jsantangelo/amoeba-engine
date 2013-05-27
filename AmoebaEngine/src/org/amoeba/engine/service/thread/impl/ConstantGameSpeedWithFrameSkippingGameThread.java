@@ -1,4 +1,4 @@
-package org.amoeba.engine.service.thread.implementation;
+package org.amoeba.engine.service.thread.impl;
 
 import org.amoeba.engine.routing.Router;
 import org.amoeba.engine.service.view.ViewService;

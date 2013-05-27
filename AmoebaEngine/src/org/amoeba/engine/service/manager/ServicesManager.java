@@ -1,4 +1,7 @@
-package org.amoeba.engine.service;
+package org.amoeba.engine.service.manager;
+
+import org.amoeba.engine.service.Service;
+import org.amoeba.engine.service.ServiceType;
 
 /**
  * Manages all Services provided by AmoebaEngine. Responsible for creating,

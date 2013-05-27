@@ -1,15 +1,18 @@
-package org.amoeba.engine.service;
+package org.amoeba.engine.service.manager.impl;
 
 import java.util.EnumMap;
 
 import org.amoeba.engine.routing.Router;
 import org.amoeba.engine.service.graphics.GraphicsService;
 import org.amoeba.engine.service.graphics.GraphicsServiceFactory;
-import org.amoeba.engine.service.input.EngineInput;
+import org.amoeba.engine.service.input.impl.EngineInputService;
 import org.amoeba.engine.service.input.InputService;
-import org.amoeba.engine.service.thread.EngineThreadService;
+import org.amoeba.engine.service.manager.ServicesManager;
+import org.amoeba.engine.service.Service;
+import org.amoeba.engine.service.ServiceType;
+import org.amoeba.engine.service.thread.impl.EngineThreadService;
 import org.amoeba.engine.service.thread.ThreadService;
-import org.amoeba.engine.service.view.EngineView;
+import org.amoeba.engine.service.view.impl.EngineViewService;
 import org.amoeba.engine.service.view.ViewService;
 
 import android.content.Context;
@@ -45,7 +48,7 @@ public class EngineServicesManager implements ServicesManager
 	private void createDefaultServices()
 	{
 		//Input Services
-		InputService inputService = new EngineInput(currentContext, callbackRouter);
+		InputService inputService = new EngineInputService(currentContext, callbackRouter);
 		services.put(ServiceType.INPUT, inputService);
 
 		//Thread Services
@@ -57,7 +60,7 @@ public class EngineServicesManager implements ServicesManager
 		services.put(ServiceType.GRAPHICS, graphicsService);
 
 		//View Services
-		ViewService viewService = new EngineView(currentContext, graphicsService, inputService, threadService);
+		ViewService viewService = new EngineViewService(currentContext, graphicsService, inputService, threadService);
 		services.put(ServiceType.VIEW, viewService);
 	}
 

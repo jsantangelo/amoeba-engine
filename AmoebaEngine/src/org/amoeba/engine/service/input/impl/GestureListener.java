@@ -1,9 +1,12 @@
-package org.amoeba.engine.service.input;
+package org.amoeba.engine.service.input.impl;
 
 import android.content.Context;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.ScaleGestureDetector;
+
+import org.amoeba.engine.service.input.InputEvent;
+import org.amoeba.engine.service.input.InputService;
 
 /**
  * Responsible for interpreting raw touch events from the Android OS, and

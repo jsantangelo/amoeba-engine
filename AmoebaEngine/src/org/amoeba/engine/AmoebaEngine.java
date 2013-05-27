@@ -3,14 +3,14 @@ package org.amoeba.engine;
 import android.content.Context;
 
 import org.amoeba.engine.routing.DrawListener;
-import org.amoeba.engine.routing.EngineRouter;
+import org.amoeba.engine.routing.impl.EngineRouter;
 import org.amoeba.engine.routing.InputListener;
 import org.amoeba.engine.routing.Router;
 import org.amoeba.engine.routing.SurfaceListener;
 import org.amoeba.engine.routing.UpdateListener;
-import org.amoeba.engine.service.EngineServicesManager;
+import org.amoeba.engine.service.manager.impl.EngineServicesManager;
+import org.amoeba.engine.service.manager.ServicesManager;
 import org.amoeba.engine.service.Service;
-import org.amoeba.engine.service.ServicesManager;
 import org.amoeba.engine.service.ServiceType;
 
 /**

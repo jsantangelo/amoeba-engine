@@ -1,8 +1,8 @@
-package org.amoeba.engine.service.thread;
+package org.amoeba.engine.service.thread.impl;
 
 import org.amoeba.engine.routing.Router;
-import org.amoeba.engine.service.thread.implementation.BasicGameThread;
-import org.amoeba.engine.service.thread.implementation.ConstantGameSpeedWithFrameSkippingGameThread;
+import org.amoeba.engine.service.thread.ThreadService;
+import org.amoeba.engine.service.thread.ThreadType;
 import org.amoeba.engine.service.view.ViewService;
 
 import android.util.Log;

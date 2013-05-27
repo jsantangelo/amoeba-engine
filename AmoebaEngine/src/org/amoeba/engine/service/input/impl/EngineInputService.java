@@ -1,14 +1,16 @@
-package org.amoeba.engine.service.input;
+package org.amoeba.engine.service.input.impl;
 
 import android.content.Context;
 import android.view.MotionEvent;
 
 import org.amoeba.engine.routing.Router;
+import org.amoeba.engine.service.input.InputEvent;
+import org.amoeba.engine.service.input.InputService;
 
 /**
  * Implementation of the service responsible for input interpretation.
  */
-public class EngineInput implements InputService
+public class EngineInputService implements InputService
 {
 	private Router callbackRouter;
 	private GestureListener gestureListener;
@@ -19,7 +21,7 @@ public class EngineInput implements InputService
 	 * @param context current Activity context
 	 * @param  router entity to be called back on processed input events
 	 */
-	public EngineInput(final Context context, final Router router)
+	public EngineInputService(final Context context, final Router router)
 	{
 		callbackRouter = router;
 		gestureListener = new GestureListener(context, this);
