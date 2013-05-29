@@ -32,4 +32,15 @@ public interface EntityVertexBufferObject extends VertexBufferObject
 	 * @return The color currently stored in the buffer in the form of android.graphics.Color.
 	 */
 	public int getColor();
+
+	/**
+	 * Render primitives from the stored data.
+	 */
+	public void draw();
+
+	/**
+	 * Render primitives from the stored data.
+	 * @param mode The kind of primitives to render.
+	 */
+	public void draw(final int mode);
 }

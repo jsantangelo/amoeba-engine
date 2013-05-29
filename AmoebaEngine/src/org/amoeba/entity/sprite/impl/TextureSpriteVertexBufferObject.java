@@ -162,12 +162,21 @@ public class TextureSpriteVertexBufferObject implements EntityVertexBufferObject
 	}
 
 	@Override
+	public void draw()
+	{
+		draw(GLES20.GL_TRIANGLE_STRIP, 0, NUMBER_VERTICES);
+	}
+
+	@Override
+	public void draw(final int mode)
+	{
+		draw(mode, 0, NUMBER_VERTICES);
+	}
+
+	@Override
 	public void draw(final int mode, final int count)
 	{
-		if (isLoaded)
-		{
-			bufferUtilities.drawVertexBuffer(mode, 0, count);
-		}
+		draw(mode, 0, count);
 	}
 
 	@Override

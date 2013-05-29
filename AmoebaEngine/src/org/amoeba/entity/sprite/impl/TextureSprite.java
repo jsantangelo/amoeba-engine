@@ -16,7 +16,6 @@ import android.opengl.GLES20;
  */
 public class TextureSprite extends Sprite
 {
-	private static final int NUMBER_OF_VERTICES = 4;
 	private Texture texture;
 	private EntityVertexBufferObject spriteBuffer;
 	private TextureShaderProgram program;
@@ -103,7 +102,7 @@ public class TextureSprite extends Sprite
 		int mvpMatrixHandle = program.getUniformLocation(ShaderConstants.UNIFORM_MVPMATRIX);
 		GLES20.glUniformMatrix4fv(mvpMatrixHandle, 1, false, mvpMatrix, 0);
 
-		spriteBuffer.draw(GLES20.GL_TRIANGLE_STRIP, NUMBER_OF_VERTICES);
+		spriteBuffer.draw();
 
 		program.stopUsing();
 	}

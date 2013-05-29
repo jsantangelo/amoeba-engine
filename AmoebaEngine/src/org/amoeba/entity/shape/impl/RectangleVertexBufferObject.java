@@ -16,9 +16,9 @@ import android.graphics.Color;
 import android.opengl.GLES20;
 
 /**
- * ShapeVertexBufferObject provides an implementation of a Entity VBO to be used for Shapes.
+ * RectangleVertexBufferObject provides an implementation of a Entity VBO to be used for Rectangles.
  */
-public class ShapeVertexBufferObject implements EntityVertexBufferObject
+public class RectangleVertexBufferObject implements EntityVertexBufferObject
 {
 	private static final int NUMBER_VERTICES = 4;
 	private static final int NUMBER_ATTRIBUTES = 3;
@@ -40,7 +40,7 @@ public class ShapeVertexBufferObject implements EntityVertexBufferObject
 		0.50f, -0.5f, 0.0f, 1.0f, 1.0f, 1.0f, 1.0f
 	};
 
-	private float[] data;
+	private float[] shapeData;
 	private int capacity;
 	private FloatBuffer buffer;
 	private VertexBufferObjectAttributeList attributeList;
@@ -49,14 +49,14 @@ public class ShapeVertexBufferObject implements EntityVertexBufferObject
 	private final ShaderProgram shaderProgram;
 
 	/**
-	 * Constructor for ShapeVertexBufferObject.
+	 * Constructor for RectangleVertexBufferObject.
 	 * @param program A shader program used to display shapes with only colors.
 	 * @param utilities The utilities to be used.
 	 */
-	public ShapeVertexBufferObject(final ShaderProgram program, final BufferUtilities utilities)
+	public RectangleVertexBufferObject(final ShaderProgram program, final BufferUtilities utilities)
 	{
-		data = DEFAULT_DATA;
-		capacity = data.length;
+		shapeData = DEFAULT_DATA;
+		capacity = shapeData.length;
 		bufferUtilities = utilities;
 		shaderProgram = program;
 		attributeList = null;
@@ -87,7 +87,7 @@ public class ShapeVertexBufferObject implements EntityVertexBufferObject
 		ByteBuffer byteBuffer = ByteBuffer.allocateDirect(capacity * BufferConstants.BYTES_PER_FLOAT);
 		byteBuffer.order(ByteOrder.nativeOrder());
 		buffer = byteBuffer.asFloatBuffer();
-		buffer.put(data).position(0);
+		buffer.put(shapeData).position(0);
 
 		isLoaded = true;
 	}
@@ -112,22 +112,22 @@ public class ShapeVertexBufferObject implements EntityVertexBufferObject
 		final int stride = attributeList.getStrideBytes() / BufferConstants.BYTES_PER_FLOAT;
 		for (int i = 0; i < NUMBER_VERTICES; ++i)
 		{
-			data[(i * stride) + COLOR_OFFSET + RED_OFFSET] = red;
-			data[(i * stride) + COLOR_OFFSET + GREEN_OFFSET] = green;
-			data[(i * stride) + COLOR_OFFSET + BLUE_OFFSET] = blue;
-			data[(i * stride) + COLOR_OFFSET + ALPHA_OFFSET] = alpha;
+			shapeData[(i * stride) + COLOR_OFFSET + RED_OFFSET] = red;
+			shapeData[(i * stride) + COLOR_OFFSET + GREEN_OFFSET] = green;
+			shapeData[(i * stride) + COLOR_OFFSET + BLUE_OFFSET] = blue;
+			shapeData[(i * stride) + COLOR_OFFSET + ALPHA_OFFSET] = alpha;
 		}
 		buffer.position(0);
-		buffer.put(data).position(0);
+		buffer.put(shapeData).position(0);
 	}
 
 	@Override
 	public int getColor()
 	{
-		int red = (int) (data[COLOR_OFFSET + RED_OFFSET] * MAX_COLOR_VALUE);
-		int green = (int) (data[COLOR_OFFSET + GREEN_OFFSET] * MAX_COLOR_VALUE);
-		int blue = (int) (data[COLOR_OFFSET + BLUE_OFFSET] * MAX_COLOR_VALUE);
-		int alpha = (int) (data[COLOR_OFFSET + ALPHA_OFFSET] * MAX_COLOR_VALUE);
+		int red = (int) (shapeData[COLOR_OFFSET + RED_OFFSET] * MAX_COLOR_VALUE);
+		int green = (int) (shapeData[COLOR_OFFSET + GREEN_OFFSET] * MAX_COLOR_VALUE);
+		int blue = (int) (shapeData[COLOR_OFFSET + BLUE_OFFSET] * MAX_COLOR_VALUE);
+		int alpha = (int) (shapeData[COLOR_OFFSET + ALPHA_OFFSET] * MAX_COLOR_VALUE);
 
 		return Color.argb(alpha, red, green, blue);
 	}
@@ -154,12 +154,21 @@ public class ShapeVertexBufferObject implements EntityVertexBufferObject
 	}
 
 	@Override
+	public void draw()
+	{
+		draw(GLES20.GL_TRIANGLE_STRIP, 0, NUMBER_VERTICES);
+	}
+
+	@Override
+	public void draw(final int mode)
+	{
+		draw(mode, 0, NUMBER_VERTICES);
+	}
+
+	@Override
 	public void draw(final int mode, final int count)
 	{
-		if (isLoaded)
-		{
-			bufferUtilities.drawVertexBuffer(mode, 0, count);
-		}
+		draw(mode, 0, count);
 	}
 
 	@Override
