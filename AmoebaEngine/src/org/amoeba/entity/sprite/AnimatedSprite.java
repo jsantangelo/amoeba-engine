@@ -1,71 +1,49 @@
 package org.amoeba.entity.sprite;
 
-import org.amoeba.graphics.camera.Camera;
 
 /**
  * AnimatedSprite is an entity that is used to display an animation.
  */
-public class AnimatedSprite extends Sprite
+public abstract class AnimatedSprite extends Sprite
 {
 	/**
 	 * Constructor for Animated Sprite.
-	 * @param x The x position of the sprite (left).
-	 * @param y The y position of the sprite (top).
-	 * @param w The width of the sprite.
-	 * @param h The height of the sprite.
+	 * @param x The x position of the sprite (center).
+	 * @param y The y position of the sprite (center).
 	 */
-	public AnimatedSprite(final float x, final float y, final float w, final float h)
+	public AnimatedSprite(final float x, final float y)
 	{
 		super(x, y);
 	}
 
-	@Override
-	public void onDraw(final Camera camera)
-	{
-		// TODO Auto-generated method stub
+	/**
+	 * Play the animated sprite with the default repetitions.
+	 * @return Whether the animated sprite is playing.
+	 */
+	public abstract boolean play();
 
-	}
+	/**
+	 * Play the animated sprite with a specified number of repetitions.
+	 * @param repetitions The number of times to play through the animation.
+	 * @return Whether the animated sprite is playing.
+	 */
+	public abstract boolean play(int repetitions);
 
-	@Override
-	public void onUpdate()
-	{
-		// TODO Auto-generated method stub
+	/**
+	 * Pause the animated sprite.
+	 * @return Whether the animated sprite was paused.
+	 */
+	public abstract boolean pause();
 
-	}
+	/**
+	 * Stop the animated sprite.
+	 * @return Whether the animated sprite was stopped.
+	 */
+	public abstract boolean stop();
 
-	@Override
-	public void load()
-	{
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void setColor(final int color)
-	{
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void setColor(final float red, final float green, final float blue, final float alpha)
-	{
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void setColor(final int color, final long duration)
-	{
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public int getColor()
-	{
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
+	/**
+	 * Determine whether the animated sprite is playing.
+	 * @return Whether the animated sprite is playing or not.
+	 */
+	public abstract boolean isPlaying();
 }

@@ -1,11 +1,11 @@
  package org.amoeba.entity.sprite;
 
-import org.amoeba.graphics.camera.Camera;
+ import android.graphics.Typeface;
 
 /**
  * TextSprite is an entity that is used to display text.
  */
-public class TextSprite extends Sprite
+public abstract class TextSprite extends Sprite
 {
 	/**
 	 * Constructor for TextSprite.
@@ -16,53 +16,21 @@ public class TextSprite extends Sprite
 		super(0f, 0f);
 	}
 
-	@Override
-	public void onDraw(final Camera camera)
-	{
-		// TODO Auto-generated method stub
+	/**
+	 * Set the text string.
+	 * @param text The string to be displayed.
+	 */
+	public abstract void setText(String text);
 
-	}
+	/**
+	 * Set the size of the font.
+	 * @param size The size of the font.
+	 */
+	public abstract void setTextSize(int size);
 
-	@Override
-	public void onUpdate()
-	{
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void load()
-	{
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void setColor(final int color)
-	{
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void setColor(final float red, final float green, final float blue, final float alpha)
-	{
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void setColor(final int color, final long duration)
-	{
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public int getColor()
-	{
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
+	/**
+	 * Set the font.
+	 * @param font The font to use for the text.
+	 */
+	public abstract void setFont(Typeface font);
 }
