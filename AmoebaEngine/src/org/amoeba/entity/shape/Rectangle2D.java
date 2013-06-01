@@ -11,6 +11,7 @@ import org.amoeba.graphics.utilities.ColorTransition;
 public abstract class Rectangle2D extends Rectangle implements Entity
 {
 	private ColorTransition colorTransition;
+	private int entityDepth;
 
 	/**
 	 * Default constructor for Rectangle2D.
@@ -18,7 +19,7 @@ public abstract class Rectangle2D extends Rectangle implements Entity
 	 */
 	public Rectangle2D()
 	{
-		super(0f, 0f, 1f, 1f);
+		this(0f, 0f, 1f, 1f);
 	}
 
 	/**
@@ -28,7 +29,7 @@ public abstract class Rectangle2D extends Rectangle implements Entity
 	 */
 	public Rectangle2D(final float w, final float h)
 	{
-		super(0f, 0f, w, h);
+		this(0f, 0f, w, h);
 	}
 
 	/**
@@ -37,7 +38,7 @@ public abstract class Rectangle2D extends Rectangle implements Entity
 	 */
 	public Rectangle2D(final Dimension dimension)
 	{
-		super(0f, 0f, dimension.getWidth(), dimension.getHeight());
+		this(0f, 0f, dimension.getWidth(), dimension.getHeight());
 	}
 
 	/**
@@ -50,6 +51,7 @@ public abstract class Rectangle2D extends Rectangle implements Entity
 	public Rectangle2D(final float x, final float y, final float w, final float h)
 	{
 		super(x, y, w, h);
+		setDepth(0);
 	}
 
 	/**
@@ -99,5 +101,17 @@ public abstract class Rectangle2D extends Rectangle implements Entity
 				colorTransition = null;
 			}
 		}
+	}
+
+	@Override
+	public int getDepth()
+	{
+		return entityDepth;
+	}
+
+	@Override
+	public void setDepth(final int depth)
+	{
+		entityDepth = depth;
 	}
 }

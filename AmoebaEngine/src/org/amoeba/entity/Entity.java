@@ -27,4 +27,16 @@ public interface Entity extends DrawListener, UpdateListener
 	 * @param position The x and y coordinates of the entity.
 	 */
 	public void setPosition(final Point position);
+
+	/**
+	 * Get the depth of the entity. Used to order drawing of entities.
+	 * @return The depth of the entity.
+	 */
+	public int getDepth();
+
+	/**
+	 * Set the depth of the entity. Used to order drawing of entities.
+	 * @param depth The depth.
+	 */
+	public void setDepth(final int depth);
 }
