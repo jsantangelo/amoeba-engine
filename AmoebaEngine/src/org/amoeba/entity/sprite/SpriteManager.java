@@ -58,7 +58,10 @@ public class SpriteManager implements DrawListener, UpdateListener
 	{
 		for (Sprite sprite : sprites)
 		{
-			sprite.onDraw(camera);
+			if (!sprite.isHidden())
+			{
+				sprite.onDraw(camera);
+			}
 		}
 	}
 
