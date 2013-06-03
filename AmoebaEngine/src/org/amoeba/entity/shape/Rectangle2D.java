@@ -12,6 +12,7 @@ public abstract class Rectangle2D extends Rectangle implements Entity
 {
 	private ColorTransition colorTransition;
 	private int entityDepth;
+	private boolean hidden;
 
 	/**
 	 * Default constructor for Rectangle2D.
@@ -52,6 +53,7 @@ public abstract class Rectangle2D extends Rectangle implements Entity
 	{
 		super(x, y, w, h);
 		setDepth(0);
+		show();
 	}
 
 	/**
@@ -113,5 +115,23 @@ public abstract class Rectangle2D extends Rectangle implements Entity
 	public void setDepth(final int depth)
 	{
 		entityDepth = depth;
+	}
+
+	@Override
+	public void hide()
+	{
+		hidden = true;
+	}
+
+	@Override
+	public void show()
+	{
+		hidden = false;
+	}
+
+	@Override
+	public boolean isHidden()
+	{
+		return hidden;
 	}
 }

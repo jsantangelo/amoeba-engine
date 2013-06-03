@@ -39,4 +39,20 @@ public interface Entity extends DrawListener, UpdateListener
 	 * @param depth The depth.
 	 */
 	public void setDepth(final int depth);
+
+	/**
+	 * Prevent the entity from being drawn.
+	 */
+	public void hide();
+
+	/**
+	 * Automatically draw the entity to the screen.
+	 */
+	public void show();
+
+	/**
+	 * Check whether the entity is hidden.
+	 * @return Whether the entity is hidden.
+	 */
+	public boolean isHidden();
 }
