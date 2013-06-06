@@ -2,8 +2,13 @@ package org.amoeba.entity.shape.impl;
 
 import org.amoeba.entity.EntityVertexBufferObject;
 import org.amoeba.entity.shape.Rectangle2D;
+import org.amoeba.geom.Dimension;
 import org.amoeba.graphics.camera.Camera;
+import org.amoeba.graphics.shader.ShaderConstants;
 import org.amoeba.graphics.shader.ShaderProgram;
+import org.amoeba.graphics.utilities.MatrixHelper;
+
+import android.opengl.GLES20;
 
 /**
  * BoxRectangle2D is a 2D rectangle with square corners.
@@ -44,7 +49,22 @@ public class BoxRectangle2D extends Rectangle2D
 	@Override
 	public void onDraw(final Camera camera)
 	{
-		// TODO Auto-generated method stub
+		program.use();
 
+		Dimension scale = new Dimension(getWidth() * getScale().getWidth(), getHeight() * getScale().getHeight());
+		final float[] modelMatrix = MatrixHelper.createMatrix(
+				getPosition(),
+				scale,
+				getRotation());
+
+		getBuffer().bind();
+
+		final float[] mvpMatrix = camera.calculateMVPMatrix(modelMatrix);
+		int mvpMatrixHandle = program.getUniformLocation(ShaderConstants.UNIFORM_MVPMATRIX);
+		GLES20.glUniformMatrix4fv(mvpMatrixHandle, 1, false, mvpMatrix, 0);
+
+		getBuffer().draw();
+
+		program.stopUsing();
 	}
 }
