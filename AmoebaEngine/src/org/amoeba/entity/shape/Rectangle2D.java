@@ -1,6 +1,7 @@
 package org.amoeba.entity.shape;
 
 import org.amoeba.entity.Entity;
+import org.amoeba.entity.EntityVertexBufferObject;
 import org.amoeba.geom.Dimension;
 import org.amoeba.geom.Rectangle;
 import org.amoeba.graphics.utilities.ColorTransition;
@@ -13,59 +14,72 @@ public abstract class Rectangle2D extends Rectangle implements Entity
 	private ColorTransition colorTransition;
 	private int entityDepth;
 	private boolean hidden;
+	private EntityVertexBufferObject vertexBuffer;
 
 	/**
 	 * Default constructor for Rectangle2D.
 	 * Creates the rectangle at (0, 0) with a width and height of 1.0f.
+	 * @param vbo The vertex buffer object for the rectangle.
 	 */
-	public Rectangle2D()
+	public Rectangle2D(final EntityVertexBufferObject vbo)
 	{
-		this(0f, 0f, 1f, 1f);
+		this(0f, 0f, 1f, 1f, vbo);
 	}
 
 	/**
 	 * Constructor for Rectangle2D for a specific width and height.
 	 * @param w The width of the rectangle.
 	 * @param h The height of the rectangle.
+	 * @param vbo The vertex buffer object for the rectangle.
 	 */
-	public Rectangle2D(final float w, final float h)
+	public Rectangle2D(final float w, final float h, final EntityVertexBufferObject vbo)
 	{
-		this(0f, 0f, w, h);
+		this(0f, 0f, w, h, vbo);
 	}
 
 	/**
 	 * Constructor for Rectangle2D for a specific width and height.
 	 * @param dimension The width and height of the rectangle.
+	 * @param vbo The vertex buffer object for the rectangle.
 	 */
-	public Rectangle2D(final Dimension dimension)
+	public Rectangle2D(final Dimension dimension, final EntityVertexBufferObject vbo)
 	{
-		this(0f, 0f, dimension.getWidth(), dimension.getHeight());
+		this(0f, 0f, dimension.getWidth(), dimension.getHeight(), vbo);
 	}
 
 	/**
 	 * Constructor for Rectangle2D for a specific position and size.
-	 * @param x The x position of the rectangle (left).
-	 * @param y The y position of the rectangle (top).
+	 * @param x The x position of the rectangle (center).
+	 * @param y The y position of the rectangle (center).
 	 * @param w The width of the rectangle.
 	 * @param h The height of the rectangle.
+	 * @param vbo The vertex buffer object for the rectangle.
 	 */
-	public Rectangle2D(final float x, final float y, final float w, final float h)
+	public Rectangle2D(final float x, final float y, final float w, final float h, final EntityVertexBufferObject vbo)
 	{
 		super(x, y, w, h);
 		setDepth(0);
 		show();
+
+		vertexBuffer = vbo;
 	}
 
 	/**
 	 * Load the rectangle.
 	 */
-	public abstract void load();
+	public void load()
+	{
+		vertexBuffer.load();
+	}
 
 	/**
 	 * Pack the color into the buffer.
 	 * @param color The new color of the rectangle (as defined by android.graphics.Color).
 	 */
-	public abstract void setColor(final int color);
+	public void setColor(final int color)
+	{
+		vertexBuffer.setColor(color);
+	}
 
 	/**
 	 * Pack the color into the buffer.
@@ -74,7 +88,10 @@ public abstract class Rectangle2D extends Rectangle implements Entity
 	 * @param blue The blue component of the color (0.0f - 1.0f).
 	 * @param alpha The alpha component of the color (0.0f - 1.0f).
 	 */
-	public abstract void setColor(final float red, final float green, final float blue, final float alpha);
+	public void setColor(final float red, final float green, final float blue, final float alpha)
+	{
+		vertexBuffer.setColor(red, green, blue, alpha);
+	}
 
 	/**
 	 * Transition to a new color over a set time.
@@ -90,7 +107,19 @@ public abstract class Rectangle2D extends Rectangle implements Entity
 	 * Get the current color of the rectangle.
 	 * @return The current color of the rectangle.
 	 */
-	public abstract int getColor();
+	public int getColor()
+	{
+		return vertexBuffer.getColor();
+	}
+
+	/**
+	 * Get the vertex buffer object for the rectangle.
+	 * @return The vertex buffer object for the rectangle.
+	 */
+	protected EntityVertexBufferObject getBuffer()
+	{
+		return vertexBuffer;
+	}
 
 	@Override
 	public void onUpdate()

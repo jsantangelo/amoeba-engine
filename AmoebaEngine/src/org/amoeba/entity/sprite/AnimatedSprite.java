@@ -1,5 +1,7 @@
 package org.amoeba.entity.sprite;
 
+import org.amoeba.entity.EntityVertexBufferObject;
+
 
 /**
  * AnimatedSprite is an entity that is used to display an animation.
@@ -10,10 +12,11 @@ public abstract class AnimatedSprite extends Sprite
 	 * Constructor for Animated Sprite.
 	 * @param x The x position of the sprite (center).
 	 * @param y The y position of the sprite (center).
+	 * @param vbo The vertex buffer object for the rectangle.
 	 */
-	public AnimatedSprite(final float x, final float y)
+	public AnimatedSprite(final float x, final float y, final EntityVertexBufferObject vbo)
 	{
-		super(x, y);
+		super(x, y, vbo);
 	}
 
 	/**
