@@ -3,6 +3,7 @@ package org.amoeba.entity.shape;
 import org.amoeba.entity.Entity;
 import org.amoeba.entity.EntityVertexBufferObject;
 import org.amoeba.geom.Dimension;
+import org.amoeba.geom.Point;
 import org.amoeba.geom.Rectangle;
 import org.amoeba.graphics.utilities.ColorTransition;
 
@@ -45,6 +46,17 @@ public abstract class Rectangle2D extends Rectangle implements Entity
 	public Rectangle2D(final Dimension dimension, final EntityVertexBufferObject vbo)
 	{
 		this(0f, 0f, dimension.getWidth(), dimension.getHeight(), vbo);
+	}
+
+	/**
+	 * Constructor for Rectangle2D for a specific position and size.
+	 * @param pos The position of the rectangle (center).
+	 * @param dimension The width and height of the rectangle.
+	 * @param vbo The vertex buffer object for the rectangle.
+	 */
+	public Rectangle2D(final Point pos, final Dimension dimension, final EntityVertexBufferObject vbo)
+	{
+		this(pos.getX(), pos.getY(), dimension.getWidth(), dimension.getHeight(), vbo);
 	}
 
 	/**

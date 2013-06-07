@@ -24,7 +24,7 @@ public class BoxRectangle2D extends Rectangle2D
 	 */
 	public BoxRectangle2D(final ShaderProgram shaderProgram, final EntityVertexBufferObject vbo)
 	{
-		this(0f, 0f, shaderProgram, vbo);
+		this(0f, 0f, 1f, 1f, shaderProgram, vbo);
 	}
 
 	/**
@@ -36,7 +36,21 @@ public class BoxRectangle2D extends Rectangle2D
 	 */
 	public BoxRectangle2D(final float x, final float y, final ShaderProgram shaderProgram, final EntityVertexBufferObject vbo)
 	{
-		super(x, y, vbo);
+		this(x, y, 1f, 1f, shaderProgram, vbo);
+	}
+
+	/**
+	 * Constructor for Sprite.
+	 * @param x The x position of the sprite (center).
+	 * @param y The y position of the sprite (center).
+	 * @param w The width of the rectangle.
+	 * @param h The height of the rectangle.
+	 * @param shaderProgram The program used to draw this shape.
+	 * @param vbo The vertex buffer object for the shape.
+	 */
+	public BoxRectangle2D(final float x, final float y, final float w, final float h, final ShaderProgram shaderProgram, final EntityVertexBufferObject vbo)
+	{
+		super(x, y, w, h, vbo);
 		program = shaderProgram;
 	}
 
