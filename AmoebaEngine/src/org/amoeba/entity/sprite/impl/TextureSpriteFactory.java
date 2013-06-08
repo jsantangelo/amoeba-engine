@@ -1,8 +1,8 @@
 package org.amoeba.entity.sprite.impl;
 
+import org.amoeba.entity.EntityManager;
 import org.amoeba.entity.sprite.Sprite;
 import org.amoeba.entity.sprite.SpriteFactory;
-import org.amoeba.entity.sprite.SpriteManager;
 import org.amoeba.graphics.shader.ShaderProgramManager;
 import org.amoeba.graphics.shader.impl.TextureShaderProgram;
 import org.amoeba.graphics.texture.Texture;
@@ -19,7 +19,7 @@ public class TextureSpriteFactory implements SpriteFactory
 	private final TextureManager textureManager;
 	private final TextureFactory textureFactory;
 	private final ShaderProgramManager shaderProgramManager;
-	private final SpriteManager spriteManager;
+	private final EntityManager entityManager;
 	private final ShaderUtilities shaderUtilities;
 	private final BufferUtilities bufferUtilities;
 
@@ -30,16 +30,16 @@ public class TextureSpriteFactory implements SpriteFactory
 	 * @param programManager The shader program manager.
 	 * @param shaUtilities The shader utilities.
 	 * @param bufUtilities The buffer utilities.
-	 * @param sprManager The sprite manager.
+	 * @param entManager The entity manager.
 	 */
-	public TextureSpriteFactory(final TextureManager texManager, final TextureFactory texFactory, final ShaderProgramManager programManager, final ShaderUtilities shaUtilities, final BufferUtilities bufUtilities, final SpriteManager sprManager)
+	public TextureSpriteFactory(final TextureManager texManager, final TextureFactory texFactory, final ShaderProgramManager programManager, final ShaderUtilities shaUtilities, final BufferUtilities bufUtilities, final EntityManager entManager)
 	{
 		textureManager = texManager;
 		textureFactory = texFactory;
 		shaderProgramManager = programManager;
 		shaderUtilities = shaUtilities;
 		bufferUtilities = bufUtilities;
-		spriteManager = sprManager;
+		entityManager = entManager;
 	}
 
 	@Override
@@ -62,7 +62,7 @@ public class TextureSpriteFactory implements SpriteFactory
 
 		TextureSpriteVertexBufferObject vbo = new TextureSpriteVertexBufferObject(program, bufferUtilities);
 		sprite = new TextureSprite(texture, program, vbo);
-		spriteManager.add(sprite);
+		entityManager.add(sprite);
 
 		return sprite;
 	}

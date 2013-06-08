@@ -2,8 +2,8 @@ package org.amoeba.engine.service.graphics.impl;
 
 import org.amoeba.engine.routing.Router;
 import org.amoeba.engine.service.graphics.GraphicsService;
+import org.amoeba.entity.EntityManager;
 import org.amoeba.entity.sprite.SpriteFactory;
-import org.amoeba.entity.sprite.SpriteManager;
 import org.amoeba.entity.sprite.impl.TextureSpriteFactory;
 import org.amoeba.graphics.shader.ShaderProgramManager;
 import org.amoeba.graphics.texture.TextureFactory;
@@ -33,7 +33,7 @@ public class GLES20GraphicsService implements GraphicsService
 	private final TextureUtilities textureUtilities;
 
 	private final ShaderProgramManager shaderProgramManager;
-	private final SpriteManager spriteManager;
+	private final EntityManager entityManager;
 	private final TextureManager textureManager;
 
 	private final TextureFactory textureFactory;
@@ -55,16 +55,16 @@ public class GLES20GraphicsService implements GraphicsService
 		textureUtilities = new GLES20TextureUtilities(activityContext);
 
 		shaderProgramManager = new ShaderProgramManager();
-		spriteManager = new SpriteManager();
+		entityManager = new EntityManager();
 		textureManager = new TextureManager();
 
 		textureFactory = new BitmapTextureFactory(textureManager, textureUtilities);
-		spriteFactory = new TextureSpriteFactory(textureManager, textureFactory, shaderProgramManager, shaderUtilities, bufferUtilities, spriteManager);
+		spriteFactory = new TextureSpriteFactory(textureManager, textureFactory, shaderProgramManager, shaderUtilities, bufferUtilities, entityManager);
 
 		renderer = new GLES20Renderer(router);
 
-		router.registerForDraw(spriteManager);
-		router.registerForUpdate(spriteManager);
+		router.registerForDraw(entityManager);
+		router.registerForUpdate(entityManager);
 		router.registerForSurfaceEvents(this);
 	}
 
@@ -91,7 +91,7 @@ public class GLES20GraphicsService implements GraphicsService
 	{
 		shaderProgramManager.loadPrograms();
 		textureManager.loadTextures();
-		spriteManager.loadSprites();
+		entityManager.loadAll();
 	}
 
 	@Override

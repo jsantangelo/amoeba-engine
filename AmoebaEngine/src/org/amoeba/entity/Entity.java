@@ -29,6 +29,11 @@ public interface Entity extends DrawListener, UpdateListener
 	public void setPosition(final Point position);
 
 	/**
+	 * Load the entity.
+	 */
+	public void load();
+
+	/**
 	 * Get the depth of the entity. Used to order drawing of entities.
 	 * @return The depth of the entity.
 	 */

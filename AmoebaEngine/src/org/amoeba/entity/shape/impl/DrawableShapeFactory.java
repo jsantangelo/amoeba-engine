@@ -1,5 +1,6 @@
 package org.amoeba.entity.shape.impl;
 
+import org.amoeba.entity.EntityManager;
 import org.amoeba.entity.shape.Rectangle2D;
 import org.amoeba.entity.shape.ShapeFactory;
 import org.amoeba.geom.Dimension;
@@ -17,18 +18,21 @@ public class DrawableShapeFactory implements ShapeFactory
 	private final ShaderProgramManager shaderProgramManager;
 	private final ShaderUtilities shaderUtilities;
 	private final BufferUtilities bufferUtilities;
+	private final EntityManager entityManager;
 
 	/**
 	 * Constructor for TextureSpriteFactory.
 	 * @param programManager The shader program manager.
 	 * @param shaUtilities The shader utilities.
 	 * @param bufUtilities The buffer utilities.
+	 * @param entManager The entity manager.
 	 */
-	public DrawableShapeFactory(final ShaderProgramManager programManager, final ShaderUtilities shaUtilities, final BufferUtilities bufUtilities)
+	public DrawableShapeFactory(final ShaderProgramManager programManager, final ShaderUtilities shaUtilities, final BufferUtilities bufUtilities, final EntityManager entManager)
 	{
 		shaderProgramManager = programManager;
 		shaderUtilities = shaUtilities;
 		bufferUtilities = bufUtilities;
+		entityManager = entManager;
 	}
 
 	@Override
@@ -45,7 +49,7 @@ public class DrawableShapeFactory implements ShapeFactory
 
 		RectangleVertexBufferObject vbo = new RectangleVertexBufferObject(program, bufferUtilities);
 		rectangle = new BoxRectangle2D(position.getX(), position.getY(), dimensions.getWidth(), dimensions.getHeight(), program, vbo);
-		//entityManager.add(rectangle);
+		entityManager.add(rectangle);
 
 		return rectangle;
 	}
