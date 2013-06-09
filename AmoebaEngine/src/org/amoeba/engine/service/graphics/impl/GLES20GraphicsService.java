@@ -3,6 +3,8 @@ package org.amoeba.engine.service.graphics.impl;
 import org.amoeba.engine.routing.Router;
 import org.amoeba.engine.service.graphics.GraphicsService;
 import org.amoeba.entity.EntityManager;
+import org.amoeba.entity.shape.ShapeFactory;
+import org.amoeba.entity.shape.impl.DrawableShapeFactory;
 import org.amoeba.entity.sprite.SpriteFactory;
 import org.amoeba.entity.sprite.impl.TextureSpriteFactory;
 import org.amoeba.graphics.shader.ShaderProgramManager;
@@ -38,6 +40,7 @@ public class GLES20GraphicsService implements GraphicsService
 
 	private final TextureFactory textureFactory;
 	private final SpriteFactory spriteFactory;
+	private final ShapeFactory shapeFactory;
 
 	private final GLSurfaceView.Renderer renderer;
 
@@ -60,6 +63,7 @@ public class GLES20GraphicsService implements GraphicsService
 
 		textureFactory = new BitmapTextureFactory(textureManager, textureUtilities);
 		spriteFactory = new TextureSpriteFactory(textureManager, textureFactory, shaderProgramManager, shaderUtilities, bufferUtilities, entityManager);
+		shapeFactory = new DrawableShapeFactory(shaderProgramManager, shaderUtilities, bufferUtilities, entityManager);
 
 		renderer = new GLES20Renderer(router);
 
@@ -72,6 +76,12 @@ public class GLES20GraphicsService implements GraphicsService
 	public SpriteFactory getSpriteFactory()
 	{
 		return spriteFactory;
+	}
+
+	@Override
+	public ShapeFactory getShapeFactory()
+	{
+		return shapeFactory;
 	}
 
 	@Override
