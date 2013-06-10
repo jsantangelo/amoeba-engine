@@ -9,7 +9,6 @@ import org.amoeba.graphics.texture.Texture;
 import org.amoeba.graphics.texture.TextureFactory;
 import org.amoeba.graphics.texture.TextureManager;
 import org.amoeba.graphics.utilities.BufferUtilities;
-import org.amoeba.graphics.utilities.ShaderUtilities;
 
 /**
  * TextureSpriteFactory provides an implementation of SpriteFactory for Textured sprites.
@@ -20,7 +19,6 @@ public class TextureSpriteFactory implements SpriteFactory
 	private final TextureFactory textureFactory;
 	private final ShaderProgramManager shaderProgramManager;
 	private final EntityManager entityManager;
-	private final ShaderUtilities shaderUtilities;
 	private final BufferUtilities bufferUtilities;
 
 	/**
@@ -28,16 +26,14 @@ public class TextureSpriteFactory implements SpriteFactory
 	 * @param texManager The texture manager.
 	 * @param texFactory The texture factory.
 	 * @param programManager The shader program manager.
-	 * @param shaUtilities The shader utilities.
 	 * @param bufUtilities The buffer utilities.
 	 * @param entManager The entity manager.
 	 */
-	public TextureSpriteFactory(final TextureManager texManager, final TextureFactory texFactory, final ShaderProgramManager programManager, final ShaderUtilities shaUtilities, final BufferUtilities bufUtilities, final EntityManager entManager)
+	public TextureSpriteFactory(final TextureManager texManager, final TextureFactory texFactory, final ShaderProgramManager programManager, final BufferUtilities bufUtilities, final EntityManager entManager)
 	{
 		textureManager = texManager;
 		textureFactory = texFactory;
 		shaderProgramManager = programManager;
-		shaderUtilities = shaUtilities;
 		bufferUtilities = bufUtilities;
 		entityManager = entManager;
 	}
@@ -53,12 +49,8 @@ public class TextureSpriteFactory implements SpriteFactory
 			texture = textureFactory.createTexture(drawableID);
 		}
 
-		TextureShaderProgram program = (TextureShaderProgram) shaderProgramManager.getProgram(TextureShaderProgram.VERTEX_SHADER_SOURCE, TextureShaderProgram.FRAGMENT_SHADER_SOURCE);
-		if (program == null)
-		{
-			program = new TextureShaderProgram(shaderUtilities);
-			shaderProgramManager.add(program);
-		}
+		TextureShaderProgram program = TextureShaderProgram.getInstance();
+		shaderProgramManager.add(program);
 
 		TextureSpriteVertexBufferObject vbo = new TextureSpriteVertexBufferObject(program, bufferUtilities);
 		sprite = new TextureSprite(texture, program, vbo);

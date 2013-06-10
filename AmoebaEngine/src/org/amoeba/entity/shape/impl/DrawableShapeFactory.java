@@ -8,7 +8,6 @@ import org.amoeba.geom.Point;
 import org.amoeba.graphics.shader.ShaderProgramManager;
 import org.amoeba.graphics.shader.impl.ColorShaderProgram;
 import org.amoeba.graphics.utilities.BufferUtilities;
-import org.amoeba.graphics.utilities.ShaderUtilities;
 
 /**
  * DrawableShapeFactory provides functionality to create drawable shapes.
@@ -16,21 +15,18 @@ import org.amoeba.graphics.utilities.ShaderUtilities;
 public class DrawableShapeFactory implements ShapeFactory
 {
 	private final ShaderProgramManager shaderProgramManager;
-	private final ShaderUtilities shaderUtilities;
 	private final BufferUtilities bufferUtilities;
 	private final EntityManager entityManager;
 
 	/**
 	 * Constructor for TextureSpriteFactory.
 	 * @param programManager The shader program manager.
-	 * @param shaUtilities The shader utilities.
 	 * @param bufUtilities The buffer utilities.
 	 * @param entManager The entity manager.
 	 */
-	public DrawableShapeFactory(final ShaderProgramManager programManager, final ShaderUtilities shaUtilities, final BufferUtilities bufUtilities, final EntityManager entManager)
+	public DrawableShapeFactory(final ShaderProgramManager programManager, final BufferUtilities bufUtilities, final EntityManager entManager)
 	{
 		shaderProgramManager = programManager;
-		shaderUtilities = shaUtilities;
 		bufferUtilities = bufUtilities;
 		entityManager = entManager;
 	}
@@ -40,12 +36,8 @@ public class DrawableShapeFactory implements ShapeFactory
 	{
 		Rectangle2D rectangle = null;
 
-		ColorShaderProgram program = (ColorShaderProgram) shaderProgramManager.getProgram(ColorShaderProgram.VERTEX_SHADER_SOURCE, ColorShaderProgram.FRAGMENT_SHADER_SOURCE);
-		if (program == null)
-		{
-			program = new ColorShaderProgram(shaderUtilities);
-			shaderProgramManager.add(program);
-		}
+		ColorShaderProgram program = ColorShaderProgram.getInstance();
+		shaderProgramManager.add(program);
 
 		RectangleVertexBufferObject vbo = new RectangleVertexBufferObject(program, bufferUtilities);
 		rectangle = new BoxRectangle2D(position.getX(), position.getY(), dimensions.getWidth(), dimensions.getHeight(), program, vbo);

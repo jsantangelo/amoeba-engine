@@ -1,6 +1,7 @@
 package org.amoeba.graphics.utilities;
 
 import org.amoeba.graphics.shader.Shader;
+import org.amoeba.graphics.shader.Shader.Type;
 
 /**
  * ShaderUtilities provides a wrapper around common texture related OpenGL functions.
@@ -14,7 +15,7 @@ public interface ShaderUtilities
 	 * @param shaderType The type of shader (e.g. Fragment or Vertex).
 	 * @return The handle to the shader.
 	 */
-	public int compileShaderFromSource(final String shaderSource, final int shaderType);
+	public int compileShaderFromSource(final String shaderSource, final Type shaderType);
 
 	/**
 	 * Generate a program handle.
@@ -72,14 +73,9 @@ public interface ShaderUtilities
 	public int getUniformLocation(final int programHandle, final String uniformName);
 
 	/**
-	 * Get the OpenGL integer value for a Fragment Shader.
-	 * @return The integer value representing GL_FRAGMENT_SHADER.
+	 * Get the OpenGL integer value for a specific Shader type.
+	 * @param shaderType An enum representing which type of shader to return.
+	 * @return The integer value representing the shader type.
 	 */
-	public int getFragmentShaderId();
-
-	/**
-	 * Get the OpenGL integer value for a Vertex Shader.
-	 * @return The integer value representing GL_VERTEX_SHADER.
-	 */
-	public int getVertexShaderId();
+	public int getShaderType(Type shaderType);
 }

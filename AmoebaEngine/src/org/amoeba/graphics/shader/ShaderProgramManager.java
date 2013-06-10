@@ -2,19 +2,24 @@ package org.amoeba.graphics.shader;
 
 import java.util.ArrayList;
 
+import org.amoeba.graphics.utilities.ShaderUtilities;
+
 /**
  * ShaderProgramManager maintains a collection of shader programs.
  */
 public class ShaderProgramManager
 {
 	private final ArrayList<ShaderProgram> programs;
+	private final ShaderUtilities utilities;
 
 	/**
 	 * Constructor for ShaderProgramManager.
+	 * @param shaderUtilities The utilities to use with shaders.
 	 */
-	public ShaderProgramManager()
+	public ShaderProgramManager(final ShaderUtilities shaderUtilities)
 	{
 		programs = new ArrayList<ShaderProgram>();
+		utilities = shaderUtilities;
 	}
 
 	/**
@@ -36,31 +41,29 @@ public class ShaderProgramManager
 	{
 		for (ShaderProgram program : programs)
 		{
+			program.initialize(utilities);
 			program.compile();
 			program.link();
 		}
 	}
 
 	/**
-	 * Get a program given the vertex and fragment shaders' source.
-	 * @param vertexShader The source of the vertex shader.
-	 * @param fragmentShader The source of the fragment shader.
-	 * @return The program if it was found in the collection.
+	 * Return whether a program is maintained by the ShaderProgramManager.
+	 * @param shaderProgram The program to search for.
+	 * @return Whether the program exists in the collection.
 	 */
-	public ShaderProgram getProgram(final String vertexShader, final String fragmentShader)
+	public boolean hasProgram(final ShaderProgram shaderProgram)
 	{
-		ShaderProgram foundProgram = null;
-
+		boolean found = false;
 		for (ShaderProgram program : programs)
 		{
-			if (program.getVertexShader().getSource() == vertexShader &&
-					program.getFragmentShader().getSource() == fragmentShader)
+			if (program == shaderProgram)
 			{
-				foundProgram = program;
+				found = true;
 				break;
 			}
 		}
 
-		return foundProgram;
+		return found;
 	}
 }

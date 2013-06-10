@@ -11,14 +11,28 @@ public abstract class ShaderProgram
 	private Shader fragmentShader;
 	private Shader vertexShader;
 	private int handle;
+	private boolean initialized = false;
+
+	/**
+	 * Initialize the program.
+	 * @param utilities The shader utilities to use with this program.
+	 */
+	public void initialize(final ShaderUtilities utilities)
+	{
+		shaderUtilities = utilities;
+		initialized = true;
+	}
 
 	/**
 	 * Compile all shaders in the program.
 	 */
 	public void compile()
 	{
-		fragmentShader.compile();
-		vertexShader.compile();
+		if (initialized)
+		{
+			fragmentShader.compile(shaderUtilities);
+			vertexShader.compile(shaderUtilities);
+		}
 	}
 
 	/**
@@ -27,14 +41,17 @@ public abstract class ShaderProgram
 	 */
 	public int link()
 	{
-		handle = shaderUtilities.generateProgramHandle();
-		shaderUtilities.attachShaderToProgram(handle, vertexShader);
-		shaderUtilities.attachShaderToProgram(handle, fragmentShader);
-
-		if (!shaderUtilities.linkProgram(handle))
+		handle = 0;
+		if (initialized)
 		{
-			shaderUtilities.deleteProgram(handle);
-			handle = 0;
+			handle = shaderUtilities.generateProgramHandle();
+			shaderUtilities.attachShaderToProgram(handle, vertexShader);
+			shaderUtilities.attachShaderToProgram(handle, fragmentShader);
+
+			if (!shaderUtilities.linkProgram(handle))
+			{
+				shaderUtilities.deleteProgram(handle);
+			}
 		}
 
 		return handle;
@@ -45,7 +62,10 @@ public abstract class ShaderProgram
 	 */
 	public void use()
 	{
-		shaderUtilities.useProgram(handle);
+		if (initialized)
+		{
+			shaderUtilities.useProgram(handle);
+		}
 	}
 
 	/**
@@ -54,7 +74,7 @@ public abstract class ShaderProgram
 	 */
 	public boolean isInUse()
 	{
-		return (shaderUtilities.isProgramInUse(handle));
+		return (initialized && shaderUtilities.isProgramInUse(handle));
 	}
 
 	/**
@@ -140,14 +160,5 @@ public abstract class ShaderProgram
 	protected void setVertexShader(final Shader shader)
 	{
 		vertexShader = shader;
-	}
-
-	/**
-	 * Set the shader utilities to use with this program.
-	 * @param utilities The shader utilities to use.
-	 */
-	protected void setShaderUtilities(final ShaderUtilities utilities)
-	{
-		shaderUtilities = utilities;
 	}
 }

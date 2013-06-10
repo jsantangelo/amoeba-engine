@@ -7,9 +7,18 @@ import org.amoeba.graphics.utilities.ShaderUtilities;
  */
 public abstract class Shader
 {
-	private ShaderUtilities shaderUtilities;
+	/**
+	 * Types of shaders (Vertex or Fragment).
+	 */
+	public enum Type
+	{
+		VERTEX,
+		FRAGMENT
+	};
+
 	private String source;
-	private int handle, type;
+	private int handle;
+	private Type type;
 
 	/**
 	 * Get the source code for the shader.
@@ -24,7 +33,7 @@ public abstract class Shader
 	 * Get the type of the shader.
 	 * @return The type of the shader (Vertex or Fragment).
 	 */
-	public int getType()
+	public Type getType()
 	{
 		return type;
 	}
@@ -40,8 +49,9 @@ public abstract class Shader
 
 	/**
 	 * Compile the shader.
+	 * @param shaderUtilities The utilities used to compile the shader.
 	 */
-	public void compile()
+	public void compile(final ShaderUtilities shaderUtilities)
 	{
 		handle = shaderUtilities.compileShaderFromSource(source, type);
 	}
@@ -59,7 +69,7 @@ public abstract class Shader
 	 * Set the type of the shader.
 	 * @param shaderType The new shader type.
 	 */
-	protected void setType(final int shaderType)
+	protected void setType(final Type shaderType)
 	{
 		type = shaderType;
 	}
@@ -71,14 +81,5 @@ public abstract class Shader
 	protected void setHandle(final int shaderHandle)
 	{
 		handle = shaderHandle;
-	}
-
-	/**
-	 * Set the utilities to be used with this shader.
-	 * @param utilities The shader utilities.
-	 */
-	protected void setShaderUtilities(final ShaderUtilities utilities)
-	{
-		shaderUtilities = utilities;
 	}
 }

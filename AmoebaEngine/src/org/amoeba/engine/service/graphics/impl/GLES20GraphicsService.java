@@ -57,13 +57,13 @@ public class GLES20GraphicsService implements GraphicsService
 		shaderUtilities = new GLES20ShaderUtilities();
 		textureUtilities = new GLES20TextureUtilities(activityContext);
 
-		shaderProgramManager = new ShaderProgramManager();
+		shaderProgramManager = new ShaderProgramManager(shaderUtilities);
 		entityManager = new EntityManager();
 		textureManager = new TextureManager();
 
 		textureFactory = new BitmapTextureFactory(textureManager, textureUtilities);
-		spriteFactory = new TextureSpriteFactory(textureManager, textureFactory, shaderProgramManager, shaderUtilities, bufferUtilities, entityManager);
-		shapeFactory = new DrawableShapeFactory(shaderProgramManager, shaderUtilities, bufferUtilities, entityManager);
+		spriteFactory = new TextureSpriteFactory(textureManager, textureFactory, shaderProgramManager, bufferUtilities, entityManager);
+		shapeFactory = new DrawableShapeFactory(shaderProgramManager, bufferUtilities, entityManager);
 
 		renderer = new GLES20Renderer(router);
 

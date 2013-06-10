@@ -1,6 +1,7 @@
 package org.amoeba.graphics.utilities.impl;
 
 import org.amoeba.graphics.shader.Shader;
+import org.amoeba.graphics.shader.Shader.Type;
 import org.amoeba.graphics.utilities.ShaderUtilities;
 
 import android.opengl.GLES20;
@@ -23,15 +24,11 @@ public class GLES20ShaderUtilities implements ShaderUtilities
 		glIntStorage = new int[1];
 	}
 
-	/**
-	 * Compile a shader given the source code and type.
-	 * @param shaderSource The source code of the shader.
-	 * @param shaderType The type of shader (e.g. Fragment or Vertex).
-	 * @return The handle to the shader.
-	 */
-	public int compileShaderFromSource(final String shaderSource, final int shaderType)
+	@Override
+	public int compileShaderFromSource(final String shaderSource, final Type shaderType)
 	{
-		int handle = GLES20.glCreateShader(shaderType);
+		int type = getShaderType(shaderType);
+		int handle = GLES20.glCreateShader(type);
 		if (handle == 0)
 		{
 			throw new RuntimeException("Error creating shader.");
@@ -39,11 +36,9 @@ public class GLES20ShaderUtilities implements ShaderUtilities
 		else
 		{
 			GLES20.glShaderSource(handle, shaderSource);
-
 			GLES20.glCompileShader(handle);
 
 			GLES20.glGetShaderiv(handle, GLES20.GL_COMPILE_STATUS, glIntStorage, 0);
-
 			if (glIntStorage[0] == 0)
 			{
 				Log.e(TAG, "Error compiling shader: " + GLES20.glGetShaderInfoLog(handle));
@@ -55,10 +50,7 @@ public class GLES20ShaderUtilities implements ShaderUtilities
 		return handle;
 	}
 
-	/**
-	 * Generate a program handle.
-	 * @return The OpenGL program handle.
-	 */
+	@Override
 	public int generateProgramHandle()
 	{
 		int handle = GLES20.glCreateProgram();
@@ -70,21 +62,13 @@ public class GLES20ShaderUtilities implements ShaderUtilities
 		return handle;
 	}
 
-	/**
-	 * Attach a shader to a program.
-	 * @param programHandle The program with which the shader will be attached.
-	 * @param shader The shader to be attached.
-	 */
+	@Override
 	public void attachShaderToProgram(final int programHandle, final Shader shader)
 	{
 		GLES20.glAttachShader(programHandle, shader.getHandle());
 	}
 
-	/**
-	 * Link a program with a given OpenGL program handle.
-	 * @param handle The handle representing the program to be linked.
-	 * @return Whether the linking was successful.
-	 */
+	@Override
 	public boolean linkProgram(final int handle)
 	{
 		boolean result = true;
@@ -100,20 +84,13 @@ public class GLES20ShaderUtilities implements ShaderUtilities
 		return result;
 	}
 
-	/**
-	 * Use a program of a given handle.
-	 * @param programHandle The handle representing the program to be used.
-	 */
+	@Override
 	public void useProgram(final int programHandle)
 	{
 		GLES20.glUseProgram(programHandle);
 	}
 
-	/**
-	 * Query OpenGL whether a given program is in use.
-	 * @param programHandle The handle representing the program to be checked.
-	 * @return Whether the program is currently in use.
-	 */
+	@Override
 	public boolean isProgramInUse(final int programHandle)
 	{
 		GLES20.glGetIntegerv(GLES20.GL_CURRENT_PROGRAM, glIntStorage, 0);
@@ -121,21 +98,13 @@ public class GLES20ShaderUtilities implements ShaderUtilities
 		return (glIntStorage[0] == programHandle);
 	}
 
-	/**
-	 * Delete a program of a given handle.
-	 * @param programHandle The handle representing the program to be deleted.
-	 */
+	@Override
 	public void deleteProgram(final int programHandle)
 	{
 		GLES20.glDeleteProgram(programHandle);
 	}
 
-	/**
-	 * Get the location of an attribute in a given program.
-	 * @param programHandle The handle representing the program that contains the attribute.
-	 * @param attributeName The name of the attribute that is being retrieved.
-	 * @return The OpenGL handle of the attribute.
-	 */
+	@Override
 	public int getAttributeLocation(final int programHandle, final String attributeName)
 	{
 		if (attributeName == null)
@@ -152,12 +121,7 @@ public class GLES20ShaderUtilities implements ShaderUtilities
 		return attribute;
 	}
 
-	/**
-	 * Get the location of a uniform in a given program.
-	 * @param programHandle The handle representing the program that contains the uniform.
-	 * @param uniformName The name of the uniform that is being retrieved.
-	 * @return The OpenGL handle of the uniform.
-	 */
+	@Override
 	public int getUniformLocation(final int programHandle, final String uniformName)
 	{
 		if (uniformName == null)
@@ -174,21 +138,22 @@ public class GLES20ShaderUtilities implements ShaderUtilities
 		return uniform;
 	}
 
-	/**
-	 * Get the OpenGL integer value for a Fragment Shader.
-	 * @return The integer value representing GL_FRAGMENT_SHADER.
-	 */
-	public int getFragmentShaderId()
+	@Override
+	public int getShaderType(final Type shaderType)
 	{
-		return GLES20.GL_FRAGMENT_SHADER;
-	}
+		int type = 0;
+		switch (shaderType)
+		{
+			case VERTEX:
+				type = GLES20.GL_VERTEX_SHADER;
+				break;
+			case FRAGMENT:
+				type = GLES20.GL_FRAGMENT_SHADER;
+				break;
+			default:
+				type = GLES20.GL_NONE;
+		}
 
-	/**
-	 * Get the OpenGL integer value for a Vertex Shader.
-	 * @return The integer value representing GL_VERTEX_SHADER.
-	 */
-	public int getVertexShaderId()
-	{
-		return GLES20.GL_VERTEX_SHADER;
+		return type;
 	}
 }
