@@ -175,4 +175,10 @@ public abstract class Rectangle2D extends Rectangle implements Entity
 	{
 		return hidden;
 	}
+
+	@Override
+	public int compareTo(final Entity entity)
+	{
+		return entity.getDepth() - this.getDepth();
+	}
 }

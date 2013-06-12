@@ -12,6 +12,7 @@ public class SpriteExample extends GameActivity
 {
 	private Sprite sprite;
 	private Rectangle2D rectangle;
+	private boolean flipped = false;
 
 	@Override
 	protected void onCreate(final Bundle savedInstanceState)
@@ -26,9 +27,11 @@ public class SpriteExample extends GameActivity
 	{
 		sprite.setPosition(width / 2, height * 3 /4);
 		sprite.setColor(Color.BLUE, 10000L);
+		sprite.setDepth(-1);
 
 		rectangle.setPosition(width / 2, height / 4);
 		rectangle.setColor(Color.RED, 10000L);
+		rectangle.setDepth(1);
 	}
 
 	@Override
@@ -39,5 +42,17 @@ public class SpriteExample extends GameActivity
 
 		sprite.setRotation(angleInDegrees);
 		rectangle.setRotation(angleInDegrees);
+
+		if (angleInDegrees > 355.0f && !flipped)
+		{
+			sprite.setDepth(sprite.getDepth() * -1);
+			rectangle.setDepth(rectangle.getDepth() * -1);
+			flipped = true;
+		}
+
+		if (angleInDegrees < 355.0f)
+		{
+			flipped = false;
+		}
 	}
 }

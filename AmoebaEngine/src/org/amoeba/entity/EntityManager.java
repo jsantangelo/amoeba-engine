@@ -1,6 +1,7 @@
 package org.amoeba.entity;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 import org.amoeba.engine.routing.DrawListener;
 import org.amoeba.engine.routing.UpdateListener;
@@ -30,6 +31,7 @@ public class EntityManager implements DrawListener, UpdateListener
 		if (entity != null)
 		{
 			entities.add(entity);
+			Collections.sort(entities);
 		}
 	}
 
@@ -47,9 +49,22 @@ public class EntityManager implements DrawListener, UpdateListener
 	@Override
 	public void onUpdate()
 	{
+		boolean sorted = true;
+		int lastDepth = Integer.MAX_VALUE;
 		for (Entity entity : entities)
 		{
 			entity.onUpdate();
+
+			if (lastDepth < entity.getDepth())
+			{
+				sorted = false;
+			}
+			lastDepth = entity.getDepth();
+		}
+
+		if (!sorted)
+		{
+			Collections.sort(entities);
 		}
 	}
 

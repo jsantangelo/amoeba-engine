@@ -7,7 +7,7 @@ import org.amoeba.geom.Point;
 /**
  * Entity is an object in a scene.
  */
-public interface Entity extends DrawListener, UpdateListener
+public interface Entity extends Comparable<Entity>, DrawListener, UpdateListener
 {
 	/**
 	 * Get the position of the entity.
