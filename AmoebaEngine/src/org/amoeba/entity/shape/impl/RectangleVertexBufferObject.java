@@ -21,7 +21,7 @@ import android.opengl.GLES20;
 public class RectangleVertexBufferObject implements EntityVertexBufferObject
 {
 	private static final int NUMBER_VERTICES = 4;
-	private static final int NUMBER_ATTRIBUTES = 3;
+	private static final int NUMBER_ATTRIBUTES = 2;
 	private static final int POSITION_DATA_SIZE = 3;
 	private static final int POSITION_OFFSET = 0;
 	private static final int COLOR_DATA_SIZE = 4;
@@ -67,7 +67,6 @@ public class RectangleVertexBufferObject implements EntityVertexBufferObject
 	@Override
 	public void load()
 	{
-
 		attributeList = new VertexBufferObjectAttributeList(NUMBER_ATTRIBUTES, bufferUtilities);
 		attributeList.add(new VertexBufferObjectAttribute(
 				shaderProgram.getAttributeLocation(ShaderConstants.ATTRIBUTE_POSITION),

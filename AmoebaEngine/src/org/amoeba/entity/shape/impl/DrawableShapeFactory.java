@@ -32,7 +32,31 @@ public class DrawableShapeFactory implements ShapeFactory
 	}
 
 	@Override
+	public Rectangle2D createRectangle()
+	{
+		return createRectangle(0f, 0f, 1f, 1f);
+	}
+
+	@Override
+	public Rectangle2D createRectangle(final Dimension dimensions)
+	{
+		return createRectangle(0f, 0f, dimensions.getWidth(), dimensions.getHeight());
+	}
+
+	@Override
+	public Rectangle2D createRectangle(final float w, final float h)
+	{
+		return createRectangle(0f, 0f, w, h);
+	}
+
+	@Override
 	public Rectangle2D createRectangle(final Point position, final Dimension dimensions)
+	{
+		return createRectangle(position.getX(), position.getY(), dimensions.getWidth(), dimensions.getHeight());
+	}
+
+	@Override
+	public Rectangle2D createRectangle(final float x, final float y, final float w, final float h)
 	{
 		Rectangle2D rectangle = null;
 
@@ -40,7 +64,7 @@ public class DrawableShapeFactory implements ShapeFactory
 		shaderProgramManager.add(program);
 
 		RectangleVertexBufferObject vbo = new RectangleVertexBufferObject(program, bufferUtilities);
-		rectangle = new BoxRectangle2D(position.getX(), position.getY(), dimensions.getWidth(), dimensions.getHeight(), program, vbo);
+		rectangle = new BoxRectangle2D(x, y, w, h, program, vbo);
 		entityManager.add(rectangle);
 
 		return rectangle;

@@ -43,6 +43,16 @@ public class Rectangle extends Collidable
 
 	/**
 	 * Constructor for Rectangle for a specific position and size.
+	 * @param pos The position of the rectangle (center).
+	 * @param dimension The width and height of the rectangle.
+	 */
+	public Rectangle(final Point pos, final Dimension dimension)
+	{
+		this(pos.getX(), pos.getY(), dimension.getWidth(), dimension.getHeight());
+	}
+
+	/**
+	 * Constructor for Rectangle for a specific position and size.
 	 * @param x The x position of the rectangle (center).
 	 * @param y The y position of the rectangle (center).
 	 * @param w The width of the rectangle.
@@ -50,24 +60,9 @@ public class Rectangle extends Collidable
 	 */
 	public Rectangle(final float x, final float y, final float w, final float h)
 	{
-		setPosition(x, y);
-		setWidth(w);
-		setHeight(h);
-		setScale(1.0f);
-		setRotation(0.0f);
-	}
-
-	/**
-	 * Constructor for Rectangle for a specific position and size.
-	 * @param pos The position of the rectangle (center).
-	 * @param dimension The width and height of the rectangle.
-	 */
-	public Rectangle(final Point pos, final Dimension dimension)
-	{
-		setPosition(pos.getX(), pos.getY());
-		setWidth(dimension.getWidth());
-		setHeight(dimension.getHeight());
-		setScale(1.0f);
+		position = new Point(x, y);
+		size = new Dimension(w, h);
+		scale = new Dimension(1.0f, 1.0f);
 		setRotation(0.0f);
 	}
 
