@@ -29,6 +29,13 @@ public interface TextureUtilities
 	public void loadTextureFromResource(Texture texture);
 
 	/**
+	 * Create a texture that displays text.
+	 * @param texture The texture to be packed.
+	 * @param text The text to display on the texture.
+	 */
+	public void createTextTexture(Texture texture, String text);
+
+	/**
 	 * Unload a texture from OpenGL.
 	 * @param texture The texture to be unloaded.
 	 */

@@ -40,20 +40,13 @@ public class GLES20TextureUtilities implements TextureUtilities
 		glIntStorage = new int[1];
 	}
 
-	/**
-	 * Determine whether a texture with a given handle is loaded into OpenGL.
-	 * @param handle The OpenGL handle of the texture to check.
-	 * @return Whether the texture is loaded.
-	 */
+	@Override
 	public boolean isTextureLoaded(final int handle)
 	{
 		return GLES20.glIsTexture(handle);
 	}
 
-	/**
-	 * Generate an OpenGL handle to be used for a texture.
-	 * @return A new handle to be used in the binding of a texture.
-	 */
+	@Override
 	public int generateTextureHandle()
 	{
 		GLES20.glGenTextures(1, glIntStorage, 0);
@@ -65,10 +58,7 @@ public class GLES20TextureUtilities implements TextureUtilities
 		return glIntStorage[0];
 	}
 
-	/**
-	 * Load a texture from a resource into OpenGL.
-	 * @param texture The texture to be loaded.
-	 */
+	@Override
 	public void loadTextureFromResource(final Texture texture)
 	{
 		int textureHandle = texture.getHandle();
@@ -96,10 +86,12 @@ public class GLES20TextureUtilities implements TextureUtilities
 		}
 	}
 
-	/**
-	 * Unload a texture from OpenGL.
-	 * @param texture The texture to be unloaded.
-	 */
+	@Override
+	public void createTextTexture(final Texture texture, final String text)
+	{
+	}
+
+	@Override
 	public void unloadTexture(final Texture texture)
 	{
 		int textureHandle = texture.getHandle();
@@ -118,11 +110,7 @@ public class GLES20TextureUtilities implements TextureUtilities
 		}
 	}
 
-	/**
-	 * Get a preset TextureOptions.
-	 * @param preset The requested type of texture options.
-	 * @return The requested texture options.
-	 */
+	@Override
 	public TextureOptions getTextureOptionsPreset(final Preset preset)
 	{
 		TextureOptions options = null;
@@ -141,10 +129,7 @@ public class GLES20TextureUtilities implements TextureUtilities
 		return options;
 	}
 
-	/**
-	 * Apply OpenGL texture options.
-	 * @param options The options to be applied.
-	 */
+	@Override
 	public void applyTextureOptions(final TextureOptions options)
 	{
 		GLES20.glTexParameterf(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_MIN_FILTER, options.getMinFilter());
