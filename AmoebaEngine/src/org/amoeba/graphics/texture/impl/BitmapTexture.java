@@ -32,35 +32,25 @@ public class BitmapTexture implements Texture
 		height = 0;
 	}
 
-	/**
-	 * Load the texture into OpenGL.
-	 */
+	@Override
 	public void load()
 	{
 		utilities.loadTextureFromResource(this);
 	}
 
-	/**
-	 * Unload the texture from OpenGL.
-	 */
+	@Override
 	public void unload()
 	{
 		utilities.unloadTexture(this);
 	}
 
-	/**
-	 * Determine whether the texture is currently loaded.
-	 * @return Whether the texture is loaded.
-	 */
+	@Override
 	public boolean isLoaded()
 	{
 		return utilities.isTextureLoaded(getHandle());
 	}
 
-	/**
-	 * Set the width of the texture.
-	 * @param textureWidth The new width of the texture.
-	 */
+	@Override
 	public void setWidth(final int textureWidth)
 	{
 		this.width = 0;
@@ -70,10 +60,7 @@ public class BitmapTexture implements Texture
 		}
 	}
 
-	/**
-	 * Set the height of the texture.
-	 * @param textureHeight The new height of the texture.
-	 */
+	@Override
 	public void setHeight(final int textureHeight)
 	{
 		this.height = 0;
@@ -83,73 +70,49 @@ public class BitmapTexture implements Texture
 		}
 	}
 
-	/**
-	 * Set the OpenGL handle of the texture.
-	 * @param textureHandle The new handle of the texture.
-	 */
+	@Override
 	public void setHandle(final int textureHandle)
 	{
 		handle = textureHandle;
 	}
 
-	/**
-	 * Set the id of the texture.
-	 * @param id The new id of the texture.
-	 */
+	@Override
 	public void setID(final int id)
 	{
 		drawableID = id;
 	}
 
-	/**
-	 * Set the options used to load this texture.
-	 * @param textureOptions The options for this texture.
-	 */
+	@Override
 	public void setOptions(final TextureOptions textureOptions)
 	{
 		options = textureOptions;
 	}
 
-	/**
-	 * Get the width of the texture.
-	 * @return The width of the texture.
-	 */
+	@Override
 	public int getWidth()
 	{
 		return width;
 	}
 
-	/**
-	 * Get the height of the texture.
-	 * @return The height of the texture.
-	 */
+	@Override
 	public int getHeight()
 	{
 		return height;
 	}
 
-	/**
-	 * Get the OpenGL handle of the texture.
-	 * @return The handle that represents the texture.
-	 */
+	@Override
 	public int getHandle()
 	{
 		return handle;
 	}
 
-	/**
-	 * Get the ID of the texture.
-	 * @return The id number that was used to generate the texture.
-	 */
+	@Override
 	public int getID()
 	{
 		return drawableID;
 	}
 
-	/**
-	 * Get the options of this texture.
-	 * @return The options used to load the texture.
-	 */
+	@Override
 	public TextureOptions getOptions()
 	{
 		return options;
