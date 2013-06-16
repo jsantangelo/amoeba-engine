@@ -89,6 +89,57 @@ public class GLES20TextureUtilities implements TextureUtilities
 	@Override
 	public void createTextTexture(final Texture texture, final String text)
 	{
+		int textureHandle = texture.getHandle();
+		if (textureHandle == -1)
+		{
+			textureHandle = generateTextureHandle();
+		}
+
+		/*
+		if (textureHandle != -1)
+		{
+			Paint textPaint = new Paint();
+			textPaint.setTextSize(textSize);
+			textPaint.setAntiAlias(true);
+			textPaint.setColor(textColor);
+			textPaint.setTextAlign(Align.CENTER);
+
+			if (textFont != null)
+			{
+				textPaint.setTypeface(textFont);
+			}
+
+			// Measure the text size
+			int ascent = (int) FloatMath.ceil(-textPaint.ascent());
+			int descent = (int) FloatMath.ceil(textPaint.descent());
+			int measuredTextHeight = ascent + descent;
+			int measuredTextWidth = (int) FloatMath.ceil(textPaint.measureText(text));
+
+			int width = nextPowerTwo(measuredTextWidth);
+			int height = nextPowerTwo(measuredTextHeight);
+			width = Math.max(width, 2);
+			height = Math.max(height, 2);
+
+			Bitmap bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
+			Canvas canvas = new Canvas(bitmap);
+			bitmap.eraseColor(0);
+
+			// draw the text centered
+			int textXPosition = (width / 2);
+			int textYPosition = (height / 2) + (measuredTextHeight / 4);
+			canvas.drawText(text, textXPosition, textYPosition, textPaint);
+
+			GLES20.glBindTexture(GL10.GL_TEXTURE_2D, textureHandle);
+			applyTextureOptions(DEFAULT_OPTIONS);
+			GLUtils.texImage2D(GL10.GL_TEXTURE_2D, 0, bitmap, 0);
+			bitmap.recycle();
+
+			setText(text);
+			texture.setHandle(textureHandle);
+			texture.setWidth(width);
+			texture.setHeight(height);
+		}
+		*/
 	}
 
 	@Override
