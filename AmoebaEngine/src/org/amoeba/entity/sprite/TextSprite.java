@@ -23,17 +23,23 @@ public abstract class TextSprite extends Sprite
 	 * Set the text string.
 	 * @param text The string to be displayed.
 	 */
-	public abstract void setText(String text);
+	public abstract void setText(final String text);
+
+	/**
+	 * Get the text string.
+	 * @return The text string.
+	 */
+	public abstract String getText();
 
 	/**
 	 * Set the size of the font.
 	 * @param size The size of the font.
 	 */
-	public abstract void setTextSize(int size);
+	public abstract void setTextSize(final int size);
 
 	/**
 	 * Set the font.
 	 * @param font The font to use for the text.
 	 */
-	public abstract void setFont(Typeface font);
+	public abstract void setFont(final Typeface font);
 }
