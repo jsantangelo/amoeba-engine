@@ -1,4 +1,4 @@
-package org.amoeba.examples.spriteexample;
+package org.amoeba.examples.entity;
 
 import org.amoeba.activity.GameActivity;
 import org.amoeba.entity.shape.Rectangle2D;
