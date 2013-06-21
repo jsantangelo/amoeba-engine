@@ -12,7 +12,7 @@ public class ShapeExample extends GameActivity
 	private Rectangle2D rectangle;
 
 	@Override
-	protected void onCreate(final Bundle savedInstanceState)
+	public void onCreate(final Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
 		rectangle = getGraphicsService().getShapeFactory().createRectangle(500f, 500f);

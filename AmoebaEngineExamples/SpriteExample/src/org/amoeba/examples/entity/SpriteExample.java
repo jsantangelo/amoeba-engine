@@ -12,7 +12,7 @@ public class SpriteExample extends GameActivity
 	private Sprite sprite;
 
 	@Override
-	protected void onCreate(final Bundle savedInstanceState)
+	public void onCreate(final Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
 		sprite = getGraphicsService().getSpriteFactory().createSprite(R.drawable.happy);
