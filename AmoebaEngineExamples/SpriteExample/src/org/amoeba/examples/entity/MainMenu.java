@@ -9,7 +9,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.MotionEvent;
 
-public class EntityMenu extends GameActivity
+public class MainMenu extends GameActivity
 {
 	private int screenHeight = 0;
 	private Sprite sprite;
