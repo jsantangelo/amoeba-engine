@@ -57,7 +57,7 @@ public class TextureSpriteVertexBufferObject implements EntityVertexBufferObject
 	 */
 	public TextureSpriteVertexBufferObject(final ShaderProgram program, final BufferUtilities utilities)
 	{
-		spriteData = DEFAULT_SPRITE_DATA;
+		spriteData = DEFAULT_SPRITE_DATA.clone();
 		capacity = spriteData.length;
 		bufferUtilities = utilities;
 		shaderProgram = program;

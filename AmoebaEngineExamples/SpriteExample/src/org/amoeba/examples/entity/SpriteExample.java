@@ -21,7 +21,7 @@ public class SpriteExample extends GameActivity
 	@Override
 	public void onSurfaceChanged(final int width, final int height)
 	{
-		sprite.setPosition(width / 2, height * 3 /4);
+		sprite.setPosition(width / 2, height / 2);
 		sprite.setColor(Color.BLUE, 10000L);
 	}
 

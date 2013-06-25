@@ -55,7 +55,7 @@ public class RectangleVertexBufferObject implements EntityVertexBufferObject
 	 */
 	public RectangleVertexBufferObject(final ShaderProgram program, final BufferUtilities utilities)
 	{
-		shapeData = DEFAULT_DATA;
+		shapeData = DEFAULT_DATA.clone();
 		capacity = shapeData.length;
 		bufferUtilities = utilities;
 		shaderProgram = program;
