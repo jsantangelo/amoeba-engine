@@ -1,9 +1,10 @@
 package org.amoeba.examples.entity;
 
+import java.util.LinkedHashMap;
+
 import org.amoeba.activity.GameActivity;
 import org.amoeba.engine.service.input.InputEvent;
 import org.amoeba.entity.shape.Rectangle2D;
-import org.amoeba.entity.sprite.Sprite;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,30 +12,31 @@ import android.view.MotionEvent;
 
 public class MainMenu extends GameActivity
 {
-	private int screenHeight = 0;
-	private Sprite sprite;
-	private Rectangle2D rectangle;
+	private LinkedHashMap<Rectangle2D, Class<?>> menuItems;
 
 	@Override
 	protected void onCreate(final Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
-		sprite = getGraphicsService().getSpriteFactory().createSprite(R.drawable.happy);
-		rectangle = getGraphicsService().getShapeFactory().createRectangle();
+		menuItems = new LinkedHashMap<Rectangle2D, Class<?>>();
+		menuItems.put(getGraphicsService().getSpriteFactory().createSprite(R.drawable.happy), SpriteExample.class);
+		menuItems.put(getGraphicsService().getShapeFactory().createRectangle(), ShapeExample.class);
+		menuItems.put(getGraphicsService().getSpriteFactory().createSprite(R.drawable.happy), SpriteExample.class);
+		menuItems.put(getGraphicsService().getShapeFactory().createRectangle(), ShapeExample.class);
+		menuItems.put(getGraphicsService().getSpriteFactory().createSprite(R.drawable.happy), SpriteExample.class);
 	}
 
 	@Override
 	public void onSurfaceChanged(final int width, final int height)
 	{
-		screenHeight = height;
-
-		sprite.setWidth(width);
-		sprite.setHeight(height / 2);
-		sprite.setPosition(width / 2, height / 4);
-
-		rectangle.setWidth(width);
-		rectangle.setHeight(height / 2);
-		rectangle.setPosition(width / 2, height * 3 / 4);
+		int index = 0;
+		for(Rectangle2D entity : menuItems.keySet())
+		{
+			entity.setWidth(width);
+			entity.setHeight(height / menuItems.size());
+			entity.setPosition(width / 2, height * (index * 2 + 1) / (menuItems.size() * 2));
+			index++;
+		}
 	}
 
 	@Override
@@ -44,13 +46,17 @@ public class MainMenu extends GameActivity
 				event.getEventType() == InputEvent.EventType.LONGPRESS)
 		{
 			MotionEvent touchPoint = event.getMotionEvent();
-			if(touchPoint.getY() < screenHeight / 2)
+			float inputY = touchPoint.getY();
+			for(Rectangle2D entity : menuItems.keySet())
 			{
-				startActivity(new Intent(this, SpriteExample.class));
-			}
-			else
-			{
-				startActivity(new Intent(this, ShapeExample.class));
+				//TODO: Add Collidable to Entity and use the isColliding function instead
+				//if(entity.isColliding(inputX, inputY))
+				if(((entity.getPosition().getY() - entity.getHeight() / 2) <= inputY) &&
+						((entity.getPosition().getY() + entity.getHeight() / 2) >= inputY))
+				{
+					startActivity(new Intent(this, menuItems.get(entity)));
+					break;
+				}
 			}
 			overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left);
 		}
