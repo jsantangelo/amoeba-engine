@@ -37,7 +37,7 @@ public class ShaderProgramManager
 	/**
 	 * Load all programs in the collection.
 	 */
-	public void loadPrograms()
+	public void loadAll()
 	{
 		for (ShaderProgram program : programs)
 		{

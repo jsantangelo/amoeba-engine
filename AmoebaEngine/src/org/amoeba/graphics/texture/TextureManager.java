@@ -1,109 +1,63 @@
 package org.amoeba.graphics.texture;
 
-import android.util.SparseArray;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * TextureManager maintains a collection of textures.
  */
 public class TextureManager
 {
-	private final SparseArray<Texture> textures;
+	private final Set<Texture> textures;
 
 	/**
 	 * Constructor for TextureManager.
 	 */
 	public TextureManager()
 	{
-		this.textures = new SparseArray<Texture>();
+		this.textures = new HashSet<Texture>();
 	}
 
 	/**
-	 * Add a texture to be managed by the texture service.
+	 * Add a texture to be managed by the texture manager.
 	 * @param texture Texture to be added to the collection.
 	 */
 	public void add(final Texture texture)
 	{
-		if (texture != null && texture.getID() != -1)
+		if (texture != null)
 		{
-			textures.put(texture.getID(), texture);
+			textures.add(texture);
 		}
 	}
 
 	/**
-	 * Remove a texture from the texture service.
-	 * @param resource The resource ID representing the texture to be removed.
+	 * Remove a texture from the texture manager.
+	 * @param texture Texture to be removed from the collection.
 	 */
-	public void remove(final int resource)
+	public void remove(final Texture texture)
 	{
-		textures.remove(resource);
+		textures.remove(texture);
 	}
 
 	/**
-	 * Load a texture in the texture service collection.
-	 * @param resource The resource ID representing the texture to be loaded.
-	 * @return The loaded texture object.
+	 * Load all textures currently maintained by the texture manager.
 	 */
-	public Texture loadTexture(final int resource)
+	public void loadAll()
 	{
-		Texture texture = getTexture(resource);
-		texture.load();
-
-		return texture;
-	}
-
-	/**
-	 * Load all textures currently maintained by the texture service.
-	 */
-	public void loadTextures()
-	{
-		for (int index = 0; index < textures.size(); index++)
+		for (Texture texture : textures)
 		{
-			textures.valueAt(index).load();
+			texture.load();
 		}
 	}
 
 	/**
-	 * Unload a texture in the texture service collection.
-	 * @param resource The resource ID representing the texture to be loaded.
-	 * @return The unloaded texture object.
+	 * Unload all textures currently maintained by the texture manager.
 	 */
-	public Texture unloadTexture(final int resource)
+	public void unloadAll()
 	{
-		Texture texture = getTexture(resource);
-		texture.unload();
-
-		return texture;
-	}
-
-	/**
-	 * Unload all texture currently maintained by the texture service.
-	 */
-	public void unloadTextures()
-	{
-		for (int index = 0; index < textures.size(); index++)
+		for (Texture texture : textures)
 		{
-			textures.valueAt(index).unload();
+			texture.unload();
 		}
 	}
-
-	/**
-	 * Get a texture from the texture service using its resource ID.
-	 * @param resource The resource ID representing the texture.
-	 * @return The texture associated with the resource ID.
-	 */
-	public Texture getTexture(final int resource)
-	{
-		return textures.get(resource);
-	}
-
-	/**
-	 * Get the handle of a texture from its resource ID.
-	 * @param resource The resource ID representing the texture.
-	 * @return The texture handle associated with the resource ID.
-	 */
-	public int getTextureID(final int resource)
-	{
-		return textures.get(resource).getHandle();
-	}
-
 }
