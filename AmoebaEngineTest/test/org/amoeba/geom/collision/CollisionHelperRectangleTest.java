@@ -50,6 +50,6 @@ public class CollisionHelperRectangleTest
 		boolean result = CollisionHelper.isColliding(rectangle1, rectangle2);
 
 		// Assert Post-conditions
-		assertEquals(true, result);
+		assertEquals(false, result);
 	}
 }
