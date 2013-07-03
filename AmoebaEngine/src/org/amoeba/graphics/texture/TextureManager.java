@@ -15,7 +15,7 @@ public class TextureManager
 	 */
 	public TextureManager()
 	{
-		this.textures = new HashSet<Texture>();
+		textures = new HashSet<Texture>();
 	}
 
 	/**
@@ -59,5 +59,14 @@ public class TextureManager
 		{
 			texture.unload();
 		}
+	}
+
+	/**
+	 * Get the number of textures maintained by the texture manager.
+	 * @return The number of textures in the collection.
+	 */
+	public int size()
+	{
+		return textures.size();
 	}
 }
