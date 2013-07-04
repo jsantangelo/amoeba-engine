@@ -21,22 +21,28 @@ public class TextureManager
 	/**
 	 * Add a texture to be managed by the texture manager.
 	 * @param texture Texture to be added to the collection.
+	 * @return Whether the texture was added to the collection.
 	 */
-	public void add(final Texture texture)
+	public boolean add(final Texture texture)
 	{
+		boolean added = false;
+
 		if (texture != null)
 		{
-			textures.add(texture);
+			added = textures.add(texture);
 		}
+
+		return added;
 	}
 
 	/**
 	 * Remove a texture from the texture manager.
 	 * @param texture Texture to be removed from the collection.
+	 * @return Whether the texture was removed.
 	 */
-	public void remove(final Texture texture)
+	public boolean remove(final Texture texture)
 	{
-		textures.remove(texture);
+		return textures.remove(texture);
 	}
 
 	/**
