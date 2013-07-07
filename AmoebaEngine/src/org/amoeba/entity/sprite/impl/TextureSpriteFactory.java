@@ -3,6 +3,7 @@ package org.amoeba.entity.sprite.impl;
 import org.amoeba.entity.EntityManager;
 import org.amoeba.entity.sprite.Sprite;
 import org.amoeba.entity.sprite.SpriteFactory;
+import org.amoeba.geom.Point;
 import org.amoeba.graphics.shader.ShaderProgramManager;
 import org.amoeba.graphics.shader.impl.TextureShaderProgram;
 import org.amoeba.graphics.texture.ResourceManager;
@@ -41,6 +42,18 @@ public class TextureSpriteFactory implements SpriteFactory
 	@Override
 	public Sprite createSprite(final int drawableID)
 	{
+		return createSprite(drawableID, 0.0f, 0.0f);
+	}
+
+	@Override
+	public Sprite createSprite(final int drawableID, final Point position)
+	{
+		return createSprite(drawableID, position.getX(), position.getY());
+	}
+
+	@Override
+	public Sprite createSprite(final int drawableID, final float x, final float y)
+	{
 		Sprite sprite = null;
 
 		Texture texture = resourceManager.getTexture(drawableID);
@@ -53,7 +66,7 @@ public class TextureSpriteFactory implements SpriteFactory
 		shaderProgramManager.add(program);
 
 		TextureSpriteVertexBufferObject vbo = new TextureSpriteVertexBufferObject(program, bufferUtilities);
-		sprite = new TextureSprite(texture, program, vbo);
+		sprite = new TextureSprite(x, y, texture, program, vbo);
 		entityManager.add(sprite);
 
 		return sprite;
