@@ -59,7 +59,7 @@ public class GLES20TextureUtilities implements TextureUtilities
 	}
 
 	@Override
-	public void loadTextureFromResource(final Texture texture)
+	public void loadTextureFromResource(final Texture texture, final int resource)
 	{
 		int textureHandle = texture.getHandle();
 		if (textureHandle == -1)
@@ -72,7 +72,7 @@ public class GLES20TextureUtilities implements TextureUtilities
 			BitmapFactory.Options opts = new BitmapFactory.Options();
 			opts.inScaled = false;
 
-			Bitmap bmp = BitmapFactory.decodeResource(context.getResources(), texture.getID(), opts);
+			Bitmap bmp = BitmapFactory.decodeResource(context.getResources(), resource, opts);
 
 			GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, textureHandle);
 			applyTextureOptions(DEFAULT_OPTIONS);

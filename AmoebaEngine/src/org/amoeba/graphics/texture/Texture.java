@@ -40,12 +40,6 @@ public interface Texture
 	public void setHandle(final int handle);
 
 	/**
-	 * Set the id of the texture.
-	 * @param id The new id of the texture.
-	 */
-	public void setID(final int id);
-
-	/**
 	 * Set the options used to load this texture.
 	 * @param options The options for this texture.
 	 */
@@ -68,12 +62,6 @@ public interface Texture
 	 * @return The handle that represents the texture.
 	 */
 	public int getHandle();
-
-	/**
-	 * Get the ID of the texture.
-	 * @return The id number that was used to generate the texture.
-	 */
-	public int getID();
 
 	/**
 	 * Get the options of this texture.

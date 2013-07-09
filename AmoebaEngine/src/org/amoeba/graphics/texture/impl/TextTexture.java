@@ -35,7 +35,7 @@ public class TextTexture implements Texture
 	@Override
 	public void load()
 	{
-		utilities.loadTextureFromResource(this);
+
 	}
 
 	@Override
@@ -77,12 +77,6 @@ public class TextTexture implements Texture
 	}
 
 	@Override
-	public void setID(final int id)
-	{
-
-	}
-
-	@Override
 	public void setOptions(final TextureOptions textureOptions)
 	{
 		options = textureOptions;
@@ -104,12 +98,6 @@ public class TextTexture implements Texture
 	public int getHandle()
 	{
 		return handle;
-	}
-
-	@Override
-	public int getID()
-	{
-		return -1;
 	}
 
 	@Override

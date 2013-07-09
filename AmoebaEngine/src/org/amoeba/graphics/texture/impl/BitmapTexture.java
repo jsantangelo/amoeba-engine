@@ -35,7 +35,7 @@ public class BitmapTexture implements Texture
 	@Override
 	public void load()
 	{
-		utilities.loadTextureFromResource(this);
+		utilities.loadTextureFromResource(this, drawableID);
 	}
 
 	@Override
@@ -77,12 +77,6 @@ public class BitmapTexture implements Texture
 	}
 
 	@Override
-	public void setID(final int id)
-	{
-		drawableID = id;
-	}
-
-	@Override
 	public void setOptions(final TextureOptions textureOptions)
 	{
 		options = textureOptions;
@@ -104,12 +98,6 @@ public class BitmapTexture implements Texture
 	public int getHandle()
 	{
 		return handle;
-	}
-
-	@Override
-	public int getID()
-	{
-		return drawableID;
 	}
 
 	@Override
