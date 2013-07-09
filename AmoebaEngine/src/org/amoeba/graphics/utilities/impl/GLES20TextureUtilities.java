@@ -7,6 +7,7 @@ import java.nio.IntBuffer;
 import org.amoeba.graphics.texture.Texture;
 import org.amoeba.graphics.texture.TextureOptions;
 import org.amoeba.graphics.texture.TextureOptions.Preset;
+import org.amoeba.graphics.texture.impl.BaseTexture;
 import org.amoeba.graphics.utilities.TextureUtilities;
 
 import android.content.Context;
@@ -59,9 +60,11 @@ public class GLES20TextureUtilities implements TextureUtilities
 	}
 
 	@Override
-	public void loadTextureFromResource(final Texture texture, final int resource)
+	public Texture loadTextureFromResource(final int resource, final TextureOptions options, final int handle)
 	{
-		int textureHandle = texture.getHandle();
+		Texture texture = null;
+
+		int textureHandle = handle;
 		if (textureHandle == -1)
 		{
 			textureHandle = generateTextureHandle();
@@ -75,15 +78,15 @@ public class GLES20TextureUtilities implements TextureUtilities
 			Bitmap bmp = BitmapFactory.decodeResource(context.getResources(), resource, opts);
 
 			GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, textureHandle);
-			applyTextureOptions(DEFAULT_OPTIONS);
+			applyTextureOptions(options);
 			GLUtils.texImage2D(GLES20.GL_TEXTURE_2D, 0, bmp, 0);
 
-			texture.setWidth(bmp.getWidth());
-			texture.setHeight(bmp.getHeight());
-			texture.setHandle(textureHandle);
+			texture = new BaseTexture(this, options, textureHandle, bmp.getWidth(), bmp.getHeight());
 
 			bmp.recycle();
 		}
+
+		return texture;
 	}
 
 	@Override

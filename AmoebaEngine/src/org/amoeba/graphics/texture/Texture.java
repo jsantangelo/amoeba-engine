@@ -22,30 +22,6 @@ public interface Texture
 	public boolean isLoaded();
 
 	/**
-	 * Set the width of the texture.
-	 * @param width The new width of the texture.
-	 */
-	public void setWidth(final int width);
-
-	/**
-	 * Set the height of the texture.
-	 * @param height The new height of the texture.
-	 */
-	public void setHeight(final int height);
-
-	/**
-	 * Set the OpenGL handle of the texture.
-	 * @param handle The new handle of the texture.
-	 */
-	public void setHandle(final int handle);
-
-	/**
-	 * Set the options used to load this texture.
-	 * @param options The options for this texture.
-	 */
-	public void setOptions(final TextureOptions options);
-
-	/**
 	 * Get the width of the texture.
 	 * @return The width of the texture.
 	 */

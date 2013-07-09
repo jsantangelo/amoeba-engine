@@ -1,18 +1,13 @@
 package org.amoeba.graphics.texture.impl;
 
-import org.amoeba.graphics.texture.Texture;
 import org.amoeba.graphics.texture.TextureOptions;
 import org.amoeba.graphics.utilities.TextureUtilities;
 
 /**
  * TextTexture provides a texture with text.
  */
-public class TextTexture implements Texture
+public class TextTexture extends BaseTexture
 {
-	private final TextureUtilities utilities;
-	private TextureOptions options;
-	private int handle;
-	private int width, height;
 	private String text;
 
 	/**
@@ -23,13 +18,8 @@ public class TextTexture implements Texture
 	 */
 	public TextTexture(final TextureUtilities textureUtilities, final TextureOptions textureOptions, final String displayedText)
 	{
-		utilities = textureUtilities;
-		options = textureOptions;
+		super(textureUtilities, textureOptions, -1, 0, 0);
 		setText(displayedText);
-
-		handle = -1;
-		width = 0;
-		height = 0;
 	}
 
 	@Override
@@ -41,69 +31,10 @@ public class TextTexture implements Texture
 	@Override
 	public void unload()
 	{
-		utilities.unloadTexture(this);
-	}
-
-	@Override
-	public boolean isLoaded()
-	{
-		return utilities.isTextureLoaded(getHandle());
-	}
-
-	@Override
-	public void setWidth(final int textureWidth)
-	{
-		this.width = 0;
-		if (width >= 0)
-		{
-			width = textureWidth;
-		}
-	}
-
-	@Override
-	public void setHeight(final int textureHeight)
-	{
-		this.height = 0;
-		if (height >= 0)
-		{
-			height = textureHeight;
-		}
-	}
-
-	@Override
-	public void setHandle(final int textureHandle)
-	{
-		handle = textureHandle;
-	}
-
-	@Override
-	public void setOptions(final TextureOptions textureOptions)
-	{
-		options = textureOptions;
-	}
-
-	@Override
-	public int getWidth()
-	{
-		return width;
-	}
-
-	@Override
-	public int getHeight()
-	{
-		return height;
-	}
-
-	@Override
-	public int getHandle()
-	{
-		return handle;
-	}
-
-	@Override
-	public TextureOptions getOptions()
-	{
-		return options;
+		getUtilities().unloadTexture(this);
+		setHandle(-1);
+		setWidth(0);
+		setHeight(0);
 	}
 
 	/**

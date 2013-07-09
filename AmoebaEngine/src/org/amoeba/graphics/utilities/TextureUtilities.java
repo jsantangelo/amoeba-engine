@@ -24,10 +24,12 @@ public interface TextureUtilities
 
 	/**
 	 * Load a texture from a resource into OpenGL.
-	 * @param texture The texture to be loaded.
 	 * @param resource The id of the resource to load.
+	 * @param options The texture options with which to load.
+	 * @param handle The texture's handle if there is one already.
+	 * @return The texture, whether it was loaded or not.
 	 */
-	public void loadTextureFromResource(final Texture texture, final int resource);
+	public Texture loadTextureFromResource(final int resource, final TextureOptions options, final int handle);
 
 	/**
 	 * Create a texture that displays text.
