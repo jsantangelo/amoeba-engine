@@ -1,5 +1,6 @@
 package org.amoeba.graphics.utilities;
 
+import org.amoeba.graphics.texture.TextOptions;
 import org.amoeba.graphics.texture.Texture;
 import org.amoeba.graphics.texture.TextureOptions;
 import org.amoeba.graphics.texture.TextureOptions.Preset;
@@ -33,10 +34,13 @@ public interface TextureUtilities
 
 	/**
 	 * Create a texture that displays text.
-	 * @param texture The texture to be packed.
 	 * @param text The text to display on the texture.
+	 * @param textureOptions The texture options with which to load.
+	 * @param textOptions The text options to use.
+	 * @param handle The texture's handle if there is one already.
+	 * @return The texture, whether it was loaded or not.
 	 */
-	public void createTextTexture(final Texture texture, final String text);
+	public Texture loadTextTexture(final String text, final TextureOptions textureOptions, final TextOptions textOptions, final int handle);
 
 	/**
 	 * Unload a texture from OpenGL.

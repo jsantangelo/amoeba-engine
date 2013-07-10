@@ -4,6 +4,9 @@ import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.nio.IntBuffer;
 
+import javax.microedition.khronos.opengles.GL10;
+
+import org.amoeba.graphics.texture.TextOptions;
 import org.amoeba.graphics.texture.Texture;
 import org.amoeba.graphics.texture.TextureOptions;
 import org.amoeba.graphics.texture.TextureOptions.Preset;
@@ -13,6 +16,8 @@ import org.amoeba.graphics.utilities.TextureUtilities;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.graphics.Paint;
 import android.opengl.GLES20;
 import android.opengl.GLUtils;
 
@@ -90,33 +95,30 @@ public class GLES20TextureUtilities implements TextureUtilities
 	}
 
 	@Override
-	public void createTextTexture(final Texture texture, final String text)
+	public Texture loadTextTexture(final String text, final TextureOptions textureOptions, final TextOptions textOptions, final int handle)
 	{
-		int textureHandle = texture.getHandle();
+		Texture texture = null;
+
+		int textureHandle = handle;
 		if (textureHandle == -1)
 		{
 			textureHandle = generateTextureHandle();
 		}
 
-		/*
 		if (textureHandle != -1)
 		{
 			Paint textPaint = new Paint();
-			textPaint.setTextSize(textSize);
-			textPaint.setAntiAlias(true);
-			textPaint.setColor(textColor);
-			textPaint.setTextAlign(Align.CENTER);
-
-			if (textFont != null)
-			{
-				textPaint.setTypeface(textFont);
-			}
+			textPaint.setTextSize(textOptions.getSize());
+			textPaint.setAntiAlias(textOptions.isAntiAliased());
+			textPaint.setColor(textOptions.getColor());
+			textPaint.setTextAlign(textOptions.getAlignment());
+			textPaint.setTypeface(textOptions.getTypeface());
 
 			// Measure the text size
-			int ascent = (int) FloatMath.ceil(-textPaint.ascent());
-			int descent = (int) FloatMath.ceil(textPaint.descent());
+			int ascent = (int) Math.ceil(-textPaint.ascent());
+			int descent = (int) Math.ceil(textPaint.descent());
 			int measuredTextHeight = ascent + descent;
-			int measuredTextWidth = (int) FloatMath.ceil(textPaint.measureText(text));
+			int measuredTextWidth = (int) Math.ceil(textPaint.measureText(text));
 
 			int width = nextPowerTwo(measuredTextWidth);
 			int height = nextPowerTwo(measuredTextHeight);
@@ -129,20 +131,28 @@ public class GLES20TextureUtilities implements TextureUtilities
 
 			// draw the text centered
 			int textXPosition = (width / 2);
-			int textYPosition = (height / 2) + (measuredTextHeight / 4);
+			int textYPosition = (height / 2) + (measuredTextHeight / 2);
 			canvas.drawText(text, textXPosition, textYPosition, textPaint);
 
 			GLES20.glBindTexture(GL10.GL_TEXTURE_2D, textureHandle);
-			applyTextureOptions(DEFAULT_OPTIONS);
+			applyTextureOptions(textureOptions);
 			GLUtils.texImage2D(GL10.GL_TEXTURE_2D, 0, bitmap, 0);
 			bitmap.recycle();
 
-			setText(text);
-			texture.setHandle(textureHandle);
-			texture.setWidth(width);
-			texture.setHeight(height);
+			texture = new BaseTexture(this, textureOptions, textureHandle, width, height);
 		}
-		*/
+
+		return texture;
+	}
+
+	/**
+	 * Get the integer that is the next power of two higher than x.
+	 * @param x The non-power of two value.
+	 * @return An integer that is the closest power of two.
+	 */
+	private int nextPowerTwo(final int x)
+	{
+		return (int) (Math.pow(2, Math.ceil(Math.log(x) / Math.log(2))));
 	}
 
 	@Override
