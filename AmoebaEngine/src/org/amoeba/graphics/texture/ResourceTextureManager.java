@@ -3,14 +3,14 @@ package org.amoeba.graphics.texture;
 import android.util.SparseArray;
 
 /**
- * ResourceManager maintains a collection of resource textures.
+ * ResourceTextureManager maintains a collection of resource textures.
  */
 public class ResourceTextureManager
 {
 	private final SparseArray<Texture> textures;
 
 	/**
-	 * Constructor for ResourceManager.
+	 * Constructor for ResourceTextureManager.
 	 */
 	public ResourceTextureManager()
 	{

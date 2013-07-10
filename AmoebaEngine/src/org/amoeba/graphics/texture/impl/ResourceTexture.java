@@ -5,22 +5,22 @@ import org.amoeba.graphics.texture.TextureOptions;
 import org.amoeba.graphics.utilities.TextureUtilities;
 
 /**
- * BitmapTexture is a texture implementation that uses bitmaps to load the texture.
+ * ResourceTexture is a texture implementation that loads textures from resources.
  */
 public class ResourceTexture extends BaseTexture
 {
 	private int drawableID;
 
 	/**
-	 * The constructor for BitmapTexture.
+	 * The constructor for ResourceTexture.
 	 * @param textureUtilities The utilities used to perform OpenGL functionality.
 	 * @param textureOptions The options used to load the texture.
-	 * @param id The id of the resource representing the texture.
+	 * @param resource The id of the resource representing the texture.
 	 */
-	public ResourceTexture(final TextureUtilities textureUtilities, final TextureOptions textureOptions, final int id)
+	public ResourceTexture(final TextureUtilities textureUtilities, final TextureOptions textureOptions, final int resource)
 	{
 		super(textureUtilities, textureOptions, -1, 0, 0);
-		drawableID = id;
+		drawableID = resource;
 	}
 
 	@Override

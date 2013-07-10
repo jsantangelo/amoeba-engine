@@ -8,7 +8,7 @@ import org.amoeba.graphics.texture.TextureOptions.Preset;
 import org.amoeba.graphics.utilities.TextureUtilities;
 
 /**
- * BitmapTextureFactory is an implementation of a TextureFactory for bitmap textures.
+ * ResourceTextureFactory is an implementation of a TextureFactory for textures from resources.
  */
 public class ResourceTextureFactory implements TextureFactory
 {
@@ -17,7 +17,7 @@ public class ResourceTextureFactory implements TextureFactory
 	private final TextureUtilities textureUtilities;
 
 	/**
-	 * Constructor for BitmapTextureFactory.
+	 * Constructor for ResourceTextureFactory.
 	 * @param resManager Associates resources to textures.
 	 * @param texManager The maintainer of the texture collection.
 	 * @param utilities The texture utilities to use for texture operations.
