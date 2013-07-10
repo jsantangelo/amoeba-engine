@@ -5,14 +5,14 @@ import android.util.SparseArray;
 /**
  * ResourceManager maintains a collection of resource textures.
  */
-public class ResourceManager
+public class ResourceTextureManager
 {
 	private final SparseArray<Texture> textures;
 
 	/**
 	 * Constructor for ResourceManager.
 	 */
-	public ResourceManager()
+	public ResourceTextureManager()
 	{
 		this.textures = new SparseArray<Texture>();
 	}

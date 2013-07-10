@@ -6,7 +6,7 @@ import org.amoeba.entity.sprite.SpriteFactory;
 import org.amoeba.geom.Point;
 import org.amoeba.graphics.shader.ShaderProgramManager;
 import org.amoeba.graphics.shader.impl.TextureShaderProgram;
-import org.amoeba.graphics.texture.ResourceManager;
+import org.amoeba.graphics.texture.ResourceTextureManager;
 import org.amoeba.graphics.texture.Texture;
 import org.amoeba.graphics.texture.TextureFactory;
 import org.amoeba.graphics.utilities.BufferUtilities;
@@ -16,7 +16,7 @@ import org.amoeba.graphics.utilities.BufferUtilities;
  */
 public class TextureSpriteFactory implements SpriteFactory
 {
-	private final ResourceManager resourceManager;
+	private final ResourceTextureManager resourceManager;
 	private final TextureFactory textureFactory;
 	private final ShaderProgramManager shaderProgramManager;
 	private final EntityManager entityManager;
@@ -30,7 +30,7 @@ public class TextureSpriteFactory implements SpriteFactory
 	 * @param bufUtilities The buffer utilities.
 	 * @param entManager The entity manager.
 	 */
-	public TextureSpriteFactory(final ResourceManager resManager, final TextureFactory texFactory, final ShaderProgramManager programManager, final BufferUtilities bufUtilities, final EntityManager entManager)
+	public TextureSpriteFactory(final ResourceTextureManager resManager, final TextureFactory texFactory, final ShaderProgramManager programManager, final BufferUtilities bufUtilities, final EntityManager entManager)
 	{
 		resourceManager = resManager;
 		textureFactory = texFactory;

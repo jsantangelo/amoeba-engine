@@ -7,7 +7,7 @@ import org.amoeba.graphics.utilities.TextureUtilities;
 /**
  * BitmapTexture is a texture implementation that uses bitmaps to load the texture.
  */
-public class BitmapTexture extends BaseTexture
+public class ResourceTexture extends BaseTexture
 {
 	private int drawableID;
 
@@ -17,7 +17,7 @@ public class BitmapTexture extends BaseTexture
 	 * @param textureOptions The options used to load the texture.
 	 * @param id The id of the resource representing the texture.
 	 */
-	public BitmapTexture(final TextureUtilities textureUtilities, final TextureOptions textureOptions, final int id)
+	public ResourceTexture(final TextureUtilities textureUtilities, final TextureOptions textureOptions, final int id)
 	{
 		super(textureUtilities, textureOptions, -1, 0, 0);
 		drawableID = id;

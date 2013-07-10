@@ -8,10 +8,10 @@ import org.amoeba.entity.shape.impl.DrawableShapeFactory;
 import org.amoeba.entity.sprite.SpriteFactory;
 import org.amoeba.entity.sprite.impl.TextureSpriteFactory;
 import org.amoeba.graphics.shader.ShaderProgramManager;
-import org.amoeba.graphics.texture.ResourceManager;
+import org.amoeba.graphics.texture.ResourceTextureManager;
 import org.amoeba.graphics.texture.TextureFactory;
 import org.amoeba.graphics.texture.TextureManager;
-import org.amoeba.graphics.texture.impl.BitmapTextureFactory;
+import org.amoeba.graphics.texture.impl.ResourceTextureFactory;
 import org.amoeba.graphics.utilities.BufferUtilities;
 import org.amoeba.graphics.utilities.ShaderUtilities;
 import org.amoeba.graphics.utilities.TextureUtilities;
@@ -37,7 +37,7 @@ public class GLES20GraphicsService implements GraphicsService
 
 	private final ShaderProgramManager shaderProgramManager;
 	private final EntityManager entityManager;
-	private final ResourceManager resourceManager;
+	private final ResourceTextureManager resourceManager;
 	private final TextureManager textureManager;
 
 	private final TextureFactory textureFactory;
@@ -61,10 +61,10 @@ public class GLES20GraphicsService implements GraphicsService
 
 		shaderProgramManager = new ShaderProgramManager(shaderUtilities);
 		entityManager = new EntityManager();
-		resourceManager = new ResourceManager();
+		resourceManager = new ResourceTextureManager();
 		textureManager = new TextureManager();
 
-		textureFactory = new BitmapTextureFactory(resourceManager, textureManager, textureUtilities);
+		textureFactory = new ResourceTextureFactory(resourceManager, textureManager, textureUtilities);
 		spriteFactory = new TextureSpriteFactory(resourceManager, textureFactory, shaderProgramManager, bufferUtilities, entityManager);
 		shapeFactory = new DrawableShapeFactory(shaderProgramManager, bufferUtilities, entityManager);
 
