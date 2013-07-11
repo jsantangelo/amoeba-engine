@@ -1,48 +1,50 @@
 package org.amoeba.entity.sprite.impl;
 
 import org.amoeba.entity.EntityVertexBufferObject;
-import org.amoeba.entity.sprite.Sprite;
+import org.amoeba.entity.sprite.TextSprite;
 import org.amoeba.geom.Dimension;
 import org.amoeba.graphics.camera.Camera;
 import org.amoeba.graphics.shader.ShaderConstants;
 import org.amoeba.graphics.shader.impl.TextureShaderProgram;
-import org.amoeba.graphics.texture.Texture;
+import org.amoeba.graphics.texture.impl.TextTexture;
 import org.amoeba.graphics.utilities.MatrixHelper;
 
 import android.opengl.GLES20;
 
 /**
- * TextureSprite provides an implementation of Sprites using Textures.
+ * TextTextureSprite provides an implementation of TextSprite using textures.
  */
-public class TextureSprite extends Sprite
+public class TextTextureSprite extends TextSprite
 {
-	private Texture texture;
+	private TextTexture texture;
 	private TextureShaderProgram program;
+	private boolean reloadNeeded;
 
 	/**
-	 * Constructor for TextureSprite.
-	 * @param spriteTexture The texture on this sprite.
+	 * Constructor for TextTextureSprite.
+	 * @param textTexture The texture on this sprite.
 	 * @param textureProgram The program used to draw this sprite.
 	 * @param vbo The vertex buffer object for the sprite.
 	 */
-	public TextureSprite(final Texture spriteTexture, final TextureShaderProgram textureProgram, final EntityVertexBufferObject vbo)
+	public TextTextureSprite(final TextTexture textTexture, final TextureShaderProgram textureProgram, final EntityVertexBufferObject vbo)
 	{
-		this(0f, 0f, spriteTexture, textureProgram, vbo);
+		this(0f, 0f, textTexture, textureProgram, vbo);
 	}
 
 	/**
-	 * Constructor for TextureSprite.
+	 * Constructor for TextTextureSprite.
 	 * @param x The x position of the sprite (center).
 	 * @param y The y position of the sprite (center).
-	 * @param spriteTexture The texture on this sprite.
+	 * @param textTexture The texture on this sprite.
 	 * @param textureProgram The program used to draw this sprite.
 	 * @param vbo The vertex buffer object for the sprite.
 	 */
-	public TextureSprite(final float x, final float y, final Texture spriteTexture, final TextureShaderProgram textureProgram, final EntityVertexBufferObject vbo)
+	public TextTextureSprite(final float x, final float y, final TextTexture textTexture, final TextureShaderProgram textureProgram, final EntityVertexBufferObject vbo)
 	{
-		super(x, y, vbo);
-		texture = spriteTexture;
+		super(textTexture.getText(), x, y, vbo);
+		texture = textTexture;
 		program = textureProgram;
+		reloadNeeded = false;
 	}
 
 	@Override
@@ -86,5 +88,37 @@ public class TextureSprite extends Sprite
 		getBuffer().draw();
 
 		program.stopUsing();
+	}
+
+	@Override
+	public void onUpdate()
+	{
+		super.onUpdate();
+
+		if (reloadNeeded)
+		{
+			texture.unload();
+			texture.load();
+
+			if (getWidth() == 0)
+			{
+				setWidth(texture.getWidth());
+			}
+
+			if (getHeight() == 0)
+			{
+				setHeight(texture.getHeight());
+			}
+
+			reloadNeeded = false;
+		}
+	}
+
+	@Override
+	public void setText(final String text)
+	{
+		super.setText(text);
+		texture.setText(text);
+		reloadNeeded = true;
 	}
 }

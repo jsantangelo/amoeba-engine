@@ -1,5 +1,7 @@
 package org.amoeba.graphics.texture.impl;
 
+import org.amoeba.graphics.texture.TextOptions;
+import org.amoeba.graphics.texture.Texture;
 import org.amoeba.graphics.texture.TextureOptions;
 import org.amoeba.graphics.utilities.TextureUtilities;
 
@@ -9,23 +11,32 @@ import org.amoeba.graphics.utilities.TextureUtilities;
 public class TextTexture extends BaseTexture
 {
 	private String text;
+	private TextOptions displayedTextOptions;
 
 	/**
 	 * The constructor for TextTexture.
 	 * @param textureUtilities The utilities used to perform OpenGL functionality.
 	 * @param textureOptions The options used to load the texture.
+	 * @param textOptions The options used to display the text.
 	 * @param displayedText The text to be displayed on the texture.
 	 */
-	public TextTexture(final TextureUtilities textureUtilities, final TextureOptions textureOptions, final String displayedText)
+	public TextTexture(final TextureUtilities textureUtilities, final TextureOptions textureOptions, final TextOptions textOptions, final String displayedText)
 	{
 		super(textureUtilities, textureOptions, -1, 0, 0);
 		setText(displayedText);
+		displayedTextOptions = textOptions;
 	}
 
 	@Override
 	public void load()
 	{
-
+		Texture result = getUtilities().loadTextTexture(text, getOptions(), displayedTextOptions, getHandle());
+		if (result != null)
+		{
+			setHandle(result.getHandle());
+			setWidth(result.getWidth());
+			setHeight(result.getHeight());
+		}
 	}
 
 	@Override
