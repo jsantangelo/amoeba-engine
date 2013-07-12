@@ -11,4 +11,13 @@ public interface TextureFactory
 	 * @return The new texture.
 	 */
 	public Texture createTexture(final int drawableId);
+
+	/**
+	 * Create a texture from a string of text and options which describe
+	 * how to draw that text.
+	 * @param text The text to display on the texture.
+	 * @param options The options used to display the texture.
+	 * @return The new texture.
+	 */
+	public Texture createTexture(final String text, final TextOptions options);
 }

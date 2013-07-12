@@ -1,6 +1,7 @@
 package org.amoeba.graphics.texture.impl;
 
 import org.amoeba.graphics.texture.ResourceTextureManager;
+import org.amoeba.graphics.texture.TextOptions;
 import org.amoeba.graphics.texture.Texture;
 import org.amoeba.graphics.texture.TextureFactory;
 import org.amoeba.graphics.texture.TextureManager;
@@ -29,11 +30,8 @@ public class ResourceTextureFactory implements TextureFactory
 		textureUtilities = utilities;
 	}
 
-	/**
-	 * Create a texture from drawable resources.
-	 * @param drawableId The id of the bitmap in drawable resources.
-	 * @return The new texture.
-	 */
+
+	@Override
 	public Texture createTexture(final int drawableId)
 	{
 		Texture texture = resourceManager.getTexture(drawableId);
@@ -43,6 +41,16 @@ public class ResourceTextureFactory implements TextureFactory
 			textureManager.add(texture);
 			resourceManager.add(texture, drawableId);
 		}
+
+		return texture;
+	}
+
+	@Override
+	public Texture createTexture(final String text, final TextOptions options)
+	{
+		Texture texture = null;
+		texture = new TextTexture(textureUtilities, textureUtilities.getTextureOptionsPreset(Preset.DEFAULT), options, text);
+		textureManager.add(texture);
 
 		return texture;
 	}
