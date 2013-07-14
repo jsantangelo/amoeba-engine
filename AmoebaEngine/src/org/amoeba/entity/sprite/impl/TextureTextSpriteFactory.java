@@ -20,6 +20,7 @@ public class TextureTextSpriteFactory implements TextFactory
 	private final EntityManager entityManager;
 	private final ShaderProgramManager shaderProgramManager;
 	private final TextureFactory textureFactory;
+	private TextOptions defaultOptions;
 
 	/**
 	 * Constructor for TextureSpriteFactory.
@@ -34,7 +35,48 @@ public class TextureTextSpriteFactory implements TextFactory
 		shaderProgramManager = programManager;
 		bufferUtilities = bufUtilities;
 		entityManager = entManager;
+		defaultOptions = null;
 	}
+
+	@Override
+	public void setDefaultTextOptions(final TextOptions options)
+	{
+		defaultOptions = options;
+	}
+
+	@Override
+	public TextSprite createTextSprite(final String text)
+	{
+		if (defaultOptions == null)
+		{
+			throw new RuntimeException("Attempting to create Text Sprite with no text options.");
+		}
+
+		return createTextSprite(text, defaultOptions, 0.0f, 0.0f);
+	}
+
+	@Override
+	public TextSprite createTextSprite(final String text, final Point position)
+	{
+		if (defaultOptions == null)
+		{
+			throw new RuntimeException("Attempting to create Text Sprite with no text options.");
+		}
+
+		return createTextSprite(text, defaultOptions, position.getX(), position.getY());
+	}
+
+	@Override
+	public TextSprite createTextSprite(final String text, final float x, final float y)
+	{
+		if (defaultOptions == null)
+		{
+			throw new RuntimeException("Attempting to create Text Sprite with no text options.");
+		}
+
+		return createTextSprite(text, defaultOptions, x, y);
+	}
+
 	@Override
 	public TextSprite createTextSprite(final String text, final TextOptions textOptions)
 	{
