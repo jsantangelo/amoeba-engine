@@ -4,6 +4,7 @@ import org.amoeba.engine.routing.SurfaceListener;
 import org.amoeba.engine.service.Service;
 import org.amoeba.entity.shape.ShapeFactory;
 import org.amoeba.entity.sprite.SpriteFactory;
+import org.amoeba.entity.sprite.TextFactory;
 
 import android.opengl.GLSurfaceView;
 
@@ -24,6 +25,12 @@ public interface GraphicsService extends Service, SurfaceListener
 	 * @return A Shape Factory.
 	 */
 	public ShapeFactory getShapeFactory();
+
+	/**
+	 * get a Text Factory, used to create text sprites.
+	 * @return A Text Factory.
+	 */
+	public TextFactory getTextFactory();
 
 	/**
 	 * Get a OpenGL Renderer.
