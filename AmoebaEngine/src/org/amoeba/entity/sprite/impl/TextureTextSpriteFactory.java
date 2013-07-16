@@ -11,11 +11,17 @@ import org.amoeba.graphics.texture.TextureFactory;
 import org.amoeba.graphics.texture.impl.TextTexture;
 import org.amoeba.graphics.utilities.BufferUtilities;
 
+import android.graphics.Color;
+import android.graphics.Paint.Align;
+import android.graphics.Typeface;
+
 /**
  * TextureTextSpriteFactory provides an implementation of TextFactory using TextTextures.
  */
 public class TextureTextSpriteFactory implements TextFactory
 {
+	private static final TextOptions DEFAULT_OPTIONS = new TextOptions(12, Color.BLACK, Align.CENTER, Typeface.DEFAULT, true);
+
 	private final BufferUtilities bufferUtilities;
 	private final EntityManager entityManager;
 	private final ShaderProgramManager shaderProgramManager;
@@ -35,7 +41,7 @@ public class TextureTextSpriteFactory implements TextFactory
 		shaderProgramManager = programManager;
 		bufferUtilities = bufUtilities;
 		entityManager = entManager;
-		defaultOptions = null;
+		defaultOptions = DEFAULT_OPTIONS;
 	}
 
 	@Override
@@ -47,33 +53,18 @@ public class TextureTextSpriteFactory implements TextFactory
 	@Override
 	public TextSprite createTextSprite(final String text)
 	{
-		if (defaultOptions == null)
-		{
-			throw new RuntimeException("Attempting to create Text Sprite with no text options.");
-		}
-
 		return createTextSprite(text, defaultOptions, 0.0f, 0.0f);
 	}
 
 	@Override
 	public TextSprite createTextSprite(final String text, final Point position)
 	{
-		if (defaultOptions == null)
-		{
-			throw new RuntimeException("Attempting to create Text Sprite with no text options.");
-		}
-
 		return createTextSprite(text, defaultOptions, position.getX(), position.getY());
 	}
 
 	@Override
 	public TextSprite createTextSprite(final String text, final float x, final float y)
 	{
-		if (defaultOptions == null)
-		{
-			throw new RuntimeException("Attempting to create Text Sprite with no text options.");
-		}
-
 		return createTextSprite(text, defaultOptions, x, y);
 	}
 
