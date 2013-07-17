@@ -21,9 +21,7 @@ public class MainMenu extends GameActivity
 		menuItems = new LinkedHashMap<Rectangle2D, Class<?>>();
 		menuItems.put(getGraphicsService().getSpriteFactory().createSprite(R.drawable.happy), SpriteExample.class);
 		menuItems.put(getGraphicsService().getShapeFactory().createRectangle(), ShapeExample.class);
-		menuItems.put(getGraphicsService().getSpriteFactory().createSprite(R.drawable.happy), SpriteExample.class);
-		menuItems.put(getGraphicsService().getShapeFactory().createRectangle(), ShapeExample.class);
-		menuItems.put(getGraphicsService().getSpriteFactory().createSprite(R.drawable.happy), SpriteExample.class);
+		menuItems.put(getGraphicsService().getTextFactory().createTextSprite("Text"), TextExample.class);
 	}
 
 	@Override
