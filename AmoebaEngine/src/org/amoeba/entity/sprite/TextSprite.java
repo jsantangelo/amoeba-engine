@@ -39,4 +39,28 @@ public abstract class TextSprite extends Sprite
 	{
 		return displayedText;
 	}
+
+	/**
+	 * Set the size of the text.
+	 * @param textSize The new text size.
+	 */
+	public abstract void setTextSize(final int textSize);
+
+	/**
+	 * Get the size of the text.
+	 * @return The text size.
+	 */
+	public abstract int getTextSize();
+
+	/**
+	 * Set the color of the text.
+	 * @param textColor The new text color.
+	 */
+	public abstract void setTextColor(final int textColor);
+
+	/**
+	 * Get the color of the text.
+	 * @return The text color.
+	 */
+	public abstract int getTextColor();
 }

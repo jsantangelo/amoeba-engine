@@ -100,15 +100,8 @@ public class TextTextureSprite extends TextSprite
 			texture.unload();
 			texture.load();
 
-			if (getWidth() == 0)
-			{
-				setWidth(texture.getWidth());
-			}
-
-			if (getHeight() == 0)
-			{
-				setHeight(texture.getHeight());
-			}
+			setWidth(texture.getWidth());
+			setHeight(texture.getHeight());
 
 			reloadNeeded = false;
 		}
@@ -120,5 +113,31 @@ public class TextTextureSprite extends TextSprite
 		super.setText(text);
 		texture.setText(text);
 		reloadNeeded = true;
+	}
+
+	@Override
+	public void setTextSize(final int textSize)
+	{
+		texture.getTextOptions().setSize(textSize);
+		reloadNeeded = true;
+	}
+
+	@Override
+	public int getTextSize()
+	{
+		return texture.getTextOptions().getSize();
+	}
+
+	@Override
+	public void setTextColor(final int textColor)
+	{
+		texture.getTextOptions().setColor(textColor);
+		reloadNeeded = true;
+	}
+
+	@Override
+	public int getTextColor()
+	{
+		return texture.getTextOptions().getColor();
 	}
 }

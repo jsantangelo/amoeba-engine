@@ -65,4 +65,22 @@ public class TextTexture extends BaseTexture
 	{
 		text = displayedText;
 	}
+
+	/**
+	 * Set the text options.
+	 * @param textOptions The new text options.
+	 */
+	public void setTextOptions(final TextOptions textOptions)
+	{
+		displayedTextOptions = textOptions;
+	}
+
+	/**
+	 * Get the text options.
+	 * @return The text options.
+	 */
+	public TextOptions getTextOptions()
+	{
+		return displayedTextOptions;
+	}
 }

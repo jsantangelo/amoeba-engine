@@ -8,11 +8,11 @@ import android.graphics.Typeface;
  */
 public class TextOptions
 {
-	private final int size;
-	private final int color;
-	private final Align alignment;
-	private final Typeface typeface;
-	private final boolean antiAlias;
+	private int size;
+	private int color;
+	private Align alignment;
+	private Typeface typeface;
+	private boolean antiAlias;
 
 	/**
 	 * Constructor for TextOptions.
@@ -41,12 +41,30 @@ public class TextOptions
 	}
 
 	/**
+	 * Set the size of the text.
+	 * @param textSize The text size.
+	 */
+	public void setSize(final int textSize)
+	{
+		size = textSize;
+	}
+
+	/**
 	 * Get the color of the text.
 	 * @return The text color.
 	 */
 	public int getColor()
 	{
 		return color;
+	}
+
+	/**
+	 * Set the color of the text.
+	 * @param textColor The text color.
+	 */
+	public void setColor(final int textColor)
+	{
+		color = textColor;
 	}
 
 	/**
@@ -59,6 +77,15 @@ public class TextOptions
 	}
 
 	/**
+	 * Set the alignment of the text.
+	 * @param textAlignment The text alignment.
+	 */
+	public void setAlignment(final Align textAlignment)
+	{
+		alignment = textAlignment;
+	}
+
+	/**
 	 * Get the typeface of the text.
 	 * @return The text typeface.
 	 */
@@ -68,11 +95,29 @@ public class TextOptions
 	}
 
 	/**
+	 * Set the typeface of the text.
+	 * @param textTypeface The text typeface.
+	 */
+	public void setTypeface(final Typeface textTypeface)
+	{
+		typeface = textTypeface;
+	}
+
+	/**
 	 * Get whether the text is anti-aliased.
 	 * @return Whether the text is anti-aliased.
 	 */
 	public boolean isAntiAliased()
 	{
 		return antiAlias;
+	}
+
+	/**
+	 * Set whether the text is anti-aliased.
+	 * @param textAntiAlias Whether the text should be anti-aliased.
+	 */
+	public void setAntiAlias(final boolean textAntiAlias)
+	{
+		antiAlias = textAntiAlias;
 	}
 }
