@@ -97,7 +97,6 @@ public class TextTextureSprite extends TextSprite
 
 		if (reloadNeeded)
 		{
-			texture.unload();
 			texture.load();
 
 			setWidth(texture.getWidth());

@@ -19,7 +19,7 @@ public abstract class TextSprite extends Sprite
 	public TextSprite(final String text, final float x, final float y, final EntityVertexBufferObject vbo)
 	{
 		super(x, y, vbo);
-		setText(text);
+		displayedText = text;
 	}
 
 	/**
