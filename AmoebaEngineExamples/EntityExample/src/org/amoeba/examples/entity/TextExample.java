@@ -2,8 +2,11 @@ package org.amoeba.examples.entity;
 
 import org.amoeba.activity.GameActivity;
 import org.amoeba.entity.sprite.TextSprite;
+import org.amoeba.graphics.texture.TextOptions;
 
 import android.graphics.Color;
+import android.graphics.Paint.Align;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.SystemClock;
 
@@ -15,14 +18,14 @@ public class TextExample extends GameActivity
 	public void onCreate(final Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
-		text = getGraphicsService().getTextFactory().createTextSprite("Hello!");
+		TextOptions options = new TextOptions(64, Color.BLUE, Align.CENTER, Typeface.DEFAULT, true);
+		text = getGraphicsService().getTextFactory().createTextSprite("Hello!", options);
 	}
 
 	@Override
 	public void onSurfaceChanged(final int width, final int height)
 	{
 		text.setPosition(width / 2, height / 2);
-		text.setColor(Color.BLUE, 10000L);
 	}
 
 	@Override

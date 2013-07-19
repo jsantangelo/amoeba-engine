@@ -32,6 +32,19 @@ public class TextOptions
 	}
 
 	/**
+	 * Copy constructor for TextOptions.
+	 * @param options The text options to copy.
+	 */
+	public TextOptions(final TextOptions options)
+	{
+		size = options.getSize();
+		color = options.getColor();
+		alignment = options.getAlignment();
+		typeface = options.getTypeface();
+		antiAlias = options.isAntiAliased();
+	}
+
+	/**
 	 * Get the size of the text.
 	 * @return The text size.
 	 */

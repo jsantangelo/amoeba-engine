@@ -7,6 +7,7 @@ import org.amoeba.engine.service.input.InputEvent;
 import org.amoeba.entity.shape.Rectangle2D;
 
 import android.content.Intent;
+import android.opengl.GLES20;
 import android.os.Bundle;
 import android.view.MotionEvent;
 
@@ -28,6 +29,7 @@ public class MainMenu extends GameActivity
 	public void onSurfaceChanged(final int width, final int height)
 	{
 		int index = 0;
+		GLES20.glClearColor(0.5f, 0.5f, 0.5f, 0f);
 		for(Rectangle2D entity : menuItems.keySet())
 		{
 			entity.setWidth(width);

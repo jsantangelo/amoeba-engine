@@ -41,7 +41,7 @@ public class TextureTextSpriteFactory implements TextFactory
 		shaderProgramManager = programManager;
 		bufferUtilities = bufUtilities;
 		entityManager = entManager;
-		defaultOptions = DEFAULT_OPTIONS;
+		defaultOptions = new TextOptions(DEFAULT_OPTIONS);
 	}
 
 	@Override
