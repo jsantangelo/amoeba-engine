@@ -32,6 +32,7 @@ public class TextureSpriteVertexBufferObject implements EntityVertexBufferObject
 	private static final int GREEN_OFFSET = 1;
 	private static final int BLUE_OFFSET = 2;
 	private static final int ALPHA_OFFSET = 3;
+	private static final int DATA_SIZE = POSITION_DATA_SIZE + TEXTURE_COORDINATE_DATA_SIZE + COLOR_DATA_SIZE;
 	private static final float MAX_COLOR_VALUE = 255.0f;
 	private static final float[] DEFAULT_SPRITE_DATA = new float[]
 	{
@@ -117,7 +118,7 @@ public class TextureSpriteVertexBufferObject implements EntityVertexBufferObject
 	@Override
 	public void setColor(final float red, final float green, final float blue, final float alpha)
 	{
-		final int stride = attributeList.getStrideBytes() / BufferConstants.BYTES_PER_FLOAT;
+		final int stride = DATA_SIZE;
 		for (int i = 0; i < NUMBER_VERTICES; ++i)
 		{
 			spriteData[(i * stride) + COLOR_OFFSET + RED_OFFSET] = red;
@@ -125,8 +126,12 @@ public class TextureSpriteVertexBufferObject implements EntityVertexBufferObject
 			spriteData[(i * stride) + COLOR_OFFSET + BLUE_OFFSET] = blue;
 			spriteData[(i * stride) + COLOR_OFFSET + ALPHA_OFFSET] = alpha;
 		}
-		spriteBuffer.position(0);
-		spriteBuffer.put(spriteData).position(0);
+
+		if (isLoaded)
+		{
+			spriteBuffer.position(0);
+			spriteBuffer.put(spriteData).position(0);
+		}
 	}
 
 	@Override
