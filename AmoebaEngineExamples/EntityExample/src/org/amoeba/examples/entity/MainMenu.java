@@ -4,37 +4,35 @@ import java.util.LinkedHashMap;
 
 import org.amoeba.activity.GameActivity;
 import org.amoeba.engine.service.input.InputEvent;
-import org.amoeba.entity.shape.Rectangle2D;
+import org.amoeba.examples.entity.menu.Button;
 
 import android.content.Intent;
-import android.opengl.GLES20;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.MotionEvent;
 
 public class MainMenu extends GameActivity
 {
-	private LinkedHashMap<Rectangle2D, Class<?>> menuItems;
+	private LinkedHashMap<Button, Class<?>> menuItems;
 
 	@Override
 	protected void onCreate(final Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
-		menuItems = new LinkedHashMap<Rectangle2D, Class<?>>();
-		menuItems.put(getGraphicsService().getSpriteFactory().createSprite(R.drawable.happy), SpriteExample.class);
-		menuItems.put(getGraphicsService().getShapeFactory().createRectangle(), ShapeExample.class);
-		menuItems.put(getGraphicsService().getTextFactory().createTextSprite("Text"), TextExample.class);
+		menuItems = new LinkedHashMap<Button, Class<?>>();
+		menuItems.put(new Button("Sprites", Color.RED, getGraphicsService()), SpriteExample.class);
+		menuItems.put(new Button("Shapes", Color.GREEN, getGraphicsService()), ShapeExample.class);
+		menuItems.put(new Button("Text", Color.BLUE, getGraphicsService()), TextExample.class);
 	}
 
 	@Override
 	public void onSurfaceChanged(final int width, final int height)
 	{
 		int index = 0;
-		GLES20.glClearColor(0.5f, 0.5f, 0.5f, 0f);
-		for(Rectangle2D entity : menuItems.keySet())
+		for(Button button : menuItems.keySet())
 		{
-			entity.setWidth(width);
-			entity.setHeight(height / menuItems.size());
-			entity.setPosition(width / 2, height * (index * 2 + 1) / (menuItems.size() * 2));
+			button.setSize(width, height / menuItems.size());
+			button.setPosition(width / 2, height * (index * 2 + 1) / (menuItems.size() * 2));
 			index++;
 		}
 	}
@@ -46,15 +44,11 @@ public class MainMenu extends GameActivity
 				event.getEventType() == InputEvent.EventType.LONGPRESS)
 		{
 			MotionEvent touchPoint = event.getMotionEvent();
-			float inputY = touchPoint.getY();
-			for(Rectangle2D entity : menuItems.keySet())
+			for(Button button : menuItems.keySet())
 			{
-				//TODO: Add Collidable to Entity and use the isColliding function instead
-				//if(entity.isColliding(inputX, inputY))
-				if(((entity.getPosition().getY() - entity.getHeight() / 2) <= inputY) &&
-						((entity.getPosition().getY() + entity.getHeight() / 2) >= inputY))
+				if(button.isColliding(touchPoint.getX(), touchPoint.getY()))
 				{
-					startActivity(new Intent(this, menuItems.get(entity)));
+					startActivity(new Intent(this, menuItems.get(button)));
 					break;
 				}
 			}
