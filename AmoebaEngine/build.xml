@@ -59,6 +59,12 @@
         pre-build process.
     -->
     <import file="static_analysis_rules.xml" optional="true" />
+
+    <!--
+        Import static analysis tasks to be run on the code as part of the 
+        pre-build process.
+    -->
+    <import file="unit_testing_rules.xml" optional="true" />
     
     <!--
         Import per project custom build rules if present at the root of the project.

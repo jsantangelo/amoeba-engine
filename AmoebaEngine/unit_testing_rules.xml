@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="unit_testing_rules">
+	<property name="unittestsrc.dir" value="../AmoebaEngineTest/tests" />
+
+	<target name="check-for-junit-testing-dependencies" depends="deploy-jar">
+		<condition property="junit.dependencies.available">
+			<and>
+				<available file="${junit.dir}/junit-4.11.jar" property="junit.present" />
+				<available file="${hamcrest.dir}/hamcrest-core-1.3.jar" property="hamcrest.present" />
+				<available file="${mockito.dir}/mockito-all-1.9.5.jar" property="mockito.present" />
+			</and>
+		</condition>
+	</target>
+
+	<target name="run-junit-tests" depends="check-for-junit-testing-dependencies" if="junit.dependencies.available">
+		<path id="junit.class.path">
+			<pathelement path="${source.dir}" />
+			<pathelement path="${unittestsrc.dir}" />
+			<pathelement location="${junit.dir}/junit-4.11.jar" />
+			<pathelement location="${hamcrest.dir}/hamcrest-core-1.3.jar" />
+			<pathelement location="${mockito.dir}/mockito-all-1.9.5.jar" />
+		</path>
+		
+		<property name="junit.path" refid="junit.class.path"/>
+        <echo message="JUnit ClassPath is: ${junit.path}"/>
+
+		<junit printsummary="yes" haltonfailure="no" >
+			<classpath refid="junit.class.path" />
+
+			<formatter type="plain" />
+
+			<batchtest fork="yes">
+				<fileset dir="${unittestsrc.dir}">
+					<include name="**/*Test.java" />
+				</fileset>
+			</batchtest>
+		</junit>
+	</target>
+
+	<target name="run-unit-tests" depends="run-junit-tests" />
+</project>

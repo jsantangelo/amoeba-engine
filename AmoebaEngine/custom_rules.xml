@@ -8,16 +8,20 @@
 	</condition>
 
 	<target name="-pre-build" depends="run-staticanalysis">
+		
+	</target>
+
+	<target name="deploy-jar">
+		<echo message="Deploying jar file..." />
+		<copy file="${out.dir}/${build.name}" todir="${deploy.dir}" />
+		<move file="${deploy.dir}/${build.name}" tofile="${deploy.dir}/${deployable.name}" />
+	</target>
+
+	<target name="-post-build" depends="run-unit-tests">
 		<echo message="Running Android lint..." />
 		<exec executable="${sdk.dir}/tools/lint${file.ext}">
 			<arg value="." />
 		</exec>
-	</target>
-
-	<target name="-post-build">
-		<echo message="Deploying jar file..." />
-		<copy file="${out.dir}/${build.name}" todir="${deploy.dir}" />
-		<move file="${deploy.dir}/${build.name}" tofile="${deploy.dir}/${deployable.name}" />
 	</target>
 
 	<target name="-pre-clean">

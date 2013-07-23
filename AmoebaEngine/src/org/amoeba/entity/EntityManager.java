@@ -7,6 +7,8 @@ import org.amoeba.engine.routing.DrawListener;
 import org.amoeba.engine.routing.UpdateListener;
 import org.amoeba.graphics.camera.Camera;
 
+import android.annotation.SuppressLint;
+
 /**
  * EntityManager maintains a collection of entities.
  */
@@ -68,6 +70,7 @@ public class EntityManager implements DrawListener, UpdateListener
 		}
 	}
 
+	@SuppressLint("WrongCall")
 	@Override
 	public void onDraw(final Camera camera)
 	{

@@ -11,6 +11,8 @@ import org.amoeba.engine.routing.UpdateListener;
 import org.amoeba.engine.service.input.InputEvent;
 import org.amoeba.graphics.camera.Camera;
 
+import android.annotation.SuppressLint;
+
 /**
  * Responsible for accepting invocations from services, and routing them to
  * relevant, registered listeners.
@@ -118,6 +120,7 @@ public class EngineRouter implements Router
 	 * Notifies any registered draw listeners of the draw callback.
 	 * @param camera The camera.
 	 */
+	@SuppressLint("WrongCall")
 	private void notifyDrawListeners(final Camera camera)
 	{
 		synchronized (listenerMutex)
