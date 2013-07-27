@@ -245,7 +245,12 @@ public final class CollisionHelper
 	 */
 	public static boolean isColliding(final Point point1, final Point point2)
 	{
-		return false;
+		boolean colliding = false;
+		
+		if (point1.getX() == point2.getX() && point1.getY() == point2.getY())
+			colliding = true;
+		
+		return colliding;
 	}
 
 	/**
