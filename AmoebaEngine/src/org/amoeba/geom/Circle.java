@@ -38,9 +38,9 @@ public class Circle extends Collidable
 	 */
 	public Circle(final Point position, final float r)
 	{
-		setPosition(position);
+		center = new Point(position);
 		setRadius(r);
-		setScale(1.0f);
+		scale = new Dimension(1.0f, 1.0f);
 	}
 
 	/**

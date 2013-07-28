@@ -168,7 +168,14 @@ public final class CollisionHelper
 	 */
 	public static boolean isColliding(final Circle circle1, final Circle circle2)
 	{
-		return false;
+		boolean colliding = false;
+		CollisionMath collisionMath = new CollisionMath();
+		float distanceBetween = collisionMath.calcDistance(circle1.getPosition(), circle2.getPosition());
+		if ((distanceBetween - circle1.getRadius() - circle2.getRadius()) < 0)
+		{
+			colliding = true;
+		}
+		return colliding;
 	}
 
 	/**
@@ -190,7 +197,14 @@ public final class CollisionHelper
 	 */
 	public static boolean isColliding(final Circle circle, final Point point)
 	{
-		return false;
+		boolean colliding = false;
+		CollisionMath collisionMath = new CollisionMath();
+		float distanceBetween = collisionMath.calcDistance(circle.getPosition(), point);
+		if ((distanceBetween - circle.getRadius()) < 0)
+		{
+			colliding = true;
+		}
+		return colliding;
 	}
 
 	/**
@@ -246,10 +260,10 @@ public final class CollisionHelper
 	public static boolean isColliding(final Point point1, final Point point2)
 	{
 		boolean colliding = false;
-		
 		if (point1.getX() == point2.getX() && point1.getY() == point2.getY())
+		{
 			colliding = true;
-		
+		}
 		return colliding;
 	}
 
