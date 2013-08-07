@@ -4,8 +4,6 @@ import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.nio.IntBuffer;
 
-import javax.microedition.khronos.opengles.GL10;
-
 import org.amoeba.graphics.texture.TextOptions;
 import org.amoeba.graphics.texture.Texture;
 import org.amoeba.graphics.texture.TextureOptions;
@@ -114,10 +112,9 @@ public class GLES20TextureUtilities implements TextureUtilities
 			textPaint.setTextAlign(textOptions.getAlignment());
 			textPaint.setTypeface(textOptions.getTypeface());
 
-			// Measure the text size
-			int ascent = (int) Math.ceil(-textPaint.ascent());
+			int ascent = (int) Math.ceil(textPaint.ascent());
 			int descent = (int) Math.ceil(textPaint.descent());
-			int measuredTextHeight = ascent + descent;
+			int measuredTextHeight = -ascent + descent;
 			int measuredTextWidth = (int) Math.ceil(textPaint.measureText(text));
 
 			int width = nextPowerTwo(measuredTextWidth);
@@ -129,14 +126,25 @@ public class GLES20TextureUtilities implements TextureUtilities
 			Canvas canvas = new Canvas(bitmap);
 			bitmap.eraseColor(0);
 
-			// draw the text centered
-			int textXPosition = (width / 2);
-			int textYPosition = (height / 2) + (measuredTextHeight / 2);
+			int textYPosition = (height / 2) - ((descent + ascent) / 2);
+			int textXPosition = 0;
+			switch(textOptions.getAlignment())
+			{
+				case CENTER:
+					textXPosition = (width / 2);
+					break;
+				case RIGHT:
+					textXPosition = width;
+					break;
+				default:
+					break;
+			}
+
 			canvas.drawText(text, textXPosition, textYPosition, textPaint);
 
-			GLES20.glBindTexture(GL10.GL_TEXTURE_2D, textureHandle);
+			GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, textureHandle);
 			applyTextureOptions(textureOptions);
-			GLUtils.texImage2D(GL10.GL_TEXTURE_2D, 0, bitmap, 0);
+			GLUtils.texImage2D(GLES20.GL_TEXTURE_2D, 0, bitmap, 0);
 			bitmap.recycle();
 
 			texture = new BaseTexture(this, textureOptions, textureHandle, width, height);
