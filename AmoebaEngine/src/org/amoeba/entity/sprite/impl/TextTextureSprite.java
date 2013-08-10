@@ -66,6 +66,16 @@ public class TextTextureSprite extends TextSprite
 	@Override
 	public void onDraw(final Camera camera)
 	{
+		if (reloadNeeded)
+		{
+			texture.load();
+
+			setWidth(texture.getWidth());
+			setHeight(texture.getHeight());
+
+			reloadNeeded = false;
+		}
+
 		program.use();
 
 		Dimension scale = new Dimension(getWidth() * getScale().getWidth(), getHeight() * getScale().getHeight());
@@ -88,22 +98,6 @@ public class TextTextureSprite extends TextSprite
 		getBuffer().draw();
 
 		program.stopUsing();
-	}
-
-	@Override
-	public void onUpdate()
-	{
-		super.onUpdate();
-
-		if (reloadNeeded)
-		{
-			texture.load();
-
-			setWidth(texture.getWidth());
-			setHeight(texture.getHeight());
-
-			reloadNeeded = false;
-		}
 	}
 
 	@Override
