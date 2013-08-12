@@ -9,15 +9,12 @@ import org.amoeba.graphics.camera.impl.Camera2D;
 
 import android.opengl.GLES20;
 import android.opengl.GLSurfaceView;
-import android.util.Log;
 
 /**
  * GLES20RendererService is an implementation of RendererService using OpenGL ES 2.0.
  */
 public class GLES20Renderer implements GLSurfaceView.Renderer
 {
-	private static final String TAG = "Amoeba.Renderer";
-
 	private Camera camera;
 
 	private int screenWidth, screenHeight;
@@ -57,8 +54,6 @@ public class GLES20Renderer implements GLSurfaceView.Renderer
 	 */
 	public void onSurfaceChanged(final GL10 unused, final int width, final int height)
 	{
-		Log.d(TAG, "Renderer surface changed...");
-
         screenWidth = width;
         screenHeight = height;
 
@@ -76,8 +71,6 @@ public class GLES20Renderer implements GLSurfaceView.Renderer
 	 */
 	public void onSurfaceCreated(final GL10 unused, final EGLConfig config)
 	{
-		Log.d(TAG, "Renderer surface created...");
-
 		GLES20.glClearColor(0.0f, 0.0f, 0.0f, 1f);
         GLES20.glDisable(GLES20.GL_DEPTH_TEST);
         GLES20.glBlendFunc(GLES20.GL_SRC_ALPHA, GLES20.GL_ONE_MINUS_SRC_ALPHA);

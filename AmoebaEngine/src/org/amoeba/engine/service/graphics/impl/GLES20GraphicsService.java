@@ -122,4 +122,16 @@ public class GLES20GraphicsService implements GraphicsService
 	{
 
 	}
+
+	@Override
+	public void setClearColor(final int color)
+	{
+
+	}
+
+	@Override
+	public void setClearColor(final float red, final float green, final float blue, final float alpha)
+	{
+
+	}
 }
