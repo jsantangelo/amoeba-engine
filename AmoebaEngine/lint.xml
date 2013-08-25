@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<lint>
+    <!-- Disable the Registered Activity In Manifest check for GameActivity -->
+    <issue id="Registered">
+        <ignore path="src/org/amoeba/activity/GameActivity.java" />
+    </issue>
+</lint>
